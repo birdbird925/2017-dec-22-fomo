@@ -1,0 +1,76 @@
+.contact-wrapper
+    position: relative
+    width: 100%
+    height: calc(100vh - 160px)
+    margin-bottom: 40px
+
+    .contact-form
+        position: absolute
+        top: 50%
+        left: 50%
+        -webkit-transform: translate3d(-50%,-50%,0)
+        transform: translate3d(-50%,-50%,0)
+        width: calc(100% - 60px)
+        margin: auto
+        text-align: center
+        font-family: 'Muli'
+
+    .form-group
+        margin-bottom: 20px
+
+    label
+        font-weight: bold
+        font-style: italic
+        font-size: 10px
+        color: $semi-bg
+        letter-spacing: 2px
+        text-transform: uppercase
+
+    input,
+    textarea
+        width: 100%
+        background: none
+        border: 1px solid $semi-bg
+        outline: none
+        padding: 10px
+        border-radius: 0px
+        border-style: solid
+        appearance: none
+        -webkit-appearance:none
+
+        &:focus
+            outline: none
+
+    input[type=submit],
+    a
+        font-weight: 900
+        text-transform: uppercase
+        color: $primary
+        border: none
+
+    .sepecial-regarding
+        position: absolute
+        bottom: 0
+        left: 50%
+        -webkit-transform: translate3d(-50%, 0,0)
+        transform: translate3d(-50%,0,0)
+        text-align: center
+        width: 100%
+
+@media (min-width: 600px)
+    .contact-wrapper
+        .contact-form
+            width: 80%
+
+@media (min-width: 769px)
+    .contact-wrapper
+        .contact-form
+            width: 65%
+
+        .sepecial-regarding
+            bottom: 20px
+
+@media (min-width: 1280px)
+    .contact-wrapper
+        .contact-form
+            width: 50%

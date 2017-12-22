@@ -1,0 +1,106 @@
+.msg-popup.popup
+    opacity: 1
+    z-index: 1001
+
+.msg-popup
+    position: fixed
+    margin: auto
+    z-index: -1
+    text-align: center
+    font-family: 'Muli'
+    width: calc(100%)
+    height: 100vh
+    background: $semi-bg
+    opacity: 0
+    transition: opacity 333ms linear, z-index 333ms linear
+    -webkit-transition: opacity 333ms linear, z-index 333ms linear
+
+    .popup-inner
+        color: $white
+        width: calc(100% - 60px)
+        margin: auto
+        position: absolute
+        top: 50%
+        left: 50%
+        -webkit-transform: translate3d(-50%,-100%,0)
+        transform: translate3d(-50%,-100%,0)
+
+        .title
+            font-family: 'Muli'
+            text-align: center
+            font-size: 30px
+            line-height: 36px
+            letter-spacing: 2px
+            margin: 15px auto
+            clear: both
+            text-transform: uppercase
+
+        .caption
+            font-family: 'Muli'
+            letter-spacing: 2px
+            font-weight: 100
+            text-transform: uppercase
+            margin-bottom: 15px
+
+    .close-nav
+        display: none
+
+    .close-nav.popup
+        cursor: pointer
+        background:
+            image: url(/images/demo/close.svg)
+            repeat: no-repeat
+            position: center
+            size: contain
+        display: inline-block
+        width: 25px
+        height: 25px
+        text-indent: -9999px
+        white-space: nowrap
+        position: absolute
+        top: 25px
+        right: 25px
+
+        &:hover
+            background:
+                image: url(/images/demo/close-hover.svg)
+
+@media (min-width: 769px)
+    .msg-popup.popup
+        top: 20vh
+
+    .msg-popup
+        transition: top 666ms cubic-bezier(.666,0,.333,1)
+        -webkit-transition: top 666ms cubic-bezier(.666,0,.333,1)
+        opacity: 1
+        z-index: 1001
+        width: 60%
+        height: 60vh
+        top: 120vh
+        left: 50%
+        -webkit-transform: translate3d(-50%,0,0)
+        transform: translate3d(-50%,0,0)
+        padding: 40px 0
+
+        .popup-inner
+            color: $white
+            width: calc(100% - 60px)
+            margin: auto
+            position: absolute
+            top: 50%
+            left: 50%
+            -webkit-transform: translate3d(-50%,-50%,0)
+            transform: translate3d(-50%,-50%,0)
+
+            .title
+                margin-top: 0px
+
+        .popup-footer
+            position: static
+            -webkit-transform: translate3d(0,0,0)
+            transform: translate3d(0,0,0)
+            margin: 0 auto
+
+@media (min-width: 1280px)
+    .msg-popup
+        width: 50%

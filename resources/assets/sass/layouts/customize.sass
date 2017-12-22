@@ -1,0 +1,365 @@
+.customize-wrapper
+    display: flex
+    flex-direction: column
+    min-height: 100vh
+    padding: 100px 30px 30px
+    font-family: 'Muli'
+
+    .customize-canvas
+        flex: 1
+        position: relative
+        text-align: center
+
+        #front-canvas.initial,
+        #back-canvas.initial,
+            opacity: 0
+
+        #front-canvas,
+        #back-canvas
+            opacity: 1
+            transition: opacity 333ms cubic-bezier(0.666, 0, 0.333, 1)
+            -webkit-transition: opacity 333ms cubic-bezier(0.666, 0, 0.333, 1)
+
+            .konvajs-content
+                margin: auto
+
+        .customize-controls
+            position: absolute
+            right: 0
+            top: 50%
+            transform: translateY(-50%)
+            padding: 0
+            list-style: none
+
+            .customize-control
+                cursor: pointer
+                display: block
+                margin-bottom: 25px
+                width: 25px
+                height: 25px
+                background:
+                    repeat: no-repeat
+                    position: center
+                    size: contain
+
+            .addCart
+                background-image: url(/images/demo/add-cart.svg)
+
+                &:hover
+                    background-image: url(/images/demo/add-cart-hover.svg)
+
+            .addedCart
+                background-image: url(/images/demo/added-cart.svg)
+
+            .save
+                background-image: url(/images/demo/heart.svg)
+
+                &:hover
+                    background-image: url(/images/demo/heart-hover.svg)
+
+            .saved
+                background-image: url(/images/demo/fullfil-heart.svg)
+
+            .admin-control
+                background-image: url(/images/demo/save-product.svg)
+
+                &:hover
+                    background-image: url(/images/demo/save-product-hover.svg)
+
+        .lSPager
+            a
+                background: $semi-bg !important
+
+            .active
+                a
+                    background: $primary !important
+
+        img
+            max-height: 45vh
+
+    .customize-option
+        height: 30vh
+
+        .desktop-control
+            display: none
+
+        .option-slider
+            min-height: 100%
+
+            .option-header
+                text-align: center
+                font-weight: 900
+                text-transform: uppercase
+                font-size: 10px
+                line-height: 14px
+                padding: 5px 0px
+                margin-bottom: 20px
+                position: relative
+
+                span
+                    position: absolute
+                    left: 50%
+                    transform: translateX(-50%)
+
+                .control
+                    font-weight: normal
+                    font-style: italic
+                    color: $semi-bg
+                    cursor: pointer
+                    background:
+                        repeat: no-repeat
+                        size: 25px
+
+                .prev
+                    padding-left: 25px
+                    background:
+                        image: url(/images/demo/arrow-left.svg)
+                        position: left
+
+                    &:hover
+                        background-image: url(/images/demo/arrow-left-hover.svg)
+
+                .next
+                    padding-right: 25px
+                    background:
+                        image: url(/images/demo/arrow-right.svg)
+                        position: right
+
+                    &:hover
+                        background-image: url(/images/demo/arrow-right-hover.svg)
+
+
+            .option-wrapper
+                .title
+                    margin: 25px auto 10px
+                    text-align: center
+                    text-transform: uppercase
+                    font-size: 10px
+                    color: $semi-bg
+                    font-weight: normal
+                    font-style: italic
+                    width: 100%
+
+                .main-option,
+                .extral-option
+                    display: flex
+                    flex-flow: row wrap
+
+                    .form-group.disabled
+                        label
+                            border-color: #CCCCCC !important
+                            color: #CCCCCC !important
+
+                    .form-group
+                        width: 50%
+                        margin-bottom: 0
+                        text-align: center
+
+                        &:first-child,
+                        &:nth-child(2)
+                            label
+                                border-top: 1px solid $primary
+
+                        &:nth-child(2n)
+                            label
+                                border-left: none
+
+                        label
+                            border: 1px solid $primary
+                            border-top: none
+                            cursor: pointer
+                            text-align: center
+                            text-transform: uppercase
+                            font-size: 12px
+                            margin: 0
+                            padding: 11px
+                            height: 40px
+                            color: $semi-bg
+                            width: 100%
+
+
+                        label.color-option
+                            span
+                                display: inline-block
+                                width: 40%
+                                height: 16px
+
+                        label.image-option
+                            padding: 0 14px
+
+                            span
+                                display: inline-block
+                                width: 80%
+                                height: 35px
+                                background-color: $semi-bg
+                                -webkit-mask:
+                                    repeat: no-repeat
+                                    position: 50% 50%
+                                mask:
+                                    repeat: no-repeat
+                                    position: 50% 50%
+
+                        label.checked.image-option
+                            span
+                                background-color: $white
+
+                        label.checked
+                            background: $primary
+                            color: $white
+
+                        input[type=radio]
+                            display: none
+
+                .description
+                    clear: both
+                    margin-top: 10px
+
+                    ul
+                        margin-top: 10px
+                        padding-left: 20px
+
+                        li
+                            margin-bottom: 3px
+
+                .personalize-text
+                    input[type=text]
+                        width: 100%
+                        height: 40px
+                        padding: 10px
+                        text-align: center
+                        background: none
+                        border: 1px solid $primary
+                        color: $primary
+                        outline: none
+
+                        &:focus
+                            outline: none
+
+                        &::-webkit-input-placeholder
+                            color: $primary
+
+                        &:-moz-placeholder
+                            color: $primary
+
+                        &::-moz-placeholder
+                            color: $primary
+
+                        &:-ms-input-placeholder
+                            color: $primary
+
+                .personalize-image
+                    input[type=file]
+                        display: none
+
+                    .file-label
+                        display: block
+                        border: 1px solid $primary
+                        height: 40px
+                        background:
+                            image: url(/images/demo/file.svg)
+                            position: center center
+                            repeat: no-repeat
+                            size: 30px
+
+
+@media (min-width: 769px)
+    .customize-wrapper
+        width: calc(100% - 65px)
+        margin: auto
+        padding: 150px 50px 100px
+        flex-flow: row wrap
+        position: relative
+
+        .customize-canvas
+            width: 50%
+            position: static
+
+            .customize-controls
+                .customize-control
+                    width: 30px
+                    height: 30px
+                    margin-bottom: 30px
+
+        .customize-option
+            width: 50%
+            position: relative
+            height: calc(100vh - 265px)
+            left: 0
+
+            .desktop-control
+                display: block
+                position: absolute
+                left: 40%
+                transform: translate3d(-50%, 0, 0)
+                -webkit-transform: translate3d(-50%, 0,0)
+                font-family: 'Muli'
+                font-style: italic
+                color: $semi-bg
+                font-size: 10px
+                text-transform: uppercase
+                cursor: pointer
+                z-index: 88
+
+            .desktop-control.prev
+                top: 0
+                padding-top: 15px
+                background:
+                    image: url(/images/demo/arrow-up.svg)
+                    position: center -10px
+                    repeat: no-repeat
+                    size: 30px
+
+                &:hover
+                    background-image: url(/images/demo/arrow-up-hover.svg)
+
+            .desktop-control.next
+                bottom: 0
+                padding-bottom: 15px
+                background:
+                    image: url(/images/demo/arrow-down.svg)
+                    position: center 10px
+                    repeat: no-repeat
+                    size: 30px
+
+                &:hover
+                    background-image: url(/images/demo/arrow-down-hover.svg)
+
+            .lSSlideOuter
+                position: absolute
+                top: calc((100vh - 540px) / 2)
+                left: 0
+                max-width: 80%
+
+            .option-slider
+                .option-header
+                    .prev
+                        padding-left: 0
+                        background: none
+
+                        &:hover
+                            background: none
+
+                    .next
+                        padding-right: 0
+                        background: none
+
+                        &:hover
+                            background: none
+
+            .option-wrapper
+                .main-option,
+                .extral-option
+                    .form-group
+                        label
+                            &:hover
+                                color: $white
+                                background: $primary
+
+                    .form-group.disabled
+                        label
+                            &:hover
+                                background: none
+
+@media (min-width: 1028px)
+    .customize-wrapper
+        // width: 90%

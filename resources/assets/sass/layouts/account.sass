@@ -1,0 +1,273 @@
+#account-wrapper
+    width: calc(100% - 70px)
+    margin: 40px auto 0px
+    font-family: 'Muli'
+
+    .empty-msg
+        text-align: left
+        text-transform: uppercase
+        margin: 40px auto 50px
+
+        p
+            color: $semi-bg
+            font-style: italic
+            letter-spacing: 1px
+            font-size: 10px
+
+        a
+            color: $primary
+            font-weight: 900
+            letter-spacing: 2px
+            font-size: 12px
+
+    #saved.in,
+    #order.in,
+        border-bottom: 1px solid $semi-bg
+
+    .section
+        display: none
+
+    .section-title
+        margin-top: 25px
+        font-size: 14px
+        line-height: 18px
+        letter-spacing: 2px
+        text-transform: uppercase
+        border-bottom: 1px solid $semi-bg
+
+        span
+            cursor: pointer
+            display: inline-block
+            min-width: 150px
+            padding-bottom: 20px
+            background:
+                image: url(/images/demo/arrow-down.svg)
+                repeat: no-repeat
+                color: none
+                size: 40px
+                position: 110px -10px
+
+            &:hover
+                background:
+                    image: url(/images/demo/arrow-down-hover.svg)
+
+    #saved
+        text-align: center
+
+        a.loadmore
+            display: inline-block
+            margin: 25px auto
+            font-weight: 900
+            text-transform: uppercase
+            font-size: 14px
+            letter-spacing: 2px
+            color: $primary
+            clear: both
+
+        ul
+            display: flex
+            flex-wrap: wrap
+            justify-content: flex-start
+            list-style: none
+            padding-left: 0
+            text-align: left
+            margin-bottom: 0
+
+            a
+                margin-top: 30px
+                display: inline-block
+                width: 45%
+                opacity: 1
+
+                &:first-child,
+                &:nth-child(3n)
+                    margin-right: 5%
+
+                &:nth-child(2n)
+                    margin-left: 5%
+
+                li
+                    width: 100%
+                    display: inline-block
+
+    #order
+        .product-table
+            margin: 20px 0
+            width: 100%
+
+            tbody
+                tr
+                    td
+                        width: 25%
+
+                    .code-col
+                        display: none
+
+    #account
+        position: relative
+        padding-top: 25px
+
+        .col-sm-4
+            padding: 0
+            text-align: center
+
+        label
+            font-style: italic
+            color: $semi-bg
+            text-transform: uppercase
+            display: block
+            font-size: 10px
+            letter-spacing: 1px
+            text-align: left
+
+            span
+                color: $primary
+                cursor: pointer
+
+        input
+            background: none
+            border-radius: 0
+            border: 1px solid #9f9994
+            padding: 20px 10px
+            font-family: 'Muli'
+
+        a,
+        input[type=submit]
+            outline: none
+            border: none
+            padding: 5px
+            color: $primary
+            text-transform: uppercase
+            font-weight: 900
+            font-size: 11px
+            letter-spacing: 1px
+            cursor: pointer
+
+            &:hover
+                color: $black
+                text-decoration: none
+
+        a.cancelEdit
+            color: $semi-bg
+
+            &:hover
+                color: $black
+                text-decoration: none
+
+        .form-group
+            position: relative
+
+            a
+                position: absolute
+                right: 10px
+                top: 34px
+                font-size: 10px
+                font-weight: normal
+                font-style: italic
+
+        #email-form,
+        #password-form
+            display: none
+            position: absolute
+            top: 25px
+            width: 100%
+
+        a.show-password
+            padding: 0
+
+        .error
+            font-size: 11px
+            min-height: 15px
+            color: red
+            margin-bottom: 5px
+            font-family: 'Muli'
+            font-style: italic
+            text-transform: uppercase
+
+@media (min-width: 769px)
+    #account-wrapper
+        width: 75%
+        margin-bottom: 100px
+
+        .empty-msg
+            margin: 15px auto 10px
+
+            p
+                font-size: 12px
+
+
+            a
+                font-size: 14px
+
+        .section-title
+            border: none
+            font-size: 16px
+
+            span
+                cursor: default
+                background: none
+
+                &:hover
+                    background: none
+
+        .section
+            display: block
+
+        #saved,
+        #order,
+        #account
+            border-bottom: 1px solid $semi-bg
+            padding-bottom: 30px
+
+        #saved
+            ul
+                a
+                    width: 16.6%
+                    margin: 0 !important
+
+                .mobile-hide
+                    height: auto
+
+                    img,
+                    .konvas-thumb
+                        opacity: 1
+                        height: auto
+
+            a.loadmore
+                display: none
+
+            br
+                clear: both
+
+        #order
+            .product-table
+                tbody
+                    tr
+                        .code-col
+                            display: block
+
+        #account
+            .col-sm-4
+                padding: 0 15px
+
+                &:first-child
+                    padding-left: 0
+
+                &:last-child
+                    padding-right: 0
+
+            #email-form,
+            #password-form
+                position: static
+                display: block
+                width: 33.3333333333%
+
+            a.cancelEdit
+                display: none
+
+            br
+                clear: both
+
+@media (min-width: 1280px)
+    #account-wrapper
+        width: 60%

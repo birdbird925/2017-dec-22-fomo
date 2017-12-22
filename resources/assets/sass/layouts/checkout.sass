@@ -1,0 +1,183 @@
+.checkout-wrapper
+    display: flex
+    flex-direction: column
+    min-height: calc(100vh - 45px)
+    font-family: 'Muli'
+
+    .container
+        padding: 45px 0 60px
+
+        .row
+            width: 100%
+
+    .image-col
+        text-align: left
+
+    .konvas-thumb
+        width: 70%
+        max-width: 70px
+
+    .subtitle
+        text-transform: uppercase
+        letter-spacing: 1.2px
+        margin-bottom: 15px
+
+    label
+        display: block
+        font-size: 12px
+        font-weight: bold
+        font-style: italic
+        color: #9F9994
+        text-transform: uppercase
+        letter-spacing: 1.2px
+
+    .stick-right-form-control
+        display: inline-block
+        float: right
+
+        .login-tab
+            color: #FBA200
+            cursor: pointer
+
+        .login-tab:hover
+            text-decoration: none
+
+    input[type="text"],
+    input[type="email"],
+        background: transparent
+        padding: 5px
+        width: 100%
+        border: 1px solid #9F9994
+        outline: none
+
+    input[type="text"]::placeholder,
+    input[type="email"]::placeholder,
+        color: #CCCCCC
+
+    select
+        -webkit-appearance: none
+        -moz-appearance: none
+        appearance: none
+        background: transparent
+        border: 1px solid #9F9994
+        outline: none
+        width: 100%
+        border-radius: 0
+        padding: 5px
+
+    .shipping-detail
+        margin-top: 50px
+
+    .half.form-group
+        display: inline-block
+        width: 48%
+        float: left
+        margin-right: 2%
+
+    .half.form-group:nth-child(2n+1)
+        margin-right: 0
+        margin-left: 2%
+
+    .checkout-navigation
+        margin: 50px 0px
+        font-weight: bold
+        text-transform: uppercase
+
+        a
+            color: #9F9994
+            // letter-spacing: 1.2px
+            font-size: 12px
+            font-style: italic
+
+        a:hover
+            text-decoration: none
+
+        .paypal
+            float: right
+            color: #FBA200
+            font-size: 15px
+            font-weight: 900
+            font-style: normal
+            letter-spacing: 1.2px
+            background: transparent
+            border: none
+
+    .checkout-item-table
+        width: 100%
+        margin-bottom: 85px
+        tr
+            margin-bottom: 10px
+            td
+                border-top: none
+                padding: 0
+                padding-bottom: 25px
+                min-width: 100px
+
+            .description-col
+                text-align: left
+                min-width: 60px
+
+            .price-col
+                text-align: right
+                padding-right: 5px
+
+            .top-border
+                border-top: 1px solid #9F9994
+                padding-top: 15px
+
+        .small-padding-row
+            td
+                padding-bottom: 10px
+
+        .voucher-row
+            td
+                padding: 35px 0px
+
+                form
+                  width: 150%
+
+                input[type="text"]
+                    background: transparent
+                    padding: 5px
+                    width: 100%
+                    border: 1px solid #9F9994
+                    outline: none
+
+                    ::placeholder
+                        color: #CCCCCC
+
+                input[type="submit"]
+                    border: none
+                    background: none
+                    color: #FBA200
+                    text-transform: uppercase
+                    font-weight: bold
+                    padding: 0
+                    padding-top: 5px
+                    outline: none
+                    font-size: 12px
+                    letter-spacing: 1.5px
+                    float: right
+
+@media (max-width: 400px)
+    .checkout-wrapper
+        .checkout-item-table
+            .voucher-row
+                td
+                    form
+                      width: 200%
+
+
+@media (min-width: 992px)
+    .checkout-wrapper
+        .image-col
+            text-align: center
+
+        .konvas-thumb
+            width: 50px
+
+        .checkout-item-table
+            .voucher-row
+                td
+                    form
+                        width: 200%

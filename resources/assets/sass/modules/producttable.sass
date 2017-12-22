@@ -1,0 +1,134 @@
+.product-table
+    width: calc(100% - 60px)
+    margin: 50px auto 0px
+    font-family: 'Muli'
+    font-size: 12px
+    line-height: 16px
+
+    tbody
+        tr
+            td
+                width: 25%
+                padding-bottom: 2.5em
+                border: none
+                text-align: center
+                vertical-align: middle
+
+            .image-col
+                img,
+                .konvas-thumb
+                    width: 50px
+                    display: inline-block
+
+            .description-col
+                .description
+                    display: none
+
+
+            a.edit
+                font-weight: 900
+                text-transform: uppercase
+                color: $primary
+
+                &:hover
+                    text-decoration: none
+                    color: $black
+
+            .remove
+                cursor: pointer
+                display: inline-block
+                margin: 10px auto 0
+                width: 15px
+                height: 15px
+                border: none
+                background:
+                    color: transparent
+                    image: url(/images/demo/close.svg)
+                    repeat: no-repeat
+                    position: center
+                    size: cover
+
+                &:hover
+                    background:
+                        image: url(/images/demo/close-hover.svg)
+
+
+@media (min-width: 600px)
+    .product-table
+        font-size: 14px
+        line-height: 18px
+
+        tbody
+            tr
+                .image-col
+                    img,
+                    .konvas-thumb
+                        width: 100px
+
+@media (min-width: 769px)
+    .product-table
+        tbody
+            tr
+                .image-col
+                    img,
+                    .konvas-thumb
+                        width: 100px
+
+                td
+                    vertical-align: top
+                    text-align: left
+                    padding-bottom: 3.5em
+
+                .description-col
+                    .name
+                        font-size: 16px
+                        line-height: 20px
+                        margin-bottom: 20px
+
+                    .description
+                        width: 100%
+                        display: block
+
+                .price-col
+                    padding-left: 30px
+
+                .remove
+                    margin: 0
+                    float: right
+                    width: 20px
+                    height: 20px
+                    margin-right: 35px
+                    margin-top: -20px
+
+@media (min-width: 880px)
+    .product-table
+        tbody
+            tr
+                td
+                    width: 16.6%
+
+                .description-col
+                    width: 33.6%
+
+                .image-col
+                    text-align: left
+
+
+@media (min-width: 1280px)
+    .product-table
+        width: 75%
+
+        tbody
+            tr
+                .image-col
+                    img,
+                    .konvas-thumb
+                        width: 125px
+
+        .remove
+            margin-right: 0
+
+@media (max-width: 880px)
+    .product-table
+        .quantity-col
+            display: none

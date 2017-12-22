@@ -1,0 +1,101 @@
+@media (max-width: 768px)
+    footer.mobile-hide
+        display: none
+
+footer
+    width: 100%
+    text-transform: uppercase
+    font-family: 'Muli'
+    font-size: 10px
+    padding: 10px 30px 15px
+    text-align: center
+
+
+    ul
+        padding: 0
+        list-style: none
+
+        li
+            float: left
+            display: inline-block
+            width: 33%
+            margin: 0
+            margin-bottom: 8px
+            padding: 0
+
+            &:first-child,
+            &:nth-child(4n)
+                text-align: left
+
+            &:nth-child(2),
+            &:nth-child(2n+3)
+                text-align: center
+
+            &:nth-child(3n)
+                text-align: right
+
+            &:last-child
+                margin-bottom: 20px
+
+        a
+            color: $black
+            font-family: 'Muli'
+            font-weight: 900
+            font-style: normal
+            font-size: 10px
+            letter-spacing: 1px
+
+            &:hover
+                text-decoration: none
+                color: $primary
+
+    .copyright
+        clear: both
+
+    .design-by
+        float: right
+        display: none
+
+        a
+            color: $black
+            text-decoration: underline
+            text-decoration-style: dotted
+
+            &:hover
+                color: $primary
+
+
+@media(min-width: 769px)
+    footer
+        display: flex
+        flex-flow: row wrap
+        padding: 0 30px
+        font-size: 12px
+        line-height: 14px
+
+        ul
+            // display: inline-block
+            width: 50%
+            display: flex
+            flex-flow: row
+            align-items: flex-end
+
+            li
+                width: auto
+                margin-bottom: 0 !important
+                margin-right: 30px
+                text-align: left
+
+            a
+                font-size: 12px
+
+        .copyright
+            position: absolute
+            left: 50%
+            -webkit-transform: translate3d(-50%,0,0)
+            transform: translate3d(-50%,0,0)
+
+        .design-by
+            width: 50%
+            text-align: right
+            display: block

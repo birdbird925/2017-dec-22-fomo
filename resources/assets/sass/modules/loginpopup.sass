@@ -1,0 +1,226 @@
+.login-popup.popup
+    opacity: 1
+    z-index: 1001
+
+.login-popup
+    position: absolute
+    margin: auto
+    z-index: -1
+    text-align: center
+    font-family: 'Muli'
+    width: calc(100%)
+    min-height: 100vh
+    height: auto
+    background: $white
+    opacity: 0
+    transition: opacity 333ms linear, z-index 444ms linear
+    -webkit-transition: opacity 333ms linear, z-index 444ms linear
+
+    .popup-inner
+        width: calc(100% - 60px)
+        margin: auto
+
+        .title
+            font-family: 'Muli'
+            text-align: center
+            font-size: 30px
+            line-height: 36px
+            letter-spacing: 2px
+            margin: 30px auto
+            clear: both
+            text-transform: uppercase
+
+    .popup-footer
+        // position: absolute
+        // bottom: 30px
+        // left: 50%
+        // -webkit-transform: translate3d(-50%,0,0)
+        // transform: translate3d(-50%,0,0)
+        width: calc(100% - 60px)
+        margin: 25px auto
+
+    .close-nav
+        cursor: pointer
+        background:
+            image: url(/images/demo/close.svg)
+            repeat: no-repeat
+            position: center
+            size: contain
+        display: inline-block
+        width: 25px
+        height: 25px
+        text-indent: -9999px
+        white-space: nowrap
+        position: absolute
+        top: 25px
+        right: 25px
+
+        &:hover
+            background:
+                image: url(/images/demo/close-hover.svg)
+
+    .login,
+    .register
+        opacity: 0
+        display: none
+        margin-top: 70px
+        transition: opacity 333ms linear
+        -webkit-transition: opacity 333ms linear
+
+    .login.mobile,
+    .register.mobile,
+        opacity: 1
+        display: block
+
+    label
+        font-weight: bold
+        font-style: italic
+        font-size: 10px
+        color: $semi-bg
+        letter-spacing: 2px
+        text-transform: uppercase
+        display: block
+
+    .form-group
+        margin-bottom: 20px
+
+        .form-control
+            outline: none
+
+            &:focus
+                outline: none
+
+    input[type=password],
+    input[type=email]
+        background: none
+        border: 1px solid $semi-bg
+        outline: none
+        border-radius: 0px
+        border-style: solid
+        appearance: none
+        -webkit-appearance:none
+        text-align: center
+        padding: 18px 0
+
+        &:focus
+            outline: none
+
+    .error
+        font-size: 12px
+        min-height: 20px
+        color: red
+        margin-bottom: 10px
+        font-family: 'Muli'
+        font-style: italic
+        text-transform: uppercase
+
+
+    a,
+    input[type=submit]
+        cursor: pointer
+        outline: none
+        font-weight: 900
+        font-size: 14px
+        line-height: 16px
+        letter-spacing: 1px
+        border: none
+        background: none
+        text-transform: uppercase
+        color: $primary
+        text-align: center
+
+        &:hover
+            text-decoration: none
+            color: $black
+
+    .social-login
+        display: block
+        margin-bottom: 30px
+        color: $white
+        padding: 13px
+        font-size: 12px
+        letter-spacing: 2px
+
+        &:hover
+            text-decoration: none
+            color: $white
+
+    .facebook
+        background: #3b5998
+
+        &:hover
+            background: #5173af
+
+    .google
+        background: #4885ed
+
+        &:hover
+            background: #6ca4f4
+
+
+    .action-switcher
+        margin: 20px auto
+
+    hr
+        margin-top: 25px
+        margin-bottom: 25px
+
+
+@media (min-width: 769px)
+    .login-popup.popup
+        top: 60px
+
+    .login-popup
+        min-height: 0
+        position: fixed
+        top: -100vh
+        transition: top 666ms cubic-bezier(.666,0,.333,1)
+        -webkit-transition: top 666ms cubic-bezier(.666,0,.333,1)
+        opacity: 1
+        z-index: 1001
+        width: 85%
+        height: calc(100vh - 120px)
+        left: 50%
+        -webkit-transform: translate3d(-50%,0,0)
+        transform: translate3d(-50%,0,0)
+        padding: 40px 0
+        display: flex
+        align-items: center
+        justify-content: center
+        flex-direction: column
+
+        .popup-inner
+            width: calc(100% - 100px)
+
+        hr
+            display: none
+
+        .login,
+        .register
+            display: block
+            opacity: 1
+            margin-top: 0
+            padding: 20px 15px
+
+        .popup-footer
+            width: calc(100% - 100px)
+            padding-top: 20px
+            position: static
+            -webkit-transform: translate3d(0,0,0)
+            transform: translate3d(0,0,0)
+            margin: 0 auto
+
+
+        .social-login-box
+            float: right
+
+        .social-login
+            padding: 12px
+
+        .action-switcher
+            display: none
+            // margin: 20px auto
+
+@media (min-width: 1280px)
+    .login-popup
+        width: 60%

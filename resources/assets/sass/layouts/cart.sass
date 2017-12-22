@@ -1,0 +1,212 @@
+.cart-wrapper
+    display: flex
+    flex-direction: column
+    min-height: calc(100vh - 45px)
+    font-family: 'Muli'
+
+    .quantity-dropdown
+      background: transparent
+      border: none
+      outline: none
+      display: none
+
+    .edit .quantity-dropdown
+      display: block
+
+    .edit span.quantity
+      display: none
+
+    .empty-msg
+        position: absolute
+        top: 50%
+        left: 50%
+        -webkit-transform: translate3d(-50%,-50%,0)
+        transform: translate3d(-50%,-50%,0)
+        text-align: center
+        text-transform: uppercase
+        font-family: 'Muli'
+        font-size: 30px
+        line-height: 42px
+        letter-spacing: 2px
+        width: 80%
+
+        a
+            margin-top: 20px
+            color: $primary
+            font-weight: 900
+            font-size: 14px
+
+            &:hover
+                color: $black
+                text-decoration: none
+
+    .cart-body
+        flex: 1
+        position: relative
+
+        .shipping-table
+            width: calc(100% - 60px)
+            margin: auto
+            margin-bottom: 80px
+            font-size: 12px
+
+            tbody
+                tr
+                    border-top: 1px solid $semi-bg
+
+                    td
+                        padding-top: 1.8em
+                        text-align: center
+                        width: 25%
+
+            .shipping-label
+                font-weight: bold
+                font-style: italic
+                color: $semi-bg
+                text-transform: uppercase
+
+            select
+                border: none
+                appearance: none
+                -webkit-appearance:none
+                background: none
+                letter-spacing: 2px
+                outline: none
+
+            .control
+                a
+                    font-weight: 900
+                    color: $primary
+                    text-transform: uppercase
+
+
+    .cart-footer
+        text-align: center
+        padding-bottom: 50px
+
+        .caption
+            font-family: 'Muli'
+            font-weight: bold
+            font-style: italic
+            font-size: 12px
+            color: $semi-bg
+            letter-spacing: 2px
+
+        .total
+            font-family: 'Muli'
+            font-size: 40px
+            letter-spacing: 2px
+
+        .checkout
+            font-family: 'Muli'
+            font-weight: 900
+            font-size: 14px
+            color: $primary
+            text-transform: uppercase
+            letter-spacing: 1px
+            margin-top: 20px
+            display: inline-block
+            cursor: pointer
+
+        .checkout:hover
+            text-decoration: none
+
+@media (max-width: 768px)
+    .cart-wrapper
+        .edit .quantity-col
+            display: table-cell
+            text-align: center
+            vertical-align: middle
+
+        .edit .quantity-col select
+            margin: auto
+
+        .edit .price-col
+            display: none
+
+@media (min-width: 600px)
+    .shipping-table
+        tbody
+            tr
+                td
+                    font-size: 14px
+                    line-height: 18px
+
+@media (min-width: 769px)
+    .cart-wrapper
+        .cart-body
+            .shipping-table
+                margin-bottom: 100px
+
+                tbody
+                    tr
+                        border-top: none
+
+                        td
+                            text-align: left
+
+                        .shipping-label
+                            width: 50.2%
+                            padding-left: 26%
+
+                        .coutry
+                            padding-left: 30px
+
+                            select
+                                width: 80%
+                                cursor: pointer
+                                background:
+                                    image: url(/images/demo/arrow-down.svg)
+                                    repeat: no-repeat
+                                    color: none
+                                    size: 30px
+                                    position: right
+
+                                &:hover
+                                    background:
+                                        image: url(/images/demo/arrow-down-hover.svg)
+
+
+                        .price
+                            padding-left: 8px
+
+                        .control
+                            display: none
+
+@media (min-width: 880px)
+    .cart-wrapper
+        .cart-body
+            .shipping-table
+                tbody
+                    tr
+                        .shipping-label
+                            width: 38.2%
+                            padding-left: 17.5%
+
+                        .coutry
+                            width: 13%
+                            padding-left: 8px
+
+                        .price
+                            padding-left: 30px
+
+
+@media (min-width: 1280px)
+    .cart-wrapper
+        .cart-body
+            .shipping-table
+                width: 75%
+
+                tbody
+                    tr
+                        .shipping-label
+                            width: 50%
+                            padding-left: 17.5%
+
+                        .coutry
+                            padding-left: 8px
+                            width: 16.7%
+
+                        .price
+                            width: 66%
+                            padding-left: 30px
