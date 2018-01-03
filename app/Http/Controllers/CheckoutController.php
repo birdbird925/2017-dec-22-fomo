@@ -148,6 +148,7 @@ class CheckoutController extends Controller
 
     public function saveShipping(Request $request)
     {
+      dd($request->all());
       session([
           'checkout.shipping.email'=>$request->email,
           'checkout.shipping.firstName'=>$request->firstName,
