@@ -240,24 +240,22 @@ class CheckoutController extends Controller
     public function getDone(Request $request)
     {
     	$id = $request->get('paymentID');
-    	// $token = $request->get('token');
     	$payer_id = $request->get('PayerID');
-
-      try {
-          $payment = PayPal::getById($id, $this->_apiContext);
-      } catch (PayPal\Exception\PayPalConnectionException $pce) {
-          echo '<pre>';print_r(json_decode($pce->getData()));exit;
-      }
-
-      //check shipping country here
+      $payment = PayPal::getById($id, $this->_apiContext);
       $payerInfo = $payment->getPayer()->getPayerInfo();
       $transaction = $payment->getTransactions()[0];
       $amount = $transaction->getAmount();
       $items = $transaction->getItemList()->getItems();
+      $paymentExecution = PayPal::PaymentExecution();
+      $paymentExecution->setPayerId($payer_id);
 
-    	// $paymentExecution = PayPal::PaymentExecution();
-    	// $paymentExecution->setPayerId($payer_id);
-    	// $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
+      try {
+          $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
+      } catch (PayPal\Exception\PayPalConnectionException $pce) {
+          echo '<pre>';print_r(json_decode($pce->getData()));exit;
+      }
+
+
       //
       //   $transactionID = $executePayment->getTransactions()[0]->getRelatedResources()[0]->getSale()->getId();
       //   if($executePayment->getState() == 'approved') {
