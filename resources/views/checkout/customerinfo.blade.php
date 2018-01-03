@@ -130,17 +130,24 @@
   <script src="/js/countries.js"></script>
   <script language="javascript">
   	populateCountries("country", "state"); // first parameter is id of country drop-down and second parameter is id of state drop-down
+
     function isValid() {
       var inputField = ['email', 'first-name', 'last-name', 'address', 'city', 'postal', 'country', 'state', 'contact'];
       var hasEmpty = false;
 
       $.each(inputField, function(index, value) {
-        console.log($('#'+value).val());
         if($('#'+value).val() == '') {
           hasEmpty = true;
         }
       });
       return !hasEmpty;
+    }
+
+    function onChangeInput(handler) {
+      var inputField = ['email', 'first-name', 'last-name', 'address', 'city', 'postal', 'country', 'state', 'contact'];
+      $.each(inputField, function(index, value) {
+        $('#'+value).on('change', handler);
+      });
     }
 
     function toggleButton(actions) {
@@ -157,6 +164,9 @@
         },
         validate: function(actions) {
             toggleButton(actions);
+            onChangeInput(function() {
+                toggleButton(actions);
+            });
         },
         onClick: function() {
             if(!isValid()) {
@@ -165,10 +175,6 @@
               $('.msg-popup').toggleClass('popup');
               setTimeout(function(){ $('.msg-popup').toggleClass('popup'); }, 2000);
             }
-            else {
-              console.log('good');
-            }
-
         },
         style: {
             label: 'paypal',
@@ -179,36 +185,49 @@
         },
 
         // payment() is called when the button is clicked
-        payment: function() {
+        payment: function(data, actions) {
             console.log('start paypal page');
+            return actions.payment.create({
+                payment: {
+                    transactions: [
+                        {
+                            amount: { total: '0.01', currency: 'USD' }
+                        }
+                    ]
+                }
+            });
 
             // Set up a url on your server to create the payment
-            var CREATE_URL = '/demo/checkout/api/paypal/payment/create/';
-
-            // Make a call to your server to set up the payment
-            return paypal.request.post(CREATE_URL)
-                .then(function(res) {
-                    return res.paymentID;
-                });
+            // var CREATE_URL = '/demo/checkout/api/paypal/payment/create/';
+            //
+            // // Make a call to your server to set up the payment
+            // return paypal.request.post(CREATE_URL)
+            //     .then(function(res) {
+            //         return res.paymentID;
+            //     });
         },
 
         // onAuthorize() is called when the buyer approves the payment
         onAuthorize: function(data, actions) {
 
-            // Set up a url on your server to execute the payment
-            var EXECUTE_URL = '/demo/checkout/api/paypal/payment/execute/';
+            return actions.payment.execute().then(function() {
+                window.alert('Payment Complete!');
+            });
 
-            // Set up the data you need to pass to your server
-            var data = {
-                paymentID: data.paymentID,
-                payerID: data.payerID
-            };
-
-            // Make a call to your server to execute the payment
-            return paypal.request.post(EXECUTE_URL, data)
-                .then(function (res) {
-                    window.alert('Payment Complete!');
-                });
+            // // Set up a url on your server to execute the payment
+            // var EXECUTE_URL = '/demo/checkout/api/paypal/payment/execute/';
+            //
+            // // Set up the data you need to pass to your server
+            // var data = {
+            //     paymentID: data.paymentID,
+            //     payerID: data.payerID
+            // };
+            //
+            // // Make a call to your server to execute the payment
+            // return paypal.request.post(EXECUTE_URL, data)
+            //     .then(function (res) {
+            //         window.alert('Payment Complete!');
+            //     });
         }
 
     }, '#paypal-button-container');
