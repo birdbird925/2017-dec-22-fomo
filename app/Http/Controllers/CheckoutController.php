@@ -192,22 +192,22 @@ class CheckoutController extends Controller
       $transaction->setDescription('Creating a payment');
       $transaction->setItemList($items);
 
-    	// $redirectUrls = PayPal:: RedirectUrls();
-    	// $redirectUrls->setReturnUrl(action('CheckoutController@getDone'));
-    	// $redirectUrls->setCancelUrl(action('CartController@index'));
+    	$redirectUrls = PayPal:: RedirectUrls();
+    	$redirectUrls->setReturnUrl(action('CheckoutController@getDone'));
+    	$redirectUrls->setCancelUrl(action('CartController@index'));
 
     	$payment = PayPal::Payment();
     	$payment->setIntent('sale');
     	$payment->setPayer($payer);
-    	// $payment->setRedirectUrls($redirectUrls);
+    	$payment->setRedirectUrls($redirectUrls);
     	$payment->setTransactions(array($transaction));
       $payment->setExperienceProfileId($this->createWebProfile());
 
     	$response = $payment->create($this->_apiContext);
       // return $response;
-    	// $redirectUrl = $response->links[1]->href;
+    	$redirectUrl = $response->links[1]->href;
 
-    	// return Redirect::to($redirectUrl);
+    	return Redirect::to($redirectUrl);
     }
 
     public function getDone(Request $request)
