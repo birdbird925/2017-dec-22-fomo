@@ -62,7 +62,7 @@
             </div>
             <div class="col-md-6 col-md-pull-4 col-xs-10 col-xs-offset-1">
               <div class="subtitle">Customer Details</div>
-              <form name="customerDetail">
+              <form action="/shipping/save" method="post" name="customerDetail">
                 {{ csrf_field() }}
                 <div class="form-group">
                   <label for="email">Email
