@@ -184,15 +184,15 @@
             }
             else {
               // save checkout address
-              var form = $('form[name=customerDetail]');
-              if(form.attr('data-reload') == 'yes') {
-                $('form[name=customerDetail]').submit();
-              }
+              // var form = $('form[name=customerDetail]');
+              // if(form.attr('data-reload') == 'yes') {
+              //   $('form[name=customerDetail]').submit();
+              // }
 
-              // var data = $('form[name=customerDetail]').serialize();
-              // $.post('/checkout/shipping/save', $('form[name=customerDetail]').serialize(), function(res){
-              //   console.log('saved');
-              // });
+              var data = $('form[name=customerDetail]').serialize();
+              $.post('/checkout/shipping/save', $('form[name=customerDetail]').serialize(), function(res){
+                console.log('saved');
+              });
             }
         },
         style: {
