@@ -161,6 +161,10 @@
         return isValid() ? actions.enable() : actions.disable();
     }
 
+    $('.paypal-button').on('click', function(){
+      console.log('test');
+    });
+
     paypal.Button.render({
 
         env: 'sandbox', // sandbox | production
