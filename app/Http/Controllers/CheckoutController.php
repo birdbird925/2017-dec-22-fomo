@@ -160,6 +160,8 @@ class CheckoutController extends Controller
           'checkout.shipping.state'=>$request->state,
           'checkout.shipping.contact'=>$request->contact
       ]);
+
+      dd(session()->all());
     }
 
     public function paypal(Request $request)
