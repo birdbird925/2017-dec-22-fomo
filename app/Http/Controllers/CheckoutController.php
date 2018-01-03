@@ -245,22 +245,22 @@ class CheckoutController extends Controller
 
           $transactionID = $executePayment->getTransactions()[0]->getRelatedResources()[0]->getSale()->getId();
           if($executePayment->getState() == 'approved') {
-              $order = Order::create([
-                  'user_id' => Auth::check() ? Auth::user()->id : null,
-                  'name' => session('checkout.shipping.firstName').' '.session('checkout.shipping.lastName'),
-                  'email' => session('checkout.shipping.email'),
-                  'phone' => session('checkout.shipping.contact'),
-                  'address_line_1' => session('checkout.shipping.address'),
-                  'address_line_2' => session('checkout.shipping.appartment'),
-                  'city' => session('checkout.shipping.city'),
-                  'postcode' => session('checkout.shipping.postal'),
-                  'state' => session('checkout.shipping.state'),
-                  'country' => session('checkout.shipping.country'),
-                  'shipping_cost' => session('cart.shipping.cost'),
-                  // 'paypal_id' => $payment->getId(),
-                  'paypal_id' => $transactionID,
-                  'payment_status' => 1
-              ]);
+              // $order = Order::create([
+              //     'user_id' => Auth::check() ? Auth::user()->id : null,
+              //     'name' => session('checkout.shipping.firstName').' '.session('checkout.shipping.lastName'),
+              //     'email' => session('checkout.shipping.email'),
+              //     'phone' => session('checkout.shipping.contact'),
+              //     'address_line_1' => session('checkout.shipping.address'),
+              //     'address_line_2' => session('checkout.shipping.appartment'),
+              //     'city' => session('checkout.shipping.city'),
+              //     'postcode' => session('checkout.shipping.postal'),
+              //     'state' => session('checkout.shipping.state'),
+              //     'country' => session('checkout.shipping.country'),
+              //     'shipping_cost' => session('cart.shipping.cost'),
+              //     // 'paypal_id' => $payment->getId(),
+              //     'paypal_id' => $transactionID,
+              //     'payment_status' => 1
+              // ]);
 
               $cartItemCode = [];
               foreach($items as $item)
