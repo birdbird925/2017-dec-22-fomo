@@ -303,7 +303,7 @@ class CheckoutController extends Controller
     public function createWebProfile(){
     	$flowConfig = PayPal::FlowConfig();
       $flowConfig->setLandingPageType("Billing");
-      $flowConfig->setUserAction('commit'); // user_action=commit
+      // $flowConfig->setUserAction('commit'); // user_action=commit
     	$inputFields = PayPal::InputFields();
       $inputFields->setNoShipping(1);
       $presentation = PayPal::Presentation();
