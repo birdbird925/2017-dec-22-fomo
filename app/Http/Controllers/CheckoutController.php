@@ -57,9 +57,10 @@ class CheckoutController extends Controller
         return 'true';
     }
 
-    public function checkout()
+    public function checkout(Request $request)
     {
-      // dd(session()->all());
+      // session()->flush();
+      // session()->regenerate();
       if(sizeof(session('cart.item')) == 0 || session('cart.shipping.location') == '')
           return redirect()->back();
       else
@@ -148,21 +149,18 @@ class CheckoutController extends Controller
 
     public function saveShipping(Request $request)
     {
-      session()->put('checkout.shipping.email', $request->email);
-      // session([
-      //     'checkout.shipping.email'=>$request->email,
-      //     'checkout.shipping.firstName'=>$request->firstName,
-      //     'checkout.shipping.lastName'=>$request->lastName,
-      //     'checkout.shipping.apartment'=>$request->apartment,
-      //     'checkout.shipping.address'=>$request->address,
-      //     'checkout.shipping.city'=>$request->city,
-      //     'checkout.shipping.postal'=>$request->postal,
-      //     'checkout.shipping.country'=>$request->country,
-      //     'checkout.shipping.state'=>$request->state,
-      //     'checkout.shipping.contact'=>$request->contact
-      // ]);
-
-      dd(session()->all());
+      session([
+          'checkout.shipping.email'=>$request->email,
+          'checkout.shipping.firstName'=>$request->firstName,
+          'checkout.shipping.lastName'=>$request->lastName,
+          'checkout.shipping.apartment'=>$request->apartment,
+          'checkout.shipping.address'=>$request->address,
+          'checkout.shipping.city'=>$request->city,
+          'checkout.shipping.postal'=>$request->postal,
+          'checkout.shipping.country'=>$request->country,
+          'checkout.shipping.state'=>$request->state,
+          'checkout.shipping.contact'=>$request->contact
+      ]);
     }
 
     public function paypal(Request $request)
