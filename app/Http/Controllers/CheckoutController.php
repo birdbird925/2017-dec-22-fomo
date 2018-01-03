@@ -148,18 +148,30 @@ class CheckoutController extends Controller
 
     public function saveShipping(Request $request)
     {
-      session([
-          'checkout.shipping.email'=>$request->email,
-          'checkout.shipping.firstName'=>$request->firstName,
-          'checkout.shipping.lastName'=>$request->lastName,
-          'checkout.shipping.apartment'=>$request->apartment,
-          'checkout.shipping.address'=>$request->address,
-          'checkout.shipping.city'=>$request->city,
-          'checkout.shipping.postal'=>$request->postal,
-          'checkout.shipping.country'=>$request->country,
-          'checkout.shipping.state'=>$request->state,
-          'checkout.shipping.contact'=>$request->contact
+      session()->put('checkout.shipping', [
+        'email'=>$request->email,
+        'firstName'=>$request->firstName,
+        'lastName'=>$request->lastName,
+        'apartment'=>$request=>apartment,
+        'address'=>$request->address,
+        'city'=>$request->city,
+        'postal'=>$request->postal,
+        'country'=>$request->country,
+        'state'=>$request->state,
+        'contact'=>$request->contact
       ]);
+      // session([
+      //     'checkout.shipping.email'=>$request->email,
+      //     'checkout.shipping.firstName'=>$request->firstName,
+      //     'checkout.shipping.lastName'=>$request->lastName,
+      //     'checkout.shipping.apartment'=>$request->apartment,
+      //     'checkout.shipping.address'=>$request->address,
+      //     'checkout.shipping.city'=>$request->city,
+      //     'checkout.shipping.postal'=>$request->postal,
+      //     'checkout.shipping.country'=>$request->country,
+      //     'checkout.shipping.state'=>$request->state,
+      //     'checkout.shipping.contact'=>$request->contact
+      // ]);
 
       dd(session()->all());
     }
