@@ -311,7 +311,7 @@ class CheckoutController extends Controller
     	$webProfile = PayPal::WebProfile();
 
     	$webProfile->setName("FOMO".uniqid())
-          ->setTemporary('false') // if cant then delete
+          // ->setTemporary('false') // if cant then delete
       		->setFlowConfig($flowConfig)
       		// Parameters for style and presentation.
       		->setPresentation($presentation)
