@@ -226,11 +226,13 @@
                 payerID: data.payerID
             };
 
+            console.log(data);
+
             // Make a call to your server to execute the payment
-            return paypal.request.get(EXECUTE_URL, data)
-                .then(function (res) {
-                    window.alert('Payment Complete!');
-                });
+            // return paypal.request.get(EXECUTE_URL, data)
+            //     .then(function (res) {
+            //         window.alert('Payment Complete!');
+            //     });
         }
 
     }, '#paypal-button-container');
