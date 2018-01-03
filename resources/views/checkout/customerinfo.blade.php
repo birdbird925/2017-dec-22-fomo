@@ -194,7 +194,8 @@
             // Make a call to your server to set up the payment
             return paypal.request.get(CREATE_URL)
                 .then(function(res) {
-                    return res.paymentID;
+                    // return res.paymentID;
+                    return res;
                 });
         },
 
