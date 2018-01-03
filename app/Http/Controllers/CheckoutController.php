@@ -148,18 +148,7 @@ class CheckoutController extends Controller
 
     public function saveShipping(Request $request)
     {
-      session()->put('checkout.shipping', [
-        'email'=>$request->email,
-        'firstName'=>$request->firstName,
-        'lastName'=>$request->lastName,
-        'apartment'=>$request=>apartment,
-        'address'=>$request->address,
-        'city'=>$request->city,
-        'postal'=>$request->postal,
-        'country'=>$request->country,
-        'state'=>$request->state,
-        'contact'=>$request->contact
-      ]);
+      session()->put('checkout.shipping.email', $request->email);
       // session([
       //     'checkout.shipping.email'=>$request->email,
       //     'checkout.shipping.firstName'=>$request->firstName,
