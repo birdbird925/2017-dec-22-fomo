@@ -16,6 +16,7 @@ use App\CustomizeProduct;
 use App\Order;
 use App\OrderItem;
 use App\Voucher;
+use App\VoucherHistory;
 use Paypal;
 use Redirect;
 
@@ -302,6 +303,17 @@ class CheckoutController extends Controller
                       ]);
                       $order->save();
                   }
+              }
+
+              if(session()->has('checkout.voucher.value')) {
+                  $VoucherHistory = VoucherHistory::create([
+                      'voucher_id' => Voucher::where('code', session('checkout.voucher.code'))->first(),
+                      'order_id' => $order->id,
+                      'email' => 'x@mail.com',
+                      // 'email' => session('checkout.shipping.email'),
+                  ]);
+
+                  session()->forget("checkout.voucher");
               }
 
 
