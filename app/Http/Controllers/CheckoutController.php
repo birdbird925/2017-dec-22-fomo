@@ -211,7 +211,7 @@ class CheckoutController extends Controller
     	$payment->setTransactions(array($transaction));
       $payment->setExperienceProfileId($this->createWebProfile());
       try {
-          $response = $pp_payment->create();
+          $response = $payment->create();
       } catch (PayPal\Exception\PayPalConnectionException $pce) {
           echo '<pre>';print_r(json_decode($pce->getData()));exit;
       }
