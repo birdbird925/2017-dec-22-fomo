@@ -90,5 +90,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('message', 'ContactUsController@messages');
     Route::get('message/{id}', 'ContactUsController@reply');
 });
-//cms
+//cms page
 Route::get('/{slug}', 'CmsController@page');

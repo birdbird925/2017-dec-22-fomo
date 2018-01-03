@@ -185,26 +185,17 @@
         },
 
         // payment() is called when the button is clicked
-        payment: function(data, actions) {
+        payment: function() {
             console.log('start paypal page');
-            return actions.payment.create({
-                payment: {
-                    transactions: [
-                        {
-                            amount: { total: '0.01', currency: 'USD' }
-                        }
-                    ]
-                }
-            });
 
             // Set up a url on your server to create the payment
-            // var CREATE_URL = '/demo/checkout/api/paypal/payment/create/';
-            //
-            // // Make a call to your server to set up the payment
-            // return paypal.request.post(CREATE_URL)
-            //     .then(function(res) {
-            //         return res.paymentID;
-            //     });
+            var CREATE_URL = '/checkout/api/paypal/payment/create';
+
+            // Make a call to your server to set up the payment
+            return paypal.request.post(CREATE_URL)
+                .then(function(res) {
+                    return res.paymentID;
+                });
         },
 
         // onAuthorize() is called when the buyer approves the payment
