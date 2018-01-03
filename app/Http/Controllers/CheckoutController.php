@@ -179,10 +179,10 @@ class CheckoutController extends Controller
       }
 
       $item = PayPal::Item();
-      $item->setName('Shipping');
+      $item->setName('Shipping Fee');
       $item->setQuantity(1);
       $item->setCurrency(session('currency'));
-      $item->setPrice(-session('cart.shipping.cost'));
+      $item->setPrice(session('cart.shipping.cost'));
       $items->addItem($item);
 
       // discount
@@ -191,7 +191,7 @@ class CheckoutController extends Controller
         $item->setName('Discount');
         $item->setQuantity(1);
         $item->setCurrency(session('currency'));
-        $item->setPrice(session('checkout.voucher.value'));
+        $item->setPrice(-session('checkout.voucher.value'));
         $items->addItem($item);
       }
 
@@ -210,7 +210,6 @@ class CheckoutController extends Controller
     	$payment->setRedirectUrls($redirectUrls);
     	$payment->setTransactions(array($transaction));
       $payment->setExperienceProfileId($this->createWebProfile());
-      dd($payment);
 
     	$response = $payment->create($this->_apiContext);
     	$redirectUrl = $response->links[1]->href;
