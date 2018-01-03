@@ -146,6 +146,17 @@ class CheckoutController extends Controller
         return redirect()->back();
     }
 
+    public function testAddVoucherHistory()
+    {
+      $voucherHistory = VoucherHistory::create([
+          'voucher_id' => 3,
+          'order_id' => 40,
+          'email' => 'xiangwen@mail.com'
+      ]);
+
+      echo '1';
+    }
+
     public function saveShipping(Request $request)
     {
       // session([

@@ -29,6 +29,7 @@ Route::post('/discount-code/apply', 'CheckoutController@submitVoucher');
 Route::post('/checkout/shipping/save', 'CheckoutController@saveShipping');
 Route::get('/checkout/paypal/payment/create', 'CheckoutController@paypal');
 Route::get('/checkout/done', 'CheckoutController@getDone');
+ROute::get('/test/voucher/history', 'CheckoutController@testAddVoucherHistory');
 // Route::get('/checkout/refund', 'CheckoutController@refund');
 //customize
 Route::get('/customize', 'CustomizeController@index');
