@@ -178,14 +178,15 @@ class CheckoutController extends Controller
           $items->addItem($item);
       }
 
+      // // shipping fee
       // $item = PayPal::Item();
       // $item->setName('Shipping Fee');
       // $item->setQuantity(1);
       // $item->setCurrency(session('currency'));
       // $item->setPrice(session('cart.shipping.cost'));
       // $items->addItem($item);
-
-      // discount
+      //
+      // // discount
       // if(session()->has('checkout.voucher.value')) {
       //   $item = PayPal::Item();
       //   $item->setName('Discount');
@@ -212,7 +213,7 @@ class CheckoutController extends Controller
       $payment->setExperienceProfileId($this->createWebProfile());
       try {
           $response = $payment->create($this->_apiContext);
-          dd($response);
+          return $response->id;
       } catch (PayPal\Exception\PayPalConnectionException $pce) {
           echo '<pre>';print_r(json_decode($pce->getData()));exit;
       }
