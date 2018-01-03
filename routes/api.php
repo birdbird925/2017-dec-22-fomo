@@ -7,4 +7,4 @@ use Illuminate\Http\Request;
 // })->middleware('auth:api');
 
 
-Route::post('/checkout/api/paypal/payment/create', 'CheckoutController@paypal');
+// Route::get('/checkout/paypal/payment/create', 'CheckoutController@paypal')->middleware('sessions');

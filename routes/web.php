@@ -26,7 +26,7 @@ Route::get('/cart/{id}/quantity/{quantity}/update', 'CartController@updateQuanti
 Route::post('/checkout/validation', 'CheckoutController@validation');
 Route::get('/checkout', 'CheckoutController@checkout');
 Route::post('/discount-code/apply', 'CheckoutController@submitVoucher');
-Route::post('/checkout', 'CheckoutController@paypal');
+Route::get('/checkout/paypal/payment/create', 'CheckoutController@paypal');
 Route::get('/checkout/done', 'CheckoutController@getDone');
 // Route::get('/checkout/refund', 'CheckoutController@refund');
 //customize

@@ -145,7 +145,7 @@ class CheckoutController extends Controller
         return redirect()->back();
     }
 
-    public function paypal()
+    public function paypal(Request $request)
     {
     	$payer = PayPal::Payer();
     	$payer->setPaymentMethod('paypal');
@@ -155,9 +155,7 @@ class CheckoutController extends Controller
       $detail->setShipping(session('cart.shipping.cost'));
 
     	$amount = PayPal::Amount();
-    	// $amount->setCurrency('USD');
       $amount->setCurrency(session('currency'));
-
 
       $total = session('cart.total') + session('cart.shipping.cost');
       // discount
@@ -206,7 +204,7 @@ class CheckoutController extends Controller
       $payment->setExperienceProfileId($this->createWebProfile());
 
     	$response = $payment->create($this->_apiContext);
-      return $response;
+      // return $response;
     	// $redirectUrl = $response->links[1]->href;
 
     	// return Redirect::to($redirectUrl);
