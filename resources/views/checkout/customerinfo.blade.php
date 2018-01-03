@@ -182,7 +182,9 @@
               $.each(inputField, function(index, value) {
                 url += value+'='+$('#'+value).val()+'&';
               });
-              $.get(url);
+              $.get(url, function(){
+                console.log('save shipping');
+              });
             }
         },
         style: {
