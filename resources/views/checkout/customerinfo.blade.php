@@ -139,9 +139,6 @@
       $('#state').val($('#state').attr('data-value'));
     }
 
-    $('.paypal-button-wrapper').on('click', function(){
-      console.log('1');
-    })
     function isValid() {
       var inputField = ['email', 'firstName', 'lastName', 'address', 'city', 'postal', 'country', 'state', 'contact'];
       var hasEmpty = false;

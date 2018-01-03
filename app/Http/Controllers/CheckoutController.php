@@ -267,6 +267,7 @@ class CheckoutController extends Controller
                   'state' => 'postcode',
                   'country' => 'postcode',
                   'shipping_cost' => session('cart.shipping.cost'),
+                  'currency' => session('currency'),
                   // 'paypal_id' => $payment->getId(),
                   'paypal_id' => $transactionID,
                   'payment_status' => 1
@@ -301,8 +302,8 @@ class CheckoutController extends Controller
                       ]);
                       $order->save();
                   }
-
               }
+
 
               // remove session cart
               session()->forget("cart");
