@@ -210,8 +210,13 @@ class CheckoutController extends Controller
     	$payment->setRedirectUrls($redirectUrls);
     	$payment->setTransactions(array($transaction));
       $payment->setExperienceProfileId($this->createWebProfile());
-      dd($payment->create($this->_apiContext));
+      try {
+          $response = $pp_payment->create();
+      } catch (PayPal\Exception\PPConnectionException $pce) {
+          echo '<pre>';print_r(json_decode($pce->getData()));exit;
+      }
     	$response = $payment->create($this->_apiContext);
+      dd($response);
       return $response->id;
     	// $redirectUrl = $response->links[1]->href;
     	// return Redirect::to($redirectUrl);
