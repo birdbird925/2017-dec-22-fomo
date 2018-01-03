@@ -177,7 +177,7 @@
             }
             else {
               // save checkout address
-              var inputField = ['email', 'first-name', 'last-name', 'address', 'city', 'postal', 'country', 'state', 'contact'];
+              var inputField = ['email', 'first-name', 'last-name', 'apartment', 'address', 'city', 'postal', 'country', 'state', 'contact'];
               var url = '/checkout/shipping/save?';
               $.each(inputField, function(index, value) {
                 url += value+'='+$('#'+value).val()+'&';
