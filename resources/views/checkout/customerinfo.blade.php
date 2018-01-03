@@ -130,12 +130,40 @@
   <script src="/js/countries.js"></script>
   <script language="javascript">
   	populateCountries("country", "state"); // first parameter is id of country drop-down and second parameter is id of state drop-down
-  </script>
-  <script>
+    function isValid() {
+      var inputField = ['email', 'first-name', 'last-name', 'address', 'city', 'postal', 'country', 'state', 'contact'];
+      var hasEmpty = false;
+
+      $.each(inputField, function(index, value) {
+        if($('#'+inputField).val().trim() == '') {
+          hasEmpty = true;
+        }
+      });
+      return !hasEmpty;
+    }
+
+    function toggleButton(actions) {
+        return isValid() ? actions.enable() : actions.disable();
+    }
+
     paypal.Button.render({
 
         env: 'sandbox', // sandbox | production
 
+        client: {
+            sandbox:    'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
+            production: '<insert production client id>'
+        },
+        validate: function(actions) {
+            toggleButton(actions);
+
+            onChangeCheckbox(function() {
+                toggleButton(actions);
+            });
+        },
+        onClick: function() {
+            toggleValidationMessage();
+        },
         style: {
             label: 'paypal',
             size:  'medium',    // small | medium | large | responsive
@@ -146,15 +174,16 @@
 
         // payment() is called when the button is clicked
         payment: function() {
+            console.log('start paypal page');
 
-            // Set up a url on your server to create the payment
-            var CREATE_URL = '/demo/checkout/api/paypal/payment/create/';
-
-            // Make a call to your server to set up the payment
-            return paypal.request.post(CREATE_URL)
-                .then(function(res) {
-                    return res.paymentID;
-                });
+            // // Set up a url on your server to create the payment
+            // var CREATE_URL = '/demo/checkout/api/paypal/payment/create/';
+            //
+            // // Make a call to your server to set up the payment
+            // return paypal.request.post(CREATE_URL)
+            //     .then(function(res) {
+            //         return res.paymentID;
+            //     });
         },
 
         // onAuthorize() is called when the buyer approves the payment

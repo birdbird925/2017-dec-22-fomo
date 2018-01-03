@@ -303,19 +303,21 @@ class CheckoutController extends Controller
 
     public function createWebProfile(){
     	$flowConfig = PayPal::FlowConfig();
-    	$presentation = PayPal::Presentation();
+      $flowConfig->setLandingPageType("Billing");
+      $flowConfig->setUserAction('commit'); // user_action=commit
     	$inputFields = PayPal::InputFields();
+      $inputFields->setNoShipping(1);
+      $presentation = PayPal::Presentation();
+      $presentation->setLogoImage("https://fomo.watch/images/demo/paypal-logo.svg")->setBrandName("FOMO"); //NB: Paypal recommended to use https for the logo's address and the size set to 190x60.
     	$webProfile = PayPal::WebProfile();
-    	$flowConfig->setLandingPageType("Billing");
-        // user_action=commit
-    	$presentation->setLogoImage("http://fomo.watch/images/demo/paypal-logo.svg")->setBrandName("FOMO"); //NB: Paypal recommended to use https for the logo's address and the size set to 190x60.
 
     	$webProfile->setName("FOMO".uniqid())
-    		->setFlowConfig($flowConfig)
-    		// Parameters for style and presentation.
-    		->setPresentation($presentation)
-    		// Parameters for input field customization.
-    		->setInputFields($inputFields);
+          ->setTemporary('false') // if cant then delete
+      		->setFlowConfig($flowConfig)
+      		// Parameters for style and presentation.
+      		->setPresentation($presentation)
+      		// Parameters for input field customization.
+      		->setInputFields($inputFields);
 
     	$createProfileResponse = $webProfile->create($this->_apiContext);
 
