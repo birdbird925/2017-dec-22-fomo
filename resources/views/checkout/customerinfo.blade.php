@@ -227,7 +227,7 @@
             };
 
             // Make a call to your server to execute the payment
-            return paypal.request.post(EXECUTE_URL, data)
+            return paypal.request.get(EXECUTE_URL, data)
                 .then(function (res) {
                     window.alert('Payment Complete!');
                 });
