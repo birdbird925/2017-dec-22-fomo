@@ -147,7 +147,6 @@ class CheckoutController extends Controller
 
     public function saveShipping(Request $request)
     {
-      dd($request->all());
       session([
           'checkout.shipping.email'=>$request->email,
           'checkout.shipping.firstName'=>$request->firstName,
@@ -160,6 +159,7 @@ class CheckoutController extends Controller
           'checkout.shipping.state'=>$request->state,
           'checkout.shipping.contact'=>$request->contact,
       ]);
+      dd(session()->all());
     }
 
     public function paypal(Request $request)
