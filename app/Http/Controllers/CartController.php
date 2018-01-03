@@ -30,7 +30,7 @@ class CartController extends Controller
         return redirect('/cart');
     }
 
-    public function updateQuantity(Request $request, $id, $quantity)
+    public function updateQuantity($id, $quantity, Request $request)
     {
         $request->session()->put('cart.item.'.$id.'.quantity', $quantity);
         // session(['cart.item.'.$id.'.quantity' => $quantity]);
