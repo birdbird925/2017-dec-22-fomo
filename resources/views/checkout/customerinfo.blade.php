@@ -133,7 +133,7 @@
   <script src="/js/countries.js"></script>
   <script language="javascript">
   	populateCountries("country", "state"); // first parameter is id of country drop-down and second parameter is id of state drop-down
-    if($('#country').attr('data-value') != null) {
+    if($('#country').attr('data-value') != '') {
       $('#country').val($('#country').attr('data-value'));
       populateStates('country', 'state');
       $('#state').val($('#state').attr('data-value'));
