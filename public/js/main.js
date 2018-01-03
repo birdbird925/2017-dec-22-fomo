@@ -1796,7 +1796,7 @@ $(function() {
         var id = row.find('.quantity-dropdown').attr('data-id');
         $.get("/cart/"+id+"/quantity/"+quantity+"/update", function() {
           row.find('span.quantity').text(quantity+' piece');
-          window.location.reload();
+          // window.location.reload();
         });
       }
     })
