@@ -14,6 +14,7 @@
     <link href="/css/app.css" rel="stylesheet">
 
     <!-- Scripts -->
+    @stack('head-scripts')
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),

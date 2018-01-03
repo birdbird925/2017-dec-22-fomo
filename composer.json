@@ -15,6 +15,7 @@
         "netshell/paypal": "dev-master",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/message": "^1.6",
+        "srmklive/paypal": "~1.0",
         "torann/geoip": "^1.0"
     },
     "require-dev": {

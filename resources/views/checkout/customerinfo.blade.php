@@ -110,11 +110,14 @@
                 <input id="contact" type="text" name="contact" placeholder="(Country Code)(Contact Number)" autocomplete="off">
               </div>
               <div class="checkout-navigation">
-                <a href="/cart">< Return to Cart</a>
-                <form action="/checkout" method="post" style="display: inline;">
+                <a href="/cart">Return to Cart</a>
+                {{-- <form action="/checkout" method="post" style="display: inline;">
                   {{ csrf_field() }}
                   <input class="paypal" type="submit" value="PAYPAL PAYMENT">
-                </form>
+                </form> --}}
+                <div class="paypal-button-wrapper">
+                  <div id="paypal-button-container"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -128,5 +131,55 @@
   <script language="javascript">
   	populateCountries("country", "state"); // first parameter is id of country drop-down and second parameter is id of state drop-down
   </script>
+  <script>
+    paypal.Button.render({
 
+        env: 'sandbox', // sandbox | production
+
+        style: {
+            label: 'paypal',
+            size:  'medium',    // small | medium | large | responsive
+            shape: 'rect',     // pill | rect
+            color: 'blue',     // gold | blue | silver | black
+            tagline: false
+        },
+
+        // payment() is called when the button is clicked
+        payment: function() {
+
+            // Set up a url on your server to create the payment
+            var CREATE_URL = '/demo/checkout/api/paypal/payment/create/';
+
+            // Make a call to your server to set up the payment
+            return paypal.request.post(CREATE_URL)
+                .then(function(res) {
+                    return res.paymentID;
+                });
+        },
+
+        // onAuthorize() is called when the buyer approves the payment
+        onAuthorize: function(data, actions) {
+
+            // Set up a url on your server to execute the payment
+            var EXECUTE_URL = '/demo/checkout/api/paypal/payment/execute/';
+
+            // Set up the data you need to pass to your server
+            var data = {
+                paymentID: data.paymentID,
+                payerID: data.payerID
+            };
+
+            // Make a call to your server to execute the payment
+            return paypal.request.post(EXECUTE_URL, data)
+                .then(function (res) {
+                    window.alert('Payment Complete!');
+                });
+        }
+
+    }, '#paypal-button-container');
+  </script>
+@endpush
+
+@push('head-scripts')
+  <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 @endpush

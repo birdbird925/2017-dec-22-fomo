@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "75e722dbbcd0b0072e41925af6e822d8",
-    "content-hash": "ae06c368c6f87ae9d2d8b07c12def865",
+    "hash": "4438bcc648d60b5154c93122ca5694fe",
+    "content-hash": "46066cb09c75fde2398eddc875ce5fe2",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -2189,6 +2189,61 @@
                 "stylesheet"
             ],
             "time": "2016-07-19 19:14:21"
+        },
+        {
+            "name": "srmklive/paypal",
+            "version": "1.5.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/srmklive/laravel-paypal.git",
+                "reference": "839e839e239f7981a8c746c3f964d2f2bb1ac1e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/srmklive/laravel-paypal/zipball/839e839e239f7981a8c746c3f964d2f2bb1ac1e7",
+                "reference": "839e839e239f7981a8c746c3f964d2f2bb1ac1e7",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "illuminate/support": "~5.1|~5.2|~5.3|~5.4|~5.5",
+                "nesbot/carbon": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Srmklive\\PayPal\\Providers\\PayPalServiceProvider"
+                    ],
+                    "aliases": {
+                        "PayPal": "Srmklive\\PayPal\\Facades\\PayPal"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Srmklive\\PayPal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raza Mehdi",
+                    "email": "srmk@outlook.com"
+                }
+            ],
+            "description": "Laravel plugin For Processing Payments Through Paypal Express Checkout. Can Be Used Independently With Other Applications.",
+            "keywords": [
+                "http",
+                "laravel paypal",
+                "paypal",
+                "rest",
+                "web service"
+            ],
+            "time": "2017-10-17 10:47:22"
         },
         {
             "name": "swiftmailer/swiftmailer",

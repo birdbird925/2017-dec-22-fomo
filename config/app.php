@@ -170,6 +170,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Netshell\Paypal\PaypalServiceProvider::class,
+        // Srmklive\PayPal\Providers\PayPalServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         /*
          * Application Service Providers...

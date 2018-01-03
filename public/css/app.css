@@ -10993,7 +10993,8 @@ body.initial {
 
 .checkout-wrapper .checkout-navigation a {
   color: #9F9994;
-  font-size: 12px;
+  line-height: 40px;
+  font-size: 13.5px;
   font-style: italic;
 }
 
@@ -11001,15 +11002,9 @@ body.initial {
   text-decoration: none;
 }
 
-.checkout-wrapper .checkout-navigation .paypal {
+.checkout-wrapper .checkout-navigation .paypal-button-wrapper {
   float: right;
-  color: #FBA200;
-  font-size: 15px;
-  font-weight: 900;
-  font-style: normal;
-  letter-spacing: 1.2px;
-  background: transparent;
-  border: none;
+  display: inline;
 }
 
 .checkout-wrapper .checkout-item-table {
