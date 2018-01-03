@@ -59,6 +59,7 @@ class CheckoutController extends Controller
 
     public function checkout()
     {
+      dd(session()->all());
       if(sizeof(session('cart.item')) == 0 || session('cart.shipping.location') == '')
           return redirect()->back();
       else
