@@ -240,7 +240,7 @@ class CheckoutController extends Controller
     public function getDone(Request $request)
     {
     	$id = $request->get('paymentID');
-    	$payer_id = $request->get('PayerID');
+    	$payer_id = $request->get('payerID');
       $payment = PayPal::getById($id, $this->_apiContext);
       $payerInfo = $payment->getPayer()->getPayerInfo();
       $transaction = $payment->getTransactions()[0];
