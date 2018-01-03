@@ -138,6 +138,10 @@
       populateStates('country', 'state');
       $('#state').val($('#state').attr('data-value'));
     }
+
+    $('.paypal-button-wrapper').on('click', function(){
+      console.log('1');
+    })
     function isValid() {
       var inputField = ['email', 'firstName', 'lastName', 'address', 'city', 'postal', 'country', 'state', 'contact'];
       var hasEmpty = false;
@@ -160,10 +164,6 @@
     function toggleButton(actions) {
         return isValid() ? actions.enable() : actions.disable();
     }
-
-    $('.paypal-button').on('click', function(){
-      console.log('test');
-    });
 
     paypal.Button.render({
 
