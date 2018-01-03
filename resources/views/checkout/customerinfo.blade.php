@@ -231,14 +231,16 @@
             // Make a call to your server to execute the payment
             return paypal.request.get(EXECUTE_URL)
                 .then(function (res) {
-                    console.log(res);
+                    if(res == 'cart') {
+                      window.location.href = "/cart";
+                    }
+                    elseif(res == 'account') {
+                      window.location.href = '/account';
+                    }
+                    else {
+                      window.location.reload();
+                    }
                 });
-            // return paypal.request.get(EXECUTE_URL, data)
-            //     .then(function (res) {
-            //         console.log(res);
-            //     });
-
-            console.log('end');
         }
 
     }, '#paypal-button-container');
