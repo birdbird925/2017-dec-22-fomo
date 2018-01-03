@@ -191,7 +191,7 @@ class CheckoutController extends Controller
         $item->setName('Discount');
         $item->setQuantity(1);
         $item->setCurrency(session('currency'));
-        $item->setPrice(-session('checkout.voucher.value'));
+        $item->setPrice(session('checkout.voucher.value'));
         $items->addItem($item);
       }
 
