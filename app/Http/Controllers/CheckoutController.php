@@ -307,7 +307,7 @@ class CheckoutController extends Controller
 
               if(session()->has('checkout.voucher.value')) {
                 echo $order->id;
-                echo Voucher::where('code', session('checkout.voucher.code'))->first()->id
+                echo Voucher::where('code', session('checkout.voucher.code'))->first()->id;
               //     $VoucherHistory = VoucherHistory::create([
               //         'voucher_id' => Voucher::where('code', session('checkout.voucher.code'))->first()->id,
               //         'order_id' => $order->id,
