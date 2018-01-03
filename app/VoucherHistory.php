@@ -10,4 +10,5 @@ class VoucherHistory extends Model
 {
     protected $table = 'voucher_history';
     protected $guarded = [];
+    public $timestamps  = false;
 }

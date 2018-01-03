@@ -9,6 +9,8 @@ use Carbon\Carbon;
 class Voucher extends Model
 {
     protected $table = 'voucher';
+    protected $guarded = [];
+    public $timestamps  = false;
 
     public function performance()
     {
