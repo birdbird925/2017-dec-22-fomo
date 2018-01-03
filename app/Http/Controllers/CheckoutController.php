@@ -305,16 +305,16 @@ class CheckoutController extends Controller
                   }
               }
 
-              if(session()->has('checkout.voucher.value')) {
-                  $VoucherHistory = VoucherHistory::create([
-                      'voucher_id' => Voucher::where('code', session('checkout.voucher.code'))->first()->id,
-                      'order_id' => $order->id,
-                      'email' => 'x@mail.com',
-                      // 'email' => session('checkout.shipping.email'),
-                  ]);
-
-                  session()->forget("checkout.voucher");
-              }
+              // if(session()->has('checkout.voucher.value')) {
+              //     $VoucherHistory = VoucherHistory::create([
+              //         'voucher_id' => Voucher::where('code', session('checkout.voucher.code'))->first()->id,
+              //         'order_id' => $order->id,
+              //         'email' => 'x@mail.com',
+              //         // 'email' => session('checkout.shipping.email'),
+              //     ]);
+              //
+              //     session()->forget("checkout.voucher");
+              // }
 
 
               // remove session cart
