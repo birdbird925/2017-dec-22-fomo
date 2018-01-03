@@ -249,94 +249,94 @@ class CheckoutController extends Controller
           echo '<pre>';print_r(json_decode($pce->getData()));exit;
       }
 
-    	// $payment = PayPal::getById($id, $this->_apiContext);
+    	$payment = PayPal::getById($id, $this->_apiContext);
 
-      // check shipping country here
-      // $payerInfo = $payment->getPayer()->getPayerInfo();
-      // $transaction = $payment->getTransactions()[0];
-      // $amount = $transaction->getAmount();
-      // $items = $transaction->getItemList()->getItems();
-      //
-    	// $paymentExecution = PayPal::PaymentExecution();
-    	// $paymentExecution->setPayerId($payer_id);
-    	// $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
-      //
-      //   $transactionID = $executePayment->getTransactions()[0]->getRelatedResources()[0]->getSale()->getId();
-      //   if($executePayment->getState() == 'approved') {
-      //       $order = Order::create([
-      //           'user_id' => Auth::check() ? Auth::user()->id : null,
-      //           'name' => session('checkout.shipping.firstName').' '.session('checkout.shipping.lastName'),
-      //           'email' => session('checkout.shipping.email'),
-      //           'phone' => session('checkout.shipping.contact'),
-      //           'address_line_1' => session('checkout.shipping.address'),
-      //           'address_line_2' => session('checkout.shipping.appartment'),
-      //           'city' => session('checkout.shipping.city'),
-      //           'postcode' => session('checkout.shipping.postal'),
-      //           'state' => session('checkout.shipping.state'),
-      //           'country' => session('checkout.shipping.country'),
-      //           'shipping_cost' => session('cart.shipping.cost'),
-      //           // 'paypal_id' => $payment->getId(),
-      //           'paypal_id' => $transactionID,
-      //           'payment_status' => 1
-      //       ]);
-      //
-      //       $cartItemCode = [];
-      //       foreach($items as $item)
-      //           $cartItemCode[] = $item->sku;
-      //
-      //       foreach(session('cart.item') as $cartItem) {
-      //           if(in_array($cartItem['code'], $cartItemCode)) {
-      //               $component = json_decode($cartItem['product']);
-      //               $type_id = $component->customize_type->value;
-      //               $product = CustomizeProduct::create([
-      //                   'name' => $cartItem['name'],
-      //                   'components' => $cartItem['product'],
-      //                   'image' => $cartItem['image'],
-      //                   'images' =>$cartItem['images'],
-      //                   'thumb' => $cartItem['thumb'],
-      //                   'back' => $cartItem['back'],
-      //                   'type_id' => $type_id,
-      //                   'description' => $cartItem['description'],
-      //                   'price' => $cartItem['price'],
-      //                   'created_by' => Auth::check() ? Auth::user()->id : null,
-      //               ]);
-      //
-      //               $key = array_search($cartItem['code'],$cartItemCode);
-      //               $orderItem = $order->items()->create([
-      //                   'product_id' => $product->id,
-      //                   'price' => $items[$key]->price,
-      //                   'quantity' => $items[$key]->quantity
-      //               ]);
-      //               $order->save();
-      //           }
-      //
-      //       }
-      //
-      //       // remove session cart
-      //       session()->forget("cart");
-      //       // send mail
-      //       $order->notify(new OrderSuccess($order));
-      //
-      //       session()->flash('popup', [
-      //           'title' => 'Hooray!',
-      //           'caption' => 'You order is successfully placed.'
-      //       ]);
-      //
-      //       if(Auth::check())
-      //           return 'account';
-      //           // return redirect('/account');
-      //       else
-      //           return 'cart';
-      //           // return redirect('/cart');
-      //   }
-      //   else {
-      //       session()->flash('popup', [
-      //           'title' => 'Ermm',
-      //           'caption' => 'Fail to process the order, please try again.'
-      //       ]);
-      //       // return redirect('/cart');
-      //       return 'checkout';
-      //   }
+      //check shipping country here
+      $payerInfo = $payment->getPayer()->getPayerInfo();
+      $transaction = $payment->getTransactions()[0];
+      $amount = $transaction->getAmount();
+      $items = $transaction->getItemList()->getItems();
+
+    	$paymentExecution = PayPal::PaymentExecution();
+    	$paymentExecution->setPayerId($payer_id);
+    	$executePayment = $payment->execute($paymentExecution, $this->_apiContext);
+
+        $transactionID = $executePayment->getTransactions()[0]->getRelatedResources()[0]->getSale()->getId();
+        if($executePayment->getState() == 'approved') {
+            $order = Order::create([
+                'user_id' => Auth::check() ? Auth::user()->id : null,
+                'name' => session('checkout.shipping.firstName').' '.session('checkout.shipping.lastName'),
+                'email' => session('checkout.shipping.email'),
+                'phone' => session('checkout.shipping.contact'),
+                'address_line_1' => session('checkout.shipping.address'),
+                'address_line_2' => session('checkout.shipping.appartment'),
+                'city' => session('checkout.shipping.city'),
+                'postcode' => session('checkout.shipping.postal'),
+                'state' => session('checkout.shipping.state'),
+                'country' => session('checkout.shipping.country'),
+                'shipping_cost' => session('cart.shipping.cost'),
+                // 'paypal_id' => $payment->getId(),
+                'paypal_id' => $transactionID,
+                'payment_status' => 1
+            ]);
+
+            $cartItemCode = [];
+            foreach($items as $item)
+                $cartItemCode[] = $item->sku;
+
+            foreach(session('cart.item') as $cartItem) {
+                if(in_array($cartItem['code'], $cartItemCode)) {
+                    $component = json_decode($cartItem['product']);
+                    $type_id = $component->customize_type->value;
+                    $product = CustomizeProduct::create([
+                        'name' => $cartItem['name'],
+                        'components' => $cartItem['product'],
+                        'image' => $cartItem['image'],
+                        'images' =>$cartItem['images'],
+                        'thumb' => $cartItem['thumb'],
+                        'back' => $cartItem['back'],
+                        'type_id' => $type_id,
+                        'description' => $cartItem['description'],
+                        'price' => $cartItem['price'],
+                        'created_by' => Auth::check() ? Auth::user()->id : null,
+                    ]);
+
+                    $key = array_search($cartItem['code'],$cartItemCode);
+                    $orderItem = $order->items()->create([
+                        'product_id' => $product->id,
+                        'price' => $items[$key]->price,
+                        'quantity' => $items[$key]->quantity
+                    ]);
+                    $order->save();
+                }
+
+            }
+
+            // remove session cart
+            session()->forget("cart");
+            // send mail
+            $order->notify(new OrderSuccess($order));
+
+            session()->flash('popup', [
+                'title' => 'Hooray!',
+                'caption' => 'You order is successfully placed.'
+            ]);
+
+            if(Auth::check())
+                return 'account';
+                // return redirect('/account');
+            else
+                return 'cart';
+                // return redirect('/cart');
+        }
+        else {
+            session()->flash('popup', [
+                'title' => 'Ermm',
+                'caption' => 'Fail to process the order, please try again.'
+            ]);
+            // return redirect('/cart');
+            return 'checkout';
+        }
     }
 
     public function createWebProfile(){
