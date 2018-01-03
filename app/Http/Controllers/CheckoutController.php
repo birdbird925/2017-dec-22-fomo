@@ -212,8 +212,9 @@ class CheckoutController extends Controller
       $payment->setExperienceProfileId($this->createWebProfile());
       dd($payment->create($this->_apiContext));
     	$response = $payment->create($this->_apiContext);
-    	$redirectUrl = $response->links[1]->href;
-    	return Redirect::to($redirectUrl);
+      return $response->id;
+    	// $redirectUrl = $response->links[1]->href;
+    	// return Redirect::to($redirectUrl);
     }
 
     public function getDone(Request $request)
