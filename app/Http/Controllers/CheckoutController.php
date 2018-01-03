@@ -159,6 +159,8 @@ class CheckoutController extends Controller
           'checkout.shipping.state'=>$request->state,
           'checkout.shipping.contact'=>$request->contact
       ]);
+
+      return true;
     }
 
     public function paypal(Request $request)
@@ -250,7 +252,6 @@ class CheckoutController extends Controller
       $transaction = $payment->getTransactions()[0];
       $amount = $transaction->getAmount();
       $items = $transaction->getItemList()->getItems();
-      $address = $transaction->getItemList()->getShippingAddress();
 
     	$paymentExecution = PayPal::PaymentExecution();
     	$paymentExecution->setPayerId($payer_id);
@@ -260,16 +261,16 @@ class CheckoutController extends Controller
         if($executePayment->getState() == 'approved') {
             $order = Order::create([
                 'user_id' => Auth::check() ? Auth::user()->id : null,
-                'name' => $address->getRecipientName(),
-                'email' => $payerInfo->getEmail(),
-                'phone' => $address->getPhone() ? $address()->getPhone() : $payerInfo->getPhone(),
-                'address_line_1' => $address->getLine1(),
-                'address_line_2' => $address->getLine2(),
-                'city' => $address->getCity(),
-                'postcode' => $address->getPostalCode(),
-                'state' => $address->getState(),
-                'country' => $address->getCountryCode(),
-                'shipping_cost' => $amount->getDetails()->getShipping(),
+                'name' => session('checkout.shipping.firstName').' '.session('checkout.shipping.lastName'),
+                'email' => session('checkout.shipping.email'),
+                'phone' => session('checkout.shipping.contact'),
+                'address_line_1' => session('checkout.shipping.address'),
+                'address_line_2' => session('checkout.shipping.appartment'),
+                'city' => session('checkout.shipping.city'),
+                'postcode' => session('checkout.shipping.postal'),
+                'state' => session('checkout.shipping.state'),
+                'country' => session('checkout.shipping.country'),
+                'shipping_cost' => session('cart.shipping.cost'),
                 // 'paypal_id' => $payment->getId(),
                 'paypal_id' => $transactionID,
                 'payment_status' => 1
@@ -318,12 +319,19 @@ class CheckoutController extends Controller
             ]);
 
             if(Auth::check())
-                return redirect('/account');
+                return 'account';
+                // return redirect('/account');
             else
-                return redirect('/cart');
+                return 'cart';
+                // return redirect('/cart');
         }
         else {
-            return redirect('/cart');
+            session()->flash('popup', [
+                'title' => 'Ermm',
+                'caption' => 'Fail to process the order, please try again.'
+            ]);
+            // return redirect('/cart');
+            return 'checkout';
         }
     }
 
