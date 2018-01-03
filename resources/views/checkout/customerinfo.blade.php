@@ -62,53 +62,56 @@
             </div>
             <div class="col-md-6 col-md-pull-4 col-xs-10 col-xs-offset-1">
               <div class="subtitle">Customer Details</div>
-              <div class="form-group">
-                <label for="email">Email
-                  @if(!Auth::check())
-                    <div class="stick-right-form-control">
-                      Already have account? <a class="login-tab">login</a>
-                    </div>
-                  @endif
-                </label>
-                <input id="email" type="email" name="email" placeholder="Email Address" value="{{ Session::has('checkout.shipping.email') ? Session::get('checkout.shipping.email') : (Auth::check() ? Auth::user()->email : '') }}" autocomplete="off">
-              </div>
-              <div class="subtitle shipping-detail">Shipping Details</div>
-              <div class="form-group half">
-                <label for="firstName">First Name</label>
-                <input id="firstName" type="text" name="firstName" placeholder="First Name" autocomplete="off" value="{{Session::has('checkout.shipping.firstName') ? Session::get('checkout.shipping.firstName') : ''}}">
-              </div>
-              <div class="form-group half">
-                <label for="lastName">Last Name</label>
-                <input id="lastName" type="text" name="lastName" placeholder="Last Name / Family Name" autocomplete="off" value="{{Session::has('checkout.shipping.lastName') ? Session::get('checkout.shipping.lastName') : ''}}">
-              </div>
-              <div class="form-group">
-                <label for="apartment">Apt, Suite etc (optional)</label>
-                <input id="apartment" type="text" name="apartment" placeholder="Apartment / Suite / etc" autocomplete="off" value="{{Session::has('checkout.shipping.apartment') ? Session::get('checkout.shipping.apartment') : ''}}">
-              </div>
-              <div class="form-group">
-                <label for="address">Address</label>
-                <input id="address" type="text" name="address" placeholder="Address" autocomplete="off" value="{{Session::has('checkout.shipping.address') ? Session::get('checkout.shipping.address') : ''}}">
-              </div>
-              <div class="form-group half">
-                <label for="city">City</label>
-                <input id="city" type="text" name="city" placeholder="City" autocomplete="off" value="{{Session::has('checkout.shipping.city') ? Session::get('checkout.shipping.city') : ''}}">
-              </div>
-              <div class="form-group half">
-                <label for="postal">postal Code</label>
-                <input id="postal" type="text" name="postal" placeholder="Postal Code" autocomplete="off" value="{{Session::has('checkout.shipping.postal') ? Session::get('checkout.shipping.postal') : ''}}">
-              </div>
-              <div class="form-group half">
-                <label for="country">Country</label>
-                <select id="country" name="country" placeholder="Country" data-value="{{Session::has('checkout.shipping.country') ? Session::get('checkout.shipping.country') : ''}}"></select>
-              </div>
-              <div class="form-group half">
-                <label for="state">State</label>
-                <select name="state" id="state" placeholder="State" data-value="{{Session::has('checkout.shipping.state') ? Session::get('checkout.shipping.state') : ''}}"></select>
-              </div>
-              <div class="form-group">
-                <label for="contact">Contact Number</label>
-                <input id="contact" type="text" name="contact" placeholder="(Country Code)(Contact Number)" autocomplete="off" value="{{Session::has('checkout.shipping.contact') ? Session::get('checkout.shipping.contact') : ''}}">
-              </div>
+              <form name="customer-detail">
+                {{ csrf_field() }}
+                <div class="form-group">
+                  <label for="email">Email
+                    @if(!Auth::check())
+                      <div class="stick-right-form-control">
+                        Already have account? <a class="login-tab">login</a>
+                      </div>
+                    @endif
+                  </label>
+                  <input id="email" type="email" name="email" placeholder="Email Address" value="{{ Session::has('checkout.shipping.email') ? Session::get('checkout.shipping.email') : (Auth::check() ? Auth::user()->email : '') }}" autocomplete="off">
+                </div>
+                <div class="subtitle shipping-detail">Shipping Details</div>
+                <div class="form-group half">
+                  <label for="firstName">First Name</label>
+                  <input id="firstName" type="text" name="firstName" placeholder="First Name" autocomplete="off" value="{{Session::has('checkout.shipping.firstName') ? Session::get('checkout.shipping.firstName') : ''}}">
+                </div>
+                <div class="form-group half">
+                  <label for="lastName">Last Name</label>
+                  <input id="lastName" type="text" name="lastName" placeholder="Last Name / Family Name" autocomplete="off" value="{{Session::has('checkout.shipping.lastName') ? Session::get('checkout.shipping.lastName') : ''}}">
+                </div>
+                <div class="form-group">
+                  <label for="apartment">Apt, Suite etc (optional)</label>
+                  <input id="apartment" type="text" name="apartment" placeholder="Apartment / Suite / etc" autocomplete="off" value="{{Session::has('checkout.shipping.apartment') ? Session::get('checkout.shipping.apartment') : ''}}">
+                </div>
+                <div class="form-group">
+                  <label for="address">Address</label>
+                  <input id="address" type="text" name="address" placeholder="Address" autocomplete="off" value="{{Session::has('checkout.shipping.address') ? Session::get('checkout.shipping.address') : ''}}">
+                </div>
+                <div class="form-group half">
+                  <label for="city">City</label>
+                  <input id="city" type="text" name="city" placeholder="City" autocomplete="off" value="{{Session::has('checkout.shipping.city') ? Session::get('checkout.shipping.city') : ''}}">
+                </div>
+                <div class="form-group half">
+                  <label for="postal">postal Code</label>
+                  <input id="postal" type="text" name="postal" placeholder="Postal Code" autocomplete="off" value="{{Session::has('checkout.shipping.postal') ? Session::get('checkout.shipping.postal') : ''}}">
+                </div>
+                <div class="form-group half">
+                  <label for="country">Country</label>
+                  <select id="country" name="country" placeholder="Country" data-value="{{Session::has('checkout.shipping.country') ? Session::get('checkout.shipping.country') : ''}}"></select>
+                </div>
+                <div class="form-group half">
+                  <label for="state">State</label>
+                  <select name="state" id="state" placeholder="State" data-value="{{Session::has('checkout.shipping.state') ? Session::get('checkout.shipping.state') : ''}}"></select>
+                </div>
+                <div class="form-group">
+                  <label for="contact">Contact Number</label>
+                  <input id="contact" type="text" name="contact" placeholder="(Country Code)(Contact Number)" autocomplete="off" value="{{Session::has('checkout.shipping.contact') ? Session::get('checkout.shipping.contact') : ''}}">
+                </div>
+              </form>
               <div class="checkout-navigation">
                 <a href="/cart">Return to Cart</a>
                 {{-- <form action="/checkout" method="post" style="display: inline;">
@@ -177,13 +180,8 @@
             }
             else {
               // save checkout address
-              var inputField = ['email', 'firstName', 'lastName', 'apartment', 'address', 'city', 'postal', 'country', 'state', 'contact'];
-              var url = '/checkout/shipping/save?';
-              $.each(inputField, function(index, value) {
-                url += value+'='+$('#'+value).val()+'&';
-              });
-              console.log(url);
-              $.get(url, function(){
+              console.log('1');
+              $.post(url, $('form[name=customer-detail]').serialize(), function(res){
                 console.log('save shipping');
               });
             }

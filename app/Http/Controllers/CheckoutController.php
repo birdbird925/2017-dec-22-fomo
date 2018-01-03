@@ -59,6 +59,7 @@ class CheckoutController extends Controller
 
     public function checkout()
     {
+      // dd(session()->all());
       if(sizeof(session('cart.item')) == 0 || session('cart.shipping.location') == '')
           return redirect()->back();
       else
@@ -157,9 +158,9 @@ class CheckoutController extends Controller
           'checkout.shipping.postal'=>$request->postal,
           'checkout.shipping.country'=>$request->country,
           'checkout.shipping.state'=>$request->state,
-          'checkout.shipping.contact'=>$request->contact,
+          'checkout.shipping.contact'=>$request->contact
       ]);
-      dd(session()->all());
+      return true;
     }
 
     public function paypal(Request $request)
