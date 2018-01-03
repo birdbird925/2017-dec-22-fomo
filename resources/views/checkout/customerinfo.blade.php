@@ -226,13 +226,17 @@
                 payerID: data.payerID
             };
 
-            console.log(data);
+            var EXECUTE_URL = '/checkout/done?paymentID='+data.paymentID+'&payerID='+data.payerID;
 
             // Make a call to your server to execute the payment
-            return paypal.request.get(EXECUTE_URL, data)
+            return paypal.request.get(EXECUTE_URL)
                 .then(function (res) {
                     console.log(res);
                 });
+            // return paypal.request.get(EXECUTE_URL, data)
+            //     .then(function (res) {
+            //         console.log(res);
+            //     });
 
             console.log('end');
         }
