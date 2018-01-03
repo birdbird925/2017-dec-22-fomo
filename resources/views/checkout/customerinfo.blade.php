@@ -62,7 +62,7 @@
             </div>
             <div class="col-md-6 col-md-pull-4 col-xs-10 col-xs-offset-1">
               <div class="subtitle">Customer Details</div>
-              <form name="customer-detail">
+              <form name="customerDetail">
                 {{ csrf_field() }}
                 <div class="form-group">
                   <label for="email">Email
@@ -182,7 +182,7 @@
               // save checkout address
               var data = $('form[name=myform]').serialize();
               console.log(data);
-              $.post('/checkout/shipping/save', $('form[name=customer-detail]').serialize(), function(res){
+              $.post('/checkout/shipping/save', $('form[name=customerDetail]').serialize(), function(res){
                 console.log('save shipping');
               });
             }
