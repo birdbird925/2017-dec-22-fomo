@@ -175,6 +175,15 @@
               $('.msg-popup').toggleClass('popup');
               setTimeout(function(){ $('.msg-popup').toggleClass('popup'); }, 2000);
             }
+            else {
+              // save checkout address
+              var inputField = ['email', 'first-name', 'last-name', 'address', 'city', 'postal', 'country', 'state', 'contact'];
+              var url = '/checkout/shipping/save?';
+              $.each(inputField, function(index, value) {
+                url += value+'='+$('#'+value).val()+'&';
+              });
+              $.get(url);
+            }
         },
         style: {
             label: 'paypal',
@@ -202,24 +211,20 @@
         // onAuthorize() is called when the buyer approves the payment
         onAuthorize: function(data, actions) {
 
-            return actions.payment.execute().then(function() {
-                window.alert('Payment Complete!');
-            });
+            // Set up a url on your server to execute the payment
+            var EXECUTE_URL = '/checkout/done';
 
-            // // Set up a url on your server to execute the payment
-            // var EXECUTE_URL = '/demo/checkout/api/paypal/payment/execute/';
-            //
-            // // Set up the data you need to pass to your server
-            // var data = {
-            //     paymentID: data.paymentID,
-            //     payerID: data.payerID
-            // };
-            //
-            // // Make a call to your server to execute the payment
-            // return paypal.request.post(EXECUTE_URL, data)
-            //     .then(function (res) {
-            //         window.alert('Payment Complete!');
-            //     });
+            // Set up the data you need to pass to your server
+            var data = {
+                paymentID: data.paymentID,
+                payerID: data.payerID
+            };
+
+            // Make a call to your server to execute the payment
+            return paypal.request.post(EXECUTE_URL, data)
+                .then(function (res) {
+                    window.alert('Payment Complete!');
+                });
         }
 
     }, '#paypal-button-container');

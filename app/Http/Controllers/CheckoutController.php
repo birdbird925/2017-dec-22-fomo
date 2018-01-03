@@ -145,6 +145,22 @@ class CheckoutController extends Controller
         return redirect()->back();
     }
 
+    public function saveShipping(Request $request)
+    {
+      session([
+          'checkout.shipping.email'=>$request->email,
+          'checkout.shipping.firstName'=>$request->firstName,
+          'checkout.shipping.lastName'=>$request->lastName,
+          'checkout.shipping.apartment'=>$request->apartment,
+          'checkout.shipping.address'=>$request->address,
+          'checkout.shipping.city'=>$request->city,
+          'checkout.shipping.postal'=>$request->postal,
+          'checkout.shipping.country'=>$request->country,
+          'checkout.shipping.state'=>$request->state,
+          'checkout.shipping.contact'=>$request->contact,
+      ]);
+    }
+
     public function paypal(Request $request)
     {
     	$payer = PayPal::Payer();
@@ -223,7 +239,7 @@ class CheckoutController extends Controller
 
     public function getDone(Request $request)
     {
-    	$id = $request->get('paymentId');
+    	$id = $request->get('paymentID');
     	$token = $request->get('token');
     	$payer_id = $request->get('PayerID');
 
