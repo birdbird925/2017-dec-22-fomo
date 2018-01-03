@@ -74,12 +74,12 @@
               </div>
               <div class="subtitle shipping-detail">Shipping Details</div>
               <div class="form-group half">
-                <label for="first-name">First Name</label>
-                <input id="first-name" type="text" name="first-name" placeholder="First Name" autocomplete="off" value="{{Session::has('checkout.shipping.firstName') ? Session::get('checkout.shipping.firstName') : ''}}">
+                <label for="firstName">First Name</label>
+                <input id="firstName" type="text" name="firstName" placeholder="First Name" autocomplete="off" value="{{Session::has('checkout.shipping.firstName') ? Session::get('checkout.shipping.firstName') : ''}}">
               </div>
               <div class="form-group half">
-                <label for="last-name">Last Name</label>
-                <input id="last-name" type="text" name="last-name" placeholder="Last Name / Family Name" autocomplete="off" value="{{Session::has('checkout.shipping.lastName') ? Session::get('checkout.shipping.lastName') : ''}}">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" type="text" name="lastName" placeholder="Last Name / Family Name" autocomplete="off" value="{{Session::has('checkout.shipping.lastName') ? Session::get('checkout.shipping.lastName') : ''}}">
               </div>
               <div class="form-group">
                 <label for="apartment">Apt, Suite etc (optional)</label>
@@ -132,7 +132,7 @@
   	populateCountries("country", "state"); // first parameter is id of country drop-down and second parameter is id of state drop-down
 
     function isValid() {
-      var inputField = ['email', 'first-name', 'last-name', 'address', 'city', 'postal', 'country', 'state', 'contact'];
+      var inputField = ['email', 'firstName', 'lastName', 'address', 'city', 'postal', 'country', 'state', 'contact'];
       var hasEmpty = false;
 
       $.each(inputField, function(index, value) {
@@ -144,7 +144,7 @@
     }
 
     function onChangeInput(handler) {
-      var inputField = ['email', 'first-name', 'last-name', 'address', 'city', 'postal', 'country', 'state', 'contact'];
+      var inputField = ['email', 'firstName', 'lastName', 'address', 'city', 'postal', 'country', 'state', 'contact'];
       $.each(inputField, function(index, value) {
         $('#'+value).on('change', handler);
       });
@@ -177,7 +177,7 @@
             }
             else {
               // save checkout address
-              var inputField = ['email', 'first-name', 'last-name', 'apartment', 'address', 'city', 'postal', 'country', 'state', 'contact'];
+              var inputField = ['email', 'firstName', 'lastName', 'apartment', 'address', 'city', 'postal', 'country', 'state', 'contact'];
               var url = '/checkout/shipping/save?';
               $.each(inputField, function(index, value) {
                 url += value+'='+$('#'+value).val()+'&';
