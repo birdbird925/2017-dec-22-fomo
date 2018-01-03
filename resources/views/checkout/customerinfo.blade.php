@@ -70,44 +70,44 @@
                     </div>
                   @endif
                 </label>
-                <input id="email" type="email" name="email" placeholder="Email Address" value="{{Auth::check() ? Auth::user()->email : ''}}" autocomplete="off">
+                <input id="email" type="email" name="email" placeholder="Email Address" value="{{ Session::has('checkout.shipping.email') ? Session::get('checkout.shipping.email') : (Auth::check() ? Auth::user()->email : '') }}" autocomplete="off">
               </div>
               <div class="subtitle shipping-detail">Shipping Details</div>
               <div class="form-group half">
                 <label for="first-name">First Name</label>
-                <input id="first-name" type="text" name="first-name" placeholder="First Name" autocomplete="off">
+                <input id="first-name" type="text" name="first-name" placeholder="First Name" autocomplete="off" value="{{Session::has('checkout.shipping.firstName') ? Session::get('checkout.shipping.firstName') : ''}}">
               </div>
               <div class="form-group half">
                 <label for="last-name">Last Name</label>
-                <input id="last-name" type="text" name="last-name" placeholder="Last Name / Family Name" autocomplete="off">
+                <input id="last-name" type="text" name="last-name" placeholder="Last Name / Family Name" autocomplete="off" value="{{Session::has('checkout.shipping.lastName') ? Session::get('checkout.shipping.lastName') : ''}}">
               </div>
               <div class="form-group">
                 <label for="apartment">Apt, Suite etc (optional)</label>
-                <input id="apartment" type="text" name="apartment" placeholder="Apartment / Suite / etc" autocomplete="off">
+                <input id="apartment" type="text" name="apartment" placeholder="Apartment / Suite / etc" autocomplete="off" value="{{Session::has('checkout.shipping.apartment') ? Session::get('checkout.shipping.apartment') : ''}}">
               </div>
               <div class="form-group">
                 <label for="address">Address</label>
-                <input id="address" type="text" name="address" placeholder="Address" autocomplete="off">
+                <input id="address" type="text" name="address" placeholder="Address" autocomplete="off" value="{{Session::has('checkout.shipping.address') ? Session::get('checkout.shipping.address') : ''}}">
               </div>
               <div class="form-group half">
                 <label for="city">City</label>
-                <input id="city" type="text" name="city" placeholder="City" autocomplete="off">
+                <input id="city" type="text" name="city" placeholder="City" autocomplete="off" value="{{Session::has('checkout.shipping.city') ? Session::get('checkout.shipping.city') : ''}}">
               </div>
               <div class="form-group half">
                 <label for="postal">postal Code</label>
-                <input id="postal" type="text" name="postal" placeholder="Postal Code" autocomplete="off">
+                <input id="postal" type="text" name="postal" placeholder="Postal Code" autocomplete="off" value="{{Session::has('checkout.shipping.postal') ? Session::get('checkout.shipping.postal') : ''}}">
               </div>
               <div class="form-group half">
                 <label for="country">Country</label>
-                <select id="country" name="country" placeholder="Country"></select>
+                <select id="country" name="country" placeholder="Country" data-value="{{Session::has('checkout.shipping.country') ? Session::get('checkout.shipping.country') : ''}}"></select>
               </div>
               <div class="form-group half">
                 <label for="state">State</label>
-                <select name="state" id="state" placeholder="State"></select>
+                <select name="state" id="state" placeholder="State" data-value="{{Session::has('checkout.shipping.state') ? Session::get('checkout.shipping.state') : ''}}"></select>
               </div>
               <div class="form-group">
                 <label for="contact">Contact Number</label>
-                <input id="contact" type="text" name="contact" placeholder="(Country Code)(Contact Number)" autocomplete="off">
+                <input id="contact" type="text" name="contact" placeholder="(Country Code)(Contact Number)" autocomplete="off" value="{{Session::has('checkout.shipping.contact') ? Session::get('checkout.shipping.contact') : ''}}">
               </div>
               <div class="checkout-navigation">
                 <a href="/cart">Return to Cart</a>
