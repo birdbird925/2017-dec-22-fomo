@@ -62,7 +62,7 @@
             </div>
             <div class="col-md-6 col-md-pull-4 col-xs-10 col-xs-offset-1">
               <div class="subtitle">Customer Details</div>
-              <form action="/shipping/save" method="post" name="customerDetail">
+              <form action="/checkout/shipping/save" method="post" name="customerDetail">
                 {{ csrf_field() }}
                 <div class="form-group">
                   <label for="email">Email
@@ -184,10 +184,15 @@
             }
             else {
               // save checkout address
-              var data = $('form[name=customerDetail]').serialize();
-              $.post('/checkout/shipping/save', $('form[name=customerDetail]').serialize(), function(res){
-                console.log('saved');
-              });
+              var form = $('form[name=customerDetail]');
+              if(form.attr('data-reload') == 'yes') {
+                $('form[name=customerDetail]').submit();
+              }
+
+              // var data = $('form[name=customerDetail]').serialize();
+              // $.post('/checkout/shipping/save', $('form[name=customerDetail]').serialize(), function(res){
+              //   console.log('saved');
+              // });
             }
         },
         style: {
