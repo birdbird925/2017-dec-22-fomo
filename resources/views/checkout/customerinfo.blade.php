@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="checkout-wrapper">
-        <div class="title page-title">CHECK OUT {{Session::has('checkout.shipping.email') ? Session::get('checkout.shipping.email') : ''}}</div>
+        <div class="title page-title">CHECK OUT</div>
         <div class="container">
           <div class="row">
             <div class="col-md-3 col-md-push-7 col-xs-10 col-xs-offset-1">
@@ -229,10 +229,12 @@
             console.log(data);
 
             // Make a call to your server to execute the payment
-            // return paypal.request.get(EXECUTE_URL, data)
-            //     .then(function (res) {
-            //         window.alert('Payment Complete!');
-            //     });
+            return paypal.request.get(EXECUTE_URL, data)
+                .then(function (res) {
+                    console.log(res);
+                });
+
+            console.log('end');
         }
 
     }, '#paypal-button-container');
