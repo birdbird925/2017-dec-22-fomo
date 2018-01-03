@@ -234,7 +234,7 @@
                     if(res == 'cart') {
                       window.location.href = "/cart";
                     }
-                    elseif(res == 'account') {
+                    else if(res == 'account') {
                       window.location.href = '/account';
                     }
                     else {
