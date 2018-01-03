@@ -178,6 +178,13 @@ class CheckoutController extends Controller
           $items->addItem($item);
       }
 
+      $item = PayPal::Item();
+      $item->setName('Shipping');
+      $item->setQuantity(1);
+      $item->setCurrency(session('currency'));
+      $item->setPrice(-session('cart.shipping.cost'));
+      $items->addItem($item);
+
       // discount
       if(session()->has('checkout.voucher.value')) {
         $item = PayPal::Item();
