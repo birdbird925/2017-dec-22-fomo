@@ -62,7 +62,7 @@
             </div>
             <div class="col-md-6 col-md-pull-4 col-xs-10 col-xs-offset-1">
               <div class="subtitle">Customer Details</div>
-              <form action="/checkout/shipping/save" method="post" name="customerDetail">
+              <form action="/checkout/shipping/save" method="post" name="customerDetail" data-reload="{{Session::has('checkout.shipping.email') ? 'no' : 'yes'}}">
                 {{ csrf_field() }}
                 <div class="form-group">
                   <label for="email">Email
