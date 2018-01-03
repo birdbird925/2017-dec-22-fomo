@@ -184,12 +184,10 @@
             }
             else {
               // save checkout address
-              $('form[name=customerDetail]').submit();
-              // var data = $('form[name=customerDetail]').serialize();
-              // console.log(data);
-              // $.post('/checkout/shipping/save', $('form[name=customerDetail]').serialize(), function(res){
-              //   console.log(res);
-              // });
+              var data = $('form[name=customerDetail]').serialize();
+              $.post('/checkout/shipping/save', $('form[name=customerDetail]').serialize(), function(res){
+                window.location.reload();
+              });
             }
         },
         style: {
