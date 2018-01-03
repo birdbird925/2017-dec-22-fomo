@@ -59,8 +59,6 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
-      // session()->flush();
-      // session()->regenerate();
       if(sizeof(session('cart.item')) == 0 || session('cart.shipping.location') == '')
           return redirect()->back();
       else
