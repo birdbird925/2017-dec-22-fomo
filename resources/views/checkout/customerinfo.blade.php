@@ -189,7 +189,7 @@
             console.log('start paypal page');
 
             // Set up a url on your server to create the payment
-            var CREATE_URL = '/api/checkout/paypal/payment/create';
+            var CREATE_URL = '/checkout/paypal/payment/create';
 
             // Make a call to your server to set up the payment
             return paypal.request.post(CREATE_URL)
