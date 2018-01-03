@@ -170,6 +170,8 @@ class CheckoutController extends Controller
       $request->session()->put('checkout.shipping.country', $request->country);
       $request->session()->put('checkout.shipping.state', $request->state);
       $request->session()->put('checkout.shipping.contact', $request->contact);
+
+      return redirect()->back();
     }
 
     public function paypal(Request $request)
