@@ -11407,6 +11407,8 @@ header .nav-right ul .cart .item-count {
     border: none;
     color: #fba200;
     outline: none;
+    font-size: 12px;
+    margin-top: 0;
   }
   .nav-menu .ship-to a {
     font-size: 14px;

@@ -147,29 +147,29 @@ class CheckoutController extends Controller
 
     public function saveShipping(Request $request)
     {
-      session([
-          'checkout.shipping.email'=>$request->email,
-          'checkout.shipping.firstName'=>$request->firstName,
-          'checkout.shipping.lastName'=>$request->lastName,
-          'checkout.shipping.apartment'=>$request->apartment,
-          'checkout.shipping.address'=>$request->address,
-          'checkout.shipping.city'=>$request->city,
-          'checkout.shipping.postal'=>$request->postal,
-          'checkout.shipping.country'=>$request->country,
-          'checkout.shipping.state'=>$request->state,
-          'checkout.shipping.contact'=>$request->contact
-      ]);
+      // session([
+      //     'checkout.shipping.email'=>$request->email,
+      //     'checkout.shipping.firstName'=>$request->firstName,
+      //     'checkout.shipping.lastName'=>$request->lastName,
+      //     'checkout.shipping.apartment'=>$request->apartment,
+      //     'checkout.shipping.address'=>$request->address,
+      //     'checkout.shipping.city'=>$request->city,
+      //     'checkout.shipping.postal'=>$request->postal,
+      //     'checkout.shipping.country'=>$request->country,
+      //     'checkout.shipping.state'=>$request->state,
+      //     'checkout.shipping.contact'=>$request->contact
+      // ]);
 
-      // $request->session()->put('checkout.shipping.email', $request->email);
-      // $request->session()->put('checkout.shipping.firstName', $request->firstName);
-      // $request->session()->put('checkout.shipping.lastName', $request->lastName);
-      // $request->session()->put('checkout.shipping.apartment', $request->apartment);
-      // $request->session()->put('checkout.shipping.address', $request->address);
-      // $request->session()->put('checkout.shipping.city', $request->city);
-      // $request->session()->put('checkout.shipping.postal', $request->postal);
-      // $request->session()->put('checkout.shipping.country', $request->country);
-      // $request->session()->put('checkout.shipping.state', $request->state);
-      // $request->session()->put('checkout.shipping.contact', $request->contact);
+      $request->session()->put('checkout.shipping.email', $request->email);
+      $request->session()->put('checkout.shipping.firstName', $request->firstName);
+      $request->session()->put('checkout.shipping.lastName', $request->lastName);
+      $request->session()->put('checkout.shipping.apartment', $request->apartment);
+      $request->session()->put('checkout.shipping.address', $request->address);
+      $request->session()->put('checkout.shipping.city', $request->city);
+      $request->session()->put('checkout.shipping.postal', $request->postal);
+      $request->session()->put('checkout.shipping.country', $request->country);
+      $request->session()->put('checkout.shipping.state', $request->state);
+      $request->session()->put('checkout.shipping.contact', $request->contact);
     }
 
     public function paypal(Request $request)
@@ -226,8 +226,6 @@ class CheckoutController extends Controller
       } catch (PayPal\Exception\PayPalConnectionException $pce) {
           echo '<pre>';print_r(json_decode($pce->getData()));exit;
       }
-    	// $redirectUrl = $response->links[1]->href;
-    	// return Redirect::to($redirectUrl);
     }
 
     public function getDone(Request $request)
