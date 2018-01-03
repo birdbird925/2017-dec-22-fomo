@@ -160,7 +160,8 @@ class CheckoutController extends Controller
       $total = session('cart.total') + session('cart.shipping.cost');
       // discount
       if(session()->has('checkout.voucher.value')) {
-        $total - session('checkout.voucher.value');
+        $detail->setShippingDiscount(session('checkout.voucher.value'));
+        $total -= session('checkout.voucher.value');
       }
     	$amount->setTotal($total);
       $amount->setDetails($detail);
