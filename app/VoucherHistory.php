@@ -9,4 +9,5 @@ use Carbon\Carbon;
 class VoucherHistory extends Model
 {
     protected $table = 'voucher_history';
+    protected $guarded = [];
 }
