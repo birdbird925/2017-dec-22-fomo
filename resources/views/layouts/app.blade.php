@@ -41,7 +41,7 @@
     <script src="/js/lightslider.min.js"></script>
     <script src="/js/konva.js"></script>
     <script src="/js/admin/sweetalert.min.js"></script>
-    @stack('scripts')
     <script src="/js/main.js"></script>
+    @stack('scripts')
 </body>
 </html>

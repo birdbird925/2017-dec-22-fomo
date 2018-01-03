@@ -135,7 +135,8 @@
       var hasEmpty = false;
 
       $.each(inputField, function(index, value) {
-        if($('#'+inputField).val().trim() == '') {
+        console.log($('#'+value).val());
+        if($('#'+value).val() == '') {
           hasEmpty = true;
         }
       });
@@ -150,20 +151,25 @@
 
         env: 'sandbox', // sandbox | production
 
-        client: {
-            sandbox:    'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
-            production: '<insert production client id>'
-        },
-        validate: function(actions) {
-            toggleButton(actions);
-
-            onChangeCheckbox(function() {
-                toggleButton(actions);
-            });
-        },
-        onClick: function() {
-            toggleValidationMessage();
-        },
+        // client: {
+        //     sandbox:    'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
+        //     production: '<insert production client id>'
+        // },
+        // validate: function(actions) {
+        //     toggleButton(actions);
+        // },
+        // onClick: function() {
+        //     if(!isValid()) {
+        //       $('.msg-popup').find('.title').html('Erm');
+        //       $('.msg-popup').find('.caption').html('Don\'t fill up the form is not cool!');
+        //       $('.msg-popup').toggleClass('popup');
+        //       setTimeout(function(){ $('.msg-popup').toggleClass('popup'); }, 2000);
+        //     }
+        //     else {
+        //       console.log('good');
+        //     }
+        //
+        // },
         style: {
             label: 'paypal',
             size:  'medium',    // small | medium | large | responsive
@@ -176,14 +182,14 @@
         payment: function() {
             console.log('start paypal page');
 
-            // // Set up a url on your server to create the payment
-            // var CREATE_URL = '/demo/checkout/api/paypal/payment/create/';
-            //
-            // // Make a call to your server to set up the payment
-            // return paypal.request.post(CREATE_URL)
-            //     .then(function(res) {
-            //         return res.paymentID;
-            //     });
+            // Set up a url on your server to create the payment
+            var CREATE_URL = '/demo/checkout/api/paypal/payment/create/';
+
+            // Make a call to your server to set up the payment
+            return paypal.request.post(CREATE_URL)
+                .then(function(res) {
+                    return res.paymentID;
+                });
         },
 
         // onAuthorize() is called when the buyer approves the payment
