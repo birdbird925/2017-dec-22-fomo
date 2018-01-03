@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\Image\ImageRepository;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Http\Request;
 use App\CustomizeType;
 use App\CustomizeStep;
 use App\CustomizeComponent;
