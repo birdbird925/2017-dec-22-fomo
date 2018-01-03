@@ -180,7 +180,8 @@
             }
             else {
               // save checkout address
-              console.log('1');
+              var data = $('form[name=myform]').serialize();
+              console.log(data);
               $.post('/checkout/shipping/save', $('form[name=customer-detail]').serialize(), function(res){
                 console.log('save shipping');
               });
