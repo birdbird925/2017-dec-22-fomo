@@ -66,26 +66,16 @@ class CheckoutController extends Controller
           return view('checkout.customerinfo');
     }
 
+    // verify voucher
     public function submitVoucher(Request $request)
     {
-
-        $hasError = false;
         if($request->voucher == null) {
-          session()->flash('popup', [
-              'title' => 'Opps!',
-              'caption' => 'Discount code can\'t be empty'
-          ]);
-          $hasError = true;
+          return Response::json(['error' => true,'message' => 'Discount code can\'t be empty.'], 200);
         }
 
         $voucher = Voucher::where('code', $request->voucher)->first();
-
         if(!$voucher) {
-          session()->flash('popup', [
-              'title' => 'Opps!',
-              'caption' => 'Discount code is not valid'
-          ]);
-          return redirect()->back();
+          return Response::json(['error' => true,'message' => 'Discount code is not valid.'], 200);
         }
 
         if($voucher->start_at != null) {
@@ -94,56 +84,39 @@ class CheckoutController extends Controller
             $expired_at = Carbon::parse($voucher->expired_at);
 
             if($now->lt($start_at)) {
-              session()->flash('popup', [
-                  'title' => 'Opps!',
-                  'caption' => 'Discount code is not valid'
-              ]);
-
-              $hasError = true;
+              return Response::json(['error' => true,'message' => 'Discount code is not valid.'], 200);
             }
 
             if($expired_at->lt($now)) {
-              session()->flash('popup', [
-                  'title' => 'Opps!',
-                  'caption' => 'Discount code is expired!'
-              ]);
-
-              $hasError = true;
+              return Response::json(['error' => true,'message' => 'Discount code is expired!'], 200);
             }
         }
 
         if($voucher->quatity) {
             if($voucher->performance->count() >= $voucher->quatity){
-                session()->flash('popup', [
-                    'title' => 'Opps!',
-                    'caption' => 'Discount code has been fully redeemed!'
-                ]);
-
-                $hasError = true;
+                return Response::json(['error' => true,'message' => 'Discount code has been fully redeemed!'], 200);
             }
         }
 
-        if(!$hasError) {
-          if($voucher->type == 1) {
-            $amount = session('cart.total') * $voucher->value / 100;
-          }
-          if($voucher->type == 2) {
-            $rate = 1;
-            if(session('currency') != 'USD') {
-              $rate = Swap::latest('USD/'.session('currency'))->getValue();
-            }
-            $amount = number_format((float)($voucher->value * $rate), 2, '.', '');
-          }
-          if($voucher->type == 3) {
-            $amount = session('cart.shipping.cost');
-          }
-          session([
-              'checkout.voucher.id'=>$voucher->id,
-              'checkout.voucher.code'=>$voucher->code,
-              'checkout.voucher.value'=>$amount
-          ]);
+        if($voucher->type == 1) {
+          $amount = session('cart.total') * $voucher->value / 100;
         }
-        return redirect()->back();
+        if($voucher->type == 2) {
+          $rate = 1;
+          if(session('currency') != 'USD') {
+            $rate = Swap::latest('USD/'.session('currency'))->getValue();
+          }
+          $amount = number_format((float)($voucher->value * $rate), 2, '.', '');
+        }
+        if($voucher->type == 3) {
+          $amount = session('cart.shipping.cost');
+        }
+
+        return Response::json([
+          'error' => false,
+          'amount' => $amount,
+          'total' => session('cart.total') + session('cart.shipping.cost') - $amount
+        ], 200);
     }
 
     public function saveShipping(Request $request)
@@ -161,16 +134,16 @@ class CheckoutController extends Controller
       //     'checkout.shipping.contact'=>$request->contact
       // ]);
 
-      $request->session()->put('checkout.shipping.email', $request->email);
-      $request->session()->put('checkout.shipping.firstName', $request->firstName);
-      $request->session()->put('checkout.shipping.lastName', $request->lastName);
-      $request->session()->put('checkout.shipping.apartment', $request->apartment);
-      $request->session()->put('checkout.shipping.address', $request->address);
-      $request->session()->put('checkout.shipping.city', $request->city);
-      $request->session()->put('checkout.shipping.postal', $request->postal);
-      $request->session()->put('checkout.shipping.country', $request->country);
-      $request->session()->put('checkout.shipping.state', $request->state);
-      $request->session()->put('checkout.shipping.contact', $request->contact);
+      // $request->session()->put('checkout.shipping.email', $request->email);
+      // $request->session()->put('checkout.shipping.firstName', $request->firstName);
+      // $request->session()->put('checkout.shipping.lastName', $request->lastName);
+      // $request->session()->put('checkout.shipping.apartment', $request->apartment);
+      // $request->session()->put('checkout.shipping.address', $request->address);
+      // $request->session()->put('checkout.shipping.city', $request->city);
+      // $request->session()->put('checkout.shipping.postal', $request->postal);
+      // $request->session()->put('checkout.shipping.country', $request->country);
+      // $request->session()->put('checkout.shipping.state', $request->state);
+      // $request->session()->put('checkout.shipping.contact', $request->contact);
     }
 
     public function paypal(Request $request)

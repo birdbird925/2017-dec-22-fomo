@@ -35,34 +35,32 @@
                     <td class="description-col">Shipping</td>
                     <td class="price-col">$ {{Session::get('cart.shipping.cost')}}</td>
                   </tr>
-                  @if(Session::get('checkout.voucher'))
-                    <tr class="small-padding-row">
-                      <td class="image-col"></td>
-                      <td class="description-col">Discount</td>
-                      <td class="price-col">-$ {{Session::get('checkout.voucher.value')}}</td>
-                    </tr>
-                  @endif
+                  <tr class="small-padding-row" id="discount-row" style="display: none;">
+                    <td class="image-col"></td>
+                    <td class="description-col">Discount</td>
+                    <td class="price-col"></td>
+                  </tr>
                   <tr class="voucher-row">
                     <td class="image-col"></td>
                     <td>
-                      <form action="/discount-code/apply" method="post">
+                      <form action="/discount-code/apply" method="post" name="voucherForm">
                         {{ csrf_field() }}
-                        <input type="text" name="voucher" placeholder="Discount Code" autocomplete="off">
+                        <input id="voucher" type="text" name="voucher" placeholder="Discount Code" autocomplete="off">
                         <input type="submit" value="Apply">
                       </form>
                     </td>
                     <td></td>
                   </tr>
-                  <tr>
+                  <tr id="total-row">
                     <td class="image-col"></td>
                     <td class="top-border description-col">TOTAL</td>
-                    <td class="top-border price-col">$ {{Session::get('cart.total') + Session::get('cart.shipping.cost') - Session::get('checkout.voucher.value')}}</td>
+                    <td class="top-border price-col" default-total-amount="{{Session::get('cart.total') + Session::get('cart.shipping.cost')}}">$ {{Session::get('cart.total') + Session::get('cart.shipping.cost')}}</td>
                   </tr>
               </table>
             </div>
             <div class="col-md-6 col-md-pull-4 col-xs-10 col-xs-offset-1">
               <div class="subtitle">Customer Details</div>
-              <form action="/checkout/shipping/save" method="post" name="customerDetail" data-reload="{{Session::has('checkout.shipping.email') ? 'no' : 'yes'}}">
+              <form action="/checkout/shipping/save" method="post" name="customerDetail">
                 {{ csrf_field() }}
                 <div class="form-group">
                   <label for="email">Email
@@ -72,32 +70,32 @@
                       </div>
                     @endif
                   </label>
-                  <input id="email" type="email" name="email" placeholder="Email Address" value="{{ Session::has('checkout.shipping.email') ? Session::get('checkout.shipping.email') : (Auth::check() ? Auth::user()->email : '') }}" autocomplete="off">
+                  <input id="email" type="email" name="email" placeholder="Email Address" value="{{ Auth::check() ? Auth::user()->email : '' }}" autocomplete="off">
                 </div>
                 <div class="subtitle shipping-detail">Shipping Details</div>
                 <div class="form-group half">
                   <label for="firstName">First Name</label>
-                  <input id="firstName" type="text" name="firstName" placeholder="First Name" autocomplete="off" value="{{Session::has('checkout.shipping.firstName') ? Session::get('checkout.shipping.firstName') : ''}}">
+                  <input id="firstName" type="text" name="firstName" placeholder="First Name" autocomplete="off">
                 </div>
                 <div class="form-group half">
                   <label for="lastName">Last Name</label>
-                  <input id="lastName" type="text" name="lastName" placeholder="Last Name / Family Name" autocomplete="off" value="{{Session::has('checkout.shipping.lastName') ? Session::get('checkout.shipping.lastName') : ''}}">
+                  <input id="lastName" type="text" name="lastName" placeholder="Last Name / Family Name" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="apartment">Apt, Suite etc (optional)</label>
-                  <input id="apartment" type="text" name="apartment" placeholder="Apartment / Suite / etc" autocomplete="off" value="{{Session::has('checkout.shipping.apartment') ? Session::get('checkout.shipping.apartment') : ''}}">
+                  <input id="apartment" type="text" name="apartment" placeholder="Apartment / Suite / etc" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="address">Address</label>
-                  <input id="address" type="text" name="address" placeholder="Address" autocomplete="off" value="{{Session::has('checkout.shipping.address') ? Session::get('checkout.shipping.address') : ''}}">
+                  <input id="address" type="text" name="address" placeholder="Address" autocomplete="off">
                 </div>
                 <div class="form-group half">
                   <label for="city">City</label>
-                  <input id="city" type="text" name="city" placeholder="City" autocomplete="off" value="{{Session::has('checkout.shipping.city') ? Session::get('checkout.shipping.city') : ''}}">
+                  <input id="city" type="text" name="city" placeholder="City" autocomplete="off">
                 </div>
                 <div class="form-group half">
                   <label for="postal">postal Code</label>
-                  <input id="postal" type="text" name="postal" placeholder="Postal Code" autocomplete="off" value="{{Session::has('checkout.shipping.postal') ? Session::get('checkout.shipping.postal') : ''}}">
+                  <input id="postal" type="text" name="postal" placeholder="Postal Code" autocomplete="off">
                 </div>
                 <div class="form-group half">
                   <label for="country">Country</label>
@@ -109,15 +107,11 @@
                 </div>
                 <div class="form-group">
                   <label for="contact">Contact Number</label>
-                  <input id="contact" type="text" name="contact" placeholder="(Country Code)(Contact Number)" autocomplete="off" value="{{Session::has('checkout.shipping.contact') ? Session::get('checkout.shipping.contact') : ''}}">
+                  <input id="contact" type="text" name="contact" placeholder="(Country Code)(Contact Number)" autocomplete="off">
                 </div>
               </form>
               <div class="checkout-navigation">
                 <a href="/cart">Return to Cart</a>
-                {{-- <form action="/checkout" method="post" style="display: inline;">
-                  {{ csrf_field() }}
-                  <input class="paypal" type="submit" value="PAYPAL PAYMENT">
-                </form> --}}
                 <div class="paypal-button-wrapper">
                   <div id="paypal-button-container"></div>
                 </div>
@@ -139,27 +133,86 @@
       $('#state').val($('#state').attr('data-value'));
     }
 
-    function isValid() {
-      var inputField = ['email', 'firstName', 'lastName', 'address', 'city', 'postal', 'country', 'state', 'contact'];
-      var hasEmpty = false;
+    // verify voucher
+    $('form[name=voucherForm]').on('submit', function(e){
+      e.preventDefault();
+      var data = $(this).serialize();
+      $.ajax({
+        url: "/discount-code/apply",
+        type: 'post',
+        data: data,
+        dataType: 'json',
+        success: function(res){
+          if(res.error) {
+            $('#voucher').val('');
+            var total = $('#total-row .price-col').attr('default-total-amount');
+            $('#total-row .price-col').html('$ '+total);
+            $('#discount-row').css("display", "none");
+            $('.msg-popup').find('.title').html('Opps');
+            $('.msg-popup').find('.caption').html(res.message);
+            $('.msg-popup').toggleClass('popup');
+            setTimeout(function(){ $('.msg-popup').toggleClass('popup'); }, 2000);
+          }
+          else {
+            //display voucher discount amount
+            $('#discount-row .price-col').html('-$ '+res.amount);
+            $('#total-row .price-col').html('$ '+res.total);
+            $('#discount-row').css("display", "table-row");
+          }
+        }
+      });
+    });
 
+    function isValid() {
+      // check voucher code
+      if($('#voucher').val() != '') {
+        var data = $('form[name=voucherForm]').serialize();
+        var hasError = false;
+        $.ajax({
+          url: "/discount-code/apply",
+          type: 'post',
+          data: data,
+          dataType: 'json',
+          async: false,
+          success: function(res){
+            if(res.error){
+              hasError = res.message;
+            }
+          }
+        });
+        if(hasError !== false) {
+          return hasError;
+        }
+      }
+
+      var inputField = ['email', 'firstName', 'lastName', 'address', 'city', 'postal', 'country', 'state', 'contact'];
+
+      var hasEmpty = false;
       $.each(inputField, function(index, value) {
         if($('#'+value).val() == '') {
           hasEmpty = true;
         }
       });
-      return !hasEmpty;
+      if(hasEmpty) { return 'Don\'t fill up the form is not cool!'}
+
+      // check email format
+      var email_regex=/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if(email_regex.test($('#email').val())==false){
+        return 'Email address format is wrong!';
+      }
+
+      return true;
     }
 
     function onChangeInput(handler) {
-      var inputField = ['email', 'firstName', 'lastName', 'address', 'city', 'postal', 'country', 'state', 'contact'];
+      var inputField = ['email', 'firstName', 'lastName', 'address', 'city', 'postal', 'country', 'state', 'contact', 'voucher'];
       $.each(inputField, function(index, value) {
         $('#'+value).on('change', handler);
       });
     }
 
     function toggleButton(actions) {
-        return isValid() ? actions.enable() : actions.disable();
+      return isValid() === true ? actions.enable() : actions.disable();
     }
 
     paypal.Button.render({
@@ -177,18 +230,12 @@
             });
         },
         onClick: function() {
-            if(!isValid()) {
-              $('.msg-popup').find('.title').html('Erm');
-              $('.msg-popup').find('.caption').html('Don\'t fill up the form is not cool!');
-              $('.msg-popup').toggleClass('popup');
-              setTimeout(function(){ $('.msg-popup').toggleClass('popup'); }, 2000);
-            }
-            // else {
-              // var data = $('form[name=customerDetail]').serialize();
-              // $.post('/checkout/shipping/save', $('form[name=customerDetail]').serialize(), function(res){
-              //   console.log('saved');
-              // });
-            // }
+          if(isValid() !== true) {
+            $('.msg-popup').find('.title').html('Erm');
+            $('.msg-popup').find('.caption').html(isValid());
+            $('.msg-popup').toggleClass('popup');
+            setTimeout(function(){ $('.msg-popup').toggleClass('popup'); }, 2000);s
+          }
         },
         style: {
             label: 'paypal',
@@ -200,15 +247,16 @@
 
         // payment() is called when the button is clicked
         payment: function() {
+          console.log('create payment');
             // Set up a url on your server to create the payment
             var CREATE_URL = '/checkout/paypal/payment/create';
 
             // Make a call to your server to set up the payment
-            return paypal.request.post(CREATE_URL, {'_token': $('input[name="_token"]').val()})
-                .then(function(res) {
-                    // return res.paymentID;
-                    return res;
-                });
+            // return paypal.request.post(CREATE_URL, {'_token': $('input[name="_token"]').val()})
+            //     .then(function(res) {
+            //         // return res.paymentID;
+            //         return res;
+            //     });
         },
 
         // onAuthorize() is called when the buyer approves the payment
