@@ -225,7 +225,7 @@
                 payerID: data.payerID
             };
 
-
+            console.log($('form[name=customerDetail]').serialize());
             var test = ($('form[name=customerDetail]').serializeArray());
             test.push(data);
             console.log(test);
