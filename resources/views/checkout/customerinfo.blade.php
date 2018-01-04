@@ -218,14 +218,15 @@
             var EXECUTE_URL = '/checkout/done';
 
             // Set up the data you need to pass to your server
-            var customerDetail = $('form[name=customerDetail]').serialize();
-            customerDetail.push({
+            // var customerDetail = $('form[name=customerDetail]').serialize();
+            data.push({
                 paymentID: data.paymentID,
                 payerID: data.payerID
             });
+            data.push($('form[name=customerDetail]').serialize());
             console.log(customerDetail);
             // Make a call to your server to execute the payment
-            return paypal.request.post(EXECUTE_URL, customerDetail)
+            return paypal.request.post(EXECUTE_URL, data)
                 .then(function (res) {
                     if(res == 'cart') {
                       window.location.href = "/cart";
