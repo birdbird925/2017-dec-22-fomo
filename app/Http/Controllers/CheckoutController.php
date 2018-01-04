@@ -258,6 +258,7 @@ class CheckoutController extends Controller
                   'state' => $request->get('state'),
                   'country' => $request->get('country'),
                   'shipping_cost' => session('cart.shipping.cost'),
+                  'currency' => session('currency'),
                   // 'paypal_id' => $payment->getId(),
                   'paypal_id' => $transactionID,
                   'payment_status' => 1

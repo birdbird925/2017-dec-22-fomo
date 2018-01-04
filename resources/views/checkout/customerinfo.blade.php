@@ -213,13 +213,11 @@
 
         // onAuthorize() is called when the buyer approves the payment
         onAuthorize: function(data, actions) {
-            console.log('execute payment');
             // Set up a url on your server to execute the payment
             // var EXECUTE_URL = '/checkout/paypal/payment/execute';
             var EXECUTE_URL = '/checkout/done';
 
             // Set up the data you need to pass to your server
-            // var customerDetail = $('form[name=customerDetail]').serialize();
             var data = {
                 paymentID: data.paymentID,
                 payerID: data.payerID,
@@ -236,10 +234,6 @@
                 contact: $('#contact').val()
             };
 
-            console.log($('form[name=customerDetail]').serialize());
-            var test = ($('form[name=customerDetail]').serializeArray());
-            test.push(data);
-            console.log(test);
             // Make a call to your server to execute the payment
             return paypal.request.post(EXECUTE_URL, data)
                 .then(function (res) {
