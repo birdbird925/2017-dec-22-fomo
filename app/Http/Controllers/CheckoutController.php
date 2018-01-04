@@ -163,7 +163,7 @@ class CheckoutController extends Controller
       // discount
       if($request->get('voucher') != '') {
         $voucher = Voucher::where('code', $request->voucher)->first();
-        switch($vocuher->type) {
+        switch($voucher->type) {
           case 1:
             $amount = session('cart.total') * $voucher->value / 100;
             break;
@@ -290,7 +290,7 @@ class CheckoutController extends Controller
 
               if($request->get('voucher') != '') {
                 $voucher = Voucher::where('code', $request->voucher)->first();
-                switch($vocuher->type) {
+                switch($voucher->type) {
                   case 1:
                     $amount = session('cart.total') * $voucher->value / 100;
                     break;
@@ -307,7 +307,7 @@ class CheckoutController extends Controller
                     $amount = session('cart.shipping.cost');
                     break;
                 }
-                $VoucherHistory = VoucherHistory::create([
+                $voucherHistory = VoucherHistory::create([
                     'voucher_id' => $voucher->id,
                     'order_id' => $order->id,
                     'email' => $request->get('email'),
