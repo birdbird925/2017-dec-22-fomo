@@ -223,7 +223,17 @@
             var data = {
                 paymentID: data.paymentID,
                 payerID: data.payerID,
-                '_token': $('input[name="_token"]').val(),
+                _token: $('input[name="_token"]').val(),
+                email: $('#email').val(),
+                firstName: $('#firstName').val(),
+                lastName: $('#lastName').val(),
+                apartment: $('#apartment').val(),
+                address: $('#address').val(),
+                city: $('#city').val(),
+                postal: $('#postal').val(),
+                country: $('#country').val(),
+                state: $('#state').val(),
+                contact: $('#contact').val()
             };
 
             console.log($('form[name=customerDetail]').serialize());
