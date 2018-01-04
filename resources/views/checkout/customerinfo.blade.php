@@ -224,7 +224,7 @@
             data.push({
                 paymentID: data.paymentID,
                 payerID: data.payerID
-            };
+            });
 
             var EXECUTE_URL = '/checkout/done';
 
