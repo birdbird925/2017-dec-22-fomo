@@ -252,11 +252,11 @@
             var CREATE_URL = '/checkout/paypal/payment/create';
 
             // Make a call to your server to set up the payment
-            // return paypal.request.post(CREATE_URL, {'_token': $('input[name="_token"]').val()})
-            //     .then(function(res) {
-            //         // return res.paymentID;
-            //         return res;
-            //     });
+            return paypal.request.post(CREATE_URL, {'_token': $('input[name="_token"]').val(), 'voucher': $('#voucher').val()})
+                .then(function(res) {
+                    // return res.paymentID;
+                    return res;
+                });
         },
 
         // onAuthorize() is called when the buyer approves the payment
@@ -279,7 +279,8 @@
                 postal: $('#postal').val(),
                 country: $('#country').val(),
                 state: $('#state').val(),
-                contact: $('#contact').val()
+                contact: $('#contact').val(),
+                voucher: $('#voucher').val(),
             };
 
             // Make a call to your server to execute the payment
