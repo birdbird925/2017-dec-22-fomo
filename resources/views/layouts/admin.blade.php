@@ -43,34 +43,12 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-				<li class="@yield('customize-sidebar')">
-					<a data-toggle="collapse" href="#customize-dropdown">
-						<i class="pe-7s-wristwatch"></i>
-						<p>
-							Customize
-							<b class="caret"></b>
-						</p>
-					</a>
-					<div id="customize-dropdown" class="collapse @yield('customize-dropdown')">
-						<ul class="nav dropdown">
-							<li class="@yield('product-sidebar')">
-								<a href="/admin/customize/product">
-									Product
-								</a>
-							</li>
-							{{-- <li class="@yield('step-sidebar')">
-								<a href="/admin/customize/step">
-									Step
-								</a>
-							</li>
-							<li class="@yield('type-sidebar')">
-								<a href="/admin/customize/type">
-									Type
-								</a>
-							</li> --}}
-						</ul>
-					</div>
-				</li>
+								<li class="@yield('customize-sidebar')">
+                    <a href="/admin/customize/product">
+                        <i class="pe-7s-wristwatch"></i>
+                        <p>Watch</p>
+                    </a>
+                </li>
 				<li class="@yield('order-sidebar')">
 					<a href="/admin/order">
 						<i class="pe-7s-note2"></i>

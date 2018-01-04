@@ -76,5 +76,6 @@ class CurrencyController extends Controller
         }
       }
       session(['currency' => $newCurrency]);
+      session(['currencyRate' => $newCurrency == 'USD' ? 1 : Swap::latest($newCurrency.'/USD')->getValue()]);
     }
 }

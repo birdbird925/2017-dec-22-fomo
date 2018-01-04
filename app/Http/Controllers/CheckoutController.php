@@ -259,6 +259,7 @@ class CheckoutController extends Controller
                   'country' => $request->get('country'),
                   'shipping_cost' => session('cart.shipping.cost'),
                   'currency' => session('currency'),
+                  'currency_rate' => session('currencyRate'),
                   // 'paypal_id' => $payment->getId(),
                   'paypal_id' => $transactionID,
                   'payment_status' => 1

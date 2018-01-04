@@ -25,9 +25,9 @@
                 </div>
             </div>
         @else
-            <div class="pull-left">
+            {{-- <div class="pull-left">
                 <a href="/customize" class="btn btn-primary">Create Product</a>
-            </div>
+            </div> --}}
             <table id="data-table" class="mdl-data-table" cellspacing="0" width="100%">
                 <thead>
                     <tr>

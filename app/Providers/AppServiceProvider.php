@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Torann\GeoIP\Facades\GeoIP;
+use Swap\Laravel\Facades\Swap;
 use Illuminate\Http\Request;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,9 +25,11 @@ class AppServiceProvider extends ServiceProvider
             if(session('currency') == null) {
               if($geo->currency == 'MYR' || $geo->currency == 'SGD' || $geo->currency == "EUR") {
                 session(['currency' => $geo->currency]);
+                session(['currencyRate' => Swap::latest($geo->currency.'/USD')->getValue()]);
               }
               else {
                 session(['currency' => 'USD']);
+                session(['currencyRate' => 1]);
               }
             }
         });
