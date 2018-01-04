@@ -226,7 +226,7 @@
             };
 
 
-            // data.push($('form[name=customerDetail]').serialize());
+            data.push($('form[name=customerDetail]').serialize());
             console.log(data);
             // Make a call to your server to execute the payment
             return paypal.request.post(EXECUTE_URL, data)
