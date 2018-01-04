@@ -173,7 +173,7 @@ class CheckoutController extends Controller
       $request->session()->put('checkout.shipping.contact', $request->contact);
     }
 
-    public function paypal(Request $request)
+    public function createPayment(Request $request)
     {
     	$payer = PayPal::Payer();
     	$payer->setPaymentMethod('paypal');
@@ -229,7 +229,7 @@ class CheckoutController extends Controller
       }
     }
 
-    public function getDone(Request $request)
+    public function executePayment(Request $request)
     {
     	$id = $request->get('paymentID');
     	$payer_id = $request->get('payerID');
