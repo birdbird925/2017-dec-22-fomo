@@ -38,13 +38,13 @@ return [
     'facebook' => [
         'client_id' => '272247383214132',
         'client_secret' => '7302e725276b253061241efa2caadbad',
-        'redirect' => 'http://localhost:8000/login/facebook/callback',
+        'redirect' => 'https://deploy.fomo.watch/login/facebook/callback',
     ],
 
     'google' => [
         'client_id' => '109169933324-363ukaipc189uv7fdmbvvb329j1g0cbh.apps.googleusercontent.com',
         'client_secret' => '5_wGK0DEFU09elWJ-pOYCVk2',
-        'redirect' => 'http://localhost:8000/login/google/callback',
+        'redirect' => 'https://deploy.fomo.watch/login/google/callback',
     ],
 
     'paypal' => [
