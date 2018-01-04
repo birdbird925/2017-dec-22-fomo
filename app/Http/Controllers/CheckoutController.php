@@ -165,7 +165,7 @@ class CheckoutController extends Controller
         $voucher = Voucher::where('code', $request->voucher)->first();
         switch($voucher->type) {
           case 1:
-            $amount = session('cart.total') * $voucher->value / 100;
+            $discount = session('cart.total') * $voucher->value / 100;
             break;
 
           case 2:
@@ -173,15 +173,15 @@ class CheckoutController extends Controller
             if(session('currency') != 'USD') {
               $rate = Swap::latest('USD/'.session('currency'))->getValue();
             }
-            $amount = number_format((float)($voucher->value * $rate), 2, '.', '');
+            $discount = number_format((float)($voucher->value * $rate), 2, '.', '');
             break;
 
           case 3:
-            $amount = session('cart.shipping.cost');
+            $discount = session('cart.shipping.cost');
             break;
         }
-        $detail->setShippingDiscount(-$amount);
-        $total -= $amount;
+        $detail->setShippingDiscount(-$discount);
+        $total -= $discount;
       }
     	$amount->setTotal($total);
       $amount->setDetails($detail);
@@ -292,7 +292,7 @@ class CheckoutController extends Controller
                 $voucher = Voucher::where('code', $request->voucher)->first();
                 switch($voucher->type) {
                   case 1:
-                    $amount = session('cart.total') * $voucher->value / 100;
+                    $discount = session('cart.total') * $voucher->value / 100;
                     break;
 
                   case 2:
@@ -300,18 +300,18 @@ class CheckoutController extends Controller
                     if(session('currency') != 'USD') {
                       $rate = Swap::latest('USD/'.session('currency'))->getValue();
                     }
-                    $amount = number_format((float)($voucher->value * $rate), 2, '.', '');
+                    $discount = number_format((float)($voucher->value * $rate), 2, '.', '');
                     break;
 
                   case 3:
-                    $amount = session('cart.shipping.cost');
+                    $discount = session('cart.shipping.cost');
                     break;
                 }
                 $voucherHistory = VoucherHistory::create([
                     'voucher_id' => $voucher->id,
                     'order_id' => $order->id,
                     'email' => $request->get('email'),
-                    'amount' => $amount,
+                    'amount' => $discount,
                 ]);
               }
               // if(session()->has('checkout.voucher.value')) {
