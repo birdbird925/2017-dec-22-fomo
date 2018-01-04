@@ -25,6 +25,7 @@ class DashboardController extends Controller
         $products = CustomizeProduct::where('created_by', '!=', Auth::user()->id);
         $orders = Order::where('order_status', 1);
         $amount = 0;
+        // dd(Order::where('order_status', 1)->first()->discount->first());
         foreach($orders->get() as $order)
             $amount += $order->amount();
 

@@ -26,7 +26,7 @@ class Order extends Model
 
     public function discount()
     {
-      return $this->hasMany(VoucherHistory::class);
+      return $this->hasOne(VoucherHistory::class);
     }
 
     public function subTotal()
@@ -40,7 +40,7 @@ class Order extends Model
     public function amount()
     {
         // (order subtotal + shipping cost - discount) * rate
-        return ($this->shipping_cost + $this->subTotal() - $this->discount ? $this->discount->amount : 0 ) * $this->currency_rate;
+        return ($this->shipping_cost + $this->subTotal() - ($this->discount ? $this->discount->amount : 0) ) * $this->currency_rate;
     }
 
     public function fulfillStatus()
