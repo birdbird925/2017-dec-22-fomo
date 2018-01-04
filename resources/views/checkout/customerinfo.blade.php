@@ -206,7 +206,7 @@
             var CREATE_URL = '/checkout/paypal/payment/create';
 
             // Make a call to your server to set up the payment
-            return paypal.request.post(CREATE_URL, {_token: $('input[name="_token"]')})
+            return paypal.request.post(CREATE_URL, {'_token': $('input[name="_token"]')})
                 .then(function(res) {
                     // return res.paymentID;
                     return res;
