@@ -215,7 +215,8 @@
         onAuthorize: function(data, actions) {
             console.log('execute payment');
             // Set up a url on your server to execute the payment
-            var EXECUTE_URL = '/checkout/paypal/payment/execute';
+            // var EXECUTE_URL = '/checkout/paypal/payment/execute';
+            var EXECUTE_URL = '/checkout/done';
 
             // Set up the data you need to pass to your server
             // var customerDetail = $('form[name=customerDetail]').serialize();
@@ -226,7 +227,7 @@
 
 
             // data.push($('form[name=customerDetail]').serialize());
-            // console.log(data);
+            console.log(data);
             // Make a call to your server to execute the payment
             return paypal.request.post(EXECUTE_URL, data)
                 .then(function (res) {
