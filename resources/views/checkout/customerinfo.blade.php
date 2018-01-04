@@ -243,7 +243,7 @@
                       // window.location.reload();
                     }
                 });
-        }
+        },
         onError: function(err) {
             console.log(err);
         }
