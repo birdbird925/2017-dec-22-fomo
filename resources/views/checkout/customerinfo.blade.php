@@ -222,7 +222,8 @@
             // var customerDetail = $('form[name=customerDetail]').serialize();
             var data = {
                 paymentID: data.paymentID,
-                payerID: data.payerID
+                payerID: data.payerID,
+                '_token': $('input[name="_token"]').val(),
             };
 
             console.log($('form[name=customerDetail]').serialize());
@@ -230,7 +231,7 @@
             test.push(data);
             console.log(test);
             // Make a call to your server to execute the payment
-            return paypal.request.post(EXECUTE_URL, test)
+            return paypal.request.post(EXECUTE_URL, data)
                 .then(function (res) {
                     if(res == 'cart') {
                       window.location.href = "/cart";
