@@ -226,10 +226,11 @@
             };
 
 
-            data.push($('form[name=customerDetail]').serialize());
-            console.log(data);
+            var test = ($('form[name=customerDetail]').serializeArray());
+            test.push(data);
+            console.log(test);
             // Make a call to your server to execute the payment
-            return paypal.request.post(EXECUTE_URL, data)
+            return paypal.request.post(EXECUTE_URL, test)
                 .then(function (res) {
                     if(res == 'cart') {
                       window.location.href = "/cart";
@@ -242,6 +243,9 @@
                       // window.location.reload();
                     }
                 });
+        }
+        onError: function(err) {
+            console.log(err);
         }
 
     }, '#paypal-button-container');
