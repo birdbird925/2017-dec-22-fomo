@@ -53,7 +53,7 @@
             <div class="content">
                 <i class="pe-7s-cash"></i>
                 <div class="data">
-                    ${{$amount}}
+                    {{ number_format($amount, 2) }}
                 </div>
                 <p class="description">
                     Total Sales
