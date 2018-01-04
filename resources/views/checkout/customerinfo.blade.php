@@ -224,7 +224,7 @@
                 payerID: data.payerID
             });
             data.push($('form[name=customerDetail]').serialize());
-            console.log(customerDetail);
+            console.log(data);
             // Make a call to your server to execute the payment
             return paypal.request.post(EXECUTE_URL, data)
                 .then(function (res) {
