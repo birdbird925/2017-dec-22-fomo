@@ -213,7 +213,7 @@
 
         // onAuthorize() is called when the buyer approves the payment
         onAuthorize: function(data, actions) {
-
+            console.log('execute payment');
             // Set up a url on your server to execute the payment
             var EXECUTE_URL = '/checkout/done';
 
@@ -223,9 +223,7 @@
                 paymentID: data.paymentID,
                 payerID: data.payerID
             });
-
-            var EXECUTE_URL = '/checkout/done';
-
+            console.log(customerDetail);
             // Make a call to your server to execute the payment
             return paypal.request.post(EXECUTE_URL, customerDetail)
                 .then(function (res) {
