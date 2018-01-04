@@ -24,17 +24,23 @@ class Order extends Model
         return $this->hasMany(OrderShipment::class);
     }
 
+    public function discount()
+    {
+      return $this->hasMany(VoucherHistory::class);
+    }
+
     public function subTotal()
     {
         $total = 0;
         foreach($this->items as $item)
-            $total += $item->price;
+            $total += ($item->price * $item->quantity);
         return $total;
     }
 
     public function amount()
     {
-        return $this->shipping_cost + $this->subTotal();
+        // (order subtotal + shipping cost - discount) * rate
+        return ($this->shipping_cost + $this->subTotal() - $this->discount ? $this->discount->amount : 0 ) * $this->currency_rate;
     }
 
     public function fulfillStatus()
