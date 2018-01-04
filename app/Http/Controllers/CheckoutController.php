@@ -231,108 +231,108 @@ class CheckoutController extends Controller
 
     public function getDone(Request $request)
     {
-    	$id = $request->get('paymentID');
-    	$payer_id = $request->get('payerID');
-      $payment = PayPal::getById($id, $this->_apiContext);
-      $payerInfo = $payment->getPayer()->getPayerInfo();
-      $transaction = $payment->getTransactions()[0];
-      $amount = $transaction->getAmount();
-      $items = $transaction->getItemList()->getItems();
-      $paymentExecution = PayPal::PaymentExecution();
-      $paymentExecution->setPayerId($payer_id);
-
-      try {
-          $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
-
-          $transactionID = $executePayment->getTransactions()[0]->getRelatedResources()[0]->getSale()->getId();
-          if($executePayment->getState() == 'approved') {
-              $order = Order::create([
-                  'user_id' => Auth::check() ? Auth::user()->id : null,
-                  'name' => $request->get('firstName').' '.$request->get('lastName'),
-                  'email' => $request->get('email'),
-                  'phone' => $request->get('contact'),
-                  'address_line_1' => $request->get('apartment'),
-                  'address_line_2' => $request->get('address'),
-                  'city' => $request->get('city'),
-                  'postcode' => $request->get('postal'),
-                  'state' => $request->get('state'),
-                  'country' => $request->get('country'),
-                  'shipping_cost' => session('cart.shipping.cost'),
-                  // 'paypal_id' => $payment->getId(),
-                  'paypal_id' => $transactionID,
-                  'payment_status' => 1
-              ]);
-
-              $cartItemCode = [];
-              foreach($items as $item)
-                  $cartItemCode[] = $item->sku;
-
-              foreach(session('cart.item') as $cartItem) {
-                  if(in_array($cartItem['code'], $cartItemCode)) {
-                      $component = json_decode($cartItem['product']);
-                      $type_id = $component->customize_type->value;
-                      $product = CustomizeProduct::create([
-                          'name' => $cartItem['name'],
-                          'components' => $cartItem['product'],
-                          'image' => $cartItem['image'],
-                          'images' =>$cartItem['images'],
-                          'thumb' => $cartItem['thumb'],
-                          'back' => $cartItem['back'],
-                          'type_id' => $type_id,
-                          'description' => $cartItem['description'],
-                          'price' => $cartItem['price'],
-                          'created_by' => Auth::check() ? Auth::user()->id : null,
-                      ]);
-
-                      $key = array_search($cartItem['code'],$cartItemCode);
-                      $orderItem = $order->items()->create([
-                          'product_id' => $product->id,
-                          'price' => $items[$key]->price,
-                          'quantity' => $items[$key]->quantity
-                      ]);
-                      $order->save();
-                  }
-              }
-
-              if(session()->has('checkout.voucher.value')) {
-                  $VoucherHistory = VoucherHistory::create([
-                      'voucher_id' => Voucher::where('code', session('checkout.voucher.code'))->first()->id,
-                      'order_id' => $order->id,
-                      'email' => $request->get('email')
-                  ]);
-
-                  session()->forget("checkout.voucher");
-              }
-
-
-              // remove session cart
-              session()->forget("cart");
-              // send mail
-              // $order->notify(new OrderSuccess($order));
-
-              session()->flash('popup', [
-                  'title' => 'Hooray!',
-                  'caption' => 'You order is successfully placed.'
-              ]);
-
-              if(Auth::check())
-                  return 'account';
-                  // return redirect('/account');
-              else
-                  return 'cart';
-                  // return redirect('/cart');
-          }
-          else {
-              session()->flash('popup', [
-                  'title' => 'Ermm',
-                  'caption' => 'Fail to process the order, please try again.'
-              ]);
-              // return redirect('/cart');
-              return 'checkout';
-          }
-      } catch (PayPal\Exception\PayPalConnectionException $pce) {
-          echo '<pre>';print_r(json_decode($pce->getData()));exit;
-      }
+    	// $id = $request->get('paymentID');
+    	// $payer_id = $request->get('payerID');
+      // $payment = PayPal::getById($id, $this->_apiContext);
+      // $payerInfo = $payment->getPayer()->getPayerInfo();
+      // $transaction = $payment->getTransactions()[0];
+      // $amount = $transaction->getAmount();
+      // $items = $transaction->getItemList()->getItems();
+      // $paymentExecution = PayPal::PaymentExecution();
+      // $paymentExecution->setPayerId($payer_id);
+      //
+      // try {
+      //     $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
+      //
+      //     $transactionID = $executePayment->getTransactions()[0]->getRelatedResources()[0]->getSale()->getId();
+      //     if($executePayment->getState() == 'approved') {
+      //         $order = Order::create([
+      //             'user_id' => Auth::check() ? Auth::user()->id : null,
+      //             'name' => $request->get('firstName').' '.$request->get('lastName'),
+      //             'email' => $request->get('email'),
+      //             'phone' => $request->get('contact'),
+      //             'address_line_1' => $request->get('apartment'),
+      //             'address_line_2' => $request->get('address'),
+      //             'city' => $request->get('city'),
+      //             'postcode' => $request->get('postal'),
+      //             'state' => $request->get('state'),
+      //             'country' => $request->get('country'),
+      //             'shipping_cost' => session('cart.shipping.cost'),
+      //             // 'paypal_id' => $payment->getId(),
+      //             'paypal_id' => $transactionID,
+      //             'payment_status' => 1
+      //         ]);
+      //
+      //         $cartItemCode = [];
+      //         foreach($items as $item)
+      //             $cartItemCode[] = $item->sku;
+      //
+      //         foreach(session('cart.item') as $cartItem) {
+      //             if(in_array($cartItem['code'], $cartItemCode)) {
+      //                 $component = json_decode($cartItem['product']);
+      //                 $type_id = $component->customize_type->value;
+      //                 $product = CustomizeProduct::create([
+      //                     'name' => $cartItem['name'],
+      //                     'components' => $cartItem['product'],
+      //                     'image' => $cartItem['image'],
+      //                     'images' =>$cartItem['images'],
+      //                     'thumb' => $cartItem['thumb'],
+      //                     'back' => $cartItem['back'],
+      //                     'type_id' => $type_id,
+      //                     'description' => $cartItem['description'],
+      //                     'price' => $cartItem['price'],
+      //                     'created_by' => Auth::check() ? Auth::user()->id : null,
+      //                 ]);
+      //
+      //                 $key = array_search($cartItem['code'],$cartItemCode);
+      //                 $orderItem = $order->items()->create([
+      //                     'product_id' => $product->id,
+      //                     'price' => $items[$key]->price,
+      //                     'quantity' => $items[$key]->quantity
+      //                 ]);
+      //                 $order->save();
+      //             }
+      //         }
+      //
+      //         if(session()->has('checkout.voucher.value')) {
+      //             $VoucherHistory = VoucherHistory::create([
+      //                 'voucher_id' => Voucher::where('code', session('checkout.voucher.code'))->first()->id,
+      //                 'order_id' => $order->id,
+      //                 'email' => $request->get('email')
+      //             ]);
+      //
+      //             session()->forget("checkout.voucher");
+      //         }
+      //
+      //
+      //         // remove session cart
+      //         session()->forget("cart");
+      //         // send mail
+      //         // $order->notify(new OrderSuccess($order));
+      //
+      //         session()->flash('popup', [
+      //             'title' => 'Hooray!',
+      //             'caption' => 'You order is successfully placed.'
+      //         ]);
+      //
+      //         if(Auth::check())
+      //             return 'account';
+      //             // return redirect('/account');
+      //         else
+      //             return 'cart';
+      //             // return redirect('/cart');
+      //     }
+      //     else {
+      //         session()->flash('popup', [
+      //             'title' => 'Ermm',
+      //             'caption' => 'Fail to process the order, please try again.'
+      //         ]);
+      //         // return redirect('/cart');
+      //         return 'checkout';
+      //     }
+      // } catch (PayPal\Exception\PayPalConnectionException $pce) {
+      //     echo '<pre>';print_r(json_decode($pce->getData()));exit;
+      // }
     }
 
     public function createWebProfile(){
