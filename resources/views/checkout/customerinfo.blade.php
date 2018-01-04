@@ -183,18 +183,12 @@
               $('.msg-popup').toggleClass('popup');
               setTimeout(function(){ $('.msg-popup').toggleClass('popup'); }, 2000);
             }
-            else {
-              // save checkout address
-              // var form = $('form[name=customerDetail]');
-              // if(form.attr('data-reload') == 'yes') {
-              //   $('form[name=customerDetail]').submit();
-              // }
-
-              var data = $('form[name=customerDetail]').serialize();
-              $.post('/checkout/shipping/save', $('form[name=customerDetail]').serialize(), function(res){
-                console.log('saved');
-              });
-            }
+            // else {
+              // var data = $('form[name=customerDetail]').serialize();
+              // $.post('/checkout/shipping/save', $('form[name=customerDetail]').serialize(), function(res){
+              //   console.log('saved');
+              // });
+            // }
         },
         style: {
             label: 'paypal',
@@ -212,7 +206,7 @@
             var CREATE_URL = '/checkout/paypal/payment/create';
 
             // Make a call to your server to set up the payment
-            return paypal.request.get(CREATE_URL)
+            return paypal.request.post(CREATE_URL, {_token: $('input[name="_token"]')})
                 .then(function(res) {
                     // return res.paymentID;
                     return res;
@@ -226,15 +220,16 @@
             var EXECUTE_URL = '/checkout/done';
 
             // Set up the data you need to pass to your server
-            var data = {
+            var data = $('form[name=customerDetail]').serialize();
+            data.push({
                 paymentID: data.paymentID,
                 payerID: data.payerID
             };
 
-            var EXECUTE_URL = '/checkout/done?paymentID='+data.paymentID+'&payerID='+data.payerID;
+            var EXECUTE_URL = '/checkout/done';
 
             // Make a call to your server to execute the payment
-            return paypal.request.get(EXECUTE_URL)
+            return paypal.request.post(EXECUTE_URL, data)
                 .then(function (res) {
                     if(res == 'cart') {
                       window.location.href = "/cart";

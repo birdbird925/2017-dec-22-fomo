@@ -248,27 +248,16 @@ class CheckoutController extends Controller
           if($executePayment->getState() == 'approved') {
               $order = Order::create([
                   'user_id' => Auth::check() ? Auth::user()->id : null,
-                  // 'name' => session('checkout.shipping.firstName').' '.session('checkout.shipping.lastName'),
-                  // 'email' => session('checkout.shipping.email'),
-                  // 'phone' => session('checkout.shipping.contact'),
-                  // 'address_line_1' => session('checkout.shipping.address'),
-                  // 'address_line_2' => session('checkout.shipping.appartment'),
-                  // 'city' => session('checkout.shipping.city'),
-                  // 'postcode' => session('checkout.shipping.postal'),
-                  // 'state' => session('checkout.shipping.state'),
-                  // 'country' => session('checkout.shipping.country'),
-                  // 'shipping_cost' => session('cart.shipping.cost'),
-                  'name' => '1',
-                  'email' => 'test@xiangwen.com',
-                  'phone' => '0103973103',
-                  'address_line_1' => '24',
-                  'address_line_2' => '',
-                  'city' => 'city',
-                  'postcode' => 'postcode',
-                  'state' => 'postcode',
-                  'country' => 'postcode',
+                  'name' => $request->get('firstName').' '.$request->get('lastName'),
+                  'email' => $request->get('email'),
+                  'phone' => $request->get('contact'),
+                  'address_line_1' => $request->get('apartment'),
+                  'address_line_2' => $request->get('address'),
+                  'city' => $request->get('city'),
+                  'postcode' => $request->get('postal'),
+                  'state' => $request->get('state'),
+                  'country' => $request->get('country'),
                   'shipping_cost' => session('cart.shipping.cost'),
-                  'currency' => session('currency'),
                   // 'paypal_id' => $payment->getId(),
                   'paypal_id' => $transactionID,
                   'payment_status' => 1
@@ -309,7 +298,7 @@ class CheckoutController extends Controller
                   $VoucherHistory = VoucherHistory::create([
                       'voucher_id' => Voucher::where('code', session('checkout.voucher.code'))->first()->id,
                       'order_id' => $order->id,
-                      'email' => 'xiangwen@mail.com' // 'email' => session('checkout.shipping.email')
+                      'email' => $request->get('email')
                   ]);
 
                   session()->forget("checkout.voucher");
