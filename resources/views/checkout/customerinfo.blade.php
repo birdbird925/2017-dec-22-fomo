@@ -200,8 +200,6 @@
 
         // payment() is called when the button is clicked
         payment: function() {
-            console.log('start paypal page');
-
             // Set up a url on your server to create the payment
             var CREATE_URL = '/checkout/paypal/payment/create';
 
@@ -220,8 +218,8 @@
             var EXECUTE_URL = '/checkout/done';
 
             // Set up the data you need to pass to your server
-            var data = $('form[name=customerDetail]').serialize();
-            data.push({
+            var customerDetail = $('form[name=customerDetail]').serialize();
+            customerDetail.push({
                 paymentID: data.paymentID,
                 payerID: data.payerID
             });
@@ -229,7 +227,7 @@
             var EXECUTE_URL = '/checkout/done';
 
             // Make a call to your server to execute the payment
-            return paypal.request.post(EXECUTE_URL, data)
+            return paypal.request.post(EXECUTE_URL, customerDetail)
                 .then(function (res) {
                     if(res == 'cart') {
                       window.location.href = "/cart";
