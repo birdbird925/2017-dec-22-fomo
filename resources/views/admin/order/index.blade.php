@@ -17,7 +17,7 @@
                 </div>
             </div>
         @else
-            <table id="data-table" class="mdl-data-table" cellspacing="0" width="100%">
+            {{-- <table id="data-table" class="mdl-data-table" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>Order</th>
@@ -63,7 +63,7 @@
                         </tr>
                     @endforeach
                 </tbody>
-            </table>
+            </table> --}}
         @endif
     </div>
 @endsection
