@@ -52,6 +52,7 @@ Route::get('image/{id}/src', 'ImageController@imageSrc');
 Route::group(['prefix' => 'admin'], function () {
     // dashboard
     Route::get('/', 'DashboardController@index');
+    Route::post('/statistics/{range}', 'DashboardController@salesStatistics');
     // customization (step)
     Route::get('customize/step', 'CustomizeController@adminSteps');
     Route::get('customize/step/{id}', 'CustomizeController@adminStep');

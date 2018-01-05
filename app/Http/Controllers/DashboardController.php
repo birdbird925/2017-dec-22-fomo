@@ -25,7 +25,6 @@ class DashboardController extends Controller
         $products = CustomizeProduct::where('created_by', '!=', Auth::user()->id);
         $orders = Order::where('order_status', 1);
         $amount = 0;
-        // dd(Order::where('order_status', 1)->first()->discount->first());
         foreach($orders->get() as $order)
             $amount += $order->amount();
 
@@ -33,8 +32,35 @@ class DashboardController extends Controller
             'customers',
             'products',
             'orders',
-            'amount',
-            'notifications'
+            'amount'
         ));
+    }
+
+    public function salesStatistics($range)
+    {
+      $labelsData = [];
+      $ordersData = [];
+      $salesData = [];
+      for($i = $range-1; $i>=0; $i--) {
+        $date = Carbon::today()->subDay($i);
+        $orders = Order::whereDate('created_at', '=', $date);
+        $orderCount = 0;
+        $sale = 0;
+        if($orders) {
+          $orderCount = $orders->count();
+          foreach($orders->get() as $order) {
+            $sale += $order->amount();
+          }
+        }
+        $labelsData[] = $date->format('j M');
+        $ordersData[] = $orderCount;
+        $salesData[] = $sale;
+      }
+
+      return Response::json([
+        'label' => $labelsData,
+        'order' => $ordersData,
+        'sales' => $salesData
+      ], 200);
     }
 }
