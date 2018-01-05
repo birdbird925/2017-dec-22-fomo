@@ -33,7 +33,7 @@
                 <tbody>
                     @foreach($orders as $index=>$order)
                         <tr href="/admin/order/{{$order->id}}" class="{{$order->notifications->first()->read_at != '' ? 'readed' : 'new'}}">
-                            <td>{{$order->orderCode()}}</td>
+                            {{-- <td>{{$order->orderCode()}}</td>
                             <td>{{$order->created_at->diffForHumans()}}</td>
                             <td>
                                 @if($order->user_id)
@@ -44,7 +44,7 @@
                                     {{$order->name}}
                                 @endif
                             </td>
-                            <td>{{$order->country}}</td>
+                            <td>{{$order->country}}</td> --}}
                             {{-- <td>
                                 <span class="status {{$order->payment_status == 0 ? 'warning' : ''}}">
                                     {{$order->payment_status == 1 ? 'Paid' : 'Unpaid' }}
