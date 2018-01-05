@@ -48,6 +48,16 @@
                           {{substr($voucher->start_at, 0, -9)}} to {{substr($voucher->expired_at, 0, -9)}}
                       </li>
                   </ul>
+                  @if($voucher->checkStatus() != 0)
+                      <hr>
+                      <form action="/admin/voucher/{{$voucher->id}}/delete" method="post">
+                          {{ csrf_field() }}
+                          <button class="btn btn-danger">
+                              <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              Stop
+                          </button>
+                      </form>
+                  @endif
               </div>
           </div>
       </div>
@@ -146,6 +156,16 @@
                           {{substr($voucher->expired_at, 0, -9)}}
                       </li>
                   </ul>
+                  @if($voucher->checkStatus() != 0)
+                      <hr>
+                      <form action="/admin/voucher/{{$voucher->id}}/delete" method="post">
+                          {{ csrf_field() }}
+                          <button class="btn btn-danger">
+                              <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              Stop
+                          </button>
+                      </form>
+                  @endif
               </div>
           </div>
       </div>

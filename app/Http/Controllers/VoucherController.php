@@ -63,4 +63,12 @@ class VoucherController extends Controller
         return view('admin.voucher.show', compact('voucher'));
     }
 
+    public function destroy($id)
+    {
+        $voucher = Voucher::where('id', $id)->first();
+        if(!$voucher) abort('404');
+        $voucher->update(['status' => 0]);
+        return redirect('/admin/voucher');
+    }
+
 }

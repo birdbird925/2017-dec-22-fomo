@@ -86,6 +86,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('voucher/create', 'VoucherController@create');
     Route::post('voucher', 'VoucherController@store');
     Route::get('voucher/{id}', 'VoucherController@show');
+    Route::post('voucher/{id}/delete', 'VoucherController@destroy');
     // cms
     Route::get('cms', 'CmsController@index');
     Route::get('cms/{type}/create', 'CmsController@create');
