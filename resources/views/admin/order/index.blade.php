@@ -32,8 +32,9 @@
                 </thead>
                 <tbody>
                     @foreach($orders as $index=>$order)
-                        <tr href="/admin/order/{{$order->id}}" class="{{$order->notifications->first()->read_at != '' ? 'readed' : 'new'}}">
-                            {{-- <td>{{$order->orderCode()}}</td>
+                        <tr>
+                        {{-- <tr href="/admin/order/{{$order->id}}" class="{{$order->notifications->first()->read_at != '' ? 'readed' : 'new'}}"> --}}
+                            <td>{{$order->orderCode()}}</td>
                             <td>{{$order->created_at->diffForHumans()}}</td>
                             <td>
                                 @if($order->user_id)
@@ -44,8 +45,8 @@
                                     {{$order->name}}
                                 @endif
                             </td>
-                            <td>{{$order->country}}</td> --}}
-                            {{-- <td>
+                            <td>{{$order->country}}</td>
+                            <td>
                                 <span class="status {{$order->payment_status == 0 ? 'warning' : ''}}">
                                     {{$order->payment_status == 1 ? 'Paid' : 'Unpaid' }}
                                 </span>
@@ -54,12 +55,12 @@
                                 <span class="status {{$order->fulfillStatus() == 0 ? 'warning' : ''}}">
                                     {{$order->fulfillStatus()  ? 'Fulfilled' : 'Unfulfilled'}}
                                 </span>
-                            </td> --}}
-                            {{-- <td>$ {{$order->subTotal() + $order->shipping_cost}}</td>
+                            </td>
+                            <td>$ {{$order->subTotal() + $order->shipping_cost}}</td>
                             <td>
                                 <span class="hide">{{$order->order_status}}</span>
                                 <i class="fa fa-{{$order->order_status ? 'check' : 'times' }}-circle"></i>
-                            </td> --}}
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
