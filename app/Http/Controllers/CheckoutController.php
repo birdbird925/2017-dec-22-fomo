@@ -328,7 +328,7 @@ class CheckoutController extends Controller
               // remove session cart
               session()->forget("cart");
               // send mail
-              // $order->notify(new OrderSuccess($order));
+              $order->notify(new OrderSuccess($order));
 
               session()->flash('popup', [
                   'title' => 'Hooray!',
