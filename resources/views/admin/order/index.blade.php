@@ -17,7 +17,7 @@
                 </div>
             </div>
         @else
-            {{-- <table id="data-table" class="mdl-data-table" cellspacing="0" width="100%">
+            <table id="data-table" class="mdl-data-table" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>Order</th>
@@ -32,7 +32,7 @@
                 </thead>
                 <tbody>
                     @foreach($orders as $index=>$order)
-                        <tr href="/admin/order/{{$order->id}}" class="{{$order->notifications->first()->read_at != '' ? 'readed' : 'new'}}">
+                        {{-- <tr href="/admin/order/{{$order->id}}" class="{{$order->notifications->first()->read_at != '' ? 'readed' : 'new'}}">
                             <td>{{$order->orderCode()}}</td>
                             <td>{{$order->created_at->diffForHumans()}}</td>
                             <td>
@@ -60,10 +60,10 @@
                                 <span class="hide">{{$order->order_status}}</span>
                                 <i class="fa fa-{{$order->order_status ? 'check' : 'times' }}-circle"></i>
                             </td>
-                        </tr>
+                        </tr> --}}
                     @endforeach
                 </tbody>
-            </table> --}}
+            </table>
         @endif
     </div>
 @endsection
