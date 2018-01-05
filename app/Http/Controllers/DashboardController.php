@@ -54,7 +54,7 @@ class DashboardController extends Controller
         }
         $labelsData[] = $date->format('j M');
         $ordersData[] = $orderCount;
-        $salesData[] = number_format($sale, 2);
+        $salesData[] = round($sale, 2);
       }
 
       return Response::json([
