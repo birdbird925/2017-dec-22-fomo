@@ -68,6 +68,12 @@
 						<p>Customer</p>
 					</a>
 				</li>
+				<li class="@yield('voucher-sidebar')">
+					<a href="/admin/voucher">
+						<i class="pe-7s-ticket"></i>
+						<p>Voucher</p>
+					</a>
+				</li>
 				<li class="@yield('cms-sidebar')">
 					<a href="/admin/cms">
 						<i class="pe-7s-box2"></i>

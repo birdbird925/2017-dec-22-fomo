@@ -81,6 +81,10 @@ Route::group(['prefix' => 'admin'], function () {
     // customer
     Route::get('customer', 'CustomerController@index');
     Route::get('customer/{id}', 'CustomerController@show');
+    // discount voucher
+    Route::get('voucher', 'VoucherController@index');
+    Route::get('voucher/create', 'VoucherController@create');
+    Route::get('voucher/{id}', 'VoucherController@show');
     // cms
     Route::get('cms', 'CmsController@index');
     Route::get('cms/{type}/create', 'CmsController@create');

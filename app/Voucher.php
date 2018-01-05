@@ -17,20 +17,22 @@ class Voucher extends Model
         return $this->hasMany(VoucherHistory::class);
     }
 
-    public function generate($userID, $discount, $validity, $delivery = null)
+    public function checkStatus()
     {
-        $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        $code = "";
-        do {
-            for ($i = 0; $i < 10; $i++) {
-                $code .= $chars[mt_rand(0, strlen($chars)-1)];
-            }
-        } while(Voucher::where('code', $code)->count() != 0);
+      if($this->status == 1) {
+        $now = Carbon::now();
+        $start_at = Carbon::parse($this->start_at);
+        $expired_at = Carbon::parse($this->expired_at);
 
-        $this->code = $code;
-        $this->user_id = $userID;
-        $this->discount = $discount;
-        $this->expired_at = Carbon::now()->addDays($validity)->startOfDay();
-        $this->free_delivery = $delivery != null ? 1 : 0 ;
+        if($now->lt($start_at))
+          return -1;
+        else if($expired_at->lt($now))
+          return 0;
+        else
+          return 1;
+      }
+      else {
+        return 0;
+      }
     }
 }
