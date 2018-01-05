@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page-direction')
-    <a href="/admin/order">Order</a> / {{$order->codeCode()}}
+    <a href="/admin/order">Order</a> / {{$order->orderCode()}}
 @endsection
 
 @section('order-sidebar')
