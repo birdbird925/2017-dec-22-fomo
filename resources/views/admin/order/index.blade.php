@@ -32,8 +32,8 @@
                 </thead>
                 <tbody>
                     @foreach($orders as $index=>$order)
-                        <tr>
                         {{-- <tr href="/admin/order/{{$order->id}}" class="{{$order->notifications->first()->read_at != '' ? 'readed' : 'new'}}"> --}}
+                        <tr href="/admin/order/{{$order->id}}">
                             <td>{{$order->orderCode()}}</td>
                             <td>{{$order->created_at->diffForHumans()}}</td>
                             <td>
