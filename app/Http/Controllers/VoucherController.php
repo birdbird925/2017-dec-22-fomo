@@ -26,6 +26,36 @@ class VoucherController extends Controller
         return view('admin.voucher.create');
     }
 
+    public function store(Request $request)
+    {
+        $rule = [
+          'name' => 'required|max:255',
+          'code' => 'required|unique:voucher,code|max:12',
+          'start_time' => 'required|date|after:yesterday',
+          'end_time' => 'required|date|after:start_date',
+          'quantity' => 'required|integer',
+        ];
+        if($request->type == '1')
+          $rule['discount'] = 'required|between:1,99';
+
+        if($request->type == '1')
+          $rule['discount'] = 'required|integer';
+
+        $this->validate($request, $rule);
+
+        Voucher::create([
+          'name' => $request->name,
+          'code' => $request->code,
+          'type' => $request->type,
+          'value' => $request->type != 3 ? $request->discount : null,
+          'start_at' => date_create_from_format('m/d/Y', $request->start_time),
+          'expired_at' => date_create_from_format('m/d/Y', $request->end_time),
+          'quantity' => $request->quantity
+        ]);
+
+        return redirect('/admin/voucher');
+    }
+
     public function show($id)
     {
         $voucher = Voucher::where('id', $id)->first();

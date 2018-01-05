@@ -45,7 +45,7 @@
                                 Free Shipping
                               @endif
                             </td>
-                            <td>{{$voucher->performance->count()}} | {{$voucher->quatity}}</td>
+                            <td>{{$voucher->performance->count()}} | {{$voucher->quantity}}</td>
                             <td>
                               {{substr($voucher->start_at, 0, -9)}} to {{substr($voucher->expired_at, 0, -9)}}
                             </td>

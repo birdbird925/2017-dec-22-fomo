@@ -7,21 +7,22 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>FOMO Admin Panel</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-  	<meta name="viewport" content="width=device-width" />
+	<meta name="viewport" content="width=device-width" />
 
-  	<!-- Bootstrap core CSS     -->
-  	<link href="/css/bootstrap.min.css" rel="stylesheet" />
-  	<link href="/css/animate.min.css" rel="stylesheet"/>
-  	<link href="/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+	<!-- Bootstrap core CSS     -->
+	<link href="/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/css/animate.min.css" rel="stylesheet"/>
+	<link href="/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 	<link href="/css/sweetalert.css" rel="stylesheet">
 	<link rel="stylesheet" href="/css/material.min.css">
 	<link rel="stylesheet" href="/css/dataTables.material.min.css">
 	<link rel="stylesheet" href="/css/lightslider.min.css">
+	<link rel="stylesheet" href="/css/datepicker.min.css" />
 
-  	<!--     Fonts and icons     -->
-  	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-  	<link href="/css/pe-icon-7-stroke.css" rel="stylesheet" />
+	<!--     Fonts and icons     -->
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+	<link href="/css/pe-icon-7-stroke.css" rel="stylesheet" />
 	<link href="/css/app.css" rel="stylesheet">
 </head>
 <body>
@@ -147,15 +148,16 @@
 
 </body>
 
-    <!--   Core JS Files   -->
-    <script src="/js/jquery-1.10.2.js" type="text/javascript"></script>
+  <!--   Core JS Files   -->
+  <script src="/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="/js/admin/bootstrap.min.js" type="text/javascript"></script>
 	<script src="/js/admin/light-bootstrap-dashboard.js"></script>
 	<script src="/js/admin/sweetalert.min.js"></script>
 	<script src="/js/admin/jquery.dataTables.min.js"></script>
+	<script src="/js/admin/datepicker.min.js"></script>
 	<script src="/js/lightslider.min.js"></script>
 	<script src="/js/konva.js"></script>
-    @stack('scripts')
+  @stack('scripts')
 	<script src="/js/main.js"></script>
 	</script>
 </html>

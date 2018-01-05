@@ -16,7 +16,7 @@
             </div>
             <div class="content">
                 <div class="row">
-                    <form class="col-md-6" action="/admin/cms/featured{{isset($content) ? '/'.$content->id : ''}}" method="post"  enctype="multipart/form-data">
+                    <form class="col-md-6" action="/admin/voucher" method="post"  enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="name">Voucher Name</label>
@@ -31,30 +31,30 @@
                         <div class="form-group">
                             <label for="type">Voucher Type</label>
                             <select name="type" id="type" class="form-control">
-                              <option value="1">By Percentage</option>
-                              <option value="2">Fix Amount</option>
-                              <option value="3">Free Shipping</option>
+                              <option value=1>By Percentage</option>
+                              <option value=2>Fix Amount</option>
+                              <option value=3>Free Shipping</option>
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" id="voucher-value-group">
                             <label for="value" class="vourcher-type-label">Percentage of discount</label>
-                            <input type="number" id="value" class="form-control">
+                            <input type="number" name="discount" id="value" class="form-control">
                         </div>
 
                         <div class="form-group">
-                            <label for="start_at">Start time</label>
-                            <input type="text" id="start_at" name="start_at" class="form-control">
+                            <label for="start">Start time</label>
+                            <input type="text" id="start" name="start_time" class="form-control" data-toggle="datepicker">
                         </div>
 
                         <div class="form-group">
-                            <label for="end_at">End time</label>
-                            <input type="text" id="end_at" name="expired_at" class="form-control">
+                            <label for="end">End time</label>
+                            <input type="text" id="end" name="end_time" class="form-control" data-toggle="datepicker">
                         </div>
 
                         <div class="form-group">
                             <label for="quantity">Dispatch Quantity</label>
-                            <input id="quantity" type="number" class="form-control" min=1 value="1">
+                            <input id="quantity" type="number" name="quantity" class="form-control" min=1 value="1">
                         </div>
 
                         @include('layouts.partials.alert')
@@ -67,3 +67,26 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+  <script>
+    $('#type').on('change', function(){
+      switch($(this).val()) {
+        case '1':
+          $('#voucher-value-group').css("display", "block");
+          $('.vourcher-type-label').html('Percentage of discount');
+          break;
+
+        case '2':
+          $('#voucher-value-group').css("display", "block");
+          $('.vourcher-type-label').html('Fix amount of discount');
+          break;
+
+        case '3':
+          $('#voucher-value-group').css("display", "none");
+          break;
+      }
+    });
+    $('[data-toggle="datepicker"]').datepicker();
+  </script>
+@endpush

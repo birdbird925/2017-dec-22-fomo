@@ -92,8 +92,8 @@ class CheckoutController extends Controller
             }
         }
 
-        if($voucher->quatity) {
-            if($voucher->performance->count() >= $voucher->quatity){
+        if($voucher->quantity) {
+            if($voucher->performance->count() >= $voucher->quantity){
                 return Response::json(['error' => true,'message' => 'Discount code has been fully redeemed!'], 200);
             }
         }

@@ -84,6 +84,7 @@ Route::group(['prefix' => 'admin'], function () {
     // discount voucher
     Route::get('voucher', 'VoucherController@index');
     Route::get('voucher/create', 'VoucherController@create');
+    Route::post('voucher', 'VoucherController@store');
     Route::get('voucher/{id}', 'VoucherController@show');
     // cms
     Route::get('cms', 'CmsController@index');
