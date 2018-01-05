@@ -41,7 +41,7 @@ class RegisterController extends Controller
         request()->session()->regenerate();
         Auth::guard()->login($user);
 
-        // $user->notify(new WelcomeEmail());
+        $user->notify(new WelcomeEmail());
 
         return Response::json(['error' => false, 'code' => 200], 200);
     }

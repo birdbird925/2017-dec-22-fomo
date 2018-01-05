@@ -235,7 +235,6 @@ class CheckoutController extends Controller
 
       try {
           $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
-
           $transactionID = $executePayment->getTransactions()[0]->getRelatedResources()[0]->getSale()->getId();
           if($executePayment->getState() == 'approved') {
               $order = Order::create([
