@@ -55,7 +55,7 @@
                                     {{$order->fulfillStatus()  ? 'Fulfilled' : 'Unfulfilled'}}
                                 </span>
                             </td>
-                            <td>$ {{$order->subTotal() + $order->shipping_cost}}</td>
+                            <td>$ {{$order->amount()}}</td>
                             <td>
                                 <span class="hide">{{$order->order_status}}</span>
                                 <i class="fa fa-{{$order->order_status ? 'check' : 'times' }}-circle"></i>
