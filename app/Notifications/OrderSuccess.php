@@ -25,6 +25,9 @@ class OrderSuccess extends Notification
 
     public function toMail($notifiable)
     {
+        return [
+
+        ];
         // return (new MailMessage)
         //             ->subject('Purchase Successful')
         //             ->markdown('mail.order.success', ['order' => $this->order]);
