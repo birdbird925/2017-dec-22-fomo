@@ -194,6 +194,13 @@
                             {{$order->phone}}
                         </li>
                     @endif
+                    @if($order->note)
+                    <hr>
+                    <li>
+                        <span>Note:</span>
+                        {{$order->note}}
+                    </li>
+                    @endif
                     <hr>
                     <li>
                         <span>Address:</span>
