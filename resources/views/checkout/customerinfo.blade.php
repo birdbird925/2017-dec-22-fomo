@@ -65,11 +65,6 @@
                     </td>
                     <td></td>
                   </tr>
-                  {{-- <tr>
-                    <td class="image-col"></td>
-                    <td><textarea name="note" id="note" cols="30" rows="10"></textarea></td>
-                    <td></td>
-                  </tr> --}}
               </table>
             </div>
             <div class="col-md-6 col-md-pull-4 col-xs-10 col-xs-offset-1">
@@ -295,6 +290,7 @@
                 state: $('#state').val(),
                 contact: $('#contact').val(),
                 voucher: $('#voucher').val(),
+                note: $('#note-txtbox').val()
             };
 
             // Make a call to your server to execute the payment
