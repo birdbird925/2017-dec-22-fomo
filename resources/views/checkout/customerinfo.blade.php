@@ -56,6 +56,20 @@
                     <td class="top-border description-col">TOTAL</td>
                     <td class="top-border price-col" default-total-amount="{{Session::get('cart.total') + Session::get('cart.shipping.cost')}}">$ {{Session::get('cart.total') + Session::get('cart.shipping.cost')}}</td>
                   </tr>
+                  <tr class=note-row>
+                    <td class="image-col"></td>
+                    <td>
+                      <div class="note-wrapper">
+                        <textarea name="note" id="note-txtbox" rows="5" placeholder="Let us know if you would like any further personalization (* Extra charges will be added.)"></textarea>
+                      </div>
+                    </td>
+                    <td></td>
+                  </tr>
+                  {{-- <tr>
+                    <td class="image-col"></td>
+                    <td><textarea name="note" id="note" cols="30" rows="10"></textarea></td>
+                    <td></td>
+                  </tr> --}}
               </table>
             </div>
             <div class="col-md-6 col-md-pull-4 col-xs-10 col-xs-offset-1">

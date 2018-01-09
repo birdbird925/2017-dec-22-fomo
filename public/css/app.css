@@ -11088,6 +11088,19 @@ body.initial {
   float: right;
 }
 
+.checkout-wrapper .checkout-item-table .note-row .note-wrapper {
+  width: 150%;
+}
+
+.checkout-wrapper .checkout-item-table .note-row .note-wrapper #note-txtbox {
+  width: 100%;
+  background: transparent;
+  padding: 5px;
+  border: 1px solid #9f9994;
+  outline: none;
+  margin: 0px;
+}
+
 @media (max-width: 400px) {
   .checkout-wrapper .checkout-item-table .voucher-row td form {
     width: 200%;
@@ -11102,6 +11115,9 @@ body.initial {
     width: 50px;
   }
   .checkout-wrapper .checkout-item-table .voucher-row td form {
+    width: 200%;
+  }
+  .checkout-wrapper .checkout-item-table .note-row .note-wrapper {
     width: 200%;
   }
 }
