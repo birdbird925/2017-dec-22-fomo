@@ -14,6 +14,6 @@
         &copy; {{ date("Y") == '2017' ? '2017' : "2017 - ".date('Y') }} FOMO
     </div>
     <div class="design-by">
-        Website by: <a href="http://www.peiyingtang.com" target="_blank">PY</a> + <a href="http://www.thelittletroop.com" target="_blank">LOOI</a>
+        {{-- Website by: <a href="http://www.peiyingtang.com" target="_blank">PY</a> + <a href="http://www.thelittletroop.com" target="_blank">LOOI</a> --}}
     </div>
 </footer>
