@@ -223,11 +223,9 @@
       var email_regex=/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
       if(email_regex.test($('#email').val())==false){
           if(requireAlert) {
-              console.log('1');
               $('#email').addClass('animated shake error');
               setTimeout(function() { $('#email').removeClass('animated shake'); }, 1000);
           }
-          console.log('2');
         return 'Email address format is wrong!';
       }
       else {
@@ -264,7 +262,6 @@
         },
         onClick: function() {
           if(isValid(true) !== true) {
-              console.log('1212');
             $('.msg-popup').find('.title').html('Erm');
             $('.msg-popup').find('.caption').html(isValid(true));
             $('.msg-popup').toggleClass('popup');
@@ -281,7 +278,6 @@
 
         // payment() is called when the button is clicked
         payment: function() {
-          console.log('create payment');
             // Set up a url on your server to create the payment
             var CREATE_URL = '/checkout/paypal/payment/create';
 
