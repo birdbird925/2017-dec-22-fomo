@@ -10881,6 +10881,31 @@ body.initial {
   font-family: 'Muli';
 }
 
+.checkout-wrapper input.error,
+.checkout-wrapper select.error {
+  border-color: #ff7070 !important;
+}
+
+.checkout-wrapper select.error {
+  color: #ff7070;
+}
+
+.checkout-wrapper input.error::-webkit-input-placeholder {
+  color: #ff7070 !important;
+}
+
+.checkout-wrapper input.error::-moz-placeholder {
+  color: #ff7070 !important;
+}
+
+.checkout-wrapper input.error:-ms-input-placeholder {
+  color: #ff7070 !important;
+}
+
+.checkout-wrapper input.error::placeholder {
+  color: #ff7070 !important;
+}
+
 .checkout-wrapper .container {
   padding: 45px 0 60px;
 }

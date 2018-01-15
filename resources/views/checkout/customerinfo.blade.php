@@ -172,7 +172,7 @@
       });
     });
 
-    function isValid() {
+    function isValid(requireAlert = false) {
       // check voucher code
       if($('#voucher').val() != '') {
         var data = $('form[name=voucherForm]').serialize();
@@ -185,7 +185,14 @@
           async: false,
           success: function(res){
             if(res.error){
+                if(requireAlert) {
+                    $('#voucher').addClass('animated shake error');
+                    setTimeout(function() { $('#voucher').removeClass('animated shake'); }, 1000);
+                }
               hasError = res.message;
+            }
+            else {
+                $('#voucher').removeClass('error');
             }
           }
         });
@@ -198,8 +205,16 @@
 
       var hasEmpty = false;
       $.each(inputField, function(index, value) {
-        if($('#'+value).val() == '') {
-          hasEmpty = true;
+        var inputValue = $('#'+value).val()
+        if(inputValue == '' || inputValue == -1 || inputValue == null) {
+            if(requireAlert) {
+                $('#'+value).addClass('animated shake error');
+                setTimeout(function() { $('#'+value).removeClass('animated shake'); }, 1000);
+            }
+            hasEmpty = true;
+        }
+        else {
+            $('#'+value).removeClass('error');
         }
       });
       if(hasEmpty) { return 'Don\'t fill up the form is not cool!'}
@@ -207,7 +222,16 @@
       // check email format
       var email_regex=/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
       if(email_regex.test($('#email').val())==false){
+          if(requireAlert) {
+              console.log('1');
+              $('#email').addClass('animated shake error');
+              setTimeout(function() { $('#email').removeClass('animated shake'); }, 1000);
+          }
+          console.log('2');
         return 'Email address format is wrong!';
+      }
+      else {
+          $('#email').removeClass('error');
       }
 
       return true;
@@ -239,9 +263,10 @@
             });
         },
         onClick: function() {
-          if(isValid() !== true) {
+          if(isValid(true) !== true) {
+              console.log('1212');
             $('.msg-popup').find('.title').html('Erm');
-            $('.msg-popup').find('.caption').html(isValid());
+            $('.msg-popup').find('.caption').html(isValid(true));
             $('.msg-popup').toggleClass('popup');
             setTimeout(function(){ $('.msg-popup').toggleClass('popup'); }, 2000);s
           }
@@ -317,5 +342,6 @@
 @endpush
 
 @push('head-scripts')
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 @endpush
