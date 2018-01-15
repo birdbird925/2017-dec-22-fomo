@@ -15,9 +15,9 @@ class CmsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','auth.admin']);
+        $this->middleware(['auth','auth.admin'], ['except' => 'page']);
     }
-    
+
     public function index()
     {
         $slider = Slider::all();
