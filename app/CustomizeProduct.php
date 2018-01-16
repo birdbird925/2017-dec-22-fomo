@@ -60,13 +60,14 @@ class CustomizeProduct extends Model
         foreach($components as $component) {
             if($sizeComponentID != 0 && $component->size_image) {
                 $sizeImage = json_decode($component->size_image);
-                if(property_exists($sizeImage, 'front_image')) {
+
+                if(isset($sizeImage->$sizeComponentID->front_image)) {
                     $frontImage = $sizeImage->$sizeComponentID->front_image;
                     if (($key = array_search(Image::find($frontImage)->getSrc(), $images)) !== false)
                         unset($images[$key]);
                 }
 
-                if(property_exists($sizeImage, 'front_image')) {
+                if(isset($sizeImage->$sizeComponentID->back_image)) {
                     $backImage = $sizeImage->$sizeComponentID->back_image;
                     if (($key = array_search(Image::find($backImage)->getSrc(), $images)) !== false)
                         unset($images[$key]);
