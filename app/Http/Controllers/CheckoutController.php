@@ -268,7 +268,7 @@ class CheckoutController extends Controller
                       $product = CustomizeProduct::create([
                           'name' => $cartItem['name'],
                           'components' => $cartItem['product'],
-                          'image' => $cartItem['image'],
+                          // 'image' => $cartItem['image'],
                           'images' =>$cartItem['images'],
                           'thumb' => $cartItem['thumb'],
                           'back' => $cartItem['back'],
