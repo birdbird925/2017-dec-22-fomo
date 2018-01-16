@@ -172,6 +172,23 @@
                         $ {{$order->subTotal() + $order->shipping_cost}}
                     </li>
                 </ul>
+                @if($order->discount)
+                    <hr>
+                    <ul>
+                        <li>
+                            <span>Discount:</span>
+                            {{$order->discount->voucher->name}}
+                        </li>
+                        <li>
+                            <span>Code:</span>
+                            {{$order->discount->voucher->code}}
+                        </li>
+                        <li>
+                            <span>Amount: </span>
+                            $ {{$order->discount->amount}}
+                        </li>
+                    </ul>
+                @endif
                 <hr>
                 <ul>
                     <li>

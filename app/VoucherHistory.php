@@ -16,4 +16,9 @@ class VoucherHistory extends Model
     {
       return $this->belongsTo(Order::class);
     }
+
+    public function voucher()
+    {
+        return $this->belongsTo(Voucher::class);
+    }
 }

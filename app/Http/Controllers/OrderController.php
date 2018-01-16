@@ -20,7 +20,7 @@ class OrderController extends Controller
     {
         $this->middleware(['auth','auth.admin']);
     }
-    
+
     public function index()
     {
         $orders = Order::orderBy('created_at', 'desc')->get();
