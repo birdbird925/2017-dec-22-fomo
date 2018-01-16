@@ -362,7 +362,7 @@ class CheckoutController extends Controller
     	$inputFields = PayPal::InputFields();
       $inputFields->setNoShipping(1);
       $presentation = PayPal::Presentation();
-      $presentation->setLogoImage("https://fomo.watch/images/demo/paypal-logo.svg")->setBrandName("FOMO"); //NB: Paypal recommended to use https for the logo's address and the size set to 190x60.
+      // $presentation->setLogoImage("https://fomo.watch/images/demo/paypal-logo.svg")->setBrandName("FOMO"); //NB: Paypal recommended to use https for the logo's address and the size set to 190x60.
     	$webProfile = PayPal::WebProfile();
 
     	$webProfile->setName("FOMO".uniqid())
