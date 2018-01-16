@@ -734,11 +734,14 @@ $(function() {
     }
     function loadCanvasImage(imgSrc, konvaImg, konvaLayer) {
         var deferred = $.Deferred();
-        layer.add(konvaImg);
+        console.log(konvaLayer.getStage().width());
+        console.log(konvaImg.width());
+        konvaLayer.add(konvaImg);
+        console.log(konvaLayer.width());
         var imgObj = new Image();
         imgObj.onload = function() {
             if(konvaImg.hasName('personalize'))
-                loadPersonalizeImg(konvaImg, imgObj, layer);
+                loadPersonalizeImg(konvaImg, imgObj, konvaLayer);
             else
                 resizeImg(konvaImg, imgObj);
             deferred.resolve();
@@ -764,7 +767,7 @@ $(function() {
         konvaImg.height(height);
         konvaImg.getLayer().draw();
 
-        if(konvaImg.getStage().width() > width) konvaImg.getStage().width(width);
+        // if(konvaImg.getStage().width() > width) konvaImg.getStage().width(width);
     }
     function loadCustomizeCanvas(triggerChange){
         var deferreds = [];
@@ -773,9 +776,10 @@ $(function() {
         var sArray = {};
         $.each(dArray, function(index, value) {
             var stage = new Konva.Stage({
+                width: $('#'+value+'-canvas').height(),
+                height: $('#'+value+'-canvas').height(),
                 container: value+'-canvas',
-                width: $('#'+value+'-canvas').width(),
-                height: $('#'+value+'-canvas').height()
+
             });
             sArray[value] = stage;
         });
@@ -801,82 +805,82 @@ $(function() {
 
         });
 
-        var customizeType = $('input[name=customize_type]:checked').val();
-        var personalizeArea = [];
-        $.each($('.fixed-element, .customize'+customizeType).find('input[type=text], input[type=file]'), function(index, value) {
-            var direction = $(this).closest('.step').attr('direction');
-            var layerID = '.layer'+$(this).attr('layer');
-
-            // control layer = .layer10
-            if(sArray[direction].find('.layer10').length <= 0) {
-                var controlLayer = new Konva.Layer({name: 'layer10'});
-                controlLayer.setAttr('index', 10);
-                sArray[direction].add(controlLayer);
-            }
-
-            if(sArray[direction].find(layerID).length == 0){
-                layer =  new Konva.Layer({name: layerID.substring(1)});
-                layer.setAttr('index', layerID.substring(6));
-                sArray[direction].add(layer);
-            }
-            else layer = sArray[direction].find(layerID)[0];
-
-            // check layer has personalize area layer
-            if(layer.find('.personalize-area').length == 0) {
-                var image = $('input[name=customize_type]:checked').attr(direction+'_personalize');
-                deferreds.push(loadCanvasImage(image, new Konva.Image({'name': 'personalize-area'}), layer));
-            }
-
-            if($(this).attr('type') == 'text' && $(this).val() != '') {
-                inputJson[$(this).attr('name')] = {
-                    'value': $(this).val(),
-                    'x': $(this).attr('x'),
-                    'y': $(this).attr('y'),
-                    'font-size': $(this).attr('font-size'),
-                    'stage-width': $(this).attr('stage-width'),
-                    'stage-height': $(this).attr('stage-height')
-                };
-                text = new Konva.Text({
-                    id: $(this).attr('name'),
-                    name: 'personalize',
-                    text: $(this).val(),
-                    fontFamily: 'monospace',
-                    x: $(this).attr('x'),
-                    y: $(this).attr('y'),
-                    fill: 'gold',
-                    fontSize: $(this).attr('font-size'),
-                });
-                layer.add(text);
-                addPersonalizeTextControl(text);
-            }
-            if($(this).attr('type') == 'file' && typeof $(this).attr('image-src') !== typeof undefined && $(this).attr('image-src')) {
-                inputJson[$(this).attr('name')] = {
-                    "image-id": $(this).attr('image-id'),
-                    "image-src": $(this).attr('image-src'),
-                    "width": $(this).attr('width'),
-                    "height": $(this).attr('height'),
-                    "rotation": $(this).attr('rotation'),
-                    "x": $(this).attr('x'),
-                    "y": $(this).attr('y'),
-                    'stage-width': $(this).attr('stage-width'),
-                    'stage-height': $(this).attr('stage-height')
-                }
-
-                var input = $(this);
-                var direction = input.attr('direction');
-
-                konvaImg = new Konva.Image({
-                    id: input.attr('name'),
-                    name: 'personalize',
-                    x: input.attr('x') ? input.attr('x') : stage.width()/2,
-                    y: input.attr('y') ? input.attr('y') : stage.height()/2,
-                    width: input.attr('width'),
-                    height: input.attr('height'),
-                    rotation: input.attr('rotation'),
-                });
-                deferreds.push(loadCanvasImage(input.attr('image-src'), konvaImg, layer));
-            }
-        });
+        // var customizeType = $('input[name=customize_type]:checked').val();
+        // var personalizeArea = [];
+        // $.each($('.fixed-element, .customize'+customizeType).find('input[type=text], input[type=file]'), function(index, value) {
+        //     var direction = $(this).closest('.step').attr('direction');
+        //     var layerID = '.layer'+$(this).attr('layer');
+        //
+        //     // control layer = .layer10
+        //     if(sArray[direction].find('.layer10').length <= 0) {
+        //         var controlLayer = new Konva.Layer({name: 'layer10'});
+        //         controlLayer.setAttr('index', 10);
+        //         sArray[direction].add(controlLayer);
+        //     }
+        //
+        //     if(sArray[direction].find(layerID).length == 0){
+        //         layer =  new Konva.Layer({name: layerID.substring(1)});
+        //         layer.setAttr('index', layerID.substring(6));
+        //         sArray[direction].add(layer);
+        //     }
+        //     else layer = sArray[direction].find(layerID)[0];
+        //
+        //     // check layer has personalize area layer
+        //     if(layer.find('.personalize-area').length == 0) {
+        //         var image = $('input[name=customize_type]:checked').attr(direction+'_personalize');
+        //         deferreds.push(loadCanvasImage(image, new Konva.Image({'name': 'personalize-area'}), layer));
+        //     }
+        //
+        //     if($(this).attr('type') == 'text' && $(this).val() != '') {
+        //         inputJson[$(this).attr('name')] = {
+        //             'value': $(this).val(),
+        //             'x': $(this).attr('x'),
+        //             'y': $(this).attr('y'),
+        //             'font-size': $(this).attr('font-size'),
+        //             'stage-width': $(this).attr('stage-width'),
+        //             'stage-height': $(this).attr('stage-height')
+        //         };
+        //         text = new Konva.Text({
+        //             id: $(this).attr('name'),
+        //             name: 'personalize',
+        //             text: $(this).val(),
+        //             fontFamily: 'monospace',
+        //             x: $(this).attr('x'),
+        //             y: $(this).attr('y'),
+        //             fill: 'gold',
+        //             fontSize: $(this).attr('font-size'),
+        //         });
+        //         layer.add(text);
+        //         addPersonalizeTextControl(text);
+        //     }
+        //     if($(this).attr('type') == 'file' && typeof $(this).attr('image-src') !== typeof undefined && $(this).attr('image-src')) {
+        //         inputJson[$(this).attr('name')] = {
+        //             "image-id": $(this).attr('image-id'),
+        //             "image-src": $(this).attr('image-src'),
+        //             "width": $(this).attr('width'),
+        //             "height": $(this).attr('height'),
+        //             "rotation": $(this).attr('rotation'),
+        //             "x": $(this).attr('x'),
+        //             "y": $(this).attr('y'),
+        //             'stage-width': $(this).attr('stage-width'),
+        //             'stage-height': $(this).attr('stage-height')
+        //         }
+        //
+        //         var input = $(this);
+        //         var direction = input.attr('direction');
+        //
+        //         konvaImg = new Konva.Image({
+        //             id: input.attr('name'),
+        //             name: 'personalize',
+        //             x: input.attr('x') ? input.attr('x') : stage.width()/2,
+        //             y: input.attr('y') ? input.attr('y') : stage.height()/2,
+        //             width: input.attr('width'),
+        //             height: input.attr('height'),
+        //             rotation: input.attr('rotation'),
+        //         });
+        //         deferreds.push(loadCanvasImage(input.attr('image-src'), konvaImg, layer));
+        //     }
+        // });
 
         return $.when.apply(null, deferreds).done(function() {
             console.log('done load');
@@ -1880,94 +1884,4 @@ $(function() {
             if (isConfirm) {form.submit();}
         });
     });
-    // var dataSales = {
-    //       labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
-    //       series: [
-    //          [287, 385, 490, 492, 554, 586, 698, 695, 752, 788, 846, 944],
-    //         [67, 152, 143, 240, 287, 335, 435, 437, 539, 542, 544, 647],
-    //         [23, 113, 67, 108, 190, 239, 307, 308, 439, 410, 410, 509]
-    //       ]
-    //     };
-    //
-    // var optionsSales = {
-    //   lineSmooth: false,
-    //   low: 0,
-    //   high: 800,
-    //   showArea: true,
-    //   height: "245px",
-    //   axisX: {
-    //     showGrid: false,
-    //   },
-    //   lineSmooth: Chartist.Interpolation.simple({
-    //     divisor: 3
-    //   }),
-    //   showLine: false,
-    //   showPoint: false,
-    // };
-    //
-    // var responsiveSales = [
-    //   ['screen and (max-width: 640px)', {
-    //     axisX: {
-    //       labelInterpolationFnc: function (value) {
-    //         return value[0];
-    //       }
-    //     }
-    //   }]
-    // ];
-    //
-    // Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
-    //
-    //
-    // var data = {
-    //   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    //   series: [
-    //     [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
-    //     [412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]
-    //   ]
-    // };
-    //
-    // var options = {
-    //     seriesBarDistance: 10,
-    //     axisX: {
-    //         showGrid: false
-    //     },
-    //     height: "245px"
-    // };
-    //
-    // var responsiveOptions = [
-    //   ['screen and (max-width: 640px)', {
-    //     seriesBarDistance: 5,
-    //     axisX: {
-    //       labelInterpolationFnc: function (value) {
-    //         return value[0];
-    //       }
-    //     }
-    //   }]
-    // ];
-    //
-    // Chartist.Bar('#chartActivity', data, options, responsiveOptions);
-    //
-    // var dataPreferences = {
-    //     series: [
-    //         [25, 30, 20, 25]
-    //     ]
-    // };
-    //
-    // var optionsPreferences = {
-    //     donut: true,
-    //     donutWidth: 40,
-    //     startAngle: 0,
-    //     total: 100,
-    //     showLabel: false,
-    //     axisX: {
-    //         showGrid: false
-    //     }
-    // };
-    //
-    // Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
-    //
-    // Chartist.Pie('#chartPreferences', {
-    //   labels: ['62%','32%','6%'],
-    //   series: [62, 32, 6]
-    // });
 });
