@@ -12541,6 +12541,32 @@ footer .design-by a:hover {
   color: #9a9a9a;
 }
 
+#admin-wrapper #data-table_info {
+  display: inline-block;
+}
+
+#admin-wrapper #data-table_length {
+  display: none;
+}
+
+#admin-wrapper #data-table_paginate {
+  padding-top: 10px;
+  display: inline-block;
+  float: right;
+}
+
+#admin-wrapper #data-table_paginate #data-table_previous {
+  margin-right: 10px;
+}
+
+#admin-wrapper #data-table_paginate .paginate_button {
+  margin: 0 2.5px;
+}
+
+#admin-wrapper #data-table_paginate #data-table_next {
+  margin-left: 10px;
+}
+
 .cms-slider {
   text-align: center;
 }
