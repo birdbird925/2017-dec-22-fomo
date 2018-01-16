@@ -44,7 +44,7 @@
                 </h4>
             </div>
             <div class="content">
-                @if($featured->count() == 0)
+                @if($slider->count() == 0)
                     <p>You are not create any slide</p>
                 @else
                     <ul class="cms-slider" id="lightSlider">
