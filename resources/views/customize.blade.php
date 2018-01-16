@@ -73,7 +73,7 @@
                                     @endif
                                     @if($step->componentByLevel(2)->count() > 0)
                                     </div>{{-- .main-option --}}
-                                    <div class="title {{$component->type_id ? 'customize-element customize'.$component->type_id : ''}}">{{$step->componentByLevel(2)->first()->level_title}}</div>
+                                    <div class="title customize-element customize1">{{$step->componentByLevel(2)->first()->level_title}}</div>
                                     <div class="main-option">
                                         @foreach($step->componentByLevel(2) as $component)
                                             <div class="form-group {{$component->type_id ? 'customize-element customize'.$component->type_id : 'fixed-element fadeIn'}} {{$component->available ? '' : 'disabled'}}">
