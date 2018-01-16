@@ -77,14 +77,14 @@
                 <div class="form-group">
                     <label>
                         My email
-                        <span class="pull-right" id="editEmail">Update email</span>
+                        <span class="pull-right editEmail">Update email</span>
                     </label>
                     <input type="email" class="form-control" value="{{Auth::user()->email}}" disabled>
                 </div>
                 <div class="form-group">
                     <label>
                         Password
-                        <span class="pull-right" id="editPassword">Change password</span>
+                        <span class="pull-right" class="editPassword">Change password</span>
                     </label>
                     <input type="password" class="form-control" value="dummypassword" disabled>
                 </div>
@@ -100,7 +100,7 @@
                         <label>New email</label>
                         <input type="email" name="email" class="form-control">
                     </div>
-                    <input type="submit" id="editEmail" value="save" data-action="email">
+                    <input type="submit" value="save" data-action="email">
                 </form>
                 <br>
                 <a class="cancelEdit">Cancel</a>
@@ -118,7 +118,7 @@
                         <input type="password" name="new-password" class="form-control">
                         <a class="show-password">show</a>
                     </div>
-                    <input type="submit" id="editEmail" value="save" data-action='password'>
+                    <input type="submit" value="save" data-action='password'>
                 </form>
                 <br>
                 <a class="cancelEdit">Cancel</a>

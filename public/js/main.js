@@ -296,11 +296,11 @@ $(function() {
         if(count > 0) customizeProductThumb();
         if($('.loadmore').closest('#saved').find('.mobile-hide').length == 0) $(this).css({'display': 'none'});
     });
-    $('#editEmail').click(function(){
+    $('.editEmail').click(function(){
         $('#account-info').fadeOut();
         $('#email-form').fadeIn();
     });
-    $('#editPassword').click(function(){
+    $('.editPassword').click(function(){
         $('#account-info').fadeOut();
         $('#password-form').fadeIn();
     });
@@ -734,10 +734,7 @@ $(function() {
     }
     function loadCanvasImage(imgSrc, konvaImg, konvaLayer) {
         var deferred = $.Deferred();
-        console.log(konvaLayer.getStage().width());
-        console.log(konvaImg.width());
         konvaLayer.add(konvaImg);
-        console.log(konvaLayer.width());
         var imgObj = new Image();
         imgObj.onload = function() {
             if(konvaImg.hasName('personalize'))
