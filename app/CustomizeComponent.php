@@ -10,13 +10,20 @@ class CustomizeComponent extends Model
     public $timestamps  = false;
     protected $table = 'customize_components';
 
+    public function colorOption()
+    {
+        return CustomizeComponent::where('required_component', $this->id)->get();
+    }
+
     public function radioAttr($step)
     {
         return 'value='.$this->id.'
                 desc-class=.main
                 hide-class=.extral'.$step.'
                 show-class=.component'.$this->id.'
-                extral-option='.($this->option->count() > 0 ? 1 : 0).'
+                hide-step=.step'.($this->blank ? $step+1 : '-').'
+                show-step=.step'.(!$this->blank && !$this->required_component ? $step+1 : '-').'
+                color-option='.($this->colorOption()->count() > 0 ? '1' : '0').'
                 personalize='.($this->personalize ? $this->personalize : 0).'
                 hide-personalize=.'.($this->personalize ? 'step'.$step.'personalize' : 0).'
                 show-personalize=.'.($this->personalize ? 'step'.$step.'personalize'.$this->id : 0).'

@@ -34,8 +34,6 @@
     @include('layouts.partials.footer')
 
     <!-- Scripts -->
-    {{-- <script src="/js/app.js"></script> --}}
-    {{-- <script src="/js/jquery-1.10.2.js" type="text/javascript"></script> --}}
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     <script src="/js/instafeed.min.js"></script>
     <script src="/js/lightslider.min.js"></script>
