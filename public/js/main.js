@@ -529,27 +529,33 @@ $(function() {
     });
     $('.customize-option').on('click', '.next, .prev', function(){
         if($(window).width() > 768 && !$(this).hasClass('desktop-control')) return false
+        var stepCount = $(this).attr('total-step');
         var action = $(this).hasClass('next') ? 'next' : 'prev';
         var reserveAction = $(this).hasClass('next') ? 'prev' : 'next';
         if(action == 'next') optionSlider.goToNextSlide();
         if(action == 'prev') optionSlider.goToPrevSlide();
 
         $('.customize-option').find('.desktop-control.'+reserveAction).removeClass('hide');
-        if(action == 'next' && optionSlider.getCurrentSlideCount() == optionSlider.getTotalSlideCount())
+        if(action == 'next' && optionSlider.getCurrentSlideCount() == stepCount) {
             $('.customize-option').find('.desktop-control.next').addClass('hide');
-
-        if(action == 'prev' && optionSlider.getCurrentSlideCount() == 1)
-            $('.customize-option').find('.desktop-control.prev').addClass('hide');
-
-
-        var canvasDirection = canvasSlider.getCurrentSlideCount();
-        var stepDirection = ($('.option-slider').find('.step.active').attr('direction') == 'front') ? 1 : 2;
-        if(canvasDirection != stepDirection) {
-            if(stepDirection == 1)
-                canvasSlider.goToPrevSlide();
-            else
-                canvasSlider.goToNextSlide();
+            canvasSlider.goToNextSlide();
         }
+        else if(action == 'prev' && optionSlider.getCurrentSlideCount() == 1) {
+            $('.customize-option').find('.desktop-control.prev').addClass('hide');
+        }
+        else if((action == 'prev' && canvasSlider.getCurrentSlideCount() != '1') || (canvasSlider.getCurrentSlideCount() != '1' && action == 'next') ) {
+            canvasSlider.goToPrevSlide();
+        }
+
+
+        // var canvasDirection = canvasSlider.getCurrentSlideCount();
+        // var stepDirection = ($('.option-slider').find('.step.active').attr('direction') == 'front') ? 1 : 2;
+        // if(canvasDirection != stepDirection) {
+        //     if(stepDirection == 1)
+        //         canvasSlider.goToPrevSlide();
+        //     else
+        //         canvasSlider.goToNextSlide();
+        // }
 
         if($('.lslide.active').find('.control.fadeOut').length > 0) {
             if($('.lslide.active').find('.control.fadeOut').hasClass('next'))
@@ -601,6 +607,7 @@ $(function() {
         }
 
         return $.when.apply(null, deferreds).done(function() {
+            updateNextPreviousTitle();
             console.log('update size done');
         }).promise();
     }
@@ -770,6 +777,23 @@ $(function() {
         });
 
         return deferreds;
+    }
+    function updateNextPreviousTitle(){
+        var title = [];
+        var step = [];
+        $.each($('.step'), function() {
+            if($(this).css('display') != 'none'){
+                step.push($(this).attr('step'));
+                title.push($(this).attr('data-title'));
+            }
+        });
+        $.each(step, function(index, step) {
+            if($('.step'+step).css('display') != 'none') {
+                $('.step'+step).find('.next').text(title[index+1]);
+                $('.step'+step).find('.prev').text(title[index-1]);
+            }
+        });
+        $('.customize-option .next').attr('total-step', step.length);
     }
     function loadCanvasImage(imgSrc, konvaImg, konvaLayer) {
         var deferred = $.Deferred();
@@ -1453,6 +1477,7 @@ $(function() {
                 var deferreds = displayOption(input, true);
                 $.when.apply(null, deferreds).done(function() {
                     updateLabelBorder();
+                    updateNextPreviousTitle();
                     loadCustomizeCanvas(true);
                 });
             }
@@ -1476,6 +1501,7 @@ $(function() {
                 var deferreds = updateSizeImage(input.val());
                 $.when.apply(null, deferreds).done(function() {
                     updateLabelBorder();
+                    updateNextPreviousTitle();
                     loadCustomizeCanvas(true);
                 });
             }
