@@ -77,20 +77,32 @@
                                 @foreach($step->personalizeOption() as $personalize)
                                     @if($personalize->personalize == 'text')
                                         <div class="form-group step{{$step->id}}personalize step{{$step->id}}personalize{{$personalize->id}} personalize-text {{$personalize->type_id ? 'customize-element customize'.$personalize->type_id : 'fixed-element'}}">
-                                            <div class="title">
-                                                Key in the text (up to  12 letter)
-                                            </div>
-                                            <input type="text" name="step{{$step->id}}personalize{{$personalize->id}}" placeholder="------------" layer="{{$personalize->personalize ? $personalize->layer : 0}}">
+                                            @if($step->id == 13)
+                                                <div class="title">
+                                                    Key in the text (up to  10 letter)
+                                                </div>
+                                                <input type="text" name="step{{$step->id}}personalize{{$personalize->id}}" placeholder="----------" layer="{{$personalize->personalize ? $personalize->layer : 0}}" maxlength="10">
+                                            @else
+                                                <div class="title">
+                                                    Key in the text for line 1 (up to 18 letter)
+                                                </div>
+                                                <input type="text" name="step{{$step->id}}personalize{{$personalize->id}}line1" line='1' placeholder="------------------" layer="{{$personalize->personalize ? $personalize->layer : 0}}" maxlength="18">
+                                                <br>
+                                                <div class="title">
+                                                    Key in the text for line 2 (up to 18 letter)
+                                                </div>
+                                                <input type="text" name="step{{$step->id}}personalize{{$personalize->id}}line2" line='2' placeholder="------------------" layer="{{$personalize->personalize ? $personalize->layer : 0}}" maxlength="18">
+                                            @endif
                                         </div>
                                     @endif
 
                                     @if($personalize->personalize == 'image')
                                         <div class="form-group step{{$step->id}}personalize step{{$step->id}}personalize{{$personalize->id}} personalize-image {{$personalize->type_id ? 'customize-element customize'.$personalize->type_id : 'fixed-element'}}">
                                             <div class="title">
-                                                PNG OR SVG FILES ARE RECOMMENDED
+                                                JPG & PNG FILES ARE RECOMMENDED
                                             </div>
-                                            <label for="personalize-image" class="file-label"></label>
-                                            <input id="personalize-image" name="step{{$step->id}}personalize{{$personalize->id}}" type="file" layer="{{$personalize->personalize ? $personalize->layer : 0}}">
+                                            <label for="personalize-image{{$step->id}}" class="file-label"></label>
+                                            <input id="personalize-image{{$step->id}}" name="step{{$step->id}}personalize{{$personalize->id}}" type="file" layer="{{$personalize->personalize ? $personalize->layer : 0}}">
                                         </div>
                                     @endif
                                 @endforeach

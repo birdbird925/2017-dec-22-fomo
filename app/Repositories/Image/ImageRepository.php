@@ -26,6 +26,19 @@ class ImageRepository
         $name = $imageData['file']->hashName();
         $imagePath = $imageData['file']->store($path);
 
+        if(substr($name, -3) == 'png') {
+            $im = ImageCreateFromPng($path.$name);
+            Imagefilter($im, IMG_FILTER_GRAYSCALE);
+            ImagePng($im, $path.$name);
+            Imagedestroy($im);
+        }
+        else {
+            $im = ImageCreateFromJpeg($path.$name);
+            Imagefilter($im, IMG_FILTER_GRAYSCALE);
+            ImageJpeg($im, $path.$name);
+            Imagedestroy($im);
+        }
+
         // insert into database
         $image = new Image([
           'name' => $name,
@@ -34,6 +47,7 @@ class ImageRepository
         ]);
 
         $image->save();
+
 
         // generate 2 different size as medium, thumbnail product image
         if($imageData['isProductImage']){

@@ -39,8 +39,8 @@ $(function() {
                 if(konvaNode.type == 'text') {
                     var konvaTxt = new Konva.Text({
                         text: konvaNode.text,
-                        fontFamily: 'monospace',
-                        fill: 'gold',
+                        fontFamily: 'Museo_Slab',
+                        fill: '#b7b7b7',
                         x: (konvaNode.x != 0) ? konvaNode.x * ratio : 0,
                         y: (konvaNode.y != 0) ? konvaNode.y * ratio : 0,
                         fontSize: konvaNode['font-size'] * ratio
@@ -547,16 +547,6 @@ $(function() {
             canvasSlider.goToPrevSlide();
         }
 
-
-        // var canvasDirection = canvasSlider.getCurrentSlideCount();
-        // var stepDirection = ($('.option-slider').find('.step.active').attr('direction') == 'front') ? 1 : 2;
-        // if(canvasDirection != stepDirection) {
-        //     if(stepDirection == 1)
-        //         canvasSlider.goToPrevSlide();
-        //     else
-        //         canvasSlider.goToNextSlide();
-        // }
-
         if($('.lslide.active').find('.control.fadeOut').length > 0) {
             if($('.lslide.active').find('.control.fadeOut').hasClass('next'))
                 $('.desktop-control.next').addClass('hide');
@@ -632,7 +622,7 @@ $(function() {
     function displayOption(radio, updateRadio = false){
         var checkPersonalize = radio.attr('personalize');
         var showClass = radio.attr( (typeof checkPersonalize !== typeof undefined && checkPersonalize != '0') ? 'show-personalize' : 'show-class' );
-        var hideClass = radio.attr( (typeof checkPersonalize !== typeof undefined && checkPersonalize != '0') ? 'show-personalize' : 'hide-class' );
+        var hideClass = radio.attr( (typeof checkPersonalize !== typeof undefined && checkPersonalize != '0') ? 'hide-personalize' : 'hide-class' );
         var hideStep = radio.attr('hide-step');
         var checkedArray = [];
         var nameArray = [];
@@ -800,8 +790,11 @@ $(function() {
         konvaLayer.add(konvaImg);
         var imgObj = new Image();
         imgObj.onload = function() {
-            if(konvaImg.hasName('personalize'))
+            if(konvaImg.hasName('personalize')){
                 loadPersonalizeImg(konvaImg, imgObj, konvaLayer);
+                konvaLayer.find('.personalize-area')[0].moveToTop();
+                konvaLayer.draw();
+            }
             else
                 resizeImg(konvaImg, imgObj);
             deferred.resolve();
@@ -865,82 +858,79 @@ $(function() {
 
         });
 
-        // var customizeType = $('input[name=customize_type]:checked').val();
-        // var personalizeArea = [];
-        // $.each($('.fixed-element, .customize'+customizeType).find('input[type=text], input[type=file]'), function(index, value) {
-        //     var direction = $(this).closest('.step').attr('direction');
-        //     var layerID = '.layer'+$(this).attr('layer');
-        //
-        //     // control layer = .layer10
-        //     if(sArray[direction].find('.layer10').length <= 0) {
-        //         var controlLayer = new Konva.Layer({name: 'layer10'});
-        //         controlLayer.setAttr('index', 10);
-        //         sArray[direction].add(controlLayer);
-        //     }
-        //
-        //     if(sArray[direction].find(layerID).length == 0){
-        //         layer =  new Konva.Layer({name: layerID.substring(1)});
-        //         layer.setAttr('index', layerID.substring(6));
-        //         sArray[direction].add(layer);
-        //     }
-        //     else layer = sArray[direction].find(layerID)[0];
-        //
-        //     // check layer has personalize area layer
-        //     if(layer.find('.personalize-area').length == 0) {
-        //         var image = $('input[name=customize_type]:checked').attr(direction+'_personalize');
-        //         deferreds.push(loadCanvasImage(image, new Konva.Image({'name': 'personalize-area'}), layer));
-        //     }
-        //
-        //     if($(this).attr('type') == 'text' && $(this).val() != '') {
-        //         inputJson[$(this).attr('name')] = {
-        //             'value': $(this).val(),
-        //             'x': $(this).attr('x'),
-        //             'y': $(this).attr('y'),
-        //             'font-size': $(this).attr('font-size'),
-        //             'stage-width': $(this).attr('stage-width'),
-        //             'stage-height': $(this).attr('stage-height')
-        //         };
-        //         text = new Konva.Text({
-        //             id: $(this).attr('name'),
-        //             name: 'personalize',
-        //             text: $(this).val(),
-        //             fontFamily: 'monospace',
-        //             x: $(this).attr('x'),
-        //             y: $(this).attr('y'),
-        //             fill: 'gold',
-        //             fontSize: $(this).attr('font-size'),
-        //         });
-        //         layer.add(text);
-        //         addPersonalizeTextControl(text);
-        //     }
-        //     if($(this).attr('type') == 'file' && typeof $(this).attr('image-src') !== typeof undefined && $(this).attr('image-src')) {
-        //         inputJson[$(this).attr('name')] = {
-        //             "image-id": $(this).attr('image-id'),
-        //             "image-src": $(this).attr('image-src'),
-        //             "width": $(this).attr('width'),
-        //             "height": $(this).attr('height'),
-        //             "rotation": $(this).attr('rotation'),
-        //             "x": $(this).attr('x'),
-        //             "y": $(this).attr('y'),
-        //             'stage-width': $(this).attr('stage-width'),
-        //             'stage-height': $(this).attr('stage-height')
-        //         }
-        //
-        //         var input = $(this);
-        //         var direction = input.attr('direction');
-        //
-        //         konvaImg = new Konva.Image({
-        //             id: input.attr('name'),
-        //             name: 'personalize',
-        //             x: input.attr('x') ? input.attr('x') : stage.width()/2,
-        //             y: input.attr('y') ? input.attr('y') : stage.height()/2,
-        //             width: input.attr('width'),
-        //             height: input.attr('height'),
-        //             rotation: input.attr('rotation'),
-        //         });
-        //         deferreds.push(loadCanvasImage(input.attr('image-src'), konvaImg, layer));
-        //     }
-        // });
+        var customizeType = $('input[name=customize_type]:checked').val();
+        var personalizeArea = [];
+        $.each($('.fixed-element').find('input[type=text], input[type=file]'), function(index, value) {
+            var direction = $(this).closest('.step').attr('direction');
+            var layerID = '.layer'+$(this).attr('layer');
+
+            if(sArray[direction].find(layerID).length == 0){
+                layer =  new Konva.Layer({name: layerID.substring(1)});
+                layer.setAttr('index', layerID.substring(6));
+                sArray[direction].add(layer);
+            }
+            else layer = sArray[direction].find(layerID)[0];
+
+            // check layer has personalize area layer
+            if(layer.find('.personalize-area').length == 0) {
+                loadPersonalizeOuterImg(layer, direction);
+            }
+            else {
+                layer.find('.personalize-area')[0].destroy();
+                loadPersonalizeOuterImg(layer, direction);
+            }
+
+            if($(this).attr('type') == 'text' && $(this).val() != '') {
+                var position = getPersonalizeTextPosition(direction, layer.getStage(), $(this));
+                inputJson[$(this).attr('name')] = {
+                    'value': $(this).val(),
+                    'font-size': $(this).attr('font-size'),
+                    'stage-width': $(this).attr('stage-width'),
+                    'stage-height': $(this).attr('stage-height')
+                };
+                text = new Konva.Text({
+                    id: $(this).attr('name'),
+                    name: 'personalize',
+                    text: $(this).val(),
+                    fontFamily: 'Museo_Slab',
+                    x: position.x,
+                    y: position.y,
+                    fill: '#b7b7b7',
+                    fontSize: $(this).attr('font-size'),
+                });
+                if(position.textCenter) {
+                    text.x((layer.getStage().width()/2) - (text.width()/2));
+                }
+                layer.add(text);
+            }
+            if($(this).attr('type') == 'file' && typeof $(this).attr('image-src') !== typeof undefined && $(this).attr('image-src')) {
+                inputJson[$(this).attr('name')] = {
+                    "image-id": $(this).attr('image-id'),
+                    "image-src": $(this).attr('image-src'),
+                    "width": $(this).attr('width'),
+                    "height": $(this).attr('height'),
+                    "rotation": $(this).attr('rotation'),
+                    "x": $(this).attr('x'),
+                    "y": $(this).attr('y'),
+                    'stage-width': $(this).attr('stage-width'),
+                    'stage-height': $(this).attr('stage-height')
+                }
+
+                var input = $(this);
+                var direction = input.attr('direction');
+
+                konvaImg = new Konva.Image({
+                    id: input.attr('name'),
+                    name: 'personalize',
+                    x: input.attr('x') ? input.attr('x') : stage.width()/2,
+                    y: input.attr('y') ? input.attr('y') : stage.height()/2,
+                    width: input.attr('width'),
+                    height: input.attr('height'),
+                    rotation: input.attr('rotation'),
+                });
+                deferreds.push(loadCanvasImage(input.attr('image-src'), konvaImg, layer));
+            }
+        });
 
         return $.when.apply(null, deferreds).done(function() {
             console.log('done load');
@@ -972,61 +962,6 @@ $(function() {
             $('input[name='+node.id()+']').attr('z-index', node.getZIndex());
         });
         $('input[name="customize-product"]').val(JSON.stringify(inputJson)).trigger('change');
-    }
-    function addPersonalizeTextControl(konvaText) {
-        var stage = konvaText.getStage();
-        var textLayer = konvaText.getLayer();
-        var controlLayer = stage.find('.layer10')[0];
-        var control = new Konva.Rect({
-            draggable: true,
-            id: konvaText.id()+'-control',
-            name: "personalize-control",
-            width: konvaText.width() + 10,
-            height: konvaText.height() + 10,
-            x: konvaText.x()-5,
-            y: konvaText.y()-5
-        });
-
-        control.on('mouseover', function() {
-            control.opacity(0.5);
-            document.body.style.cursor = 'move';
-            control.stroke('#fba200');
-            controlLayer.draw();
-        });
-        control.on('mouseout', function() {
-            control.opacity(0);
-            document.body.style.cursor = 'default';
-            control.stroke('');
-            controlLayer.draw();
-        });
-        control.on('dragmove', function() {
-            konvaText.x(this.x()+5);
-            konvaText.y(this.y()+5);
-            textLayer.draw();
-        });
-        control.on('dragend', function() {
-            var inputJson = JSON.parse($('input[name="customize-product"]').val());
-            var json = inputJson[konvaText.id()];
-            json.x = konvaText.x();
-            json.y = konvaText.y();
-            $('input[name='+konvaText.id()+']').attr('x', konvaText.x());
-            $('input[name='+konvaText.id()+']').attr('y', konvaText.y());
-            $('input[name="customize-product"]').val(JSON.stringify(inputJson)).trigger('change');
-
-        })
-        control.on('mousedown touchstart', function(event) {
-            event.evt.stopPropagation();
-            if(controlLayer.find('Group').length > 0) controlLayer.find('Group')[0].opacity(0);
-            control.opacity(1);
-            controlLayer.draw();
-            konvaText.moveToTop();
-            textLayer.find('.personalize-area')[0].moveToTop();
-            textLayer.draw();
-            updatePersonalizeZIndex(textLayer);
-        });
-
-        controlLayer.add(control);
-        controlLayer.draw();
     }
     function resize(activeAnchor, konvaImg) {
         var stage = konvaImg.getStage();
@@ -1133,7 +1068,8 @@ $(function() {
         konvaImg.offsetX(rect.width()/2);
         konvaImg.offsetY(rect.height()/2);
         imageLayer.find('.personalize-area')[0].moveToTop();
-        imageLayer.draw();
+        // imageLayer.draw();
+        imageLayer.batchDraw();
 
         // move anchor
         group.find('.centerTop')[0].x(group.width()/2);
@@ -1155,6 +1091,11 @@ $(function() {
         var height = konvaImg.getHeight();
         var stage = konvaImg.getStage();
         var layer = stage.find('.layer10')[0];
+        if(!layer) {
+            layer = new Konva.Layer({name: 'layer10'});
+            layer.setAttr('index', 10);
+            stage.add(layer);
+        }
 
         var groudID = konvaImg.id()+'-control';
         if(stage.find('#'+groudID).length > 0) {stage.find('#'+groudID)[0].destroy();}
@@ -1240,7 +1181,7 @@ $(function() {
                 x: option.x,
                 y: option.y,
                 name: name,
-                fill: '#fba200',
+                fill: '#b7b7b7',
                 draggable: true,
                 dragBoundFunc: function(pos) {
                     return {
@@ -1253,13 +1194,6 @@ $(function() {
                 resize(this, konvaImg);
                 layer.draw();
             });
-            // anchor.on('mousedown touchstart', function(event) {
-            //     group.opacity(1);
-            //     group.setDraggable(false);
-            //     this.moveToTop();
-            //     layer.draw();
-            //     event.stopPropagation();
-            // });
             anchor.on('dragend', function() {
                 group.setDraggable(true);
                 layer.draw();
@@ -1281,6 +1215,95 @@ $(function() {
         layer.add(group);
         if(layer.find('Rect').length > 1) layer.find('Rect')[0].moveToTop();
         layer.draw();
+    }
+    function loadPersonalizeOuterImg(layer, direction){
+        var type = $('input[name=customize_type]:checked').val();
+        var size = $('input[name=step2]:checked').val();
+        var watchCase = $('input[name=step3]:checked').val();
+        var dial = $('input[name=step4]:checked').val();
+        var name = '';
+        console.log(dial);
+        if(direction == 'front') {
+            switch(dial) {
+                case '138':
+                    name = 'FOMO-PSD-Meca-Quartz-40mm-9-personalization.png';
+                    break;
+
+                case '139':
+                    name = 'FOMO-PSD-Meca-Quartz-40mm-10-personalization.png';
+                    break;
+
+                case '140':
+                    name = 'FOMO-PSD-Meca-Quartz-40mm-8-personalization.png';
+                    break;
+
+                case '141':
+                    name = 'FOMO-PSD-Meca-Quartz-40mm-11-personalization.png';
+                    break;
+
+                case '142':
+                    name = size == 130 ? 'FOMO-PSD-Quartz-36mm-8-personalization.png' : 'FOMO-PSD-Quartz-40mm-10-personalization.png';
+                    break;
+
+                case '144':
+                    name = size == 130 ? 'FOMO-PSD-Quartz-36mm-11-personalization.png' : 'FOMO-PSD-Quartz-40mm-9-personalization.png';
+                    break;
+
+                case '145':
+                    name = 'FOMO-PSD-Quartz-36mm-10-personalization.png';
+                    break;
+
+                case '147':
+                    name = 'FOMO-PSD-Quartz-36mm-9-personalization.png';
+                    break;
+            }
+        }
+        // back
+        else {
+            switch(watchCase) {
+                case '132':
+                    name = (type == 1 ? '7984-backpersonalization.png' : (size == 130 ? '7986-backpersonalization.png' : '7989-backpersonalization.png'));
+                    break;
+                case '133':
+                    name = (type == 1 ? '7992-backpersonalization.png' : (size == 130 ? '7993-backpersonalization.png' : '7993-backpersonalization.png'));
+                    break;
+                case '134':
+                    name = (type == 1 ? '8022-backpersonalization.png' : (size == 130 ? '8019-backpersonalization.png' : '8020-backpersonalization.png'));
+                    break;
+
+            }
+        }
+        var image = '/images/demo/parts/personalization/'+name;
+        deferreds.push(loadCanvasImage(image, new Konva.Image({'name': 'personalize-area'}), layer));
+    }
+    function getPersonalizeTextPosition(direction, stage, input){
+        var textCenter = true;
+        if(direction == 'front') {
+            var customizeType = $('input[name=customize_type]:checked').val();
+            // meca-quartz
+            if(customizeType == 1) {
+                x = stage.width() / 2 + ((stage.width() / 2 * 0.25) / 2);
+                y = stage.height() / 2 - (stage.height() * 0.01074);
+                textCenter = false;
+            }
+            // quartz
+            else {
+                x = stage.width() / 2;
+                y = stage.height() / 2 + (stage.height() * 0.1);
+            }
+        }
+        else {
+            if(input.attr('line') == 1) {
+                x = stage.width() / 2;
+                y = stage.height() / 2 + (stage.height() * 0.115);
+            }
+            else {
+                x = stage.width() / 2;
+                y = stage.height() / 2 + (stage.height() * 0.155);
+            }
+        }
+
+        return {x: x, y: y, textCenter: textCenter};
     }
     function scalePersonalize() {
         console.log('start scale Personalize');
@@ -1512,39 +1535,32 @@ $(function() {
         var direction = step.attr('direction');
         var stage = loadCustomizeCanvas.canvas[direction];
         var layer = stage.find('.layer'+$(this).attr('layer'))[0];
-        var contronID = $(this).attr('name')+'-control';
         var value = $(this).val();
+
+        var position = getPersonalizeTextPosition(direction, stage, $(this))
 
         if(stage.find('#'+$(this).attr('name')).length != 0) text = stage.find('#'+$(this).attr('name'))[0];
         else {
             text = new Konva.Text({
                 id: $(this).attr('name'),
                 name: 'personalize',
-                fontFamily: 'monospace',
-                x: $(this).attr('x') ? $(this).attr('x') : stage.width()/2,
-                y: $(this).attr('y') ? $(this).attr('y') : stage.height()/2,
-                fill: 'gold',
-                fontSize: $(this).attr('font-size') ? $(this).attr('font-size') :'20',
+                fontFamily: 'Museo_Slab',
+                fill: '#b7b7b7',
+                fontSize: $(this).attr('font-size') ? $(this).attr('font-size') :'10',
             });
             layer.add(text)
         }
 
+        // change text location
         text.text(value);
+        text.x(position.x);
+        text.y(position.y);
+        if(position.textCenter) {
+            text.x((stage.width()/2) - (text.width()/2));
+        }
         text.moveToTop();
         layer.find('.personalize-area')[0].moveToTop();
         layer.draw();
-
-        // personalize text control
-        if(stage.find('#'+contronID).length == 0) addPersonalizeTextControl(text);
-        else {
-            var control = stage.find('#'+contronID)[0];
-            control.width(text.width() + 10);
-            control.height(text.height() + 10);
-        }
-
-        // if value = empty destroy text control
-        if(value == '') stage.find('#'+contronID)[0].destroy();
-        stage.find('.layer10')[0].draw();
 
         var inputJson = JSON.parse($('input[name="customize-product"]').val());
         if(typeof inputJson[text.id()] === typeof undefined) {
@@ -1556,13 +1572,9 @@ $(function() {
             $(this).attr('stage-width', text.getStage().width());
             $(this).attr('stage-height', text.getStage().height());
         }
-        inputJson[text.id()].x = text.x();
-        inputJson[text.id()].y = text.y();
         inputJson[text.id()].value = value;
-        $(this).attr('x', text.x());
-        $(this).attr('y', text.y());
         $('input[name="customize-product"]').val(JSON.stringify(inputJson)).trigger('change');
-        updatePersonalizeZIndex(layer);
+        // updatePersonalizeZIndex(layer);
     });
     $('.option-slider').on('change', 'input[type=file]', function() {
         // upload image
@@ -1585,7 +1597,6 @@ $(function() {
                 // showNotification('warning', errorMsg, 'bottom', 'center');
             },
             success: function(response){
-
                 var direction = input.closest('.step').attr('direction');
                 var stage = loadCustomizeCanvas.canvas[direction];
                 var layer = stage.find('.layer'+input.attr('layer'))[0];

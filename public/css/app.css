@@ -1,5 +1,12 @@
 @charset "UTF-8";
 @font-face {
+  font-family: 'Museo_Slab';
+  src: url("/fonts/Museo_Slab_500.woff") format("woff"), url("/fonts/Muli-BoldItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Muli';
   src: url("/fonts/Muli-BoldItalic.eot");
   src: url("/fonts/Muli-BoldItalic.eot?#iefix") format("embedded-opentype"), url("/fonts/Muli-BoldItalic.woff") format("woff"), url("/fonts/Muli-BoldItalic.ttf") format("truetype");
