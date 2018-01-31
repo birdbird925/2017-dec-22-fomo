@@ -1398,11 +1398,11 @@ $(function() {
                     var inputJson = JSON.parse($('input[name="customize-product"]').val());
                     var json = inputJson[node.id()];
                     var scale = stage.height() / input.attr('stage-height');
-                    var position = getPersonalizeTextPosition(direction, stage, input);
-                    var x = position.x * scale;
-                    var y = position.y * scale;
-                    node.x(x);
-                    node.y(y);
+                    // var position = getPersonalizeTextPosition(direction, stage, input);
+                    // var x = position.x * scale;
+                    // var y = position.y * scale;
+                    // node.x(x);
+                    // node.y(y);
 
                     if(node.getClassName() == 'Text') {
                         var size = 10 * scale;
