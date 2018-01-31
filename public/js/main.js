@@ -1378,6 +1378,7 @@ $(function() {
     function scalePersonalize() {
         console.log('start scale Personalize');
         $.each(loadCustomizeCanvas.canvas, function(index, stage) {
+            var direction = index;
             var topIndex = 0;
             $.each(stage.find('.personalize'), function(index, node) {
                 var node = stage.find('.personalize')[index];
@@ -1397,7 +1398,7 @@ $(function() {
                     var inputJson = JSON.parse($('input[name="customize-product"]').val());
                     var json = inputJson[node.id()];
                     var scale = stage.height() / input.attr('stage-height');
-                    var position = getPersonalizeTextPosition();
+                    var position = getPersonalizeTextPosition(direction, stage, input);
                     var x = position.x * scale;
                     var y = position.y * scale;
                     node.x(x);
@@ -1596,7 +1597,7 @@ $(function() {
         var layer = stage.find('.layer'+$(this).attr('layer'))[0];
         var value = $(this).val();
 
-        var position = getPersonalizeTextPosition(direction, stage, $(this))
+        var position = getPersonalizeTextPosition(direction, stage, $(this));
 
         if(stage.find('#'+$(this).attr('name')).length != 0) text = stage.find('#'+$(this).attr('name'))[0];
         else {
