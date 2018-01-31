@@ -1802,6 +1802,7 @@ $(function() {
                 },
                 error: function(a, b, c){
                     console.log(a);
+                    console.log(a.responseText);
                 },
                 success: function(){
                     location.href = "/admin/customize/product"+(action=='save' ? '' : '/'+id);
