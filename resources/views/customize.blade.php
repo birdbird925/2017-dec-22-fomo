@@ -11,9 +11,12 @@
 @section('content')
     <div class="customize-wrapper">
         <div class="customize-canvas">
-            <div class="canvas-slider">
-                <li><div id="front-canvas" class="initial"></div></li>
-                <li><div id="back-canvas" class="initial"></div></li>
+            @include('layouts.partials.preloader')
+            <div class="canvas-slider-wrapper">
+                <div class="canvas-slider">
+                    <li><div id="front-canvas" class="initial"></div></li>
+                    <li><div id="back-canvas" class="initial"></div></li>
+                </div>
             </div>
             <ul class="customize-controls">
                 @if(Auth::check() && Auth::user()->checkRole('admin'))
@@ -76,7 +79,7 @@
                             @if($step->personalizeOption()->count() > 0)
                                 @foreach($step->personalizeOption() as $personalize)
                                     @if($personalize->personalize == 'text')
-                                        <div class="form-group step{{$step->id}}personalize step{{$step->id}}personalize{{$personalize->id}} personalize-text {{$personalize->type_id ? 'customize-element customize'.$personalize->type_id : 'fixed-element'}}">
+                                        <div class="form-group personalization step{{$step->id}}personalize step{{$step->id}}personalize{{$personalize->id}} personalize-text {{$personalize->type_id ? 'customize-element customize'.$personalize->type_id : 'fixed-element'}}">
                                             @if($step->id == 13)
                                                 <div class="title">
                                                     Key in the text (up to  10 letter)
@@ -97,12 +100,12 @@
                                     @endif
 
                                     @if($personalize->personalize == 'image')
-                                        <div class="form-group step{{$step->id}}personalize step{{$step->id}}personalize{{$personalize->id}} personalize-image {{$personalize->type_id ? 'customize-element customize'.$personalize->type_id : 'fixed-element'}}">
+                                        <div class="form-group personalization step{{$step->id}}personalize step{{$step->id}}personalize{{$personalize->id}} personalize-image {{$personalize->type_id ? 'customize-element customize'.$personalize->type_id : 'fixed-element'}}">
                                             <div class="title">
                                                 JPG & PNG FILES ARE RECOMMENDED
                                             </div>
                                             <label for="personalize-image{{$step->id}}" class="file-label"></label>
-                                            <input id="personalize-image{{$step->id}}" name="step{{$step->id}}personalize{{$personalize->id}}" type="file" layer="{{$personalize->personalize ? $personalize->layer : 0}}">
+                                            <input id="personalize-image{{$step->id}}" name="step{{$step->id}}personalize{{$personalize->id}}" type="file" layer="{{$personalize->personalize ? $personalize->layer : 0}}" accept="image/x-png,image/jpeg" >
                                         </div>
                                     @endif
                                 @endforeach

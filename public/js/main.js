@@ -604,6 +604,8 @@ $(function() {
     function initialCustomize(product) {
         initialCustomizeOption(product).done(function(){
             loadCustomizeCanvas().done(function() {
+                updateLabelBorder();
+                updateNextPreviousTitle();
             });
         });
     }
@@ -738,6 +740,7 @@ $(function() {
 
     }
     function updateLabelBorder(){
+        console.log('update label border');
         $.each($('.option-slider').find('.main-option'), function() {
             $i=0;
             $.each($(this).find('.form-group.fadeIn'), function() {
@@ -769,6 +772,7 @@ $(function() {
         return deferreds;
     }
     function updateNextPreviousTitle(){
+        console.log('next previous title');
         var title = [];
         var step = [];
         $.each($('.step'), function() {
@@ -795,6 +799,10 @@ $(function() {
                 konvaLayer.find('.personalize-area')[0].moveToTop();
                 konvaLayer.draw();
             }
+            else if(konvaImg.hasName('personalize-area')) {
+                konvaLayer.add(konvaImg);
+                resizeImg(konvaImg, imgObj);
+            }
             else
                 resizeImg(konvaImg, imgObj);
             deferred.resolve();
@@ -803,6 +811,7 @@ $(function() {
         return deferred.promise();
     }
     function loadPersonalizeImg(konvaImg, imgObj, layer) {
+        console.log('personalize img');
         konvaImg.image(imgObj);
         konvaImg.offsetX(konvaImg.width()/2);
         konvaImg.offsetY(konvaImg.height()/2);
@@ -823,6 +832,7 @@ $(function() {
         // if(konvaImg.getStage().width() > width) konvaImg.getStage().width(width);
     }
     function loadCustomizeCanvas(triggerChange){
+        console.log('load customize canvas');
         var deferreds = [];
         var inputJson = {};
         var dArray = ['front', 'back'];
@@ -840,6 +850,35 @@ $(function() {
             inputJson[$(this).attr('name')] = {'value': $(this).val()};
             var input = $(this);
             var layerID = '.layer'+input.attr('layer');
+            var step = input.attr('name');
+
+            // if radio button = Quartz 36mm
+            if(input.val() == 130) {
+                // zindex
+                $('#component150').parent().addClass('disabled');
+                $('#component150').prop('disabled', true);
+                $('#component215').parent().removeClass('disabled');
+                $('#component215').prop('disabled', false);
+
+                if($('#component150').is(':checked')) {
+                    $('.step5').find('label').removeClass('checked');
+                   $('.step5 input[type=radio]').first().prop('checked', true);
+                   $('.step5 label').first().addClass('checked');
+                }
+            }
+            // if radio button = Quartz 40mm
+            if(input.val() == 131 || input.val() == 128) {
+                $('#component150').parent().removeClass('disabled');
+                $('#component150').prop('disabled', false);
+                $('#component215').parent().addClass('disabled');
+                $('#component215').prop('disabled', true);
+
+                if($('#component215').is(':checked')) {
+                    $('.step5').find('label').removeClass('checked');
+                   $('.step5 input[type=radio]').first().prop('checked', true);
+                   $('.step5 label').first().addClass('checked');
+                }
+            }
 
             $.each(dArray, function(index, direction) {
                 // check stage has layer or not
@@ -852,8 +891,28 @@ $(function() {
                     layer = sArray[direction].find(layerID)[0];
 
                 image = input.attr(direction+'_image');
-                if(image != 0)
-                    deferreds.push(loadCanvasImage(image, new Konva.Image(), layer));
+                // outer blank
+                if(input.val() == '182'){
+                    var dial = $('.step4').find('input[type=radio]:checked').val();
+                    var color = (dial == 138 || dial == 139 || dial == 142) ? "W" : "B" ;
+                    var image = '';
+                    switch($('.step2').find('input[type=radio]:checked').val()) {
+                        case '128':
+                            image = '/images/FOMO_watch_parts/FOMO_MecaQuarz_40mm/FOMO_MecaQuartz40_Exterior6'+color+'.png';
+                            break;
+
+                        case '130':
+                            image = '/images/FOMO_watch_parts/FOMO_Quartz_36mm/FOMO_Quartz36_Exterior6'+color+'.png';
+                            break;
+
+                        case '131':
+                            image = '/images/FOMO_watch_parts/FOMO_Quartz_40mm/FOMO_Quartz40_Exterior6'+color+'.png';
+                            break;
+                    }
+                    deferreds.push(loadCanvasImage(image, new Konva.Image({'id': step}), layer));
+                }
+                else if(image != 0)
+                    deferreds.push(loadCanvasImage(image, new Konva.Image({'id': step}), layer));
             });
 
         });
@@ -870,15 +929,7 @@ $(function() {
                 sArray[direction].add(layer);
             }
             else layer = sArray[direction].find(layerID)[0];
-
-            // check layer has personalize area layer
-            if(layer.find('.personalize-area').length == 0) {
-                loadPersonalizeOuterImg(layer, direction);
-            }
-            else {
-                layer.find('.personalize-area')[0].destroy();
-                loadPersonalizeOuterImg(layer, direction);
-            }
+            loadPersonalizeOuterImg(layer, direction);
 
             if($(this).attr('type') == 'text' && $(this).val() != '') {
                 var position = getPersonalizeTextPosition(direction, layer.getStage(), $(this));
@@ -917,7 +968,13 @@ $(function() {
                 }
 
                 var input = $(this);
-                var direction = input.attr('direction');
+                console.log(direction);
+                // dial - black(138, 139, 142, 145), white(140, 141, 144, 147)
+                var dial = $('.step4').find('input[type=radio]:checked').val();
+                var prefix = direction == 'back' ? 'black-' : ((dial == 138 || dial == 139 || dial == 142 || dial == 145) ? 'white-' : 'black-');
+                var src = '/images/'+prefix+input.attr('image-src')
+
+                console.log(src);
 
                 konvaImg = new Konva.Image({
                     id: input.attr('name'),
@@ -928,7 +985,7 @@ $(function() {
                     height: input.attr('height'),
                     rotation: input.attr('rotation'),
                 });
-                deferreds.push(loadCanvasImage(input.attr('image-src'), konvaImg, layer));
+                deferreds.push(loadCanvasImage(src, konvaImg, layer));
             }
         });
 
@@ -940,7 +997,10 @@ $(function() {
             $('input[name="customize-product"]').val(JSON.stringify(inputJson));
             if(triggerChange) $('input[name="customize-product"]').trigger('change');
 
-            setTimeout(function(){ $('#front-canvas, #back-canvas').toggleClass('initial'); }, 333);
+            setTimeout(function(){
+                $('#front-canvas, #back-canvas').toggleClass('initial');
+                $('.loader-wrapper').toggleClass('done');
+            }, 333);
         }).promise();
     }
     function reorderCanvasLayer(){
@@ -956,6 +1016,7 @@ $(function() {
         });
     }
     function updatePersonalizeZIndex(layer){
+        console.log('update personalize zindex');
         var inputJson = JSON.parse($('input[name="customize-product"]').val());
         $.each(layer.find('.personalize'), function(index, node) {
             inputJson[node.id()]['z-index'] = node.getZIndex();
@@ -1222,39 +1283,38 @@ $(function() {
         var watchCase = $('input[name=step3]:checked').val();
         var dial = $('input[name=step4]:checked').val();
         var name = '';
-        console.log(dial);
         if(direction == 'front') {
             switch(dial) {
                 case '138':
-                    name = 'FOMO-PSD-Meca-Quartz-40mm-9-personalization.png';
+                    name = 'FOMO_MecaQuartz40mm_Dial_White2_Personalisation.png';
                     break;
 
                 case '139':
-                    name = 'FOMO-PSD-Meca-Quartz-40mm-10-personalization.png';
+                    name = 'FOMO_MecaQuartz40mm_Dial_Black1_Personalisation.png';
                     break;
 
                 case '140':
-                    name = 'FOMO-PSD-Meca-Quartz-40mm-8-personalization.png';
+                    name = 'FOMO_MecaQuartz40mm_Dial_White1_Personalisation.png';
                     break;
 
                 case '141':
-                    name = 'FOMO-PSD-Meca-Quartz-40mm-11-personalization.png';
+                    name = 'FOMO_MecaQuartz40mm_Dial_Black2_Personalisation.png';
                     break;
 
                 case '142':
-                    name = size == 130 ? 'FOMO-PSD-Quartz-36mm-8-personalization.png' : 'FOMO-PSD-Quartz-40mm-10-personalization.png';
+                    name = size == 130 ? 'FOMO_Quartz36mm_Dial_Personalisation.png' : 'FOMO_Quartz40mm_Dial_Personalisation.png';
                     break;
 
                 case '144':
-                    name = size == 130 ? 'FOMO-PSD-Quartz-36mm-11-personalization.png' : 'FOMO-PSD-Quartz-40mm-9-personalization.png';
+                    name = size == 130 ? 'FOMO_Quartz36mm_Dial_Personalisation.png' : 'FOMO_Quartz40mm_Dial_Personalisation.png';
                     break;
 
                 case '145':
-                    name = 'FOMO-PSD-Quartz-36mm-10-personalization.png';
+                    name = 'FOMO_Quartz36mm_Index_DiamondOnBlack_Personalisation.png';
                     break;
 
                 case '147':
-                    name = 'FOMO-PSD-Quartz-36mm-9-personalization.png';
+                    name = 'FOMO_Quartz36mm_Index_DiamondOnWhite_Personalisation.png';
                     break;
             }
         }
@@ -1262,21 +1322,31 @@ $(function() {
         else {
             switch(watchCase) {
                 case '132':
-                    name = (type == 1 ? '7984-backpersonalization.png' : (size == 130 ? '7986-backpersonalization.png' : '7989-backpersonalization.png'));
+                    name = (type == 1 ? 'FOMO_MecaQuartz40mm_BackCase_Silver_Personalisation.png' : (size == 130 ? 'FOMO_Quartz36mm_BackCase_Silver_Personalisation.png' : 'FOMO_Quartz40mm_BackCase_Silver_Personalisation.png'));
                     break;
                 case '133':
-                    name = (type == 1 ? '7992-backpersonalization.png' : (size == 130 ? '7993-backpersonalization.png' : '7993-backpersonalization.png'));
+                    name = (type == 1 ? 'FOMO_MecaQuartz40mm_BackCase_RoseGold_Personalisation.png' : (size == 130 ? 'FOMO_Quartz36mm_BackCase_RoseGold_Personalisation.png' : 'FOMO_Quartz40mm_BackCase_RoseGold_Personalisation.png'));
                     break;
                 case '134':
-                    name = (type == 1 ? '8022-backpersonalization.png' : (size == 130 ? '8019-backpersonalization.png' : '8020-backpersonalization.png'));
+                    name = (type == 1 ? 'FOMO_MecaQuartz40mm_BackCase_Black_Personalisation.png' : (size == 130 ? 'FOMO_Quartz36mm_BackCase_Black_Personalisation.png' : 'FOMO_Quartz40mm_BackCase_Black_Personalisation.png'));
                     break;
 
             }
         }
-        var image = '/images/demo/parts/personalization/'+name;
-        deferreds.push(loadCanvasImage(image, new Konva.Image({'name': 'personalize-area'}), layer));
+
+        var reloadPersonalizeOuter = true;
+        var image = '/images/FOMO_watch_parts/FOMO_Personalisation/'+name;
+        if(layer.find('.personalize-area').length != 0) {
+            if(layer.find('.personalize-area')[0].id() == image) {
+                reloadPersonalizeOuter = false;
+            }
+        }
+
+        if(reloadPersonalizeOuter)
+            deferreds.push(loadCanvasImage(image, new Konva.Image({'name': 'personalize-area', 'id': image}), layer));
     }
     function getPersonalizeTextPosition(direction, stage, input){
+        console.log('get personalize text position');
         var textCenter = true;
         if(direction == 'front') {
             var customizeType = $('input[name=customize_type]:checked').val();
@@ -1489,46 +1559,34 @@ $(function() {
             });
     });
     $('.option-slider').on('change', 'input[type=radio]', function(){
-        $('#front-canvas, #back-canvas').toggleClass('initial');
         var input = $(this);
-        setTimeout(function(){
+        // personalization image and text switched
+        if(input.val() >= 211 && input.val() <= 214){
+            var wrapper = input.closest('.step');
+            var fadedInItem = wrapper.find('.fadeIn.personalization');
+            var fadedOutItem = wrapper.find('.fadeOut.personalization');
+            fadedInItem.removeClass('fadeIn').addClass('fadeOut').fadeOut();
+            setTimeout(function(){
+                fadedOutItem.removeClass('fadeOut').addClass('fadeIn').fadeIn();
+            }, 333);
             checkedLabel(input);
-            updateDesc(input);
-            optionSlider.refresh();
+        }
+        else {
+            $('#front-canvas, #back-canvas').toggleClass('initial');
+            $('.loader-wrapper').toggleClass('done');
+            setTimeout(function(){
+                checkedLabel(input);
+                updateDesc(input);
+                optionSlider.refresh();
 
-            if(input.attr('size-component') != '1') {
-                var deferreds = displayOption(input, true);
+                var deferreds = input.attr('size-component') != '1' ? displayOption(input, true) : updateSizeImage(input.val());
                 $.when.apply(null, deferreds).done(function() {
                     updateLabelBorder();
                     updateNextPreviousTitle();
                     loadCustomizeCanvas(true);
                 });
-            }
-            else {
-                // if radio button = Quartz 40mm / 36mm
-                if(input.val() == 130) {
-                    $('.colorOption130').removeClass('disabled');
-                    $('.colorOption130 input[type=radio]').prop('disabled', false);
-                }
-                if(input.val() == 131) {
-                    $('.colorOption130').addClass('disabled');
-                    $('.colorOption130 input[type=radio]').prop('disabled', true);
-
-                    if($('.colorOption130').find('input[type=radio]').is(':checked')){
-                        $('.step4').find('label').removeClass('checked');
-                        $('.step4 .customize2 input[type=radio]').first().prop('checked', true);
-                        $('.step4 .customize2 label').first().addClass('checked');
-                    }
-
-                }
-                var deferreds = updateSizeImage(input.val());
-                $.when.apply(null, deferreds).done(function() {
-                    updateLabelBorder();
-                    updateNextPreviousTitle();
-                    loadCustomizeCanvas(true);
-                });
-            }
-        }, 333);
+            }, 333);
+        }
     });
     $('.option-slider').on('keyup', 'input[type=text]', function() {
         var step = $(this).closest('.step');
@@ -1583,6 +1641,7 @@ $(function() {
         var name = input[0].files[0].name;
         formData.append('file', input[0].files[0]);
         formData.append('_token', token);
+        formData.append('personalizeImg', 1);
         $.ajax({
             url: '/image/upload',
             data: formData,
@@ -1633,7 +1692,7 @@ $(function() {
                     addAnchor(image);
                     // update image info into input hidden
                     input.attr('image-id', response.id);
-                    input.attr('image-src', '/images/'+response.image);
+                    input.attr('image-src', response.image);
                     input.attr('width', 50);
                     input.attr('height', height);
                     input.attr('x', image.x());
@@ -1648,7 +1707,7 @@ $(function() {
                     }
                     var json = inputJson[input.attr('name')];
                     json['image-id'] = response.id;
-                    json['image-src'] = '/images/'+response.image;
+                    json['image-src'] = response.image;
                     json['width'] = 50;
                     json['height'] = height;
                     json['x'] = image.x();
@@ -1659,7 +1718,10 @@ $(function() {
                     $('input[name="customize-product"]').val(JSON.stringify(inputJson)).trigger('change');
                     updatePersonalizeZIndex(layer);
                 };
-                imgObj.src = '/images/'+response.image;
+                // dial - black(138, 139, 142, 145), white(140, 141, 144, 147)
+                var dial = $('.step4').find('input[type=radio]:checked').val();
+                var prefix = direction == 'back' ? 'black-' : ((dial == 138 || dial == 139 || dial == 142 || dial == 145) ? 'white-' : 'black-');
+                imgObj.src = '/images/'+prefix+response.image;
             }
         });
     });

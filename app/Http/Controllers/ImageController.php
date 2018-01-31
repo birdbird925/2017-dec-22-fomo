@@ -20,7 +20,8 @@ class ImageController extends Controller
     {
         $file = request()->file('file');
         $isProductImage = request('isProductImage', 0);
-        return $this->repository->upload(['file' => $file, 'isProductImage' => $isProductImage]);
+        $personalization = request()->has('personalizeImg') ? true : false;
+        return $this->repository->upload(['file' => $file, 'isProductImage' => $isProductImage, 'personalization' => $personalization]);
     }
 
     public function deleteImage()

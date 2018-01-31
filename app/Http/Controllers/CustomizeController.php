@@ -22,6 +22,7 @@ class CustomizeController extends Controller
             'auth.admin'
         ], [
             'except' => [
+                'test',
                 'index',
                 'edit',
                 'addCart',

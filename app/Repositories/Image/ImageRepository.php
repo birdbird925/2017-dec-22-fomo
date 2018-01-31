@@ -26,18 +26,53 @@ class ImageRepository
         $name = $imageData['file']->hashName();
         $imagePath = $imageData['file']->store($path);
 
-        if(substr($name, -3) == 'png') {
-            $im = ImageCreateFromPng($path.$name);
-            Imagefilter($im, IMG_FILTER_GRAYSCALE);
-            ImagePng($im, $path.$name);
-            Imagedestroy($im);
+        if(array_key_exists('personalization', $imageData)) {
+            if(substr($name, -3) == 'png') {
+                $im = ImageCreateFromPng($path.$name);
+                header('Content-Type: image/jpeg');
+                ImageJpeg($im, $path.$name);
+                Imagedestroy($im);
+            }
+
+            $blackImg = ImageCreateFromJpeg($path.$name);
+            $whiteImg = ImageCreateFromJpeg($path.$name);
+            $width = imagesx($blackImg);
+            $height = imagesy($blackImg);
+            imagefilter($blackImg, IMG_FILTER_GRAYSCALE);
+
+            for ($i=0; $i<$width; $i++)
+            {
+                for ($j=0; $j<$height; $j++)
+                {
+
+                    // Get the RGB value for current pixel
+                    $rgb = ImageColorAt($blackImg, $i, $j);
+
+                    // Extract each value for: R, G, B
+                    $rr = ($rgb >> 16) & 0xFF;
+                    $gg = ($rgb >> 8) & 0xFF;
+                    $bb = $rgb & 0xFF;
+
+                    $g1 = ($rr > 225 && $gg > 225 && $bb > 225) ? 0xFF : 0x00;
+                    $g2 = ($rr > 225 && $gg > 225 && $bb > 225) ? 0x00 : 0xFF;
+                    $black = imagecolorallocate($blackImg, $g1, $g1, $g1);
+                    $white = imageColorallocate($whiteImg, $g2, $g2, $g2);
+
+                    imagesetpixel($blackImg, $i, $j, $black);
+                    imagesetpixel($whiteImg, $i, $j, $white);
+                }
+            }
+
+            $white = imagecolorallocate($blackImg, 255, 255, 255);
+            imagecolortransparent($blackImg, $white);
+            ImagePng($blackImg, $path.'black-'.$name);
+            Imagedestroy($blackImg);
+            $black = imagecolorallocate($whiteImg, 0, 0, 0);
+            imagecolortransparent($whiteImg, $black);
+            ImagePng($whiteImg, $path.'white-'.$name);
+            Imagedestroy($whiteImg);
         }
-        else {
-            $im = ImageCreateFromJpeg($path.$name);
-            Imagefilter($im, IMG_FILTER_GRAYSCALE);
-            ImageJpeg($im, $path.$name);
-            Imagedestroy($im);
-        }
+
 
         // insert into database
         $image = new Image([
@@ -47,24 +82,6 @@ class ImageRepository
         ]);
 
         $image->save();
-
-
-        // generate 2 different size as medium, thumbnail product image
-        if($imageData['isProductImage']){
-          $manager = new ImageManager();
-          $newImage = $manager->make($path.$name);
-
-          $prefix = 'm-';
-          for($ratio = 1.5; $ratio <= 2; $ratio+=0.5) {
-            $width = $newImage->width() / $ratio;
-            $height = $newImage->height() / $ratio;
-            $newImage->resize($width, $height);
-            $newImage->save($path.$prefix.$name);
-
-            // change prefix
-            $prefix = 'thumb-';
-          }
-        }
 
         return Response::json([
             'error' => false,

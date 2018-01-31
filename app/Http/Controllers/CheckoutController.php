@@ -42,6 +42,63 @@ class CheckoutController extends Controller
 
     }
 
+    public function test()
+    {
+        $order = Order::create([
+            'user_id' => null,
+            'name' => 'looi',
+            'email' => 'xiangwen94@gmail.com',
+            'phone' => '0103973013',
+            'address_line_1' => '',
+            'address_line_2' => '24',
+            'city' => 'butterworth',
+            'postcode' => '13400',
+            'state' => 'pulau pinang',
+            'country' => 'malaysia',
+            'shipping_cost' => 10,
+            'currency' => session('currency'),
+            'currency_rate' => session('currencyRate'),
+            'note' => null,
+            // 'paypal_id' => $payment->getId(),
+            'paypal_id' => '1',
+            'payment_status' => 1
+        ]);
+
+        // $cartItemCode = [];
+        // foreach($items as $item)
+        //     $cartItemCode[] = $item->sku;
+
+        foreach(session('cart.item') as $cartItem) {
+            // if(in_array($cartItem['code'], $cartItemCode)) {
+                $component = json_decode($cartItem['product']);
+                $type_id = $component->customize_type->value;
+                $product = CustomizeProduct::create([
+                    'name' => $cartItem['name'],
+                    'components' => $cartItem['product'],
+                    // 'image' => $cartItem['image'],
+                    'images' =>$cartItem['images'],
+                    'thumb' => $cartItem['thumb'],
+                    'back' => $cartItem['back'],
+                    'type_id' => $type_id,
+                    'description' => $cartItem['description'],
+                    'price' => $cartItem['price'],
+                    'created_by' => Auth::check() ? Auth::user()->id : null,
+                ]);
+
+                // $key = array_search($cartItem['code'],$cartItemCode);
+                $orderItem = $order->items()->create([
+                    'product_id' => $product->id,
+                    'price' => $product->price,
+                    'quantity' => 1
+                ]);
+                $order->save();
+            // }
+        }
+
+        // send mail
+        $order->notify(new OrderSuccess($order));
+    }
+
     public function validation()
     {
         if(sizeof(session('cart.item')) == 0)
