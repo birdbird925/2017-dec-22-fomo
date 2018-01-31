@@ -1397,19 +1397,20 @@ $(function() {
                     var inputJson = JSON.parse($('input[name="customize-product"]').val());
                     var json = inputJson[node.id()];
                     var scale = stage.height() / input.attr('stage-height');
-                    var x = input.attr('x') * scale;
-                    var y = input.attr('y') * scale;
+                    var position = getPersonalizeTextPosition();
+                    var x = position.x * scale;
+                    var y = position.y * scale;
                     node.x(x);
                     node.y(y);
 
                     if(node.getClassName() == 'Text') {
-                        var size = 20 * scale;
+                        var size = 10 * scale;
                         node.fontSize(size);
-                        control.x(x-5);
-                        control.y(y-5);
-                        control.width(node.width() + 10);
-                        control.height(node.height() + 10);
-                        control.getLayer().draw();
+                        // control.x(x-5);
+                        // control.y(y-5);
+                        // control.width(node.width() + 10);
+                        // control.height(node.height() + 10);
+                        // control.getLayer().draw();
 
                         input.attr('font-size', size);
                         json['font-size'] = node.fontSize();;
