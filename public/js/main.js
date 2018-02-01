@@ -1379,6 +1379,7 @@ $(function() {
         console.log('start scale Personalize');
         $.each(loadCustomizeCanvas.canvas, function(index, stage) {
             var topIndex = 0;
+            var direction = index;
             $.each(stage.find('.personalize'), function(index, node) {
                 var node = stage.find('.personalize')[index];
                 var control = stage.find('#'+node.id()+'-control')[0];
@@ -1386,7 +1387,6 @@ $(function() {
 
                 // update personalize z-index
                 if(input.attr('z-index') > topIndex) {
-                    console.log('update-zindex');
                     topIndex = input.attr('z-index');
                     node.moveToTop();
                     node.getLayer().find('.personalize-area')[0].moveToTop();
@@ -1396,29 +1396,25 @@ $(function() {
                 if(input.attr('stage-height') != stage.height()) {
                     var inputJson = JSON.parse($('input[name="customize-product"]').val());
                     var json = inputJson[node.id()];
-                    console.log(stage.height());
-                    console.log(input.attr('stage-height'));
                     var scale = stage.height() / input.attr('stage-height');
-                    var x = input.attr('x') * scale;
-                    var y = input.attr('y') * scale;
-                    node.x(x);
-                    node.y(y);
 
                     if(node.getClassName() == 'Text') {
-                        var size = 20 * scale;
+                        var position = getPersonalizeTextPosition(direction, stage, input);
+                        var size = parseInt(json['font-size']) * scale;
                         node.fontSize(size);
-                        control.x(x-5);
-                        control.y(y-5);
-                        control.width(node.width() + 10);
-                        control.height(node.height() + 10);
-                        control.getLayer().draw();
+                        node.x(position.x);
+                        node.y(position.y);
 
                         input.attr('font-size', size);
                         json['font-size'] = node.fontSize();;
                     }
                     else {
+                        var x = input.attr('x') * scale;
+                        var y = input.attr('y') * scale;
                         var width = input.attr('width') * scale;
                         var height = input.attr('height') * scale;
+                        node.x(x);
+                        node.y(y);
                         node.width(width);
                         node.height(height);
                         node.offsetX(width/2);
@@ -1448,20 +1444,20 @@ $(function() {
                             control.getLayer().draw();
                         }
 
+                        input.attr('x', x);
+                        input.attr('y', y);
                         input.attr('height', height);
                         input.attr('width', width);
                         json.height = height;
                         json.width = width;
+                        json.x = x;
+                        json.y = y;
                     }
 
                     input.attr('stage-height', stage.height());
                     input.attr('stage-width', stage.width());
-                    input.attr('x', x);
-                    input.attr('y', y);
                     node.getLayer().draw();
 
-                    json.x = x;
-                    json.y = y;
                     json['stage-height'] = stage.height();
                     json['stage-width'] = stage.width();
                     $('input[name="customize-product"]').val(JSON.stringify(inputJson));
