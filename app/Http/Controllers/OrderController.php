@@ -21,6 +21,35 @@ class OrderController extends Controller
         $this->middleware(['auth','auth.admin']);
     }
 
+    public function test()
+    {
+        $order = Order::find(65);
+        if(!$order) abort('404');
+        if($order->order_status) {
+            $shipment = OrderShipment::create([
+                'shipping_carrier' => 'test',
+                'tracking_number' => 'stes',
+                'tracking_url' => 'stsd',
+                'order_id' => 65,
+            ]);
+
+            foreach($order->items as $item) {
+                // update fulfill
+                $item->fulfill = $item->quantity;
+                $item->save();
+                // add shipment item
+                $shipmentItem = ShipmentItem::create([
+                    'shipment_id' => $shipment->id,
+                    'item_id' => $item->id,
+                    'quantity' => $item->fulfill
+                ]);
+            }
+
+            // send mail
+            $order->notify(new OrderFulfil($shipment));
+        }
+    }
+
     public function index()
     {
         $orders = Order::orderBy('created_at', 'desc')->get();
