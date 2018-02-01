@@ -25,28 +25,14 @@ class OrderController extends Controller
     {
         $order = Order::find(65);
         if(!$order) abort('404');
-        if($order->order_status) {
-            $shipment = OrderShipment::create([
-                'shipping_carrier' => 'test',
-                'tracking_number' => 'stes',
-                'tracking_url' => 'https://www.poslaju.com.my/track-trace-v2/',
-                'order_id' => 65,
-            ]);
 
-            foreach($order->items as $item) {
-                // update fulfill
-                $item->fulfill = $item->quantity;
-                $item->save();
-                // add shipment item
-                $shipmentItem = ShipmentItem::create([
-                    'shipment_id' => $shipment->id,
-                    'item_id' => $item->id,
-                    'quantity' => $item->fulfill
-                ]);
-            }
+        if($order->order_status) {
+            $order->order_status = 0;
+            $order->save();
 
             // send mail
-            $order->notify(new OrderFulfil($shipment));
+            // refund
+            $order->notify(new OrderCancel($order));
         }
     }
 
