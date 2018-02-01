@@ -7,10 +7,10 @@ Hi {{$order->name}}, we're getting your customize watch ready to be shipped. We 
 Order {{$order->orderCode()}} summary:
 
 @component('mail::table')
-|Product                            |Price                           |
-|:----------------------------------|-------------------------------:|
+|Product               |     |Price                           |
+|----------------------|-----|-------------------------------:|
 @foreach($order->items as $item)
-|**{{$item->product->name}}**<br>{{$item->product->description}}|${{$item->product->price}}      |
+|**{{$item->product->name}}**<br>{{$item->product->description}}| |${{$item->product->price}}      |
 @endforeach
 @endcomponent
 
