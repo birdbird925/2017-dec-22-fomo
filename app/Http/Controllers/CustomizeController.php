@@ -215,14 +215,14 @@ class CustomizeController extends Controller
                 else $error = true;
             }
             // if input was extral radio button
-            else if(substr($inputName, -6) == 'extral') {
-                $extral = CustomizeComponentOption::find($attritube->value);
-                $main = $extral->component;
-                $step = $main->step;
-
-                $description .= $main->type == 'image' ? '#'.$main->value.' '.$step->title : $main->value;
-                $description .= ' in '.$extral->value.' / ';
-            }
+            // else if(substr($inputName, -6) == 'extral') {
+            //     $extral = CustomizeComponentOption::find($attritube->value);
+            //     $main = $extral->component;
+            //     $step = $main->step;
+            //
+            //     $description .= $main->type == 'image' ? '#'.$main->value.' '.$step->title : $main->value;
+            //     $description .= ' in '.$extral->value.' / ';
+            // }
             // input is personalize item
             else if (strpos($inputName, 'personalize') !== false){
                 $stepID = substr($inputName, 0, strpos($inputName, 'personalize'));
