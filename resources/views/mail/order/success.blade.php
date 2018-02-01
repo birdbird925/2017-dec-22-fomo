@@ -18,5 +18,9 @@ Order {{$order->orderCode()}} summary:
 **Shipping Charge: ${{number_format($order->shipping_cost, 2)}}**
 @endif
 
-#Total: ${{number_format($order->shipping_cost+$order->subTotal(), 2)}}
+@if($order->discount)
+**Discount: $ {{$order->discount->amount}}**
+@endif
+
+#Total: ${{number_format($order->shipping_cost+$order->subTotal()-($order->discount ? $order->discount->amount : 0 ), 2)}}
 @endcomponent
