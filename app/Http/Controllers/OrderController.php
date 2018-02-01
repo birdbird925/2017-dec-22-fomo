@@ -23,19 +23,16 @@ class OrderController extends Controller
 
     public function test()
     {
+        $order = Order::find(65);
         $shipment = OrderShipment::find(3);
         if(!$shipment) abort('404');
-
-        $order = $shipment->order;
-        foreach($order->items as $item) {
-            $item->fulfill = 0;
-            $item->save();
-        }
-        $shipment->delete();
+        $shipment->shipping_carrier = '1';
+        $shipment->tracking_number = '2';
+        $shipment->tracking_url = '$request->tracking_url';
+        $shipment->save();
 
         // send mail
-        $order->notify(new ShipmentCancel($order));
-        echo '1';
+        $shipment->order->notify(new ShipmentUpdate($shipment));
     }
 
     public function index()
