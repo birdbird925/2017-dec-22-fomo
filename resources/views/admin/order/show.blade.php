@@ -36,7 +36,7 @@
                                         {{$item->quantity}} pcs
                                     </div>
                                     <div class="price">
-                                        $ {{$item->price * $item->quantity}}
+                                        $ {{$item->price * $item->quantity * $order->currency_rate}}
                                     </div>
                                 </div>
                             </div>
@@ -165,11 +165,11 @@
                     </li>
                     <li>
                         <span>Shipping:</span>
-                        $ {{$order->shipping_cost}}
+                        $ {{$order->shipping_cost * $order->currency_rate}}
                     </li>
                     <li>
                         <span>Total</span>
-                        $ {{$order->subTotal() + $order->shipping_cost}}
+                        $ {{$order->amount()}}
                     </li>
                 </ul>
                 @if($order->discount)

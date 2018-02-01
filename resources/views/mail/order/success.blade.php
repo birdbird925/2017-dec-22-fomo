@@ -7,20 +7,20 @@ Hi {{$order->name}}, we're getting your customize watch ready to be shipped. We 
 Order {{$order->orderCode()}} summary:
 
 @component('mail::table')
-|Product                     |Price                           |
-|:---------------------------|-------------------------------:|
+|Product                     |Quantity  |Price                 |
+|:---------------------------|---------:|----------------------:|
 @foreach($order->items as $item)
-|**{{$item->product->name}}**|${{$item->product->price}}      |
+|**{{$item->product->name}}**|{{$item->quantity}} pcs|${{$item->product->price * $order->currency_rate}}      |
 @endforeach
 @endcomponent
 
 @if($order->shipping_cost != 0)
-**Shipping Charge: ${{number_format($order->shipping_cost, 2)}}**
+**Shipping Charge: ${{number_format($order->shipping_cost * $order->currency_rate, 2)}}**
 @endif
 
 @if($order->discount)
-**Discount: $ {{$order->discount->amount}}**
+**Discount: $ {{number_format($order->discount->amount* $order->currency_rate, 2)}}**
 @endif
 
-#Total: ${{number_format($order->shipping_cost+$order->subTotal()-($order->discount ? $order->discount->amount : 0 ), 2)}}
+#Total: ${{number_format($order->amount())}}
 @endcomponent
