@@ -27,16 +27,14 @@ class OrderController extends Controller
         if(!$shipment) abort('404');
 
         $order = $shipment->order;
-        if($order->order_status) {
-            foreach($order->items as $item) {
-                $item->fulfill = 0;
-                $item->save();
-            }
-            $shipment->delete();
-
-            // send mail
-            $order->notify(new ShipmentCancel($order));
+        foreach($order->items as $item) {
+            $item->fulfill = 0;
+            $item->save();
         }
+        $shipment->delete();
+
+        // send mail
+        $order->notify(new ShipmentCancel($order));
         echo '1';
     }
 
