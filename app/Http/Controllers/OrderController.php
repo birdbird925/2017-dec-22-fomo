@@ -20,20 +20,7 @@ class OrderController extends Controller
     {
         $this->middleware(['auth','auth.admin']);
     }
-
-    public function test()
-    {
-        $shipment = OrderShipment::find(2);
-        if(!$shipment) abort('404');
-        $shipment->shipping_carrier = '1';
-        $shipment->tracking_number = '2';
-        $shipment->tracking_url = '$request->tracking_url';
-        $shipment->save();
-
-        // send mail
-        $shipment->order->notify(new ShipmentUpdate($shipment));
-    }
-
+    
     public function index()
     {
         $orders = Order::orderBy('created_at', 'desc')->get();
