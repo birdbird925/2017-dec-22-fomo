@@ -37,6 +37,7 @@ class OrderController extends Controller
             // send mail
             $order->notify(new ShipmentCancel($order));
         }
+        echo '1';
     }
 
     public function index()
