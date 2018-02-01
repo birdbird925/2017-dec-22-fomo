@@ -23,17 +23,19 @@ class OrderController extends Controller
 
     public function test()
     {
-        $order = Order::find(65);
         $shipment = OrderShipment::find(3);
         if(!$shipment) abort('404');
-        if($shipment->order->order_status) {
-            $shipment->shipping_carrier = '1';
-            $shipment->tracking_number = '2';
-            $shipment->tracking_url = 'https://www.poslaju.com.my/track-trace-v2/';
-            $shipment->save();
+
+        $order = $shipment->order;
+        if($order->order_status) {
+            foreach($order->items as $item) {
+                $item->fulfill = 0;
+                $item->save();
+            }
+            $shipment->delete();
 
             // send mail
-            $shipment->order->notify(new ShipmentUpdate($shipment));
+            $order->notify(new ShipmentCancel($order));
         }
     }
 
