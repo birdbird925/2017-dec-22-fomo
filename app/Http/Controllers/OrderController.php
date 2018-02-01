@@ -23,8 +23,7 @@ class OrderController extends Controller
 
     public function test()
     {
-        $order = Order::find(65);
-        $shipment = OrderShipment::find(3);
+        $shipment = OrderShipment::find(2);
         if(!$shipment) abort('404');
         $shipment->shipping_carrier = '1';
         $shipment->tracking_number = '2';
