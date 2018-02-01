@@ -1378,7 +1378,6 @@ $(function() {
     function scalePersonalize() {
         console.log('start scale Personalize');
         $.each(loadCustomizeCanvas.canvas, function(index, stage) {
-            var direction = index;
             var topIndex = 0;
             $.each(stage.find('.personalize'), function(index, node) {
                 var node = stage.find('.personalize')[index];
@@ -1397,21 +1396,22 @@ $(function() {
                 if(input.attr('stage-height') != stage.height()) {
                     var inputJson = JSON.parse($('input[name="customize-product"]').val());
                     var json = inputJson[node.id()];
+                    console.log(stage.height());
+                    console.log(input.attr('stage-height'));
                     var scale = stage.height() / input.attr('stage-height');
-                    // var position = getPersonalizeTextPosition(direction, stage, input);
-                    // var x = position.x * scale;
-                    // var y = position.y * scale;
-                    // node.x(x);
-                    // node.y(y);
+                    var x = input.attr('x') * scale;
+                    var y = input.attr('y') * scale;
+                    node.x(x);
+                    node.y(y);
 
                     if(node.getClassName() == 'Text') {
-                        var size = 10 * scale;
+                        var size = 20 * scale;
                         node.fontSize(size);
-                        // control.x(x-5);
-                        // control.y(y-5);
-                        // control.width(node.width() + 10);
-                        // control.height(node.height() + 10);
-                        // control.getLayer().draw();
+                        control.x(x-5);
+                        control.y(y-5);
+                        control.width(node.width() + 10);
+                        control.height(node.height() + 10);
+                        control.getLayer().draw();
 
                         input.attr('font-size', size);
                         json['font-size'] = node.fontSize();;
@@ -1597,7 +1597,7 @@ $(function() {
         var layer = stage.find('.layer'+$(this).attr('layer'))[0];
         var value = $(this).val();
 
-        var position = getPersonalizeTextPosition(direction, stage, $(this));
+        var position = getPersonalizeTextPosition(direction, stage, $(this))
 
         if(stage.find('#'+$(this).attr('name')).length != 0) text = stage.find('#'+$(this).attr('name'))[0];
         else {
