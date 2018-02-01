@@ -29,7 +29,7 @@ class OrderController extends Controller
             $shipment = OrderShipment::create([
                 'shipping_carrier' => 'test',
                 'tracking_number' => 'stes',
-                'tracking_url' => 'stsd',
+                'tracking_url' => 'https://www.poslaju.com.my/track-trace-v2/',
                 'order_id' => 65,
             ]);
 
