@@ -1402,7 +1402,7 @@ $(function() {
                         var position = getPersonalizeTextPosition(direction, stage, input);
                         var size = parseInt(json['font-size']) * scale;
                         node.fontSize(size);
-                        (position.textCenter) ? node.x((stage.width()/2) - (text.width()/2)) : node.x(position.x);
+                        (position.textCenter) ? node.x((stage.width()/2) - (node.width()/2)) : node.x(position.x);
                         node.y(position.y);
 
                         input.attr('font-size', size);
