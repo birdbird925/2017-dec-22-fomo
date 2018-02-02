@@ -1290,7 +1290,7 @@ $(function() {
         var type = $('input[name=customize_type]:checked').val();
         var size = $('input[name=step2]:checked').val();
         var watchCase = $('input[name=step3]:checked').val();
-        var dial = $('input[name=step4]:checked').val();
+        var dial = $('input[name=step5]:checked').val();
         var name = '';
         if(direction == 'front') {
             switch(dial) {
