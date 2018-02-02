@@ -1000,6 +1000,7 @@ $(function() {
             setTimeout(function(){
                 $('#front-canvas, #back-canvas').toggleClass('initial');
                 $('.loader-wrapper').toggleClass('done');
+                $('.customize-option').toggleClass('lock');
             }, 333);
         }).promise();
     }
@@ -1572,6 +1573,7 @@ $(function() {
         else {
             $('#front-canvas, #back-canvas').toggleClass('initial');
             $('.loader-wrapper').toggleClass('done');
+            $('.customize-option').toggleClass('lock');
             setTimeout(function(){
                 checkedLabel(input);
                 updateDesc(input);

@@ -27,7 +27,8 @@
                 @endif
             </ul>
         </div>
-        <div class="customize-option">
+        <div class="customize-option lock">
+            <div class="protection-layer"></div>
             <input type="hidden" name="customize-name" value="{{$name}}">
             <input type="hidden" name="customize-product" value="{{$component}}">
             <div class="desktop-control prev hide">Previous Step</div>

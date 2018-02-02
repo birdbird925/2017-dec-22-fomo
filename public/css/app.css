@@ -10573,6 +10573,17 @@ body.initial {
   height: 30vh;
 }
 
+.customize-wrapper .customize-option .protection-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
 .customize-wrapper .customize-option .desktop-control {
   display: none;
 }
@@ -10784,6 +10795,10 @@ body.initial {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 30px;
+}
+
+.customize-wrapper .customize-option.lock .protection-layer {
+  z-index: 19999;
 }
 
 @media (min-width: 769px) {
