@@ -38,29 +38,55 @@ class DashboardController extends Controller
 
     public function salesStatistics($range)
     {
-      $labelsData = [];
-      $ordersData = [];
-      $salesData = [];
-      for($i = $range-1; $i>=0; $i--) {
-        $date = Carbon::today()->subDay($i);
-        $orders = Order::whereDate('created_at', '=', $date);
-        $orderCount = 0;
-        $sale = 0;
-        if($orders) {
-          $orderCount = $orders->count();
-          foreach($orders->get() as $order) {
-            $sale += $order->amount();
-          }
-        }
-        $labelsData[] = $date->format('j M');
-        $ordersData[] = $orderCount;
-        $salesData[] = round($sale, 2);
-      }
+        $labelsData = [];
+        $salesData = [];
+        $myrSales = [];
+        $usdSales = [];
+        $euSales = [];
+        $sgdSales = [];
+        for($i = $range-1; $i>=0; $i--) {
+            $date = Carbon::today()->subDay($i);
+            $orders = Order::whereDate('created_at', '=', $date);
+            $myr = 0;
+            $sgd = 0;
+            $euro = 0;
+            $usd = 0;
+            if($orders) {
+                $orderCount = $orders->count();
+                foreach($orders->get() as $order) {
+                    switch($order->currency) {
+                        case 'USD':
+                            $usd += $order->amount();
+                            break;
 
-      return Response::json([
-        'label' => $labelsData,
-        'order' => $ordersData,
-        'sales' => $salesData
-      ], 200);
+                        case 'MYR':
+                            $myr += $order->amount();
+                            break;
+
+                        case 'SGD':
+                            $sgd += $order->amount();
+                            break;
+
+                        case 'EURO':
+                            $euro += $order->amount();
+                            break;
+
+                    }
+                }
+            }
+            $labelsData[] = $date->format('j M');
+            $myrSales[] = round($myr, 2);
+            $sgdSales[] = round($sgd, 2);
+            $usdSales[] = round($usd, 2);
+            $euSales[] = round($euro, 2);
+        }
+
+        return Response::json([
+            'label' => $labelsData,
+            'myr' => $myrSales,
+            'sgd' => $sgdSales,
+            'usd' => $usdSales,
+            'eu' => $euSales
+        ], 200);
     }
 }
