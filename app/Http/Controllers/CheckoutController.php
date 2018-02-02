@@ -153,7 +153,7 @@ class CheckoutController extends Controller
           $item->setDescription($cartItem['description']);
           $item->setQuantity($cartItem['quantity']);
           $item->setCurrency(session('currency'));
-          $item->setPrice($cartItem['price']);
+          $item->setPrice($cartItem[session('currency').'_price']);
           $items->addItem($item);
       }
 
@@ -233,7 +233,7 @@ class CheckoutController extends Controller
                           'back' => $cartItem['back'],
                           'type_id' => $type_id,
                           'description' => $cartItem['description'],
-                          'price' => $cartItem['price'],
+                          'price' => $cartItem[session('currency').'_price'],
                           'created_by' => Auth::check() ? Auth::user()->id : null,
                       ]);
 

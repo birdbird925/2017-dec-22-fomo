@@ -1890,38 +1890,38 @@ $(function() {
         }
 
     });
-    $('#checkout-button').on('click', function() {
-        var productImg = [];
-        $.each(customizeProductThumb.stage, function(index, stage) {
-            productImg.push(stage.toDataURL());
-        });
-        productImg = JSON.stringify(productImg);
-        $.ajax({
-            url: '/checkout/validation',
-            data: {'_token': token, 'image': productImg},
-            type: 'POST',
-            error: function(a, b, c){
-                console.log(a.responseText);
-            },
-            success: function(response){
-                if(response == 'empty') {
-                    msgPopup('Uh - oh!', 'You cart was empty.');
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1800);
-                }
-                else if(response == 'shipping'){
-                    msgPopup('Uh - oh!', 'Where should we send you this awesome watch ?');
-                }
-                else {
-                    $('#checkout-button').off();
-                    if($('.login-popup').get(0)) {loginPopup('checkout');}
-                    else {$( "#checkout-form" ).submit();}
-                    // else {window.location.replace = "/checkout/customer-info"}
-                }
-            }
-        });
-    });
+    // $('#checkout-button').on('click', function() {
+    //     var productImg = [];
+    //     $.each(customizeProductThumb.stage, function(index, stage) {
+    //         productImg.push(stage.toDataURL());
+    //     });
+    //     productImg = JSON.stringify(productImg);
+    //     $.ajax({
+    //         url: '/checkout/validation',
+    //         data: {'_token': token, 'image': productImg},
+    //         type: 'POST',
+    //         error: function(a, b, c){
+    //             console.log(a.responseText);
+    //         },
+    //         success: function(response){
+    //             if(response == 'empty') {
+    //                 msgPopup('Uh - oh!', 'You cart was empty.');
+    //                 setTimeout(function() {
+    //                     location.reload();
+    //                 }, 1800);
+    //             }
+    //             else if(response == 'shipping'){
+    //                 msgPopup('Uh - oh!', 'Where should we send you this awesome watch ?');
+    //             }
+    //             else {
+    //                 $('#checkout-button').off();
+    //                 if($('.login-popup').get(0)) {loginPopup('checkout');}
+    //                 else {$( "#checkout-form" ).submit();}
+    //                 // else {window.location.replace = "/checkout/customer-info"}
+    //             }
+    //         }
+    //     });
+    // });
     $('.cart-body .edit').on('click', function(e) {
       e.preventDefault();
       var row = $(this).closest('tr');
