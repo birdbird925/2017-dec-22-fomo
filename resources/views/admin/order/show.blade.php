@@ -36,7 +36,7 @@
                                         {{$item->quantity}} pcs
                                     </div>
                                     <div class="price">
-                                        $ {{number_format($item->price * $item->quantity, 2)}}
+                                        {{$order->currency}} {{number_format($item->price * $item->quantity, 2)}}
                                     </div>
                                 </div>
                             </div>
@@ -163,13 +163,13 @@
                         <span>Fulfilled:</span>
                         {{$order->fulfillStatus()  ? 'Fulfilled' : 'Unfulfilled'}}
                     </li>
-                    <li>
+                    {{-- <li>
                         <span>Shipping:</span>
-                        $ {{$order->shipping_cost}}
-                    </li>
+                        {{$order->currency}} {{$order->shipping_cost}}
+                    </li> --}}
                     <li>
                         <span>Total</span>
-                        $ {{$order->amount()}}
+                        {{$order->currency}} {{$order->amount()}}
                     </li>
                 </ul>
                 @if($order->discount)
@@ -185,7 +185,7 @@
                         </li>
                         <li>
                             <span>Amount: </span>
-                            $ {{number_format($order->discount->amount, 2)}}
+                            {{$order->currency}} {{number_format($order->discount->amount, 2)}}
                         </li>
                     </ul>
                 @endif
