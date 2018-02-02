@@ -52,7 +52,7 @@
         <div class="card data-card" id="sales-card">
             <div class="content">
                 <i class="pe-7s-cash"></i>
-                <div class="data" usd="{{round($usd, 2)}}" myr="{{round($myr, 2)}}" sgd="{{round($sgd, 2)}}" euro="{{$round($euro,2)}}" currency="usd">
+                <div class="data" usd="{{round($usd, 2)}}" myr="{{round($myr, 2)}}" sgd="{{round($sgd, 2)}}" euro="{{round($euro,2)}}" currency="usd">
                     USD {{round($usd, 2)}}
                 </div>
                 <p class="description">
