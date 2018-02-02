@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\OrderSuccess;
+use App\Mail\NewOrderNotificationEmail;
 use Swap\Laravel\Facades\Swap;
 use Carbon\Carbon;
 use App\CustomizeProduct;
@@ -37,7 +38,7 @@ class CheckoutController extends Controller
     			'log.LogEnabled' => true,
     			'log.FileName' => storage_path('logs/paypal.log'),
     			'log.LogLevel' => 'FINE',
-          'validate_ssl'   => true,
+                'validate_ssl'   => true,
     		));
 
     }
@@ -265,6 +266,7 @@ class CheckoutController extends Controller
               session()->forget("cart");
               // send mail
               $order->notify(new OrderSuccess($order));
+              Mail::to('kris@fomo.watch')->send(new NewOrderNotificationEmail());
 
               session()->flash('popup', [
                   'title' => 'Hooray!',
