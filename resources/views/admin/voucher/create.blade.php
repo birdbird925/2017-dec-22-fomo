@@ -32,8 +32,8 @@
                             <label for="type">Voucher Type</label>
                             <select name="type" id="type" class="form-control">
                               <option value=1>By Percentage</option>
-                              <option value=2>Fix Amount</option>
-                              <option value=3>Free Shipping</option>
+                              {{-- <option value=2>Fix Amount</option>
+                              <option value=3>Free Shipping</option> --}}
                             </select>
                         </div>
 
