@@ -10,7 +10,7 @@ Order {{$order->orderCode()}} summary:
 |Product                     |Quantity  |Price                 |
 |:---------------------------|---------:|----------------------:|
 @foreach($order->items as $item)
-|**{{$item->product->name}}**|{{$item->quantity}} pcs|${{$item->product->price}}      |
+|**{{$item->product->name}}**|{{$item->quantity}} pcs|${{number_format($item->product->price,2)}}      |
 @endforeach
 @endcomponent
 

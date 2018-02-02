@@ -42,14 +42,6 @@ class CheckoutController extends Controller
 
     }
 
-    public function test()
-    {
-
-        $order = Order::find(69);
-        // send mail
-        $order->notify(new OrderSuccess($order));
-    }
-
     public function validation()
     {
         if(sizeof(session('cart.item')) == 0)

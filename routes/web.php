@@ -99,5 +99,4 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('message/{id}', 'ContactUsController@reply');
 });
 //cms page
-Route::get('order/test', 'CheckoutController@test');
 Route::get('/{slug}', 'CmsController@page');
