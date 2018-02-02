@@ -88,8 +88,10 @@ class CustomizeController extends Controller
     public function addCart()
     {
         $code  = 'SS'.substr(md5(microtime()),rand(0,26),12);
-        $price = $this->productType(request('product'))->price;
-        $rate = session('currency') != 'USD' ? Swap::latest('USD/'.session('currency'))->getValue() : 1;
+        $usdPrice = $this->productType(request('product'))->usd_price;
+        $sgdPrice = $this->productType(request('product'))->sgd_price;
+        $myrPrice = $this->productType(request('product'))->myr_price;
+        $euPrice = $this->productType(request('product'))->eu_price;
 
         session()->push('cart.item', [
             'code' => $code,
@@ -98,45 +100,22 @@ class CustomizeController extends Controller
             'images' => request('images'),
             'thumb' => request('thumb'),
             'back' => request('back'),
-            'price' => number_format((float)($price * $rate), 2, '.', ''),
+            'USD_price' => $usdPrice,
+            'SGD_price' => $sgdPrice,
+            'MYR_price' => $myrPrice,
+            'EUR_price' => $euPrice,
             'description' => $this->productDescription(request('product')),
             'quantity' => 1,
         ]);
 
-        // $total = session('cart.shipping.cost') > 0 ? session('cart.shipping.cost') : 0;
         $total = 0;
+        $priceField = session('currency').'_price';
         foreach(session('cart.item') as $item)
-            $total += ($item['price'] * $item['quantity']);
+            $total += ($item[$priceField] * $item['quantity']);
         session(['cart.total' => $total]);
 
         return $code;
     }
-
-    // public function updateCart($id)
-    // {
-    //     $total = session('cart.shipping.cost') > 0 ? session('cart.shipping.cost') : 0;
-    //     foreach(session('cart.item') as $index=>$item) {
-    //         if($item['code'] == $id){
-    //
-    //             session(["cart.item.$index" => [
-    //                 'code' => $id,
-    //                 'name' => request('name'),
-    //                 'product' => request('product'),
-    //                 'images' => request('images'),
-    //                 'thumb' => request('thumb'),
-    //                 'back' => request('back'),
-    //                 'price' => $this->productType(request('product'))->price,
-    //                 'description' => $this->productDescription(request('product'))
-    //             ]]);
-    //
-    //             $total += $this->productType(request('product'))->price;
-    //         }
-    //         else
-    //             $total += $item['price'];
-    //     }
-    //
-    //     session(['cart.total'=>$total]);
-    // }
 
     public function saveProduct()
     {

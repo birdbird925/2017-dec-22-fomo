@@ -40,7 +40,7 @@ class Order extends Model
     public function amount()
     {
         // (order subtotal + shipping cost - discount) * rate
-        return round(($this->shipping_cost + $this->subTotal() - ($this->discount ? $this->discount->amount : 0) ) * $this->currency_rate, 2);
+        return round($this->shipping_cost + $this->subTotal() - ($this->discount ? $this->discount->amount : 0));
     }
 
     public function fulfillStatus()

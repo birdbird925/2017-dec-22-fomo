@@ -36,7 +36,7 @@
                                         {{$item->quantity}} pcs
                                     </div>
                                     <div class="price">
-                                        $ {{number_format($item->price * $item->quantity * $order->currency_rate, 2)}}
+                                        $ {{number_format($item->price * $item->quantity)}}
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +165,7 @@
                     </li>
                     <li>
                         <span>Shipping:</span>
-                        $ {{number_format($order->shipping_cost * $order->currency_rate,2)}}
+                        $ {{$order->shipping_cost}}
                     </li>
                     <li>
                         <span>Total</span>

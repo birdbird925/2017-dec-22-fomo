@@ -21,24 +21,24 @@
                       {{$item['quantity']}} piece
                     </td>
                     <td class="price-col">
-                      $ {{$item['price']}}
+                      {{session('currency')}} {{$item[session('currency').'_price']}}
                     </td>
                   </tr>
                 @endforeach
                   <tr class="small-padding-row">
                     <td class="image-col"></td>
                     <td class="top-border description-col">Subtotal</td>
-                    <td class="top-border price-col">$ {{Session::get('cart.total')}}</td>
+                    <td class="top-border price-col">{{session('currency')}} {{Session::get('cart.total')}}</td>
                   </tr>
-                  <tr class="small-padding-row">
+                  {{-- <tr class="small-padding-row">
                     <td class="image-col"></td>
                     <td class="description-col">Shipping</td>
                     <td class="price-col">$ {{Session::get('cart.shipping.cost')}}</td>
-                  </tr>
+                  </tr> --}}
                   <tr class="small-padding-row" id="discount-row" style="display: none;">
                     <td class="image-col"></td>
                     <td class="description-col">Discount</td>
-                    <td class="price-col"></td>
+                    <td class="price-col">-{{session('currency')}} <span></span></td>
                   </tr>
                   <tr class="voucher-row">
                     <td class="image-col"></td>
@@ -54,7 +54,7 @@
                   <tr id="total-row">
                     <td class="image-col"></td>
                     <td class="top-border description-col">TOTAL</td>
-                    <td class="top-border price-col" default-total-amount="{{Session::get('cart.total') + Session::get('cart.shipping.cost')}}">$ {{Session::get('cart.total') + Session::get('cart.shipping.cost')}}</td>
+                    <td class="top-border price-col" default-total-amount="{{Session::get('cart.total') + Session::get('cart.shipping.cost')}}">{{session('currency')}} <span>{{Session::get('cart.total') + Session::get('cart.shipping.cost')}}</span></td>
                   </tr>
                   <tr class=note-row>
                     <td class="image-col"></td>
@@ -164,8 +164,8 @@
           }
           else {
             //display voucher discount amount
-            $('#discount-row .price-col').html('-$ '+res.amount);
-            $('#total-row .price-col').html('$ '+res.total);
+            $('#discount-row .price-col span').html(res.amount);
+            $('#total-row .price-col span').html(res.total);
             $('#discount-row').css("display", "table-row");
           }
         }

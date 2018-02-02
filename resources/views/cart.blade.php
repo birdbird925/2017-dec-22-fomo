@@ -45,7 +45,7 @@
                                 <span class="quantity">{{$item['quantity']}} piece</span>
                             </td>
                             <td class="price-col">
-                                $ {{$item['price']}}
+                                {{session('currency')}} {{$item[session('currency').'_price']}}
                             </td>
                             <td class="control-col">
                                 <a href="#" class="edit" data-id="{{$index}}">Edit</a>
@@ -57,37 +57,16 @@
                         </tr>
                     @endforeach
                 </tabel>
-                <table class="shipping-table">
-                    <tr>
-                        <td class="shipping-label">Shipping</td>
-                        <td class="coutry">
-                            <select name="shipping-country">
-                                <option value="" {{Session::get('cart.shipping.location') == "" ? 'selected' : ''}}>SELECT</option>
-                                <option data-price="{{Session::get('currency') == 'USD' ? 30 : ( Session::get('currency') == 'MYR' ? '125' : (Session::get('currency') == 'SGD' ? '40.5' : '25' ))}}" {{Session::get('cart.shipping.location') == "UK/US" ? 'selected' : ''}}>UK/US</option>
-                                <option data-price="{{Session::get('currency') == 'USD' ? 20 : ( Session::get('currency') == 'MYR' ? '82' : (Session::get('currency') == 'SGD' ? '27' : '18' ))}}" {{Session::get('cart.shipping.location') == "ASIAN" ? 'selected' : ''}}>ASIAN</option>
-                                <option data-price="{{Session::get('currency') == 'USD' ? 10 : ( Session::get('currency') == 'MYR' ? '40.8' : (Session::get('currency') == 'SGD' ? '13.5' : '8.50' ))}}" {{Session::get('cart.shipping.location') == "EURO" ? 'selected' : ''}}>EURO</option>
-                            </select>
-                        </td>
-                        <td class="price">
-                            $ {{Session::get('cart.shipping.cost') > 0 ? Session::get('cart.shipping.cost') : 0}}
-                        </td>
-                        <td class="control">
-                            <a id="shipping-trigger">Edit</a>
-                        </td>
-                    </tr>
-                </table>
+                <table></table>
             @endif
         </div>
         @if(sizeof(Session::get('cart.item')) != 0)
           <div class="cart-footer">
               <div class="caption">TOTAL</div>
               <div class="total">
-                  $ <span>{{Session::get('cart.total') + (Session::get('cart.shipping.cost') > 0 ? Session::get('cart.shipping.cost') : 0 )}}</span>
+                  {{session('currency')}} <span>{{Session::get('cart.total')}}</span>
               </div>
-              <form id="checkout-form" action="/checkout" method="get">
-                {{ csrf_field() }}
-                <a id="checkout-button" class="checkout">Proceed to checkout</a>
-            </form>
+              <a id="checkout-button" class="checkout" href="/checkout">Proceed to checkout</a>
           </div>
         @endif
     </div>
