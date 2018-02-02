@@ -853,31 +853,38 @@ $(function() {
             var step = input.attr('name');
 
             // if radio button = Quartz 36mm
-            if(input.val() == 130) {
+            if(input.val() == 131) {
                 // zindex
-                $('#component150').parent().addClass('disabled');
-                $('#component150').prop('disabled', true);
-                $('#component215').parent().removeClass('disabled');
-                $('#component215').prop('disabled', false);
+                // $('#component150').parent().addClass('disabled');
+                // $('#component150').prop('disabled', true);
+                // $('#component215').parent().removeClass('disabled');
+                // $('#component215').prop('disabled', false);
+                $('#component150').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
+                $('#component215').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
 
                 if($('#component150').is(':checked')) {
-                    $('.step5').find('label').removeClass('checked');
-                   $('.step5 input[type=radio]').first().prop('checked', true);
-                   $('.step5 label').first().addClass('checked');
+                    $('.step6').find('label').removeClass('checked');
+                   $('.step6 input[type=radio]').first().prop('checked', true);
+                   $('.step6 label').first().addClass('checked');
                 }
+
+                updateLabelBorder();
             }
             // if radio button = Quartz 40mm
-            if(input.val() == 131 || input.val() == 128) {
-                $('#component150').parent().removeClass('disabled');
-                $('#component150').prop('disabled', false);
-                $('#component215').parent().addClass('disabled');
-                $('#component215').prop('disabled', true);
+            if(input.val() == 130 || input.val() == 128) {
+                // $('#component150').parent().removeClass('disabled');
+                // $('#component150').prop('disabled', false);
+                $('#component150').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
+                $('#component215').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
+                // $('#component215').prop('disabled', true);
 
                 if($('#component215').is(':checked')) {
-                    $('.step5').find('label').removeClass('checked');
-                   $('.step5 input[type=radio]').first().prop('checked', true);
-                   $('.step5 label').first().addClass('checked');
+                    $('.step6').find('label').removeClass('checked');
+                   $('.step6 input[type=radio]').first().prop('checked', true);
+                   $('.step6 label').first().addClass('checked');
                 }
+
+                updateLabelBorder();
             }
 
             $.each(dArray, function(index, direction) {
@@ -893,7 +900,7 @@ $(function() {
                 image = input.attr(direction+'_image');
                 // outer blank
                 if(input.val() == '182'){
-                    var dial = $('.step4').find('input[type=radio]:checked').val();
+                    var dial = $('.step5').find('input[type=radio]:checked').val();
                     var color = (dial == 138 || dial == 139 || dial == 142) ? "W" : "B" ;
                     var image = '';
                     switch($('.step2').find('input[type=radio]:checked').val()) {
@@ -902,11 +909,11 @@ $(function() {
                             break;
 
                         case '130':
-                            image = '/images/FOMO_watch_parts/FOMO_Quartz_36mm/FOMO_Quartz36_Exterior6'+color+'.png';
+                            image = '/images/FOMO_watch_parts/FOMO_Quartz_36mm/FOMO_Quartz40_Exterior6'+color+'.png';
                             break;
 
                         case '131':
-                            image = '/images/FOMO_watch_parts/FOMO_Quartz_40mm/FOMO_Quartz40_Exterior6'+color+'.png';
+                            image = '/images/FOMO_watch_parts/FOMO_Quartz_40mm/FOMO_Quartz36_Exterior6'+color+'.png';
                             break;
                     }
                     deferreds.push(loadCanvasImage(image, new Konva.Image({'id': step}), layer));
@@ -922,6 +929,9 @@ $(function() {
         $.each($('.fixed-element').find('input[type=text], input[type=file]'), function(index, value) {
             var direction = $(this).closest('.step').attr('direction');
             var layerID = '.layer'+$(this).attr('layer');
+            // dial - black(138, 139, 142, 145), white(140, 141, 144, 147)
+            var dial = $('.step5').find('input[type=radio]:checked').val();
+            var color = direction == 'back' ? 'white' : ((dial == 138 || dial == 139 || dial == 142 || dial == 145) ? 'white' : 'black');
 
             if(sArray[direction].find(layerID).length == 0){
                 layer =  new Konva.Layer({name: layerID.substring(1)});
@@ -946,11 +956,15 @@ $(function() {
                     fontFamily: 'Museo_Slab',
                     x: position.x,
                     y: position.y,
-                    fill: '#b7b7b7',
+                    fill: color,
                     fontSize: $(this).attr('font-size'),
                 });
                 if(position.textCenter) {
                     text.x((layer.getStage().width()/2) - (text.width()/2));
+                }
+                else {
+                    var newX = text.x() - text.width() / 2;
+                    text.x(newX);
                 }
                 layer.add(text);
             }
@@ -968,13 +982,7 @@ $(function() {
                 }
 
                 var input = $(this);
-                console.log(direction);
-                // dial - black(138, 139, 142, 145), white(140, 141, 144, 147)
-                var dial = $('.step4').find('input[type=radio]:checked').val();
-                var prefix = direction == 'back' ? 'black-' : ((dial == 138 || dial == 139 || dial == 142 || dial == 145) ? 'white-' : 'black-');
-                var src = '/images/'+prefix+input.attr('image-src')
-
-                console.log(src);
+                var src = '/images/'+color+"-"+input.attr('image-src');
 
                 konvaImg = new Konva.Image({
                     id: input.attr('name'),
@@ -1303,19 +1311,11 @@ $(function() {
                     break;
 
                 case '142':
-                    name = size == 130 ? 'FOMO_Quartz36mm_Dial_Personalisation.png' : 'FOMO_Quartz40mm_Dial_Personalisation.png';
+                    name = size == 130 ? 'FOMO_Quartz40mm_Dial_Personalisation.png' : 'FOMO_Quartz36mm_Dial_Personalisation.png';
                     break;
 
                 case '144':
-                    name = size == 130 ? 'FOMO_Quartz36mm_Dial_Personalisation.png' : 'FOMO_Quartz40mm_Dial_Personalisation.png';
-                    break;
-
-                case '145':
-                    name = 'FOMO_Quartz36mm_Index_DiamondOnBlack_Personalisation.png';
-                    break;
-
-                case '147':
-                    name = 'FOMO_Quartz36mm_Index_DiamondOnWhite_Personalisation.png';
+                    name = size == 130 ? 'FOMO_Quartz40mm_Dial_Personalisation.png' : 'FOMO_Quartz36mm_Dial_Personalisation.png';
                     break;
             }
         }
@@ -1323,13 +1323,13 @@ $(function() {
         else {
             switch(watchCase) {
                 case '132':
-                    name = (type == 1 ? 'FOMO_MecaQuartz40mm_BackCase_Silver_Personalisation.png' : (size == 130 ? 'FOMO_Quartz36mm_BackCase_Silver_Personalisation.png' : 'FOMO_Quartz40mm_BackCase_Silver_Personalisation.png'));
+                    name = (type == 1 ? 'FOMO_MecaQuartz40mm_BackCase_Silver_Personalisation.png' : (size == 130 ? 'FOMO_Quartz40mm_BackCase_Silver_Personalisation.png' : 'FOMO_Quartz36mm_BackCase_Silver_Personalisation.png'));
                     break;
                 case '133':
-                    name = (type == 1 ? 'FOMO_MecaQuartz40mm_BackCase_RoseGold_Personalisation.png' : (size == 130 ? 'FOMO_Quartz36mm_BackCase_RoseGold_Personalisation.png' : 'FOMO_Quartz40mm_BackCase_RoseGold_Personalisation.png'));
+                    name = (type == 1 ? 'FOMO_MecaQuartz40mm_BackCase_RoseGold_Personalisation.png' : (size == 130 ? 'FOMO_Quartz40mm_BackCase_RoseGold_Personalisation.png' : 'FOMO_Quartz36mm_BackCase_RoseGold_Personalisation.png'));
                     break;
                 case '134':
-                    name = (type == 1 ? 'FOMO_MecaQuartz40mm_BackCase_Black_Personalisation.png' : (size == 130 ? 'FOMO_Quartz36mm_BackCase_Black_Personalisation.png' : 'FOMO_Quartz40mm_BackCase_Black_Personalisation.png'));
+                    name = (type == 1 ? 'FOMO_MecaQuartz40mm_BackCase_Black_Personalisation.png' : (size == 130 ? 'FOMO_Quartz40mm_BackCase_Black_Personalisation.png' : 'FOMO_Quartz36mm_BackCase_Black_Personalisation.png'));
                     break;
 
             }
@@ -1353,7 +1353,7 @@ $(function() {
             var customizeType = $('input[name=customize_type]:checked').val();
             // meca-quartz
             if(customizeType == 1) {
-                x = stage.width() / 2 + ((stage.width() / 2 * 0.25) / 2);
+                x = stage.width() / 2 + ((stage.width() / 2 * 0.5) / 2);
                 y = stage.height() / 2 - (stage.height() * 0.01074);
                 textCenter = false;
             }
@@ -1599,11 +1599,13 @@ $(function() {
 
         if(stage.find('#'+$(this).attr('name')).length != 0) text = stage.find('#'+$(this).attr('name'))[0];
         else {
+            var dial = $('.step5').find('input[type=radio]:checked').val();
+            var color = (dial == 138 || dial == 139 || dial == 142) ? "#ffffff" : "#000000" ;
             text = new Konva.Text({
                 id: $(this).attr('name'),
                 name: 'personalize',
                 fontFamily: 'Museo_Slab',
-                fill: '#b7b7b7',
+                fill: color,
                 fontSize: $(this).attr('font-size') ? $(this).attr('font-size') :'10',
             });
             layer.add(text)
@@ -1615,6 +1617,10 @@ $(function() {
         text.y(position.y);
         if(position.textCenter) {
             text.x((stage.width()/2) - (text.width()/2));
+        }
+        else {
+            var newX = text.x() - text.width() / 2;
+            text.x(newX);
         }
         text.moveToTop();
         layer.find('.personalize-area')[0].moveToTop();
@@ -1719,8 +1725,8 @@ $(function() {
                     updatePersonalizeZIndex(layer);
                 };
                 // dial - black(138, 139, 142, 145), white(140, 141, 144, 147)
-                var dial = $('.step4').find('input[type=radio]:checked').val();
-                var prefix = direction == 'back' ? 'black-' : ((dial == 138 || dial == 139 || dial == 142 || dial == 145) ? 'white-' : 'black-');
+                var dial = $('.step5').find('input[type=radio]:checked').val();
+                var prefix = direction == 'back' ? 'white-' : ((dial == 138 || dial == 139 || dial == 142 || dial == 145) ? 'white-' : 'black-');
                 imgObj.src = '/images/'+prefix+response.image;
             }
         });
