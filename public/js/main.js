@@ -838,9 +838,10 @@ $(function() {
         var dArray = ['front', 'back'];
         var sArray = {};
         $.each(dArray, function(index, value) {
+            var size = $('#'+value+'-canvas').height() > $('#'+value+'-canvas').width() ? $('#'+value+'-canvas').width() : $('#'+value+'-canvas').height();
             var stage = new Konva.Stage({
-                width: $('#'+value+'-canvas').height(),
-                height: $('#'+value+'-canvas').height(),
+                width: size,
+                height: size,
                 container: value+'-canvas',
 
             });
