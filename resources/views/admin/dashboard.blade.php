@@ -184,7 +184,7 @@
       e.preventDefault();
       statistics($(this).attr('data-target'));
     })
-    $('#sales-card').on('click', function()){
+    $('#sales-card').on('click', function(){
         var wrapper = $(this).find('.data');
         var currency = wrapper.attr('currency');
         var usd = wrapper.attr('usd');
@@ -212,6 +212,6 @@
                 wrapper.attr('currency', 'usd');
                 break;
         }
-    }
+    });
     </script>
 @endpush
