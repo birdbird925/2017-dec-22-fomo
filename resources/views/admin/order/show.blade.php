@@ -36,7 +36,7 @@
                                         {{$item->quantity}} pcs
                                     </div>
                                     <div class="price">
-                                        $ {{number_format($item->price * $item->quantity)}}
+                                        $ {{number_format($item->price * $item->quantity, 2)}}
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +185,7 @@
                         </li>
                         <li>
                             <span>Amount: </span>
-                            $ {{number_format($order->discount->amount, 2}}
+                            $ {{number_format($order->discount->amount, 2)}}
                         </li>
                     </ul>
                 @endif
