@@ -49,11 +49,11 @@
         </div>
     </div>
     <div class="col-sm-3">
-        <div class="card data-card">
+        <div class="card data-card" id="sales-card">
             <div class="content">
                 <i class="pe-7s-cash"></i>
-                <div class="data">
-                    {{ round($amount, 2) }}
+                <div class="data" usd="{{round($usd, 2)}}" myr="{{round($myr, 2)}}" sgd="{{round($sgd, 2)}}" euro="{{$round($euro,2)}}" currency="usd">
+                    USD {{round($usd, 2)}}
                 </div>
                 <p class="description">
                     Total Sales
@@ -184,5 +184,34 @@
       e.preventDefault();
       statistics($(this).attr('data-target'));
     })
+    $('#sales-card').on('click', function()){
+        var wrapper = $(this).find('.data');
+        var currency = wrapper.attr('currency');
+        var usd = wrapper.attr('usd');
+        var myr = wrapper.attr('myr');
+        var sgd = wrapper.attr('sgd');
+        var euro = wrapper.attr('euro');
+        switch(currency) {
+            case 'usd':
+                wrapper.html('MYR '+myr);
+                wrapper.attr('currency', 'myr');
+                break;
+
+            case 'myr':
+                wrapper.html('SGD '+sgd);
+                wrapper.attr('currency', 'sgd');
+                break;
+
+            case 'sgd':
+                wrapper.html('EURO '+euro);
+                wrapper.attr('currency', 'euro');
+                break;
+
+            case 'euro':
+                wrapper.html('USD '+usd);
+                wrapper.attr('currency', 'usd');
+                break;
+        }
+    }
     </script>
 @endpush

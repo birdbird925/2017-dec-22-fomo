@@ -24,15 +24,39 @@ class DashboardController extends Controller
         $customers = User::where('role', 1);
         $products = CustomizeProduct::where('created_by', '!=', Auth::user()->id);
         $orders = Order::where('order_status', 1);
-        $amount = 0;
-        foreach($orders->get() as $order)
-            $amount += $order->amount();
+        $myr = 0;
+        $sgd = 0;
+        $euro = 0;
+        $usd = 0;
+        foreach($orders->get() as $order) {
+            switch($order->currency) {
+                case 'USD':
+                    $usd += $order->amount();
+                    break;
+
+                case 'MYR':
+                    $myr += $order->amount();
+                    break;
+
+                case 'SGD':
+                    $sgd += $order->amount();
+                    break;
+
+                case 'EURO':
+                    $euro += $order->amount();
+                    break;
+
+            }
+        }
 
         return view('admin.dashboard', compact(
             'customers',
             'products',
             'orders',
-            'amount'
+            'usd',
+            'sgd',
+            'euro',
+            'myr'
         ));
     }
 
