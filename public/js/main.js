@@ -496,7 +496,7 @@ $(function() {
         controls: false,
         enableTouch: false,
         enableDrag: false,
-        adaptiveHeight: false,
+        adaptiveHeight: true,
         onSliderLoad: function (el) {
             $('#front-canvas, #back-canvas').css({'height': $('.customize-canvas').height()-30});
             canvasSlider.refresh()
@@ -510,6 +510,7 @@ $(function() {
         slideMove: 1,
         pager: false,
         controls: false,
+        adaptiveHeight: true,
         enableTouch: false,
         enableDrag: false,
         responsive : [
@@ -1557,7 +1558,12 @@ $(function() {
         });
     }
     $(window).resize(function() {
-        // $('.customize-canvas').css('height', '50vh');
+        if($(window).width() > 768) {
+            $('.customize-canvas').css({'height': $('.customize-wrapper').height()});
+        }
+        else {
+            $('.customize-canvas').css({'height': '50vh'});
+        }
         $('#front-canvas, #back-canvas').css({'height': $('.customize-canvas').height()-30});
         canvasSlider.refresh();
         $('#front-canvas, #back-canvas').toggleClass('initial');
