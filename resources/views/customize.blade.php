@@ -112,8 +112,8 @@
                                 @endforeach
                             @endif
                             <div class="description">
-                                <div class="main">1212</div>
-                                <div class="extral">1212</div>
+                                <div class="main"></div>
+                                <div class="extral"></div>
                             </div>
                         </div>
                     </li>
