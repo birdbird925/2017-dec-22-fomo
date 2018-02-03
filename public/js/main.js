@@ -1558,7 +1558,7 @@ $(function() {
     }
     $(window).resize(function() {
         $('#front-canvas, #back-canvas').css({'height': $('.customize-canvas').height()-30});
-        canvasSlider.refresh()
+        canvasSlider.refresh();
         $('#front-canvas, #back-canvas').toggleClass('initial');
         $('.loader-wrapper').toggleClass('done');
         $('.customize-option').toggleClass('lock');
