@@ -1634,7 +1634,7 @@ $(function() {
                 name: 'personalize',
                 fontFamily: 'Museo_Slab',
                 fill: direction == 'back' ? '#ffffff' : color,
-                fontSize: $(this).attr('font-size') ? $(this).attr('font-size') : (direction == 'back' ? '15' : '10'),
+                fontSize: $(this).attr('font-size') ? $(this).attr('font-size') : (direction == 'back' ? '20' : '10'),
             });
             layer.add(text)
         }
