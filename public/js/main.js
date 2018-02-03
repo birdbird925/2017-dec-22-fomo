@@ -1557,6 +1557,7 @@ $(function() {
         });
     }
     $(window).resize(function() {
+        // $('.customize-canvas').css('height', '50vh');
         $('#front-canvas, #back-canvas').css({'height': $('.customize-canvas').height()-30});
         canvasSlider.refresh();
         $('#front-canvas, #back-canvas').toggleClass('initial');

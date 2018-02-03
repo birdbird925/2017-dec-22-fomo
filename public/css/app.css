@@ -10485,6 +10485,7 @@ body.initial {
   flex: 1;
   position: relative;
   text-align: center;
+  max-height: 50vh;
 }
 
 .customize-wrapper .customize-canvas #front-canvas.initial,
@@ -10816,6 +10817,7 @@ body.initial {
   .customize-wrapper .customize-canvas {
     width: 50%;
     position: static;
+    max-height: 100vh;
   }
   .customize-wrapper .customize-canvas .canvas-slider-wrapper {
     -webkit-transform: translateY(-100%);
