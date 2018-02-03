@@ -868,16 +868,15 @@ $(function() {
                     var description = '<ul><li>'+(size == 131 ? '36' : '40');
                     switch($('.step3').find('input[type=radio]:checked').val()) {
                         case '132':
-                            description += 'mm 316L stainless steel</li><li>Bright polish top with brushed side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>');
+                            description += 'mm 316L stainless steel</li><li>Bright polish top with brushed side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>';
                             break;
 
                         case '133':
-
-                            description += 'mm 316L stainless steel with rose gold PVD coating</li><li>Bright polish top with brushed side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>');
+                            description += 'mm 316L stainless steel with rose gold PVD coating</li><li>Bright polish top with brushed side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>';
                             break;
 
                         case '134':
-                            description += 'mm 316L stainless steel with black PVD coating</li><li>Brushed top and side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>');
+                            description += 'mm 316L stainless steel with black PVD coating</li><li>Brushed top and side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>';
                             break;
                     }
 
@@ -891,7 +890,6 @@ $(function() {
                 if(size != '128') {
                     var description = '<ul><li>'+(size == 131 ? '36' : '40');
                     description += 'mm top grain leather with quick release spring bar</li></ul>';
-
                     $('.step12 .description .main').html(description);
                 }
             }
