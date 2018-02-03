@@ -1557,6 +1557,11 @@ $(function() {
         });
     }
     $(window).resize(function() {
+        $('#front-canvas, #back-canvas').css({'height': $('.customize-canvas').height()-30});
+        canvasSlider.refresh()
+        $('#front-canvas, #back-canvas').toggleClass('initial');
+        $('.loader-wrapper').toggleClass('done');
+        $('.customize-option').toggleClass('lock');
         loadCustomizeCanvas();
     });
     $(document).on('mousedown touchstart', function(event) {
