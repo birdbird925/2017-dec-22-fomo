@@ -873,7 +873,7 @@ $(function() {
                     $('.step6 label').first().addClass('checked');
                 }
 
-                switch($('.step3.checked input').val()) {
+                switch($('.step3').find('input[type=radio]:checked').val()) {
                     case '132':
                         $('.step3 .description .main').html('<ul><li>36mm 316L stainless steel</li><li>Bright polish top with brushed side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>');
                         break;
@@ -886,7 +886,6 @@ $(function() {
                         $('.step3 .description .main').html('<ul><li>36mm 316L stainless steel with black PVD coating</li><li>Brushed top and side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>');
                         break;
                 }
-                console.log($('.step3.checked input').val());
 
                 // update strap step description
                 $('.step12 .description').html('<ul><li>18mm top grain leather with quick release spring bar</li></ul>');
@@ -905,7 +904,7 @@ $(function() {
                 }
 
                 if(input.val() == 130) {
-                    switch($('.step3.checked input').val()) {
+                    switch($('.step3').find('input[type=radio]:checked').val()) {
                         case '132':
                             $('.step3 .description .main').html('<ul><li>40mm 316L stainless steel</li><li>Bright polish top with brushed side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>');
                             break;
