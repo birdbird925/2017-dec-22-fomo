@@ -1606,7 +1606,7 @@ $(function() {
                 id: $(this).attr('name'),
                 name: 'personalize',
                 fontFamily: 'Museo_Slab',
-                fill: color,
+                fill: direction == 'back' ? '#ffffff' : color,
                 fontSize: $(this).attr('font-size') ? $(this).attr('font-size') :'10',
             });
             layer.add(text)
