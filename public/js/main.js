@@ -838,7 +838,9 @@ $(function() {
         var dArray = ['front', 'back'];
         var sArray = {};
         $.each(dArray, function(index, value) {
-            var size = $('#'+value+'-canvas').height() > $('#'+value+'-canvas').width() ? $('#'+value+'-canvas').width() : $('#'+value+'-canvas').height();
+            var canvasHeight = $('#'+value+'-canvas').height();
+            var canvasWidth = $('#'+value+'-canvas').width()
+            var size =  canvasHeight > canvasWidth ? canvasWidth : canvasHeight;
             var stage = new Konva.Stage({
                 width: size,
                 height: size,
@@ -846,6 +848,9 @@ $(function() {
 
             });
             sArray[value] = stage;
+            if(canvasHeight > canvasWidth) {
+                $('.konvajs-content').css('margin-top', (canvasHeight - canvasWidth) / 2);
+            }
         });
         $.each($('.option-slider').find('input[type=radio]:checked'), function(index) {
             inputJson[$(this).attr('name')] = {'value': $(this).val()};
