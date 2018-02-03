@@ -906,15 +906,15 @@ $(function() {
                     var image = '';
                     switch($('.step2').find('input[type=radio]:checked').val()) {
                         case '128':
-                            image = '/images/FOMO_watch_parts/FOMO_MecaQuarz_40mm/FOMO_MecaQuartz40mm_Exterior6'+color+'.png';
+                            image = '/images/FOMO_watch_parts/FOMO_MecaQuarz_40mm/FOMO_MecaQuartz40_Exterior6'+color+'.png';
                             break;
 
                         case '130':
-                            image = '/images/FOMO_watch_parts/FOMO_Quartz_36mm/FOMO_Quartz40mm_Exterior6'+color+'.png';
+                            image = '/images/FOMO_watch_parts/FOMO_Quartz_40mm/FOMO_Quartz40_Exterior6'+color+'.png';
                             break;
 
                         case '131':
-                            image = '/images/FOMO_watch_parts/FOMO_Quartz_40mm/FOMO_Quartz36mm_Exterior6'+color+'.png';
+                            image = '/images/FOMO_watch_parts/FOMO_Quartz_36mm/FOMO_Quartz36_Exterior6'+color+'.png';
                             break;
                     }
                     deferreds.push(loadCanvasImage(image, new Konva.Image({'id': step}), layer));
