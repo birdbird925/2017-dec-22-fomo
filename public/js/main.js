@@ -618,50 +618,31 @@ $(function() {
         $('label[for='+id+']').addClass('checked');
     }
     function updateDesc(radio){
-        // dial description
-        if(radio.attr('name') == 'step3') {
+        if(radio.attr('name') == 'step2' || radio.attr('name') == 'step3' || radio.attr('name') == 'step9') {
             var size = $('.step2').find('input[type=radio]:checked').val();
-            if(size != '128') {
-                var description = '<ul><li>'+(size == 131 ? '36' : '40');
-                switch($('.step3').find('input[type=radio]:checked').val()) {
-                    case '132':
-                        description += 'mm 316L stainless steel</li><li>Bright polish top with brushed side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>';
-                        break;
 
-                    case '133':
-                        description += 'mm 316L stainless steel with rose gold PVD coating</li><li>Bright polish top with brushed side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>';
-                        break;
+            // case description
+            var description = '<ul><li>'+(size == 131 ? '36' : '40');
+            switch($('.step3').find('input[type=radio]:checked').val()) {
+                case '132':
+                    description += 'mm 316L stainless steel</li><li>Bright polish top with brushed side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>';
+                    break;
 
-                    case '134':
-                        description += 'mm 316L stainless steel with black PVD coating</li><li>Brushed top and side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>';
-                        break;
-                }
+                case '133':
+                    description += 'mm 316L stainless steel with rose gold PVD coating</li><li>Bright polish top with brushed side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>';
+                    break;
 
-                $('.step3 .description .main').html(description);
+                case '134':
+                    description += 'mm 316L stainless steel with black PVD coating</li><li>Brushed top and side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>';
+                    break;
             }
-            else {
-                var description = radio.attr('description');
-                var descClass = radio.attr('desc-class');
-                radio.closest('.step').find(descClass).fadeOut(function(){
-                    $(this).html(description);
-                }).fadeIn();
-            }
-        }
-        // strap description
-        else if(radio.attr('name') == 'step12') {
-            var size = $('.step2').find('input[type=radio]:checked').val();
-            if(size != '128') {
-                var description = '<ul><li>'+(size == 131 ? '36' : '40');
-                description += 'mm top grain leather with quick release spring bar</li></ul>';
-                $('.step12 .description .main').html(description);
-            }
-            else {
-                var description = radio.attr('description');
-                var descClass = radio.attr('desc-class');
-                radio.closest('.step').find(descClass).fadeOut(function(){
-                    $(this).html(description);
-                }).fadeIn();
-            }
+
+            // strap
+            description = '<ul><li>'+(size == 131 ? '36' : '40');
+            description += 'mm top grain leather with quick release spring bar</li></ul>';
+            $('.step12 .description .main').html(description);
+
+            $('.step3 .description .main').html(description);
         }
         else {
             var description = radio.attr('description');
