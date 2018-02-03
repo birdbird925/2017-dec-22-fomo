@@ -1556,6 +1556,9 @@ $(function() {
             }
         });
     }
+    $(window).resize(function() {
+        loadCustomizeCanvas();
+    });
     $(document).on('mousedown touchstart', function(event) {
         if($(document).find('.canvas-slider').length == 1)
             $.each(loadCustomizeCanvas.canvas, function(direction, stage) {
