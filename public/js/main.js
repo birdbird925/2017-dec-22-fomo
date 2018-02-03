@@ -496,7 +496,7 @@ $(function() {
         controls: false,
         enableTouch: false,
         enableDrag: false,
-        adaptiveHeight: true,
+        adaptiveHeight: false,
         onSliderLoad: function (el) {
             $('#front-canvas, #back-canvas').css({'height': $('.customize-canvas').height()-30});
             canvasSlider.refresh()
