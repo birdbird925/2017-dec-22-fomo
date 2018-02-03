@@ -864,33 +864,59 @@ $(function() {
             // if radio button = Quartz 36mm
             if(input.val() == 131) {
                 // zindex
-                // $('#component150').parent().addClass('disabled');
-                // $('#component150').prop('disabled', true);
-                // $('#component215').parent().removeClass('disabled');
-                // $('#component215').prop('disabled', false);
                 $('#component150').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
                 $('#component215').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
 
                 if($('#component150').is(':checked')) {
                     $('.step6').find('label').removeClass('checked');
-                   $('.step6 input[type=radio]').first().prop('checked', true);
-                   $('.step6 label').first().addClass('checked');
+                    $('.step6 input[type=radio]').first().prop('checked', true);
+                    $('.step6 label').first().addClass('checked');
                 }
+
+                switch($('.step3.checked input').val()) {
+                    case '132':
+                        $('.step3 .description').html('<ul><li>36mm 316L stainless steel</li><li>Bright polish top with brushed side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>');
+                        break;
+
+                    case '133':
+                        $('.step3 .description').html('<ul><li>36mm 316L stainless steel with rose gold PVD coating</li><li>Bright polish top with brushed side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>');
+                        break;
+
+                    case '134':
+                        $('.step3 .description').html('<ul><li>36mm 316L stainless steel with black PVD coating</li><li>Brushed top and side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>');
+                        break;
+                }
+
+                // update strap step description
+                $('.step12 .description').html('<ul><li>18mm top grain leather with quick release spring bar</li></ul>');
 
                 updateLabelBorder();
             }
             // if radio button = Quartz 40mm
             if(input.val() == 130 || input.val() == 128) {
-                // $('#component150').parent().removeClass('disabled');
-                // $('#component150').prop('disabled', false);
                 $('#component150').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
                 $('#component215').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
-                // $('#component215').prop('disabled', true);
 
                 if($('#component215').is(':checked')) {
                     $('.step6').find('label').removeClass('checked');
-                   $('.step6 input[type=radio]').first().prop('checked', true);
-                   $('.step6 label').first().addClass('checked');
+                    $('.step6 input[type=radio]').first().prop('checked', true);
+                    $('.step6 label').first().addClass('checked');
+                }
+
+                if(input.val() == 130) {
+                    switch($('.step3.checked input').val()) {
+                        case '132':
+                            $('.step3 .description').html('<ul><li>40mm 316L stainless steel</li><li>Bright polish top with brushed side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>');
+                            break;
+
+                        case '133':
+                            $('.step3 .description').html('<ul><li>40mm 316L stainless steel with rose gold PVD coating</li><li>Bright polish top with brushed side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>');
+                            break;
+
+                        case '134':
+                            $('.step3 .description').html('<ul><li>40mm 316L stainless steel with black PVD coating</li><li>Brushed top and side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>');
+                            break;
+                    }
                 }
 
                 updateLabelBorder();
