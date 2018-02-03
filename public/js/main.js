@@ -636,13 +636,12 @@ $(function() {
                     description += 'mm 316L stainless steel with black PVD coating</li><li>Brushed top and side</li><li>Water resistant 5ATM</li><li>Sapphire Crystal</li></ul>';
                     break;
             }
+            $('.step3 .description .main').html(description);
 
             // strap
             description = '<ul><li>'+(size == 131 ? '36' : '40');
             description += 'mm top grain leather with quick release spring bar</li></ul>';
             $('.step12 .description .main').html(description);
-
-            $('.step3 .description .main').html(description);
         }
         else {
             var description = radio.attr('description');
