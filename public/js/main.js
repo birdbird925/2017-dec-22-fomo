@@ -504,16 +504,17 @@ $(function() {
     });
     var optionSlider = $(".option-slider").lightSlider({
         item:1,
-        vertical: ($(window).width() > 768 ? true : false ),
+        // vertical: ($(window).width() > 768 ? true : false ),
+        vartical: false,
         // verticalHeight: 275,
-        verticalHeight: 400,
+        verticalHeight: 900,
         slideMargin:0,
         slideMove: 1,
         pager: false,
         controls: false,
-        adaptiveHeight: true,
         enableTouch: false,
         enableDrag: false,
+        adaptiveHeight: false,
         responsive : [
             {
                 breakpoint: 768,

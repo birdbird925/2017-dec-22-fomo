@@ -10590,7 +10590,7 @@ body.initial {
 }
 
 .customize-wrapper .customize-option .option-slider {
-  min-height: 100%;
+  min-height: 400px;
 }
 
 .customize-wrapper .customize-option .option-slider .option-header {
@@ -10873,6 +10873,9 @@ body.initial {
     top: calc((100vh - 540px) / 2);
     left: 0;
     max-width: 80%;
+  }
+  .customize-wrapper .customize-option .option-slider {
+    min-height: 100%;
   }
   .customize-wrapper .customize-option .option-slider .option-header .prev {
     padding-left: 0;
