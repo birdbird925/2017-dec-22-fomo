@@ -531,7 +531,7 @@ $(function() {
         }
     });
     $('.customize-option').on('click', '.next, .prev', function(){
-        if($(window).width() > 768 && !$(this).hasClass('desktop-control')) return false
+        // if($(window).width() > 768 && !$(this).hasClass('desktop-control')) return false
         var stepCount = $(this).attr('total-step');
         var action = $(this).hasClass('next') ? 'next' : 'prev';
         var reserveAction = $(this).hasClass('next') ? 'prev' : 'next';
@@ -1386,7 +1386,7 @@ $(function() {
             // meca-quartz
             if(customizeType == 1) {
                 x = stage.width() / 2 + ((stage.width() / 2 * 0.5) / 2);
-                y = stage.height() / 2 - (stage.height() * 0.01074);
+                y = stage.height() / 2 - (stage.height() * 0.014);
                 textCenter = false;
             }
             // quartz
@@ -1658,7 +1658,7 @@ $(function() {
                 name: 'personalize',
                 fontFamily: 'Museo_Slab',
                 fill: direction == 'back' ? '#ffffff' : color,
-                fontSize: $(this).attr('font-size') ? $(this).attr('font-size') : (direction == 'back' ? '18' : '10'),
+                fontSize: $(this).attr('font-size') ? $(this).attr('font-size') : (direction == 'back' ? '18' : '8.5'),
             });
             layer.add(text)
         }
