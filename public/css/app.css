@@ -10807,6 +10807,11 @@ body.initial {
   display: block;
   border: 1px solid #fba200;
   height: 40px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #9f9994;
+  font-size: 12px;
+  padding: 11px;
   background-image: url(/images/demo/file.svg);
   background-position: center center;
   background-repeat: no-repeat;

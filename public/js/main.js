@@ -989,7 +989,7 @@ $(function() {
                     x: position.x,
                     y: position.y,
                     fill: color,
-                    fontSize: $(this).attr('font-size'),
+                    fontSize: position.size,
                 });
                 if(position.textCenter) {
                     text.x((layer.getStage().width()/2) - (text.width()/2));
@@ -1380,13 +1380,19 @@ $(function() {
     }
     function getPersonalizeTextPosition(direction, stage, input){
         console.log('get personalize text position');
+        // front 419px = 8
+        // back 419px = 17
         var textCenter = true;
+        var konvaWidth = $('#'+direction+'-canvas .konvajs-content').width();
+        var size = 0;
+        console.log(konvaWidth);
         if(direction == 'front') {
+            size = konvaWidth != 419 ? (konvaWidth * 8 / 419) : 8;
             var customizeType = $('input[name=customize_type]:checked').val();
             // meca-quartz
             if(customizeType == 1) {
                 x = stage.width() / 2 + ((stage.width() / 2 * 0.5) / 2);
-                y = stage.height() / 2 - (stage.height() * 0.014);
+                y = stage.height() / 2 - (stage.height() * 0.012);
                 textCenter = false;
             }
             // quartz
@@ -1396,17 +1402,18 @@ $(function() {
             }
         }
         else {
+            size = konvaWidth != 419 ? (konvaWidth * 17 / 419) : 17;
             if(input.attr('line') == 1) {
                 x = stage.width() / 2;
                 y = stage.height() / 2 + (stage.height() * 0.115);
             }
             else {
                 x = stage.width() / 2;
-                y = stage.height() / 2 + (stage.height() * 0.155);
+                y = stage.height() / 2 + (stage.height() * 0.16);
             }
         }
 
-        return {x: x, y: y, textCenter: textCenter};
+        return {x: x, y: y, textCenter: textCenter, size: size};
     }
     function scalePersonalize() {
         console.log('start scale Personalize');
@@ -1658,12 +1665,12 @@ $(function() {
                 name: 'personalize',
                 fontFamily: 'Museo_Slab',
                 fill: direction == 'back' ? '#ffffff' : color,
-                fontSize: $(this).attr('font-size') ? $(this).attr('font-size') : (direction == 'back' ? '18' : '8.5'),
             });
             layer.add(text)
         }
 
         // change text location
+        text.fontSize(position.size);
         text.text(value);
         text.x(position.x);
         text.y(position.y);
@@ -1692,14 +1699,62 @@ $(function() {
         $('input[name="customize-product"]').val(JSON.stringify(inputJson)).trigger('change');
         // updatePersonalizeZIndex(layer);
     });
+    $('.option-slider').on('click', '.file-label', function(e) {
+        e.preventDefault();
+        var label = $(this);
+        var action = $(this).text();
+        var fileInput = $(this).attr('for');
+        fileInput = $('#'+fileInput);
+        if(action == '') {
+            fileInput.trigger('click');
+        }
+        else if(action == 'Remove Image'){
+            var direction = fileInput.closest('.step').attr('direction');
+            var stage = loadCustomizeCanvas.canvas[direction];
+            var layer = stage.find('.layer'+fileInput.attr('layer'))[0];
+
+            if(stage.find('#'+fileInput.attr('name')).length != 0) {
+                stage.find('.layer10')[0].destroy();
+                stage.find('#'+fileInput.attr('name'))[0].destroy();
+                layer.draw();
+
+                label.text('');
+                label.css({'background-image': 'url(/images/demo/file.svg)'});
+
+                addAnchor(image);
+                // remove image info into input hidden
+                fileInput.removeAttr('image-id');
+                fileInput.removeAttr('image-src');
+                fileInput.removeAttr('width');
+                fileInput.removeAttr('height');
+                fileInput.removeAttr('x');
+                fileInput.removeAttr('y');
+                fileInput.removeAttr('rotation');
+                fileInput.removeAttr('stage-height');
+                fileInput.removeAttr('stage-width');
+
+                var inputJson = JSON.parse($('input[name="customize-product"]').val());
+                if(typeof inputJson[fileInput.attr('name')] === typeof undefined) {
+                    inputJson[fileInput.attr('name')] = {};
+                }
+                $('input[name="customize-product"]').val(JSON.stringify(inputJson)).trigger('change');
+            }
+        }
+    });
     $('.option-slider').on('change', 'input[type=file]', function() {
-        // upload image
         var formData = new FormData();
         var input = $('input[name="'+$(this).attr('name')+'"]');
+        var label = input.parent().find('label');
         var name = input[0].files[0].name;
         formData.append('file', input[0].files[0]);
         formData.append('_token', token);
         formData.append('personalizeImg', 1);
+
+        // show image uploading message
+        label.text('Image uploading....');
+        label.css({'background-image': 'none'});
+
+        // upload image by ajax
         $.ajax({
             url: '/image/upload',
             data: formData,
@@ -1708,12 +1763,18 @@ $(function() {
             processData: false,
             dataType: 'json',
             error: function(a, b, c){
+                msgPopup('Uh - oh!', 'IMAGE IS NOT SUPPORTED.');
+                label.text('');
+                label.css({'background-image': 'url(/images/demo/file.svg)'});
                 var response = $.parseJSON(a.responseText);
                 var errorMsg = name + ' ' + response.message;
                 console.log(errorMsg);
                 // showNotification('warning', errorMsg, 'bottom', 'center');
             },
             success: function(response){
+                // change action to remove images
+                label.text('Remove Image');
+
                 var direction = input.closest('.step').attr('direction');
                 var stage = loadCustomizeCanvas.canvas[direction];
                 var layer = stage.find('.layer'+input.attr('layer'))[0];
