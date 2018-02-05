@@ -115,6 +115,10 @@
                                 <div class="main"></div>
                                 <div class="extral"></div>
                             </div>
+                            {{-- add to cart --}}
+                            @if($sIndex == $steps->count()-1)
+                                <a href="#" class="addCart">ADD TO CART</a>
+                            @endif
                         </div>
                     </li>
                 @endforeach

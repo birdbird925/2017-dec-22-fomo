@@ -10573,6 +10573,21 @@ body.initial {
   height: 30vh;
 }
 
+.customize-wrapper .customize-option .addCart {
+  display: block;
+  margin: 40px auto 0px auto;
+  width: 50%;
+  border: 1px solid #fba200;
+  background: #fba200;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 11px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  height: 40px;
+}
+
 .customize-wrapper .customize-option .protection-layer {
   position: absolute;
   top: 0;

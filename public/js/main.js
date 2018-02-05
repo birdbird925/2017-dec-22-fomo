@@ -1811,6 +1811,34 @@ $(function() {
             }
         });
     });
+    $('.customize-option').on('click', '.addCart', function() {
+        var cartBtn = $(this);
+        var stageDetail = getStageInfo();
+        $.ajax({
+            url: '/cart/add',
+            data: {
+                '_token': token,
+                'product': $('input[name="customize-product"]').val(),
+                'name': $('input[name="customize-name"]').val(),
+                'images': stageDetail.images,
+                'thumb': stageDetail.thumb,
+                'back' : stageDetail.back
+            },
+            type: 'POST',
+            error: function(a, b, c){
+                console.log(a.responseText);
+                msgPopup('Uh - oh!', 'SOMETHING WENT WRONG.');
+            },
+            success: function(cartCode){
+                msgPopup('Sweet!', 'YOUR WATCH WAS ADDED.');
+                // cartBtn.removeClass('addCart');
+                // cartBtn.addClass('addedCart');
+                // cartBtn.attr('data-id', cartCode);
+                var cartCount = parseInt($('.cart > span').text());
+                $('.cart > span').text(cartCount+1);
+            }
+        });
+    });
     $('.customize-canvas').on('click', '.save', function() {
         if($('.login-popup').get(0)) {loginPopup('save');}
         else {saveProduct();}
