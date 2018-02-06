@@ -248,11 +248,11 @@
 
     paypal.Button.render({
 
-        env: 'sandbox', // sandbox | production
+        env: 'production', // sandbox | production
 
         client: {
             sandbox:    'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
-            production: '<insert production client id>'
+            production: 'AeDp2HdqxOMQRM531QXGsuva5fBWNcySbTTCByoPW2L4kP4u8flbgg1yZFvdQE3ZMcrJ0B2r1IMgInBX'
         },
         validate: function(actions) {
             toggleButton(actions);
