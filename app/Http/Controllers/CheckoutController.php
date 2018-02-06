@@ -28,12 +28,12 @@ class CheckoutController extends Controller
     public function __construct()
     {
         $this->_apiContext = PayPal::ApiContext(
-            env("PAYPAL_CLIENT", config('services.paypal.client_id')),
-            env("PAYPAL_SECRET", config('services.paypal.secret')));
+            config('services.paypal.client_id')),
+            config('services.paypal.secret')));
 
     		$this->_apiContext->setConfig(array(
-    			'mode' => env("PAYPAL_MODE", 'sandbox'),
-    			'service.EndPoint' => env("PAYPAL_ENDPOINT", 'https://api.sandbox.paypal.com'),
+    			'mode' => config("services.paypal.model"),
+    			'service.EndPoint' => config("services.paypal.endpoint"),
     			'http.ConnectionTimeOut' => 30,
     			'log.LogEnabled' => true,
     			'log.FileName' => storage_path('logs/paypal.log'),
@@ -59,7 +59,7 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
-        dd(env("PAYPAL_MODE", 'sandbox'));
+        config("services.paypal.model")
       return view('checkout.customerinfo');
     }
 

@@ -48,8 +48,10 @@ return [
     ],
 
     'paypal' => [
-        'client_id' => 'AegJY451w10WvNb-nnwR56OCLVyS6g4lJ_E41aJECKdmmOSwhcUhYy8deBPrwqEFkEkQP5v3O4SucS-N',
-        'secret' => 'EIJOVXWCjbXoXHYtjXoWb5mffUEUb0xNYl9ezctZ-bCDMagHwZuTfTX_PZO1NL1k_n1oLDn8QEt94YMf',
+        'mode' => env('PAYPAL_MODE', 'sandbox'),
+        'client_id' => env('PAYPAL_CLIENT', 'AegJY451w10WvNb-nnwR56OCLVyS6g4lJ_E41aJECKdmmOSwhcUhYy8deBPrwqEFkEkQP5v3O4SucS-N'),
+        'secret' => env('PAYPAL_SECRET', 'EIJOVXWCjbXoXHYtjXoWb5mffUEUb0xNYl9ezctZ-bCDMagHwZuTfTX_PZO1NL1k_n1oLDn8QEt94YMf'),
+        'endpoint' => env('PAYPAL_ENDPOINT', 'https://apo.sandbox.paypal.com'),
     ]
 
 ];
