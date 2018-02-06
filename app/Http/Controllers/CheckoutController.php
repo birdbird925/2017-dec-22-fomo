@@ -28,8 +28,8 @@ class CheckoutController extends Controller
     public function __construct()
     {
         $this->_apiContext = PayPal::ApiContext(
-            config('services.paypal.client_id')),
-            config('services.paypal.secret')));
+            config('services.paypal.client_id'),
+            config('services.paypal.secret'));
 
     		$this->_apiContext->setConfig(array(
     			'mode' => config("services.paypal.model"),
