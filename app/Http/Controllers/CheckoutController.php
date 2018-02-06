@@ -59,6 +59,7 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
+        dd(env("PAYPAL_MODE", 'sandbox'));
       return view('checkout.customerinfo');
     }
 
