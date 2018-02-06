@@ -59,7 +59,6 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
-        dd(config("services.paypal"));
         return view('checkout.customerinfo');
     }
 
