@@ -331,8 +331,10 @@
                 });
         },
         onError: function(err) {
-            console.log(err);
-            console.log('1');
+            $('.msg-popup').find('.title').html('Oops, there are some error to process your payment.');
+            $('.msg-popup').find('.caption').html('Please try to make the payment again after a few minutes.');
+            $('.msg-popup').toggleClass('popup');
+            setTimeout(function(){ $('.msg-popup').toggleClass('popup'); }, 2000);
         }
 
     }, '#paypal-button-container');
