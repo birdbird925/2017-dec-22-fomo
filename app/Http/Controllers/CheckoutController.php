@@ -177,7 +177,8 @@ class CheckoutController extends Controller
           $response = $payment->create($this->_apiContext);
           return $response->id;
       } catch (PayPal\Exception\PayPalConnectionException $pce) {
-          echo '<pre>';print_r(json_decode($pce->getData()));exit;
+          return json_decode($pce->getData());
+          // echo '<pre>';print_r(json_decode($pce->getData()));exit;
       }
     }
 

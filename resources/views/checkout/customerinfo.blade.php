@@ -325,8 +325,8 @@
                       window.location.href = '/account';
                     }
                     else {
-                      console.log(res);
-                      console.log('2');
+                        console.log(JSON.parse(res));
+                        console.log(res);
                     }
                 });
         },
