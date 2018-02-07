@@ -326,12 +326,13 @@
                     }
                     else {
                       console.log(res);
-                      // window.location.reload();
+                      console.log('2');
                     }
                 });
         },
         onError: function(err) {
             console.log(err);
+            console.log('1');
         }
 
     }, '#paypal-button-container');

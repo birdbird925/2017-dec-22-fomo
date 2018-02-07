@@ -289,7 +289,8 @@ class CheckoutController extends Controller
               return 'checkout';
           }
       } catch (PayPal\Exception\PayPalConnectionException $pce) {
-          echo '<pre>';print_r(json_decode($pce->getData()));exit;
+          return json_decode($pce->getData());
+          exit;
       }
     }
 
