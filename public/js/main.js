@@ -889,45 +889,45 @@ $(function() {
             var step = input.attr('name');
 
             // certain index may need to disable outer
-            if(step == 'step6') {
-                var selectBlank = false;
-                var displayOuter = false;
-                // if radio button = diamond index selected
-                if(input.val() == 215) {
-                    $('.step8.lslide').css({'display': 'none'});
-                    selectBlank = true;
-                }
-                // if radio button = line pin index selected
-                // else if(input.val() == 149) {
-                //     displayOuter = true;
-                //     if($('#component131').is(':checked') || $('#component128').is(':checked')) {
-                //         if($('#component184').is(':checked')) {
-                //             selectBlank = true;
-                //             $('#component184').parent().addClass('disabled');
-                //             $('#component184').prop('disabled', true);
-                //         }
-                //     }
-                //
-                //     if($('#component186').is(':checked') || $('#component187').is(':checked')) {
-                //         selectBlank = true;
-                //     }
-                //     $('#component186, #component187').parent().addClass('disabled');
-                //     $('#component186, #component187').prop('disabled', true);
-                //
-                // }
-                // else {
-                //
-                // }
-                //
-                if(selectBlank) {
-                    $('#component182').prop('checked', true);
-                    $('.step9.lslide').css({'display': 'none'});
-                    $('.step9').removeClass('checked');
-                    $.each('.step9 input[type=radio]', function(index, radio) {
-                        radio.prop('checked', false);
-                    });
-                }
-            }
+            // if(step == 'step6') {
+            //     var selectBlank = false;
+            //     var displayOuter = false;
+            //     // if radio button = diamond index selected
+            //     if(input.val() == 215) {
+            //         $('.step8.lslide').css({'display': 'none'});
+            //         selectBlank = true;
+            //     }
+            //     // if radio button = line pin index selected
+            //     // else if(input.val() == 149) {
+            //     //     displayOuter = true;
+            //     //     if($('#component131').is(':checked') || $('#component128').is(':checked')) {
+            //     //         if($('#component184').is(':checked')) {
+            //     //             selectBlank = true;
+            //     //             $('#component184').parent().addClass('disabled');
+            //     //             $('#component184').prop('disabled', true);
+            //     //         }
+            //     //     }
+            //     //
+            //     //     if($('#component186').is(':checked') || $('#component187').is(':checked')) {
+            //     //         selectBlank = true;
+            //     //     }
+            //     //     $('#component186, #component187').parent().addClass('disabled');
+            //     //     $('#component186, #component187').prop('disabled', true);
+            //     //
+            //     // }
+            //     // else {
+            //     //
+            //     // }
+            //     //
+            //     if(selectBlank) {
+            //         $('#component182').prop('checked', true);
+            //         $('.step9.lslide').css({'display': 'none'});
+            //         $('.step9').removeClass('checked');
+            //         $.each('.step9 input[type=radio]', function(index, radio) {
+            //             radio.prop('checked', false);
+            //         });
+            //     }
+            // }
 
             // if radio button = Quartz 36mm
             if(input.val() == 131) {
