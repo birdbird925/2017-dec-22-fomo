@@ -120,6 +120,7 @@ class CustomizeController extends Controller
     public function saveProduct()
     {
         if(Auth::check()) {
+            $price = session('currency').'_price';
             $product = CustomizeProduct::create([
                 'name' => request('name'),
                 'components' => request('product'),
@@ -128,10 +129,10 @@ class CustomizeController extends Controller
                 'back' => request('back'),
                 'type_id' => $this->productType(request('product'))->id,
                 'description' => $this->productDescription(request('product')),
-                'price' => $this->productType(request('product'))->(session('currency').'_price'),
+                'price' => $this->productType(request('product'))->$price,
                 'created_by' => Auth::user()->id,
             ]);
-
+            
             $savedProduct = SavedProduct::create([
                 'user_id' => Auth::user()->id,
                 'product_id' => $product->id
