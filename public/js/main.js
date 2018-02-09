@@ -923,7 +923,7 @@ $(function() {
                     // $('#component182').prop('checked', true);
                     $('.step9.lslide').css({'display': 'none'});
                     // $('.step9').removeClass('checked');
-                    $.each($('.step9').find('input[type=radio]'), function(index, radio) {
+                    $('.step9').find('input[type=radio]').each(function(index, radio) {
                         console.log(index);
                         console.log(radio);
                         radio.prop('checked', false);
