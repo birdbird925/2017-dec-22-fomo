@@ -1003,7 +1003,7 @@ $(function() {
                     // outer blank
                     switch($('.step2').find('input[type=radio]:checked').val()) {
                         case '128':
-                            image = '/images/FOMO_watch_parts/FOMO_MecaQuarz_40mm/FOMO_Quartz40_Index5'+color+'.png';
+                            image = '/images/FOMO_watch_parts/FOMO_MecaQuarz_40mm/FOMO_MecaQuartz40_Index5'+color+'.png';
                             break;
 
                         case '130':
@@ -1011,7 +1011,7 @@ $(function() {
                             break;
 
                         case '131':
-                            image = '/images/FOMO_watch_parts/FOMO_Quartz_36mm/FOMO_Quartz40_Index5'+color+'.png';
+                            image = '/images/FOMO_watch_parts/FOMO_Quartz_36mm/FOMO_Quartz36_Index5'+color+'.png';
                             break;
                     }
                     deferreds.push(loadCanvasImage(image, new Konva.Image({'id': step}), layer));
