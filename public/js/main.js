@@ -929,7 +929,7 @@ $(function() {
             $('#component186, #component187').parent().addClass('disabled');
             $('#component186, #component187').prop('disabled', true);
             $('#component183, #component185').parent().removeClass('disabled');
-            $('##component183, #component185').prop('disabled', false);
+            $('#component183, #component185').prop('disabled', false);
         }
         // enable all outer
         else {
