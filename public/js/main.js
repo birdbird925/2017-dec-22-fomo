@@ -948,6 +948,10 @@ $(function() {
             }
             updateLabelBorder();
         }
+
+        if($('#component154').is(':checked')) {
+            $('component170')
+        }
     }
     function loadCustomizeCanvas(triggerChange){
         console.log('load customize canvas');
@@ -991,6 +995,27 @@ $(function() {
                     layer = sArray[direction].find(layerID)[0];
 
                 image = input.attr(direction+'_image');
+
+                // #5 index
+                if(input.val() == '166' || input.val() == '168') {
+                    var color = input.val() == '166' ? 'B' : 'W';
+                    var color += $('#component182').is(':checked') ? '_Big' : '_Small';
+                    // outer blank
+                    switch($('.step2').find('input[type=radio]:checked').val()) {
+                        case '128':
+                            image = '/images/FOMO_watch_parts/FOMO_MecaQuarz_40mm/FOMO_Quartz40_Index5'+color+'.png';
+                            break;
+
+                        case '130':
+                            image = '/images/FOMO_watch_parts/FOMO_Quartz_40mm/FOMO_Quartz40_Index5'+color+'.png';
+                            break;
+
+                        case '131':
+                            image = '/images/FOMO_watch_parts/FOMO_Quartz_36mm/FOMO_Quartz40_Index5'+color+'.png';
+                            break;
+                    }
+                    deferreds.push(loadCanvasImage(image, new Konva.Image({'id': step}), layer));
+                }
                 // outer blank
                 if(input.val() == '182'){
                     var dial = $('.step5').find('input[type=radio]:checked').val();
