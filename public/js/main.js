@@ -923,10 +923,8 @@ $(function() {
                     // $('#component182').prop('checked', true);
                     $('.step9.lslide').css({'display': 'none'});
                     // $('.step9').removeClass('checked');
-                    $('.step9').find('input[type=radio]').each(function(index, radio) {
-                        console.log(index);
-                        console.log(radio);
-                        radio.prop('checked', false);
+                    $('.step9').find('input[type=radio]').each(function() {
+                        $(this).prop('checked', false);
                     });
                 }
             }
