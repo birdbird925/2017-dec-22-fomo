@@ -918,7 +918,7 @@ $(function() {
                 $('#component184').prop('disabled', false);
             }
 
-            if($('#component186').is(':checked') || $('#component187').is(':checked')) { {
+            if($('#component186').is(':checked') || $('#component187').is(':checked')) {
                 //uncheck selected option
                 $('#component186, #component187').parent().find('label').removeClass('checked');
                 // check blank outer
