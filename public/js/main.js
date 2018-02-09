@@ -882,6 +882,62 @@ $(function() {
                 $('.konvajs-content').css('margin-top', (canvasHeight - canvasWidth) / 2);
             }
         });
+
+        // diamond index checked
+        if($('#component215').is(':checked')) {
+            // check blank outer
+            $('#component182').prop('checked', true);
+            $('#component182').parent().find('label').addClass('checked');
+            // disable outer outer
+            $('#component183, #component184, #component185, #component186, #component187').parent().addClass('disabled');
+            $('#component183, #component184, #component185, #component186, #component187').parent().find('label').removeClass('checked');
+            $('#component183, #component184, #component185, #component186, #component187').prop('disabled', true);
+            // hide outer color
+            $('.step9.lslide').css({'display': 'none'});
+            // uncheck outer color
+            $('input[name=step9]').each(function(){
+                $(this).prop('checked', false);
+            });
+        }
+        // line pin index checked
+        else if($('#component149').is(':checked')) {
+            // quartz 36mm & meca-quartz 40mm : disable outer #4
+            if($('#component131').is(':checked') || $('#component128').is(':checked')) {
+                if($('#component184').is(':checked')) {
+                    //uncheck selected option
+                    $('#component184').parent().find('label').removeClass('checked');
+                    // check blank outer
+                    $('#component182').prop('checked', true);
+                    $('#component182').parent().find('label').addClass('checked');
+                }
+                $('#component184').parent().addClass('disabled');
+                $('#component184').prop('disabled', true);
+            }
+            else {
+                $('#component184').parent().removeClass('disabled');
+                $('#component184').prop('disabled', false);
+            }
+
+            if($('#component186').is(':checked') || $('#component187').is(':checked')) { {
+                //uncheck selected option
+                $('#component186, #component187').parent().find('label').removeClass('checked');
+                // check blank outer
+                $('#component182').prop('checked', true);
+                $('#component182').parent().find('label').addClass('checked');
+            }
+
+            $('#component186, #component187').parent().addClass('disabled');
+            $('#component186, #component187').prop('disabled', true);
+            $('#component183, #component185').parent().removeClass('disabled');
+            $('##component183, #component185').prop('disabled', false);
+        }
+        // enable all outer
+        else {
+            // enable outer option
+            $('#component183, #component184, #component185, #component186, #component187').parent().removeClass('disabled');
+            $('#component183, #component184, #component185, #component186, #component187').prop('disabled', false);
+        }
+
         $.each($('.option-slider').find('input[type=radio]:checked'), function(index) {
             inputJson[$(this).attr('name')] = {'value': $(this).val()};
             var input = $(this);
@@ -892,6 +948,7 @@ $(function() {
             if(step == 'step6') {
                 var selectBlank = false;
                 var displayOuter = false;
+
                 // if radio button = diamond index selected
                 if(input.val() == 215) {
                     $('#component182').prop('checked', true);
@@ -899,67 +956,44 @@ $(function() {
                     $('#component183, #component184, #component185, #component186, #component187').parent().addClass('disabled');
                     $('#component183, #component184, #component185, #component186, #component187').parent().find('label').removeClass('checked')
                     $('#component183, #component184, #component185, #component186, #component187').prop('disabled', true);
-                    // selectBlank = true;
-                }
-                // if radio button = line pin index selected
-                // else if(input.val() == 149) {
-                //     displayOuter = true;
-                //     if($('#component131').is(':checked') || $('#component128').is(':checked')) {
-                //         if($('#component184').is(':checked')) {
-                //             selectBlank = true;
-                //             $('#component184').parent().addClass('disabled');
-                //             $('#component184').prop('disabled', true);
-                //         }
-                //     }
-                //
-                //     if($('#component186').is(':checked') || $('#component187').is(':checked')) {
-                //         selectBlank = true;
-                //     }
-                //     $('#component186, #component187').parent().addClass('disabled');
-                //     $('#component186, #component187').prop('disabled', true);
-                //
-                // }
-                // else {
-                //
-                // }
-                //
-                // if(selectBlank) {
-                //     // $('.step9.lslide').css({'display': 'none'});
-                //     $('.step9').find('input[type=radio]').each(function() {
-                //         $(this).prop('checked', false);
-                //     });
-                // }
-            }
+                    $('.step9.lslide').css({'display': 'none'});
 
-            // if radio button = Quartz 36mm
-            if(input.val() == 131) {
-                // zindex
-                $('#component150').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
-                $('#component215').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
-
-                if($('#component150').is(':checked')) {
-                    $('.step6').find('label').removeClass('checked');
-                    $('.step6 input[type=radio]').first().prop('checked', true);
-                    $('.step6 label').first().addClass('checked');
+                    $('input[name=step9]').each(function(){
+                        $(this).prop('checked', false);
+                    });
+                    // ignoreStep.push('step9');
                 }
 
-                // update strap step description
-                $('.step12 .description').html('<ul><li>18mm top grain leather with quick release spring bar</li></ul>');
+                // if radio button = Quartz 36mm
+                if(input.val() == 131) {
+                    // zindex
+                    $('#component150').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
+                    $('#component215').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
 
-                updateLabelBorder();
-            }
-            // if radio button = Quartz 40mm
-            if(input.val() == 130 || input.val() == 128) {
-                $('#component150').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
-                $('#component215').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
+                    if($('#component150').is(':checked')) {
+                        $('.step6').find('label').removeClass('checked');
+                        $('.step6 input[type=radio]').first().prop('checked', true);
+                        $('.step6 label').first().addClass('checked');
+                    }
 
-                if($('#component215').is(':checked')) {
-                    $('.step6').find('label').removeClass('checked');
-                    $('.step6 input[type=radio]').first().prop('checked', true);
-                    $('.step6 label').first().addClass('checked');
+                    // update strap step description
+                    $('.step12 .description').html('<ul><li>18mm top grain leather with quick release spring bar</li></ul>');
+
+                    updateLabelBorder();
                 }
+                // if radio button = Quartz 40mm
+                if(input.val() == 130 || input.val() == 128) {
+                    $('#component150').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
+                    $('#component215').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
 
-                updateLabelBorder();
+                    if($('#component215').is(':checked')) {
+                        $('.step6').find('label').removeClass('checked');
+                        $('.step6 input[type=radio]').first().prop('checked', true);
+                        $('.step6 label').first().addClass('checked');
+                    }
+
+                    updateLabelBorder();
+                }
             }
 
             $.each(dArray, function(index, direction) {
