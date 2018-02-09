@@ -861,6 +861,18 @@ $(function() {
 
         // if(konvaImg.getStage().width() > width) konvaImg.getStage().width(width);
     }
+    function checkBlankOuter()
+    {
+        // check blank outer
+        $('#component182').prop('checked', true);
+        $('#component182').parent().find('label').addClass('checked');
+        // hide outer color
+        $('.step9.lslide').css({'display': 'none'});
+        // uncheck outer color
+        $('input[name=step9]').each(function(){
+            $(this).prop('checked', false);
+        });
+    }
     function loadCustomizeCanvas(triggerChange){
         console.log('load customize canvas');
         var deferreds = [];
@@ -885,19 +897,11 @@ $(function() {
 
         // diamond index checked
         if($('#component215').is(':checked')) {
-            // check blank outer
-            $('#component182').prop('checked', true);
-            $('#component182').parent().find('label').addClass('checked');
             // disable outer outer
             $('#component183, #component184, #component185, #component186, #component187').parent().addClass('disabled');
             $('#component183, #component184, #component185, #component186, #component187').parent().find('label').removeClass('checked');
             $('#component183, #component184, #component185, #component186, #component187').prop('disabled', true);
-            // hide outer color
-            $('.step9.lslide').css({'display': 'none'});
-            // uncheck outer color
-            $('input[name=step9]').each(function(){
-                $(this).prop('checked', false);
-            });
+            checkBlankOuter();
         }
         // line pin index checked
         else if($('#component149').is(':checked')) {
@@ -906,9 +910,7 @@ $(function() {
                 if($('#component184').is(':checked')) {
                     //uncheck selected option
                     $('#component184').parent().find('label').removeClass('checked');
-                    // check blank outer
-                    $('#component182').prop('checked', true);
-                    $('#component182').parent().find('label').addClass('checked');
+                    checkBlankOuter();
                 }
                 $('#component184').parent().addClass('disabled');
                 $('#component184').prop('disabled', true);
@@ -921,9 +923,7 @@ $(function() {
             if($('#component186').is(':checked') || $('#component187').is(':checked')) {
                 //uncheck selected option
                 $('#component186, #component187').parent().find('label').removeClass('checked');
-                // check blank outer
-                $('#component182').prop('checked', true);
-                $('#component182').parent().find('label').addClass('checked');
+                checkBlankOuter();
             }
 
             $('#component186, #component187').parent().addClass('disabled');
