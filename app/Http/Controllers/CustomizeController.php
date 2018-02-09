@@ -120,7 +120,25 @@ class CustomizeController extends Controller
     public function saveProduct()
     {
         if(Auth::check()) {
-            $price = session('currency').'_price';
+            $priceKey = '';
+            switch(session('currency')) {
+                case 'USD':
+                    $priceKey = 'usd_price';
+                    break;
+
+                case 'SGD':
+                    $priceKey = 'sgd_price';
+                    break;
+
+                case 'MYR':
+                    $priceKey = 'myr_price';
+                    break;
+
+                case 'EURO':
+                    $priceKey = 'eu_price';
+                    break;
+            }
+
             $product = CustomizeProduct::create([
                 'name' => request('name'),
                 'components' => request('product'),
@@ -129,10 +147,10 @@ class CustomizeController extends Controller
                 'back' => request('back'),
                 'type_id' => $this->productType(request('product'))->id,
                 'description' => $this->productDescription(request('product')),
-                'price' => $this->productType(request('product'))->$price,
+                'price' => $this->productType(request('product'))->$priceKey,
                 'created_by' => Auth::user()->id,
             ]);
-            
+
             $savedProduct = SavedProduct::create([
                 'user_id' => Auth::user()->id,
                 'product_id' => $product->id
