@@ -872,6 +872,8 @@ $(function() {
             $(this).parent().find('label').removeClass('checked');
             $(this).prop('checked', false);
         });
+
+        updateNextPreviousTitle();
     }
     function loadCustomizeCanvas(triggerChange){
         console.log('load customize canvas');
