@@ -894,11 +894,10 @@ $(function() {
                 var displayOuter = false;
                 // if radio button = diamond index selected
                 if(input.val() == 215) {
-                    // $('.step8.lslide').css({'display': 'none'});
                     $('#component182').prop('checked', true);
                     $('#component182').parent().find('label').addClass('checked');
-                    $('#component183, #component184, #component185, #component186').parent().addClass('disabled');
-                    $('#component183, #component184, #component185, #component186').parent().find('label').removeClass('checked')
+                    $('#component183, #component184, #component185, #component186, #component187').parent().addClass('disabled');
+                    $('#component183, #component184, #component185, #component186, #component187').parent().find('label').removeClass('checked')
                     // selectBlank = true;
                 }
                 // if radio button = line pin index selected
