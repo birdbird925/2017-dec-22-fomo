@@ -894,7 +894,7 @@ $(function() {
                 var displayOuter = false;
                 // if radio button = diamond index selected
                 if(input.val() == 215) {
-                    $('.step8.lslide').css({'display': 'none'});
+                    // $('.step8.lslide').css({'display': 'none'});
                     selectBlank = true;
                 }
                 // if radio button = line pin index selected
@@ -920,9 +920,7 @@ $(function() {
                 // }
                 //
                 if(selectBlank) {
-                    // $('#component182').prop('checked', true);
-                    $('.step9.lslide').css({'display': 'none'});
-                    // $('.step9').removeClass('checked');
+                    // $('.step9.lslide').css({'display': 'none'});
                     $('.step9').find('input[type=radio]').each(function() {
                         $(this).prop('checked', false);
                     });
