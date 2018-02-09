@@ -999,7 +999,7 @@ $(function() {
                 // #5 index
                 if(input.val() == '166' || input.val() == '168') {
                     var color = input.val() == '166' ? 'B' : 'W';
-                    var color += $('#component182').is(':checked') ? '_Big' : '_Small';
+                    color += $('#component182').is(':checked') ? '_Big' : '_Small';
                     // outer blank
                     switch($('.step2').find('input[type=radio]:checked').val()) {
                         case '128':
