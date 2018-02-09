@@ -944,56 +944,35 @@ $(function() {
             var layerID = '.layer'+input.attr('layer');
             var step = input.attr('name');
 
-            // certain index may need to disable outer
-            if(step == 'step6') {
-                var selectBlank = false;
-                var displayOuter = false;
+            // if radio button = Quartz 36mm
+            if(input.val() == 131) {
+                // zindex
+                $('#component150').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
+                $('#component215').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
 
-                // if radio button = diamond index selected
-                if(input.val() == 215) {
-                    $('#component182').prop('checked', true);
-                    $('#component182').parent().find('label').addClass('checked');
-                    $('#component183, #component184, #component185, #component186, #component187').parent().addClass('disabled');
-                    $('#component183, #component184, #component185, #component186, #component187').parent().find('label').removeClass('checked')
-                    $('#component183, #component184, #component185, #component186, #component187').prop('disabled', true);
-                    $('.step9.lslide').css({'display': 'none'});
-
-                    $('input[name=step9]').each(function(){
-                        $(this).prop('checked', false);
-                    });
-                    // ignoreStep.push('step9');
+                if($('#component150').is(':checked')) {
+                    $('.step6').find('label').removeClass('checked');
+                    $('.step6 input[type=radio]').first().prop('checked', true);
+                    $('.step6 label').first().addClass('checked');
                 }
 
-                // if radio button = Quartz 36mm
-                if(input.val() == 131) {
-                    // zindex
-                    $('#component150').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
-                    $('#component215').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
+                // update strap step description
+                $('.step12 .description').html('<ul><li>18mm top grain leather with quick release spring bar</li></ul>');
 
-                    if($('#component150').is(':checked')) {
-                        $('.step6').find('label').removeClass('checked');
-                        $('.step6 input[type=radio]').first().prop('checked', true);
-                        $('.step6 label').first().addClass('checked');
-                    }
+                updateLabelBorder();
+            }
+            // if radio button = Quartz 40mm
+            if(input.val() == 130 || input.val() == 128) {
+                $('#component150').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
+                $('#component215').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
 
-                    // update strap step description
-                    $('.step12 .description').html('<ul><li>18mm top grain leather with quick release spring bar</li></ul>');
-
-                    updateLabelBorder();
+                if($('#component215').is(':checked')) {
+                    $('.step6').find('label').removeClass('checked');
+                    $('.step6 input[type=radio]').first().prop('checked', true);
+                    $('.step6 label').first().addClass('checked');
                 }
-                // if radio button = Quartz 40mm
-                if(input.val() == 130 || input.val() == 128) {
-                    $('#component150').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
-                    $('#component215').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
 
-                    if($('#component215').is(':checked')) {
-                        $('.step6').find('label').removeClass('checked');
-                        $('.step6 input[type=radio]').first().prop('checked', true);
-                        $('.step6 label').first().addClass('checked');
-                    }
-
-                    updateLabelBorder();
-                }
+                updateLabelBorder();
             }
 
             $.each(dArray, function(index, direction) {
