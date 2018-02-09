@@ -861,8 +861,7 @@ $(function() {
 
         // if(konvaImg.getStage().width() > width) konvaImg.getStage().width(width);
     }
-    function checkBlankOuter()
-    {
+    function checkBlankOuter(){
         // check blank outer
         $('#component182').prop('checked', true);
         $('#component182').parent().find('label').addClass('checked');
@@ -870,6 +869,7 @@ $(function() {
         $('.step9.lslide').css({'display': 'none'});
         // uncheck outer color
         $('input[name=step9]').each(function(){
+            $(this).parent().find('label').removeClass('checked');
             $(this).prop('checked', false);
         });
     }
