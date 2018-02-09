@@ -128,7 +128,7 @@ class CustomizeController extends Controller
                 'back' => request('back'),
                 'type_id' => $this->productType(request('product'))->id,
                 'description' => $this->productDescription(request('product')),
-                'price' => $this->productType(request('product'))->price,
+                'price' => $this->productType(request('product'))->(session('currency').'_price'),
                 'created_by' => Auth::user()->id,
             ]);
 
