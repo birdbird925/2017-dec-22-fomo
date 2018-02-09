@@ -875,28 +875,7 @@ $(function() {
 
         updateNextPreviousTitle();
     }
-    function loadCustomizeCanvas(triggerChange){
-        console.log('load customize canvas');
-        var deferreds = [];
-        var inputJson = {};
-        var dArray = ['front', 'back'];
-        var sArray = {};
-        $.each(dArray, function(index, value) {
-            var canvasHeight = $('#'+value+'-canvas').height();
-            var canvasWidth = $('#'+value+'-canvas').width()
-            var size =  canvasHeight > canvasWidth ? canvasWidth : canvasHeight;
-            var stage = new Konva.Stage({
-                width: size,
-                height: size,
-                container: value+'-canvas',
-
-            });
-            sArray[value] = stage;
-            if(canvasHeight > canvasWidth) {
-                $('.konvajs-content').css('margin-top', (canvasHeight - canvasWidth) / 2);
-            }
-        });
-
+    function specialRequirementCheck() {
         // diamond index checked
         if($('#component215').is(':checked')) {
             // disable outer outer
@@ -940,42 +919,66 @@ $(function() {
             $('#component183, #component184, #component185, #component186, #component187').prop('disabled', false);
         }
 
+        // if radio button = Quartz 36mm
+        if($('#component131').is(':checked')) {
+            // zindex
+            $('#component150').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
+            $('#component215').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
+
+            if($('#component150').is(':checked')) {
+                $('.step6').find('label').removeClass('checked');
+                $('.step6 input[type=radio]').first().prop('checked', true);
+                $('.step6 label').first().addClass('checked');
+            }
+
+            // update strap step description
+            $('.step12 .description').html('<ul><li>18mm top grain leather with quick release spring bar</li></ul>');
+
+            updateLabelBorder();
+        }
+        // if radio button = Quartz 40mm
+        if($('#component130').is(':checked') || $('#component128').is(':checked')) {
+            $('#component150').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
+            $('#component215').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
+
+            if($('#component215').is(':checked')) {
+                $('.step6').find('label').removeClass('checked');
+                $('.step6 input[type=radio]').first().prop('checked', true);
+                $('.step6 label').first().addClass('checked');
+            }
+            updateLabelBorder();
+        }
+    }
+    function loadCustomizeCanvas(triggerChange){
+        console.log('load customize canvas');
+        var deferreds = [];
+        var inputJson = {};
+        var dArray = ['front', 'back'];
+        var sArray = {};
+        $.each(dArray, function(index, value) {
+            var canvasHeight = $('#'+value+'-canvas').height();
+            var canvasWidth = $('#'+value+'-canvas').width()
+            var size =  canvasHeight > canvasWidth ? canvasWidth : canvasHeight;
+            var stage = new Konva.Stage({
+                width: size,
+                height: size,
+                container: value+'-canvas',
+
+            });
+            sArray[value] = stage;
+            if(canvasHeight > canvasWidth) {
+                $('.konvajs-content').css('margin-top', (canvasHeight - canvasWidth) / 2);
+            }
+        });
+
+        // special requirement from client
+        specialRequirementCheck();
+
         $.each($('.option-slider').find('input[type=radio]:checked'), function(index) {
             inputJson[$(this).attr('name')] = {'value': $(this).val()};
             var input = $(this);
             var layerID = '.layer'+input.attr('layer');
             var step = input.attr('name');
-
-            // if radio button = Quartz 36mm
-            if(input.val() == 131) {
-                // zindex
-                $('#component150').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
-                $('#component215').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
-
-                if($('#component150').is(':checked')) {
-                    $('.step6').find('label').removeClass('checked');
-                    $('.step6 input[type=radio]').first().prop('checked', true);
-                    $('.step6 label').first().addClass('checked');
-                }
-
-                // update strap step description
-                $('.step12 .description').html('<ul><li>18mm top grain leather with quick release spring bar</li></ul>');
-
-                updateLabelBorder();
-            }
-            // if radio button = Quartz 40mm
-            if(input.val() == 130 || input.val() == 128) {
-                $('#component150').parent().removeClass('fadeOut').addClass('fadeIn').fadeIn();
-                $('#component215').parent().removeClass('fadeIn').addClass('fadeOut').fadeOut();
-
-                if($('#component215').is(':checked')) {
-                    $('.step6').find('label').removeClass('checked');
-                    $('.step6 input[type=radio]').first().prop('checked', true);
-                    $('.step6 label').first().addClass('checked');
-                }
-
-                updateLabelBorder();
-            }
 
             $.each(dArray, function(index, direction) {
                 // check stage has layer or not
