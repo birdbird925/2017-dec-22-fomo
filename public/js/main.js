@@ -927,6 +927,8 @@ $(function() {
                         radio.prop('checked', false);
                     });
                 }
+
+                updateNextPreviousTitle();
             }
 
             // if radio button = Quartz 36mm
