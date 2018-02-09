@@ -898,6 +898,7 @@ $(function() {
                     $('#component182').parent().find('label').addClass('checked');
                     $('#component183, #component184, #component185, #component186, #component187').parent().addClass('disabled');
                     $('#component183, #component184, #component185, #component186, #component187').parent().find('label').removeClass('checked')
+                    $('#component183, #component184, #component185, #component186, #component187').prop('disabled', true);
                     // selectBlank = true;
                 }
                 // if radio button = line pin index selected
