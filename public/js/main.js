@@ -895,7 +895,11 @@ $(function() {
                 // if radio button = diamond index selected
                 if(input.val() == 215) {
                     // $('.step8.lslide').css({'display': 'none'});
-                    selectBlank = true;
+                    $('#component182').prop('checked', true);
+                    $('#component182').parent().find('label').addClass('checked');
+                    $('#component183, #component184, #component185, #component186').parent().addClass('disabled');
+                    $('#component183, #component184, #component185, #component186').parent().find('label').removeClass('checked')
+                    // selectBlank = true;
                 }
                 // if radio button = line pin index selected
                 // else if(input.val() == 149) {
@@ -919,12 +923,12 @@ $(function() {
                 //
                 // }
                 //
-                if(selectBlank) {
-                    // $('.step9.lslide').css({'display': 'none'});
-                    $('.step9').find('input[type=radio]').each(function() {
-                        $(this).prop('checked', false);
-                    });
-                }
+                // if(selectBlank) {
+                //     // $('.step9.lslide').css({'display': 'none'});
+                //     $('.step9').find('input[type=radio]').each(function() {
+                //         $(this).prop('checked', false);
+                //     });
+                // }
             }
 
             // if radio button = Quartz 36mm
