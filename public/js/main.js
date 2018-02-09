@@ -40,7 +40,7 @@ $(function() {
                     var konvaTxt = new Konva.Text({
                         text: konvaNode.text,
                         fontFamily: 'Museo_Slab',
-                        fill: '#b7b7b7',
+                        fill: konvaNode.fill,
                         x: (konvaNode.x != 0) ? konvaNode.x * ratio : 0,
                         y: (konvaNode.y != 0) ? konvaNode.y * ratio : 0,
                         fontSize: konvaNode['font-size'] * ratio
