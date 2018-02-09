@@ -923,9 +923,9 @@ $(function() {
                     // $('#component182').prop('checked', true);
                     $('.step9.lslide').css({'display': 'none'});
                     // $('.step9').removeClass('checked');
-                    // $.each('.step9 input[type=radio]', function(index, radio) {
-                        // radio.prop('checked', false);
-                    // });
+                    $.each('.step9 input[type=radio]', function(index, radio) {
+                        radio.prop('checked', false);
+                    });
                 }
             }
 
