@@ -924,11 +924,11 @@ $(function() {
                     $('.step9.lslide').css({'display': 'none'});
                     // $('.step9').removeClass('checked');
                     $.each('.step9 input[type=radio]', function(index, radio) {
+                        console.log(index);
+                        console.log(radio);
                         radio.prop('checked', false);
                     });
                 }
-
-                updateNextPreviousTitle();
             }
 
             // if radio button = Quartz 36mm
