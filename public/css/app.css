@@ -10731,11 +10731,21 @@ body.initial {
   display: inline-block;
   width: 80%;
   height: 35px;
+}
+
+.customize-wrapper .customize-option .option-slider .option-wrapper .main-option .form-group label.image-option span.svg,
+.customize-wrapper .customize-option .option-slider .option-wrapper .extral-option .form-group label.image-option span.svg {
   background-color: #9f9994;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: 50% 50%;
   mask-repeat: no-repeat;
   mask-position: 50% 50%;
+}
+
+.customize-wrapper .customize-option .option-slider .option-wrapper .main-option .form-group label.image-option span.png,
+.customize-wrapper .customize-option .option-slider .option-wrapper .extral-option .form-group label.image-option span.png {
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .customize-wrapper .customize-option .option-slider .option-wrapper .main-option .form-group label.checked.image-option span,
