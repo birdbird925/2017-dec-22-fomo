@@ -10752,8 +10752,8 @@ body.initial {
   margin-top: 5px;
 }
 
-.customize-wrapper .customize-option .option-slider .option-wrapper .main-option .form-group label.checked.image-option span,
-.customize-wrapper .customize-option .option-slider .option-wrapper .extral-option .form-group label.checked.image-option span {
+.customize-wrapper .customize-option .option-slider .option-wrapper .main-option .form-group label.checked.image-option span.svg,
+.customize-wrapper .customize-option .option-slider .option-wrapper .extral-option .form-group label.checked.image-option span.svg {
   background-color: #fff;
 }
 
