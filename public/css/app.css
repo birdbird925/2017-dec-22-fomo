@@ -10744,8 +10744,12 @@ body.initial {
 
 .customize-wrapper .customize-option .option-slider .option-wrapper .main-option .form-group label.image-option span.png,
 .customize-wrapper .customize-option .option-slider .option-wrapper .extral-option .form-group label.image-option span.png {
+  background-color: none;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
+  height: 30px;
+  margin-top: 5px;
 }
 
 .customize-wrapper .customize-option .option-slider .option-wrapper .main-option .form-group label.checked.image-option span,

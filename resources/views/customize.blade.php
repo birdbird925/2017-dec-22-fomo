@@ -65,7 +65,7 @@
                                                 <label class="step{{$step->id}} {{$component->type}}-option" for="component{{$component->id}}">
                                                     @if($component->type == 'image')
                                                         @if(substr($component->image('value')->getSrc(), -3) == 'png')
-                                                            <span class="png" style="background-image: url({{$component->image('value')->getSrc()}}));"></span>
+                                                            <span class="png" style="background-image: url({{$component->image('value')->getSrc()}});"></span>
                                                         @else
                                                             <span class="svg" style="mask-image: url({{$component->image('value')->getSrc()}}); -webkit-mask-image: url({{$component->image('value')->getSrc()}})"></span>
                                                         @endif
