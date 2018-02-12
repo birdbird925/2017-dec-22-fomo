@@ -10635,6 +10635,10 @@ body.initial {
   background-size: 25px;
 }
 
+.customize-wrapper .customize-option .option-slider .option-header .control:hover {
+  color: #fba200;
+}
+
 .customize-wrapper .customize-option .option-slider .option-header .prev {
   padding-left: 25px;
   background-image: url(/images/demo/arrow-left.svg);
