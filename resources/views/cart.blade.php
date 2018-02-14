@@ -16,8 +16,8 @@
 
             @if(sizeof(Session::get('cart.item')) == 0)
                 <div class="empty-msg">
-                    <p>Oops! Empty cart is not cool.</p>
-                    <a href="/customize/">Built your first watch</a>
+                    <p>Oops! There is nothing in your cart yet.</p>
+                    <a href="/customize/">Build your first watch</a>
                 </div>
             @else
                 <table class="product-table table">
