@@ -191,62 +191,79 @@ class CustomizeController extends Controller
 
     protected function productDescription($product)
     {
-        $personalize = false;
-        $engrave = false;
-        $error = false;
-        $description = '';
+        $description = '<ul>';
+        $type = 'Meca-quartz';
+
+        Ronda Caliber 762 Quartz Movement
         foreach(json_decode($product) as $inputName=>$attritube) {
-            if($inputName == 'customize_type') {
-                $customize = CustomizeType::find($attritube->value);
-                $description .= $customize->name.' / ';
-            }
-            // if input was main radio button
-            else if(preg_replace('/[0-9]+/', '', $inputName) == 'step') {
-                $component = CustomizeComponent::find($attritube->value);
-                if($component->checkType($customize->id)) {
-                    $step = $component->step->title;
-                    if($component->size_component && $component->personalize == '')
-                        $description .= $component->value.' / ';
-                    else if($component->option->count() == 0 && $component->personalize == '')
-                        $description .= $component->value.' '.$step.' / ';
-                }
-                else $error = true;
-            }
-            // if input was extral radio button
-            else if(substr($inputName, -6) == 'extral') {
-                $extral = CustomizeComponentOption::find($attritube->value);
-                $main = $extral->component;
-                $step = $main->step;
-
-                $description .= $main->type == 'image' ? '#'.$main->value.' '.$step->title : $main->value;
-                $description .= ' in '.$extral->value.' / ';
-            }
-            // input is personalize item
-            else if (strpos($inputName, 'personalize') !== false){
-                $stepID = substr($inputName, 0, strpos($inputName, 'personalize'));
-                $stepID = (int)str_replace("step", "", $stepID);
-                $step = CustomizeStep::find($stepID);
-
-                if(isset($attritube->rotation)) {
-                    if(strtolower($step->title) == 'personalize') $personalize = true;
-                    if(strtolower($step->title) == 'engrave') $engrave = true;
-                    $description .= 'With '.$step->title.' image'.' / ';
-                }
-                else if($attritube->value != '') {
-                    if(strtolower($step->title) == 'personalize') $personalize = true;
-                    if(strtolower($step->title) == 'engrave') $engrave = true;
-
-                    $description .= 'With '.$step->title.' text'.' / ';
-                }
-            }
-            else {
-                $component = CustomizeComponent::find($attritube->value);
-                $description .= $component->value .' '.$component->level_title.' / ';
+            // size
+            if($inputName == 'step2') {
+                $type = $attritube->value == '128' ? 'Meca-quartz' : 'Quartz' ;
+                $description .= '<li>316L Stainless Steel Case in '.($attritube->value == '131' ? '36' : '40').'mm excl. Crown'
             }
         }
-
-        if(!$personalize) $description .= 'Without Personalize / ';
-        if(!$engrave) $description .= 'Without Engrave / ';
+        $description .= '<li>Sapphire Cystal</li>';
+        $description .= '<li>5ATM/50 Meters Water Resistant</li>';
+        $description .= '<li>'.($type == 'Meca-quartz' ? 'SEIKO VK61 Hybrid Meca-Quartz Chronograph' : 'Ronda Caliber 762 Quartz Movement' ).'</li>';
+        $description .= '<li>Custom-Made Dial with Back Case Engraving</li>';
+        $description .= '</ul>';
+        // $personalize = false;
+        // $engrave = false;
+        // $error = false;
+        // $description = '';
+        // foreach(json_decode($product) as $inputName=>$attritube) {
+        //     if($inputName == 'customize_type') {
+        //         $customize = CustomizeType::find($attritube->value);
+        //         $description .= $customize->name.' / ';
+        //     }
+        //
+        //     // if input was main radio button
+        //     else if(preg_replace('/[0-9]+/', '', $inputName) == 'step') {
+        //         $component = CustomizeComponent::find($attritube->value);
+        //         if($component->checkType($customize->id)) {
+        //             $step = $component->step->title;
+        //             if($component->size_component && $component->personalize == '')
+        //                 $description .= $component->value.' / ';
+        //             else if($component->option->count() == 0 && $component->personalize == '')
+        //                 $description .= $component->value.' '.$step.' / ';
+        //         }
+        //         else $error = true;
+        //     }
+        //     // if input was extral radio button
+        //     else if(substr($inputName, -6) == 'extral') {
+        //         $extral = CustomizeComponentOption::find($attritube->value);
+        //         $main = $extral->component;
+        //         $step = $main->step;
+        //
+        //         $description .= $main->type == 'image' ? '#'.$main->value.' '.$step->title : $main->value;
+        //         $description .= ' in '.$extral->value.' / ';
+        //     }
+        //     // input is personalize item
+        //     else if (strpos($inputName, 'personalize') !== false){
+        //         $stepID = substr($inputName, 0, strpos($inputName, 'personalize'));
+        //         $stepID = (int)str_replace("step", "", $stepID);
+        //         $step = CustomizeStep::find($stepID);
+        //
+        //         if(isset($attritube->rotation)) {
+        //             if(strtolower($step->title) == 'personalize') $personalize = true;
+        //             if(strtolower($step->title) == 'engrave') $engrave = true;
+        //             $description .= 'With '.$step->title.' image'.' / ';
+        //         }
+        //         else if($attritube->value != '') {
+        //             if(strtolower($step->title) == 'personalize') $personalize = true;
+        //             if(strtolower($step->title) == 'engrave') $engrave = true;
+        //
+        //             $description .= 'With '.$step->title.' text'.' / ';
+        //         }
+        //     }
+        //     else {
+        //         $component = CustomizeComponent::find($attritube->value);
+        //         $description .= $component->value .' '.$component->level_title.' / ';
+        //     }
+        // }
+        //
+        // if(!$personalize) $description .= 'Without Personalize / ';
+        // if(!$engrave) $description .= 'Without Engrave / ';
 
         return $description;
     }
