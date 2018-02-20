@@ -12018,7 +12018,7 @@ footer .design-by a:hover {
 }
 
 .featured-products .product .box .description-wrapper .description ul li::before {
-  content: '◯';
+  content: '○';
   margin-right: 5px;
 }
 
