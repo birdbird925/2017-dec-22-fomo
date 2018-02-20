@@ -12013,6 +12013,15 @@ footer .design-by a:hover {
   margin: 0;
 }
 
+.featured-products .product .box .description-wrapper .description ul li {
+  margin-bottom: 5px;
+}
+
+.featured-products .product .box .description-wrapper .description ul li::before {
+  content: '∘';
+  margin-right: 5px;
+}
+
 .featured-products .product .box .description-wrapper .price {
   font-family: 'Muli';
   display: inline-block;
