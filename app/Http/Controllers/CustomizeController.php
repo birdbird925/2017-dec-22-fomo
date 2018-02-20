@@ -198,7 +198,7 @@ class CustomizeController extends Controller
             // size
             if($inputName == 'step2') {
                 $type = $attritube->value == '128' ? 'Meca-quartz' : 'Quartz' ;
-                $description .= '<li>316L Stainless Steel Case in '.($attritube->value == '131' ? '36' : '40').'mm excl. Crown'
+                $description .= '<li>316L Stainless Steel Case in '.($attritube->value == '131' ? '36' : '40').'mm excl. Crown';
             }
         }
         $description .= '<li>Sapphire Cystal</li>';
