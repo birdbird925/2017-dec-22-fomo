@@ -11678,6 +11678,16 @@ footer .design-by a:hover {
   display: none;
 }
 
+.product-table tbody tr .description-col .description ul {
+  padding: 0;
+  list-style: none;
+}
+
+.product-table tbody tr .description-col .description ul li::before {
+  content: '○';
+  margin-right: 5px;
+}
+
 .product-table tbody tr a.edit {
   font-weight: 900;
   text-transform: uppercase;
