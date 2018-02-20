@@ -11961,7 +11961,7 @@ footer .design-by a:hover {
 .featured-products .product .box {
   width: 100%;
   position: relative;
-  margin: 50px 0px 120px;
+  margin: 100px 0px 180px;
 }
 
 .featured-products .product .box .image-wrapper {
@@ -11999,7 +11999,7 @@ footer .design-by a:hover {
 }
 
 .featured-products .product .box .description-wrapper .description {
-  width: 70%;
+  width: 90%;
   margin: auto;
   font-family: 'Muli';
   font-size: 14px;
@@ -12052,16 +12052,12 @@ footer .design-by a:hover {
   float: right;
 }
 
-@media (max-width: 600px) {
-  .feature-product .product {
-    margin-top: 50px;
-    margin-bottom: 120px;
+@media (min-width: 600px) {
+  .featured-products .product .box {
+    margin: 50px 0px 120px;
   }
-  .feature-product .product .box {
-    margin: 100px 0px 180px;
-  }
-  .feature-product .product .box .description-wrapper .description {
-    width: 90%;
+  .featured-products .product .box .description-wrapper .description {
+    width: 70%;
   }
 }
 
