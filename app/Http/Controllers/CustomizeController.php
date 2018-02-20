@@ -194,7 +194,6 @@ class CustomizeController extends Controller
         $description = '<ul>';
         $type = 'Meca-quartz';
 
-        Ronda Caliber 762 Quartz Movement
         foreach(json_decode($product) as $inputName=>$attritube) {
             // size
             if($inputName == 'step2') {
