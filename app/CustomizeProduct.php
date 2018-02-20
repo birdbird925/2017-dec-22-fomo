@@ -13,6 +13,29 @@ class CustomizeProduct extends Model
     public $timestamps  = false;
     protected $table = 'customize_products';
 
+    public function priceBasedCurrency($currency)
+    {
+        switch(session('currency')) {
+            case 'USD':
+                $priceKey = 'usd_price';
+                break;
+
+            case 'SGD':
+                $priceKey = 'sgd_price';
+                break;
+
+            case 'MYR':
+                $priceKey = 'myr_price';
+                break;
+
+            case 'EURO':
+                $priceKey = 'eu_price';
+                break;
+        }
+
+        return $this->type->$priceKey;
+    }
+
     public function owner()
     {
         return $this->belongsTo(User::class, 'created_by');

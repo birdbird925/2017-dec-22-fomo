@@ -482,7 +482,7 @@ $(function() {
     *****************/
     $('#currency-selection').on('change', function(e) {
       $.get('/currency/'+$(this).val()+'/update',function(data, status) {
-        if(window.location.href.includes("/cart") || window.location.href.includes("/checkout")) {window.location.reload();}
+        if(window.location.href.includes("/cart") || window.location.href.includes("/checkout") || window.location.href.includes("/")) {window.location.reload();}
       });
     });
 

@@ -27,7 +27,7 @@
                                 <div class="description">
                                     {!!$feature->product->description!!}
                                     <br>
-                                    <span class="price">{{Session::get('currency')}} {{$feature->product->price}}</span>
+                                    <span class="price">{{Session::get('currency')}} {{$feature->product->priceBasedCurrency(Session::get('currency'))}}</span>
                                 </div>
                                 <a href="/customize/{{$feature->product->id}}" class="customize-btn">Customize</a>
                             </div>
