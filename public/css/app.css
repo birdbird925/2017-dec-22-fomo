@@ -11960,8 +11960,8 @@ footer .design-by a:hover {
 
 .featured-products .product .box {
   width: 100%;
-  margin-bottom: 100px;
   position: relative;
+  margin: 50px 0px 120px;
 }
 
 .featured-products .product .box .image-wrapper {
@@ -12052,13 +12052,6 @@ footer .design-by a:hover {
   float: right;
 }
 
-@media (max-width: 649px) {
-  .feature-product .product {
-    margin-top: 50px;
-    margin-bottom: 120px;
-  }
-}
-
 @media (min-width: 769px) {
   .featured-products .product {
     width: 92%;
@@ -12086,6 +12079,8 @@ footer .design-by a:hover {
     left: 71%;
     -webkit-transform: translate3d(0, -50%, 0);
     transform: translate3d(0, -50%, 0);
+    margin: 0px;
+    margin-bottom: 100px;
   }
   .featured-products .product .box .image-wrapper,
   .featured-products .product .box .description-wrapper {
