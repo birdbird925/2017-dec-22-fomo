@@ -28,7 +28,7 @@
                                         <a href="/admin/customize/product/{{$item->product->id}}">{{$item->product->name}}</a>
                                     </div>
                                     <div class="description">
-                                        {{$item->product->description}}
+                                        {!!$item->product->description!!}
                                     </div>
                                 </div>
                                 <div class="item-info">

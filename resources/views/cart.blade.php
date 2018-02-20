@@ -28,7 +28,7 @@
                             </td>
                             <td class="description-col col-md-4">
                                 <div class="name">{{$item['name']}}</div>
-                                <div class="description">{{$item['description']}}</div>
+                                <div class="description">{!!$item['description']!!}</div>
                             </td>
                             <td class="quantity-col">
                                 <select name="quantity" data-id="{{$index}}" class="quantity-dropdown">

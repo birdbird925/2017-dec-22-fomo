@@ -46,7 +46,7 @@
                                 </td>
                                 <td class="description-col col-md-4">
                                     <div class="name">{{$item->product->name}}</div>
-                                    <div class="description">{{$item->product->description}}</div>
+                                    <div class="description">{!!$item->product->description!!}</div>
                                 </td>
                                 <td class="price-col">
                                     $ {{$item->product->price}}

@@ -25,7 +25,7 @@
                             <div class="description-position">
                                 <div class="name">{{$feature->product->name}}</div>
                                 <div class="description">
-                                    {{$feature->product->description}}
+                                    {!!$feature->product->description!!}
                                     <br>
                                     <span class="price">${{$feature->product->price}}</span>
                                 </div>

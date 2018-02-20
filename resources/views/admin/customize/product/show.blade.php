@@ -31,7 +31,7 @@
                                 $ {{$product->price}}
                             </div>
                         </div>
-                        <div class="description">{{$product->description}}</div>
+                        <div class="description">{!!$product->description!!}</div>
                         @if(Auth::user()->id == $product->created_by)
                             <br>
                             {{-- <a href="/customize/{{$product->id}}" class="btn btn-primary">Edit</a> --}}
