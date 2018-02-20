@@ -1,87 +1,93 @@
-@media (min-width: 650px)
-    .featured-products
-        padding: 0 30px
-        margin-top: 80px
-        clear: both
 
-        .product
-            clear: both
+.featured-products
+    padding: 0 30px
+    margin-top: 80px
+    clear: both
+
+    .product
+        clear: both
+        position: relative
+
+        .bg
+            display: none
+
+        .box
+            width: 100%
+            margin-bottom: 100px
             position: relative
 
-            .bg
-                display: none
+            .image-wrapper
+                width: 50%
 
-            .box
-                width: 100%
-                margin-bottom: 100px
-                position: relative
+                img
+                    display: block
+                    max-width: 100%
+                    margin: auto
 
-                .image-wrapper
-                    width: 50%
+            .description-wrapper
+                float: right
+                width: 50%
+                text-align: center
 
-                    img
-                        display: block
-                        max-width: 100%
-                        margin: auto
+                .description-position
+                    max-width: 50%
+                    position: absolute
+                    left: 50%
+                    top: 50%
+                    -webkit-transform: translate3d(0,-50%,0)
+                    transform: translate3d(0,-50%,0)
 
-                .description-wrapper
-                    float: right
-                    width: 50%
-                    text-align: center
+                .name
+                    font-family: 'Muli'
+                    text-transform: uppercase
+                    font-size: 36px
+                    line-height: 48px
+                    letter-spacing: 2px
+                    margin-bottom: 15px
 
-                    .description-position
-                        max-width: 50%
-                        position: absolute
-                        left: 50%
-                        top: 50%
-                        -webkit-transform: translate3d(0,-50%,0)
-                        transform: translate3d(0,-50%,0)
+                .description
+                    width: 70%
+                    margin: auto
+                    // text-overflow: ellipsis
+                    font-family: 'Muli'
+                    font-size: 14px
+                    line-height: 20px
+                    // overflow: hidden
+                    // white-space: nowrap
+                    font-size: 14px
 
-                    .name
-                        font-family: 'Muli'
-                        text-transform: uppercase
-                        font-size: 36px
-                        line-height: 48px
-                        letter-spacing: 2px
-                        margin-bottom: 15px
+                .price
+                    font-family: 'Muli'
+                    display: inline-block
+                    margin-top: 5px
+                    margin-bottom: 25px
+                    font-size: 14px
+                    line-height: 20px
 
-                    .description
-                        width: 70%
-                        margin: auto
-                        // text-overflow: ellipsis
-                        font-family: 'Muli'
-                        font-size: 14px
-                        line-height: 20px
-                        // overflow: hidden
-                        // white-space: nowrap
-                        font-size: 14px
-
-                    .price
-                        font-family: 'Muli'
-                        display: inline-block
-                        margin-top: 5px
-                        margin-bottom: 25px
-                        font-size: 14px
-                        line-height: 20px
-
-                    a.customize-btn
-                        font-family: 'Muli'
-                        color: $primary
-                        font-weight: 900
-                        text-transform: uppercase
-                        letter-spacing: 2px
-                        font-size: 12px
+                a.customize-btn
+                    font-family: 'Muli'
+                    color: $primary
+                    font-weight: 900
+                    text-transform: uppercase
+                    letter-spacing: 2px
+                    font-size: 12px
 
 
-            &:nth-child(2n)
-                .description-wrapper
-                    float: left
+        &:nth-child(2n)
+            .description-wrapper
+                float: left
 
-                    .description-position
-                        left: 0
+                .description-position
+                    left: 0
 
-                .image-wrapper
-                    float: right
+            .image-wrapper
+                float: right
+
+@media (max-width: 649px)
+    .feature-product
+        .product
+            margin-top: 50px
+            margin-bottom: 120px
 
 
 

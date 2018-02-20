@@ -11943,85 +11943,104 @@ footer .design-by a:hover {
   background-size: cover;
 }
 
-@media (min-width: 650px) {
-  .featured-products {
-    padding: 0 30px;
-    margin-top: 80px;
-    clear: both;
-  }
-  .featured-products .product {
-    clear: both;
-    position: relative;
-  }
-  .featured-products .product .bg {
-    display: none;
-  }
-  .featured-products .product .box {
-    width: 100%;
-    margin-bottom: 100px;
-    position: relative;
-  }
-  .featured-products .product .box .image-wrapper {
-    width: 50%;
-  }
-  .featured-products .product .box .image-wrapper img {
-    display: block;
-    max-width: 100%;
-    margin: auto;
-  }
-  .featured-products .product .box .description-wrapper {
-    float: right;
-    width: 50%;
-    text-align: center;
-  }
-  .featured-products .product .box .description-wrapper .description-position {
-    max-width: 50%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate3d(0, -50%, 0);
-    transform: translate3d(0, -50%, 0);
-  }
-  .featured-products .product .box .description-wrapper .name {
-    font-family: 'Muli';
-    text-transform: uppercase;
-    font-size: 36px;
-    line-height: 48px;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-  }
-  .featured-products .product .box .description-wrapper .description {
-    width: 70%;
-    margin: auto;
-    font-family: 'Muli';
-    font-size: 14px;
-    line-height: 20px;
-    font-size: 14px;
-  }
-  .featured-products .product .box .description-wrapper .price {
-    font-family: 'Muli';
-    display: inline-block;
-    margin-top: 5px;
-    margin-bottom: 25px;
-    font-size: 14px;
-    line-height: 20px;
-  }
-  .featured-products .product .box .description-wrapper a.customize-btn {
-    font-family: 'Muli';
-    color: #fba200;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 12px;
-  }
-  .featured-products .product:nth-child(2n) .description-wrapper {
-    float: left;
-  }
-  .featured-products .product:nth-child(2n) .description-wrapper .description-position {
-    left: 0;
-  }
-  .featured-products .product:nth-child(2n) .image-wrapper {
-    float: right;
+.featured-products {
+  padding: 0 30px;
+  margin-top: 80px;
+  clear: both;
+}
+
+.featured-products .product {
+  clear: both;
+  position: relative;
+}
+
+.featured-products .product .bg {
+  display: none;
+}
+
+.featured-products .product .box {
+  width: 100%;
+  margin-bottom: 100px;
+  position: relative;
+}
+
+.featured-products .product .box .image-wrapper {
+  width: 50%;
+}
+
+.featured-products .product .box .image-wrapper img {
+  display: block;
+  max-width: 100%;
+  margin: auto;
+}
+
+.featured-products .product .box .description-wrapper {
+  float: right;
+  width: 50%;
+  text-align: center;
+}
+
+.featured-products .product .box .description-wrapper .description-position {
+  max-width: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate3d(0, -50%, 0);
+  transform: translate3d(0, -50%, 0);
+}
+
+.featured-products .product .box .description-wrapper .name {
+  font-family: 'Muli';
+  text-transform: uppercase;
+  font-size: 36px;
+  line-height: 48px;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.featured-products .product .box .description-wrapper .description {
+  width: 70%;
+  margin: auto;
+  font-family: 'Muli';
+  font-size: 14px;
+  line-height: 20px;
+  font-size: 14px;
+}
+
+.featured-products .product .box .description-wrapper .price {
+  font-family: 'Muli';
+  display: inline-block;
+  margin-top: 5px;
+  margin-bottom: 25px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.featured-products .product .box .description-wrapper a.customize-btn {
+  font-family: 'Muli';
+  color: #fba200;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+.featured-products .product:nth-child(2n) .description-wrapper {
+  float: left;
+}
+
+.featured-products .product:nth-child(2n) .description-wrapper .description-position {
+  left: 0;
+}
+
+.featured-products .product:nth-child(2n) .image-wrapper {
+  float: right;
+}
+
+@media (max-width: 649px) {
+  .feature-product .product {
+    margin-top: 50px;
+    margin-bottom: 120px;
   }
 }
 
