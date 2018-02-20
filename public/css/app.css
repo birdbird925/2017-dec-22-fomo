@@ -12001,12 +12001,9 @@ footer .design-by a:hover {
 .featured-products .product .box .description-wrapper .description {
   width: 70%;
   margin: auto;
-  text-overflow: ellipsis;
   font-family: 'Muli';
   font-size: 14px;
   line-height: 20px;
-  overflow: hidden;
-  white-space: nowrap;
   font-size: 14px;
 }
 
