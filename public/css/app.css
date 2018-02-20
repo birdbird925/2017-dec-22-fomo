@@ -12052,6 +12052,19 @@ footer .design-by a:hover {
   float: right;
 }
 
+@media (max-width: 600px) {
+  .feature-product .product {
+    margin-top: 50px;
+    margin-bottom: 120px;
+  }
+  .feature-product .product .box {
+    margin: 100px 0px 180px;
+  }
+  .feature-product .product .box .description-wrapper .description {
+    width: 90%;
+  }
+}
+
 @media (min-width: 769px) {
   .featured-products .product {
     width: 92%;
