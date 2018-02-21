@@ -2197,6 +2197,9 @@ $(function() {
                     setTimeout(function() { input.removeClass('animated shake'); }, 1000);
                 }
             }
+            else {
+                input.removeClass('error');
+            }
         });
 
         if(!errorFound) {
