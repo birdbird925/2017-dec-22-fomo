@@ -157,13 +157,12 @@
             var total = $('#total-row .price-col').attr('default-total-amount');
             $('#total-row .price-col').html('$ '+total);
             $('#discount-row').css("display", "none");
-            $('.msg-popup').find('.title').html('Opps');
-            $('.msg-popup').find('.caption').html(res.message);
-            $('.msg-popup').toggleClass('popup');
-            setTimeout(function(){ $('.msg-popup').toggleClass('popup'); }, 2000);
+            $('#voucher').addClass('animated shake error');
+            setTimeout(function() { $('#voucher').removeClass('animated shake'); }, 1000);
           }
           else {
             //display voucher discount amount
+            $('#voucher').removeClass('error');
             $('#discount-row .price-col span').html(res.amount);
             $('#total-row .price-col span').html(res.total);
             $('#discount-row').css("display", "table-row");
@@ -263,10 +262,10 @@
         },
         onClick: function() {
           if(isValid(true) !== true) {
-            $('.msg-popup').find('.title').html('Erm');
-            $('.msg-popup').find('.caption').html(isValid(true));
-            $('.msg-popup').toggleClass('popup');
-            setTimeout(function(){ $('.msg-popup').toggleClass('popup'); }, 2000);s
+            // $('.msg-popup').find('.title').html('Erm');
+            // $('.msg-popup').find('.caption').html(isValid(true));
+            // $('.msg-popup').toggleClass('popup');
+            // setTimeout(function(){ $('.msg-popup').toggleClass('popup'); }, 2000);s
           }
         },
         style: {
