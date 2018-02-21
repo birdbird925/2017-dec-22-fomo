@@ -2202,6 +2202,7 @@ $(function() {
             }
         });
 
+        console.log(errorFound);
         if(!errorFound) {
             console.log('1');
             $('.contact-form').submit();
