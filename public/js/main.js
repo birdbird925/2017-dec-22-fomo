@@ -2202,7 +2202,7 @@ $(function() {
         });
 
         if(!errorFound) {
-            $('.contact-form').submit();
+            $('.contact-form form').submit();
         }
     });
 
