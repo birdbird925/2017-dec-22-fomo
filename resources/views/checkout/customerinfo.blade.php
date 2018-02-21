@@ -330,8 +330,8 @@
                 });
         },
         onError: function(err) {
-            $('.msg-popup').find('.title').html('Oops, there are some error occurs.');
-            $('.msg-popup').find('.caption').html('Please try to make the payment again after a few minutes.');
+            $('.msg-popup').find('.title').html('Oops, Error.');
+            $('.msg-popup').find('.caption').html('Please try to again later.');
             $('.msg-popup').toggleClass('popup');
             console.log(err);
             setTimeout(function(){ $('.msg-popup').toggleClass('popup'); }, 5000);
