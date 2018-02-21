@@ -2184,6 +2184,8 @@ $(function() {
         var errorFound = false;
         $(".contact-form input[type=email], .contact-form textarea, .contact-form input[type=text]").each(function() {
             var input = $(this);
+            console.log(input);
+            console.log(input.val());
             if(input.val() == '') {
                 errorFound = true;
                 input.addClass('animated shake error');
