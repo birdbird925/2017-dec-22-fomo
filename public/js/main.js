@@ -2192,9 +2192,9 @@ $(function() {
                 setTimeout(function() { input.removeClass('animated shake'); }, 1000);
             }
             else if(input.attr('type') == 'email'){
-                errorFound = true;
                 var email_regex=/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
                 if(email_regex.test(input.val())==false){
+                    errorFound = true;
                     input.addClass('animated shake error');
                     setTimeout(function() { input.removeClass('animated shake'); }, 1000);
                 }
