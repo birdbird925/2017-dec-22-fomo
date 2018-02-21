@@ -4,9 +4,6 @@
     height: calc(100vh - 160px)
     margin-bottom: 40px
 
-    input.error
-        border-color: #ff7070 !important
-
     .contact-form
         position: absolute
         top: 50%
@@ -43,6 +40,10 @@
 
         &:focus
             outline: none
+
+    input.error,
+    textarea.error
+        border-color: #ff7070 !important
 
     input[type=submit],
     a

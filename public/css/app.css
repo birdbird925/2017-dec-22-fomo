@@ -10035,10 +10035,6 @@ body.initial {
   margin-bottom: 40px;
 }
 
-.contact-wrapper input.error {
-  border-color: #ff7070 !important;
-}
-
 .contact-wrapper .contact-form {
   position: absolute;
   top: 50%;
@@ -10081,6 +10077,11 @@ body.initial {
 .contact-wrapper input:focus,
 .contact-wrapper textarea:focus {
   outline: none;
+}
+
+.contact-wrapper input.error,
+.contact-wrapper textarea.error {
+  border-color: #ff7070 !important;
 }
 
 .contact-wrapper input[type=submit],
