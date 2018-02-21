@@ -2180,7 +2180,6 @@ $(function() {
     /************/
     $('.contact-form input[type=submit]').on('click', function(e){
         e.preventDefault();
-
         var errorFound = false;
         $(".contact-form input[type=email], .contact-form textarea, .contact-form input[type=text]").each(function() {
             var input = $(this);
@@ -2203,12 +2202,9 @@ $(function() {
         });
 
         if(!errorFound) {
-            console.log('1');
             $('.contact-form').submit();
         }
     });
-    $('#email').addClass('animated shake error');
-    setTimeout(function() { $('#email').removeClass('animated shake'); }, 1000);
 
     /**************
     ** admin cms
