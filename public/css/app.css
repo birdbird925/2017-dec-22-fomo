@@ -10035,6 +10035,10 @@ body.initial {
   margin-bottom: 40px;
 }
 
+.contact-wrapper input.error {
+  border-color: #ff7070 !important;
+}
+
 .contact-wrapper .contact-form {
   position: absolute;
   top: 50%;
