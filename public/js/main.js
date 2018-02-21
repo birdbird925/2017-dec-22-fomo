@@ -2203,6 +2203,7 @@ $(function() {
         });
 
         if(!errorFound) {
+            console.log('1');
             $('.contact-form').submit();
         }
     });
