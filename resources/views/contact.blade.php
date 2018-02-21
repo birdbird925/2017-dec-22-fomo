@@ -34,7 +34,7 @@
         <div class="sepecial-regarding">
             <label>Or send us email regarding to</label>
             <br>
-            <a href="">PARTNERSHIP, RETAIL, PRESS</a>
+            <a href="mailto:hello@fomo.watch">PARTNERSHIP, RETAIL, PRESS</a>
         </div>
     </div>
 @endsection
