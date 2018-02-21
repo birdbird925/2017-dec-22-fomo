@@ -2175,6 +2175,37 @@ $(function() {
       }
     })
 
+    /************
+    ** contact validation
+    /************/
+    $('.contact-form input[type=submit]').on('click', function(e){
+        e.preventDefault();
+
+        var errorFound = false;
+        $(".contact-form input").each(function() {
+            var input = $(this);
+            if(input.val() == '') {
+                errorFound = true;
+                input.addClass('animated shake error');
+                setTimeout(function() { input.removeClass('animated shake'); }, 1000);
+            }
+            else if(input.attr('type') == 'email'){
+                errorFound = true;
+                var email_regex=/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if(email_regex.test(input.val())==false){
+                    input.addClass('animated shake error');
+                    setTimeout(function() { input.removeClass('animated shake'); }, 1000);
+                }
+            }
+        });
+
+        if(!errorFound) {
+            $('.contact-form').submit();
+        }
+    });
+    $('#email').addClass('animated shake error');
+    setTimeout(function() { $('#email').removeClass('animated shake'); }, 1000);
+
     /**************
     ** admin cms
     /*************/
