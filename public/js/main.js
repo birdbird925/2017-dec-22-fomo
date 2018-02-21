@@ -2182,7 +2182,7 @@ $(function() {
         e.preventDefault();
 
         var errorFound = false;
-        $(".contact-form input, .contact-form textarea").each(function() {
+        $(".contact-form input[type=email], .contact-form textarea, .contact-form input[type=text]").each(function() {
             var input = $(this);
             if(input.val() == '') {
                 errorFound = true;
