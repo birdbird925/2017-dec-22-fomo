@@ -35,10 +35,10 @@
                         @if(Auth::user()->id == $product->created_by)
                             <br>
                             {{-- <a href="/customize/{{$product->id}}" class="btn btn-primary">Edit</a> --}}
-                            <form action="/admin/customize/product/{{$product->id}}/delete" method="post" style="display: inline">
+                            {{-- <form action="/admin/customize/product/{{$product->id}}/delete" method="post" style="display: inline">
                                 {{ csrf_field() }}
                                 <input type="submit" class="btn btn-danger required-confirm" value="Delete">
-                            </form>
+                            </form> --}}
                         @endif
                         <hr>
                         <h4 class="title">Components</h4>
