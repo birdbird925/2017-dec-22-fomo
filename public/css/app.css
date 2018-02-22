@@ -12322,6 +12322,11 @@ footer .design-by a:hover {
   outline: none;
 }
 
+.login-popup input[type=password].errorInput,
+.login-popup input[type=email].errorInput {
+  border-color: #ff7070 !important;
+}
+
 .login-popup .error {
   font-size: 12px;
   min-height: 20px;

@@ -411,10 +411,14 @@ $(function() {
             setTimeout(function() { form.find('input[type=password]').removeClass('animated shake'); }, 1000);
             // msgPopup('Erm', 'Don\'t fill up the form is not cool!');
         }
-        else if(!emailRE.test(email) || email == '') {
+        else if(email == '') {
             form.find('input[type=email]').addClass('animated shake errorInput');
             setTimeout(function() { form.find('input[type=email]').removeClass('animated shake'); }, 1000);
             // msgPopup('Erm', 'Are you sure it is email?');
+        }
+        else if(!emailRE.test(email)){
+            form.find('input[type=email]').addClass('animated shake errorInput');
+            setTimeout(function() { form.find('input[type=email]').removeClass('animated shake'); }, 1000);
         }
         else {
             form.find('input[type=email]').removeClass('errorInput');
