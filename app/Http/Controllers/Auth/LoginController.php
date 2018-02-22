@@ -36,7 +36,8 @@ class LoginController extends Controller
 
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             request()->session()->regenerate();
-            return Response::json(['error' => false, 'code' => 200], 200);
+            $role = Auth::user()->role == 2 ? 'admin' : '' ;
+            return Response::json(['error' => false, 'role' => $role, 'code' => 200], 200);
         }
         else {
             return Response::json(['error' => true,'message' => 'Email and password do not match.', 'code' => 400], 400);

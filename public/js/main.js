@@ -406,13 +406,19 @@ $(function() {
         var password = form.find('input[type=password]').val();
         var action = $(this).attr('data-action');
 
-        if(email == '' || password == '') {
-            msgPopup('Erm', 'Don\'t fill up the form is not cool!');
+        if(password == '') {
+            form.find('input[type=password]').addClass('animated shake errorInput');
+            setTimeout(function() { form.find('input[type=password]').removeClass('animated shake'); }, 1000);
+            // msgPopup('Erm', 'Don\'t fill up the form is not cool!');
         }
-        else if(!emailRE.test(email)) {
-            msgPopup('Erm', 'Are you sure it is email?');
+        else if(!emailRE.test(email) || email == '') {
+            form.find('input[type=email]').addClass('animated shake errorInput');
+            setTimeout(function() { form.find('input[type=email]').removeClass('animated shake'); }, 1000);
+            // msgPopup('Erm', 'Are you sure it is email?');
         }
         else {
+            form.find('input[type=email]').removeClass('errorInput');
+            form.find('input[type=password]').removeClass('errorInput');
             locked = true;
             $.ajax({
                 url: url,
@@ -442,7 +448,14 @@ $(function() {
                             }
                         }
                         else {
-                            if(url == '/login'){msgPopup('Oh Yeah!', 'Good to see you again.');}
+                            if(url == '/login'){
+                                if(response.role == 'admin') {
+                                    window.location.href = '/admin';
+                                }
+                                else {
+                                    msgPopup('Oh Yeah!', 'Good to see you again.');
+                                }
+                            }
                             if(url == '/register'){msgPopup('OH Yeah!', 'Thanks for the registration.');}
                             setTimeout(function(){location.reload()}, 666);
                         }

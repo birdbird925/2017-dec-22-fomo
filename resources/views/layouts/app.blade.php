@@ -14,6 +14,7 @@
     <link href="/css/app.css" rel="stylesheet">
 
     <!-- Scripts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     @stack('head-scripts')
     <script>
         window.Laravel = <?php echo json_encode([
