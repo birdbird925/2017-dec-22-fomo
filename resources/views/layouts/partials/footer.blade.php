@@ -3,7 +3,7 @@
         <ul>
             @foreach($footerMenus as $menu)
                 <li>
-                    <a href="{{$menu->link}}">
+                    <a href="{{$menu->link}}" {{$menu->text == 'Facebook' || $menu->text == 'Instagram' ? 'target="_blank"' : ''}}>
                         {{$menu->text}}
                     </a>
                 </li>
