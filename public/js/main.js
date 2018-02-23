@@ -179,6 +179,7 @@ $(function() {
                 var slideCount = $('.hero-slider li').length / 3;
                 var timing = slideCount * 7600;
                 setInterval(function() {
+                    console.log('1');
                     for (i = slideCount; i >= 1; i--) {
                         heroSlider.goToPrevSlide();
                     }
