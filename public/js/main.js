@@ -183,7 +183,7 @@ $(function() {
                     for (i = slideCount; i >= 1; i--) {
                         heroSlider.goToPrevSlide();
                     }
-                    heroSlider.refresh();
+                    // heroSlider.refresh();
                 },timing);
             }
         }
