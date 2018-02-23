@@ -152,17 +152,15 @@ $(function() {
         }
     });
     // light slider in home page
-    $(".hero-slider").lightSlider({
+    var heroSlider = $(".hero-slider").lightSlider({
         item: 3,
         slideMove:3,
         easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
         speed:600,
-        slideMove: 3,
         pager: false,
         enableDrag: false,
         auto: true,
-        pause: 5000,
-        // loop: true,
+        pause: 7000,
         slideMargin: 0,
         controls: false,
         responsive : [
@@ -171,9 +169,22 @@ $(function() {
                 settings: {
                     item:1,
                     slideMove:1,
+                    loop: true,
+                    auto: true
                 }
             },
-        ]
+        ],
+        onSliderLoad: function (el) {
+            if($(window).width() > 768) {
+                var slideCount = $('.hero-slider li').length / 3;
+                var timing = slideCount * 7600;
+                setInterval(function() {
+                    for (i = slideCount; i >= 1; i--) {
+                        heroSlider.goToPrevSlide();
+                    }
+                },timing);
+            }
+        }
     });
     //instagram feed
     if($('#instafeed').get(0)){
