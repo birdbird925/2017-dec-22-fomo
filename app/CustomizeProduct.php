@@ -29,7 +29,7 @@ class CustomizeProduct extends Model
                 $priceKey = 'myr_price';
                 break;
 
-            case 'EURO':
+            case 'EUR':
                 $priceKey = 'eu_price';
                 break;
         }
