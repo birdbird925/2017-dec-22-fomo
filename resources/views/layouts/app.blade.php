@@ -34,6 +34,7 @@
         'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '377930176006641');
         fbq('track', 'PageView');
+        @yield('facebook.pixel.event')
     </script>
     <noscript>
         <img height="1" width="1"

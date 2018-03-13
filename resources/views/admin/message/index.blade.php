@@ -32,7 +32,7 @@
                         <tr href="/admin/message/{{$notification->id}}" class="{{$notification->read_at ? 'readed' : 'new'}}" mailto="mailto:{{$notification->data['email']}}">
                             <td>{{$index+1}}</td>
                             @foreach($notification->data as $data)
-                                <td>{{$data}}</td>
+                                <td style="white-space: pre-wrap;">{{$data}}</td>
                             @endforeach
                             <td>{{$notification->created_at->diffForHumans()}}</td>
                         </tr>

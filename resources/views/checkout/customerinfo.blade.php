@@ -4,6 +4,11 @@
     fixed
 @endsection
 
+@section('facebook.pixel.event')
+    fbq('track', 'InitiateCheckout');
+    fbq('track', 'AddPaymentInfo');
+@endsection
+
 @section('content')
     <div class="checkout-wrapper">
         <div class="title page-title">CHECK OUT</div>
@@ -317,6 +322,17 @@
             // Make a call to your server to execute the payment
             return paypal.request.post(EXECUTE_URL, data)
                 .then(function (res) {
+                    !function(f,b,e,v,n,t,s)
+                    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                    n.queue=[];t=b.createElement(e);t.async=!0;
+                    t.src=v;s=b.getElementsByTagName(e)[0];
+                    s.parentNode.insertBefore(t,s)}(window,document,'script',
+                    'https://connect.facebook.net/en_US/fbevents.js');
+                    fbq('init', '377930176006641');
+                    fbq('track', 'Purchase', {value: "{{Session::get('cart.total') + Session::get('cart.shipping.cost')}}", currency: "{{session('currency')}}"});
+
                     if(res == 'cart') {
                       window.location.href = "/cart";
                     }

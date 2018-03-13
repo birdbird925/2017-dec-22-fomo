@@ -8,6 +8,10 @@
     hide
 @endsection
 
+@section('facebook.pixel.event')
+    fbq('track', 'ViewContent');
+@endsection
+
 @section('content')
     <div class="customize-wrapper">
         <div class="customize-canvas">

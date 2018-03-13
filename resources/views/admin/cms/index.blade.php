@@ -8,6 +8,10 @@
     active
 @endsection
 
+@section('facebook.pixel.event')
+    fbq('track', 'Lead');
+@endsection
+
 @section('content')
     <div class="col-sm-8">
         <div class="card">
