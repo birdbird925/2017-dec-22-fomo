@@ -13,6 +13,11 @@
         Thanks you!!
     </div>
     <div class="page-content small" style="text-align: center">
-        Your order had been confirmed!!
+        Your order is successfully placed.
+        <br>
+        @if(Auth::check())
+            <a href="/account">View order</a>
+        @endif
+        <a href="/customize">Continue to shop</a>
     </div>
 @endsection
