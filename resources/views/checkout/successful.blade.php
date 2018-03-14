@@ -12,7 +12,7 @@
     <div class="page-title title">
         Thanks you!!
     </div>
-    <div class="page-content small">
+    <div class="page-content small" style="text-align: center">
         Your order had been confirmed!!
     </div>
 @endsection

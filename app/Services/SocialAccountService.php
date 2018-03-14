@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Mail\WelcomeNewMember;
+use App\Notifications\WelcomeEmail;
 use App\SocialAccount;
 use App\User;
 use Illuminate\Support\Facades\Mail;
@@ -33,7 +33,7 @@ class SocialAccountService
             $account->user()->associate($user);
             $account->save();
 
-            Mail::to($user)->send(new WelcomeNewMember($user));
+            $user->notify(new WelcomeEmail());
 
             return $user;
 
