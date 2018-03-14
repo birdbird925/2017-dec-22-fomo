@@ -123,6 +123,11 @@ class CheckoutController extends Controller
         ], 200);
     }
 
+    public function success()
+    {
+        return view('checkout.successful');
+    }
+
     public function paypal(Request $request)
     {
     	$payer = PayPal::Payer();
