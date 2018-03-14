@@ -59,7 +59,10 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
-        return view('checkout.customerinfo');
+        if(sizeof(session('cart.item')) == 0)
+            return redirect('/cart');
+        else
+            return view('checkout.customerinfo');
     }
 
     // verify voucher
