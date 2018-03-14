@@ -16,7 +16,7 @@ class CustomizeProduct extends Model
     public function priceBasedCurrency($currency)
     {
         $priceKey = '';
-        switch(session('currency')) {
+        switch($currency) {
             case 'USD':
                 $priceKey = 'usd_price';
                 break;
