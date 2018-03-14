@@ -10,13 +10,13 @@
 
 @section('content')
     <div class="page-title title">
-        Thanks you!!
+        Thanks You
     </div>
     <div class="page-content small" style="text-align: center">
         Your order is successfully placed.
         <br>
         @if(Auth::check())
-            <a href="/account">View order</a>
+            <a href="/account" style="margin-right: 25px;">View order</a>
         @endif
         <a href="/customize">Continue to shop</a>
     </div>
