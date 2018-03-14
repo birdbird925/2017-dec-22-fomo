@@ -28,11 +28,11 @@
                                     {!!$feature->product->description!!}
                                     <br>
                                     <span class="price">
-                                        {{-- @if(Session::get('currency') != '') --}}
+                                        @if(Session::get('currency') != '')
                                             {{Session::get('currency')}} {{$feature->product->priceBasedCurrency(Session::get('currency'))}}
-                                        {{-- @else --}}
-                                            {{-- MYR {{$feature->product->priceBasedCurrency('MYR'))}} --}}
-                                        {{-- @endif --}}
+                                        @else
+                                            MYR {{$feature->product->priceBasedCurrency('MYR')}}
+                                        @endif
                                     </span>
                                 </div>
                                 <a href="/customize/{{$feature->product->id}}" class="customize-btn">Customize</a>
