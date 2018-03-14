@@ -472,7 +472,7 @@ $(function() {
                                     window.location.href = '/admin';
                                 }
                                 else {
-                                    msgPopup('Oh Yeah!', 'Good to see you again.');
+                                    // msgPopup('Oh Yeah!', 'Good to see you again.');
                                 }
                             }
                             if(url == '/register'){
