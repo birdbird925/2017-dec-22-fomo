@@ -14,6 +14,8 @@
             <div class="card">
                 <div class="content">
                     There are not any discount voucher yet.
+                    <br><br>
+                    <a href="/admin/voucher/create">Create Voucher</a>
                 </div>
             </div>
         @else
