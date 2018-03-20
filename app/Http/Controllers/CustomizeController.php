@@ -87,15 +87,26 @@ class CustomizeController extends Controller
 
     public function addCart()
     {
+        $name = '';
         $code  = 'SS'.substr(md5(microtime()),rand(0,26),12);
         $usdPrice = $this->productType(request('product'))->usd_price;
         $sgdPrice = $this->productType(request('product'))->sgd_price;
         $myrPrice = $this->productType(request('product'))->myr_price;
         $euPrice = $this->productType(request('product'))->eu_price;
 
+        switch($this->productType(request('product'))->id) {
+            case 1:
+                $name = 'RULAJ';
+                break;
+
+            case 2:
+                $name = 'MUJEI';
+                break;
+        }
+
         session()->push('cart.item', [
             'code' => $code,
-            'name' => request('name'),
+            'name' => $name,
             'product' => request('product'),
             'images' => request('images'),
             'thumb' => request('thumb'),
@@ -139,8 +150,19 @@ class CustomizeController extends Controller
                     break;
             }
 
+            $name = '';
+            switch($this->productType(request('product'))->id) {
+                case 1:
+                    $name = 'RULAJ';
+                    break;
+
+                case 2:
+                    $name = 'MUJEI';
+                    break;
+            }
+
             $product = CustomizeProduct::create([
-                'name' => request('name'),
+                'name' => $name,
                 'components' => request('product'),
                 'images' => request('images'),
                 'thumb' => request('thumb'),
