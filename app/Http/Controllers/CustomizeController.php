@@ -94,19 +94,9 @@ class CustomizeController extends Controller
         $myrPrice = $this->productType(request('product'))->myr_price;
         $euPrice = $this->productType(request('product'))->eu_price;
 
-        switch($this->productType(request('product'))->id) {
-            case 1:
-                $name = 'RULAJ';
-                break;
-
-            case 2:
-                $name = 'MUJEI';
-                break;
-        }
-
         session()->push('cart.item', [
             'code' => $code,
-            'name' => $name,
+            'name' => $this->productName(request('product')),
             'product' => request('product'),
             'images' => request('images'),
             'thumb' => request('thumb'),
@@ -150,19 +140,8 @@ class CustomizeController extends Controller
                     break;
             }
 
-            $name = '';
-            switch($this->productType(request('product'))->id) {
-                case 1:
-                    $name = 'RULAJ';
-                    break;
-
-                case 2:
-                    $name = 'MUJEI';
-                    break;
-            }
-
             $product = CustomizeProduct::create([
-                'name' => $name,
+                'name' => $this->productName(request('product')),
                 'components' => request('product'),
                 'images' => request('images'),
                 'thumb' => request('thumb'),
@@ -209,6 +188,29 @@ class CustomizeController extends Controller
                 return $customize;
             }
         }
+    }
+
+    protected function productName($product) {
+        $name = '';
+        foreach(json_decode($product) as $inputName=>$attritube) {
+            if($inputName == 'step2') {
+                switch($attritube->value) {
+                    case '128':
+                        $name = 'RULAJ';
+                        break;
+
+                    case '130':
+                        $name = 'QUI';
+                        break;
+
+                    case '131':
+                        $name = 'MUJEI';
+                        break;
+                }
+            }
+        }
+
+        return $name;
     }
 
     protected function productDescription($product)
