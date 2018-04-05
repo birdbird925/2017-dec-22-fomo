@@ -55,7 +55,7 @@ class Order extends Model
 
     public function orderCode()
     {
-        return '#'.str_pad($this->id, 7, '0', STR_PAD_LEFT);
+        return '#1'.str_pad($this->id, 5, '0', STR_PAD_LEFT);
     }
 
 }
