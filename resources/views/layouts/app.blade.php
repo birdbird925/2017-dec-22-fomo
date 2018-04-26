@@ -9,6 +9,7 @@
     <meta property="og:title" content="FOMO - a full customization experience for your watch">
     <meta property="og:description" content="A full customization experience for your watch">
     <meta property="og:image" content="https://fomo.watch/images/fomo-hero-screenshot.jpg">
+    <meta property="og:image:type" content="image/jpg">
     <meta property="og:url" content="https://fomo.watch/">
 
     <!-- CSRF Token -->
