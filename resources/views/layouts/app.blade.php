@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    {{-- social media meta tag --}}
+    <meta property="og:title" content="FOMO - a full customization experience for your watch">
+    <meta property="og:description" content="A full customization experience for your watch">
+    <meta property="og:image" content="https://fomo.watch/images/fomo-hero-screenshot.jpg">
+    <meta property="og:url" content="https://fomo.watch/">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
