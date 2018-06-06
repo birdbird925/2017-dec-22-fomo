@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('navMenus', DB::select("select * from cms_menu where type = 'nav'"));
             // $ip = request()->getClientIp(true) != '::1' ? request()->getClientIp(true) : '165.72.200.11';
             // $geo = geoip($ip);
-            // if(session('currency') == null) {
+            if(session('currency') == null) {
             //   if($geo->currency == 'MYR' || $geo->currency == 'SGD' || $geo->currency == "EUR") {
             //     session(['currency' => $geo->currency]);
             //     session(['currencyRate' => Swap::latest($geo->currency.'/USD')->getValue()]);
@@ -32,8 +32,9 @@ class AppServiceProvider extends ServiceProvider
             //     session(['currencyRate' => 1]);
             //   }
             // }
-            session(['currency' => 'USD']);
-            session(['currencyRate' => 1]);
+                session(['currency' => 'MYR']);
+                session(['currencyRate' => 1]);
+            }
         });
         view()->composer('layouts.partials.footer', function($view){
             $view->with('footerMenus', DB::select("select * from cms_menu where type = 'footer'"));
